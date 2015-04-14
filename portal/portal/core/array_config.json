@@ -1,0 +1,12 @@
+{
+    "tipos_dispositivos": {
+        "1": "Ios",
+        "2": "Android"
+    },
+    "estado_solicitud_bang": {
+        "1": "Pendiente",
+        "2": "Aceptada"
+    }
+    
+    
+}
