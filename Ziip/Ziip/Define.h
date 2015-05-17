@@ -11,10 +11,10 @@
 #ifndef d3_Define_h
 #define d3_Define_h
 
-#define CONEXION_URL @"http://localhost:8000/api/"
+#define CONEXION_URL @"http://ziip.marodriguez.com/api/"
 
-#define IMAGENES_URL @"http://localhost:8000/uploads/"
-#define CHAT_URL @"127.0.0.1"
+#define IMAGENES_URL @"http://ziip.marodriguez.com:8000/uploads/"
+#define CHAT_URL @"ziip.marodriguez.com"
 
 
 #define TIPO_MENSAJE_BLOQUEAR = 4
