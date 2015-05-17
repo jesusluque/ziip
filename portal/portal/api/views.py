@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from portal.core.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+import random
 
     
 CARACTERES_TOKEN = 'abcdefghijklmnopqrstuvwxyz1234567890'
@@ -17,6 +17,7 @@ def test(request):
     
 def generaTokenSolicitud():
     token = ''
+    i=0
     while i<NUM_CARACTERES_TOKEN:
         v = CARACTERES_TOKEN[random.randint(1,len(CARACTERES_TOKEN)-1)]
         token=token+v
@@ -25,14 +26,23 @@ def generaTokenSolicitud():
     
 def generaTokenUsuario():
     token = ''
-    while i<NUM_CARACTERES_TOKEN:
-        v = CARACTERES_TOKEN[random.randint(1,len(CARACTERES_TOKEN)-1)]
-        token=token+v
-        i=i+1
+    
+    while token == '':
+        i=0
+        while i<NUM_CARACTERES_TOKEN:
+            v = CARACTERES_TOKEN[random.randint(1,len(CARACTERES_TOKEN)-1)]
+            token=token+v
+            i=i+1
+        lista_usuarios = Usuarios.objects.filter(token=token)
+        if len(lista_usuarios)>0:
+            token=''
+            
+        
     return token
 
 def generaCodigoSolicitud():
     token = ''
+    i=0
     while i<NUM_CARACTERES_CODIGO:
         v = CARACTERES_CODIGO[random.randint(1,len(CARACTERES_CODIGO)-1)]
         token=token+v
@@ -43,6 +53,113 @@ def enviaSmsCodigo(telefono,codigo):
     print codigo
     
 
+@csrf_exempt
+def login(request):
+    usuarios = Usuarios.objects.filter(usuario=request.POST["user"], password=request.POST["password"])
+    if len(usuarios)>0:
+        status = "ok"
+        usuario = usuarios[0]
+        usuario.token = generaTokenUsuario()
+        usuario.save()
+        token = usuario.token
+        mensaje = ""        
+        if request.POST.has_key("pushToken"):
+            lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
+            if len(lista_tokens)>0:
+                token = lista_tokens[0]
+                if token.usuario_id != usuario.pk:
+                    token.usuario_id=usuario.pk
+                    token.save()
+            else:
+                token = Tokens()
+                token.usuario_id = usuario.pk
+                token.token = request.POST["pushToken"]
+                token.device = request.POST["device"]
+                token.save()
+
+    else:
+        status = "ko"
+        token = ""
+        mensaje = "Usuario o password invalido"
+        
+        
+
+
+    response = json.dumps({"resource":"login","status":status, "token":token,"mensaje":mensaje})
+    return HttpResponse(response)
+
+
+@csrf_exempt
+def alta(request):
+    lista_usuarios = Usuarios.objects.filter(usuario=request.POST["user"])  
+    mensaje=""
+    if len(lista_usuarios) ==0:
+        usuario=Usuarios()
+        usuario.usuario = request.POST["user"]
+        usuario.password = request.POST["password"]
+        if request.POST["movil"] != "":
+            usuario.num_telefono = request.POST["movil"]
+            usuario.codigo = generaCodigoSolicitud()
+            enviaSmsCodigo(request.POST["movil"],usuario.codigo)
+        
+        usuario.fecha_registro = datetime.now()
+        usuario.token = generaTokenUsuario()
+        usuario.save()
+        token = usuario.token
+        status = "ok"
+        if request.POST.has_key("pushToken"):
+            lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
+            if len(lista_tokens)>0:
+                token = lista_tokens[0]
+                if token.usuario_id != usuario.pk:
+                    token.usuario_id = usuario.pk
+                    token.save()
+            else:
+                token = Tokens()
+                token.usuario_id = usuario.pk
+                token.token = request.POST["pushToken"]
+                token.device = request.POST["device"]
+                token.save()
+
+
+            
+    else:
+        status = "ko"
+        mensaje = "El usuario ya existe"
+        
+    
+    response = json.dumps({"resource":"alta","status":status, "token":token,"mensaje":mensaje})
+    return HttpResponse(response)
+    
+@csrf_exempt
+def confirmacionMovil(request):    
+    print request
+    #print request.META 
+    
+    status = "ok"
+    mensaje = ""   
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token=request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            if usuario.codigo == request.POST["codigo"]:
+                usuario.confirmado=True
+                usuario.save()
+            else:
+                status = "ko"
+                mensaje ="El codigo de confirmacion no coincide"
+            
+        else:
+            status = "ko"
+            mensaje=" no hay usuario"
+        
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"confirmacionMovil","status":status,"mensaje":mensaje})
+    return HttpResponse(response)
+"""    
 @csrf_exempt
 def solicitudAlta(request):
     
@@ -126,7 +243,7 @@ def solicitudBang(request):
     response = json.dumps({"status":"ok", "estado":estado }
         
     return HttpResponse(response)
-    
+"""    
     
     
     
