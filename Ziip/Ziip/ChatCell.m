@@ -7,6 +7,7 @@
 //
 
 #import "ChatCell.h"
+#import "Define.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -57,11 +58,13 @@
     //self.imageCache = [[ImageCache alloc] init];
     //El label con el texto
     bool fromMe=NO;
-    NSString *imgGlobo = @"bocadillo_blanco";
+    NSString *imgGlobo = @"bblanco"; //Blanco
+    
     if ([self.myId isEqualToString:[self.message.from stringValue]]){
         fromMe=YES;
-        imgGlobo = @"bocadillo_verde";
+        imgGlobo = @"bmorado"; //Morado
     }
+
     
     CGSize size=CGSizeMake(0,0);
     UILabel *lblTexto ;
@@ -82,7 +85,11 @@
         lblTexto.font = font;
         lblTexto.text = self.message.text;
         lblTexto.numberOfLines=0;
-        lblTexto.textColor = [UIColor blackColor];
+        if (fromMe){
+            lblTexto.textColor = [UIColor blancoColor];
+        } else {
+            lblTexto.textColor = [UIColor foregroundColor];
+        }
         lblTexto.backgroundColor =[UIColor clearColor];
         
         //self.texto.text = self.message.text;
@@ -122,7 +129,10 @@
     }
        */
     //El Globo
-    UIImage *bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imgGlobo ofType:@"png"]];
+
+    //UIImage *bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imgGlobo ofType:@"png"]];
+    UIImage *bubble = [UIImage imageNamed:imgGlobo];
+
     UIImageView *globitoView = [[UIImageView alloc] initWithImage:[bubble resizableImageWithCapInsets:UIEdgeInsetsMake(5,20,23,20)]];
     
     float width_globo;
@@ -161,6 +171,7 @@
     lblFecha.font = dateFont;
     lblFecha.text = strFecha;
     lblFecha.backgroundColor=[UIColor clearColor];
+    lblFecha.textColor = [UIColor foregroundColor];
     
     //EL CHECK
     UIImageView *checkView;
@@ -200,15 +211,15 @@
     } else if([self.message.tipo intValue]==3) {
         [self addSubview: btn_localizacion];
     }
-    [self addSubview:fondoFecha];
+    //[self addSubview:fondoFecha];
     
     [self addSubview: lblFecha];
     if (fromMe){
         [self addSubview: checkView];
     }
-    if (self.segmentedControl){
-        [self addSubview:self.segmentedControl];
-    }
+    //if (self.segmentedControl){
+    //    [self addSubview:self.segmentedControl];
+    //}
     
     
     

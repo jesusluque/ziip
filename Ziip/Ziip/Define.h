@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #ifndef d3_Define_h
 #define d3_Define_h
@@ -23,3 +24,30 @@
 
 
 #endif
+
+
+@interface UIColor (BackgroundColor)
+
++ (UIColor*)backgroundColor;
+
+@end
+
+
+@interface UIColor (ForegroundColor)
+
++ (UIColor*) foregroundColor;
+
+@end
+
+@interface UIColor (LogoColor)
+
++ (UIColor*)logoColor;
+
+@end
+
+
+@interface UIColor (BlancoColor)
+
++ (UIColor*)blancoColor;
+
+@end

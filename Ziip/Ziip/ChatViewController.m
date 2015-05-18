@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
 #import "ChatMessage.h"
-#import "MapaViewController.h"
+
 //#import "NSData+Base64.h"
 #import <QuartzCore/QuartzCore.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -368,7 +368,7 @@ NSLog(@"diferencia: %f",diferencia);
         CGSize sizeFecha = [fecha sizeWithFont:dateFont constrainedToSize:CGSizeMake(320, 2000)];
         UILabel *lblFecha = [[UILabel alloc] initWithFrame:CGRectMake((300-sizeFecha.width) /2,0,sizeFecha.width+20,sizeFecha.height)];
         lblFecha.backgroundColor = [UIColor clearColor];
-        lblFecha.textColor = [UIColor blackColor];
+        lblFecha.textColor = [UIColor foregroundColor];
         lblFecha.font = dateFont;
         lblFecha.text = fecha;
         lblFecha.textAlignment = NSTextAlignmentCenter;
@@ -384,7 +384,7 @@ NSLog(@"diferencia: %f",diferencia);
         [fondoFecha.layer setMasksToBounds:YES];
         fondoFecha.layer.borderColor = [UIColor lightGrayColor].CGColor;
         fondoFecha.layer.borderWidth = 1.0f;
-        [view addSubview:fondoFecha];
+        //[view addSubview:fondoFecha];
         [view addSubview:lblFecha];
         
         return view;
