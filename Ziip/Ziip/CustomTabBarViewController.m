@@ -7,6 +7,7 @@
 //
 
 #import "CustomTabBarViewController.h"
+#import "Define.h"
 
 @interface CustomTabBarViewController ()
 
@@ -29,11 +30,11 @@
         
         NSString *imageName;
         if (i==0) {
-            imageName= @"agendaB.png";
+            imageName= @"agendaA.png";
         } else if (i==1) {
-            imageName= @"chatB.png";
+            imageName= @"chatA.png";
         } else if ( i==2) {
-            imageName= @"ajustesB.png";
+            imageName= @"ajustesA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
 
@@ -45,6 +46,8 @@
         
         [tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
         i++;
+        
+        
     }
     
     self.tabBar.tintColor =[UIColor redColor];
@@ -56,10 +59,18 @@
     UIColor *color =[UIColor colorWithRed:130 green:81 blue:160 alpha:0];
     
     [[UITabBar appearance] setBarTintColor:color];
-    //[[UITabbar appearance] setBarTintColor:[UIColor yellowColor]]
-    //[[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:130 green:81 blue:160 alpha:0]];
+    
+    //esto funciona, pero es una imagen
+    self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"backA"];
+    //self.tabBar.selectedImageTintColor = [UIColor foregroundColor];
     
 }
+
+-(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    
+    NSLog(@"%@",item);
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

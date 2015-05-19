@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     
+    NSLog(@"%f",self.view.frame.size.width);
     [super viewDidLoad];
     self.btnLogin.layer.cornerRadius = 5;
     self.btnLogin.clipsToBounds = YES;

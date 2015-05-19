@@ -55,6 +55,13 @@
     }
     
     
+    
+    int max_width = self.frame.size.width -110;
+    
+    
+    
+    
+    
     //self.imageCache = [[ImageCache alloc] init];
     //El label con el texto
     bool fromMe=NO;
@@ -74,9 +81,9 @@
     if ([self.message.tipo intValue]==1) {
         
         UIFont *font = [UIFont systemFontOfSize:17.0f];
-        size = [self.message.text sizeWithFont:font constrainedToSize:CGSizeMake(MAX_WIDTH, 2000)];
+        size = [self.message.text sizeWithFont:font constrainedToSize:CGSizeMake(max_width, 2000)];
         if (fromMe){
-            pos_x=((320-RIGTH_MARGIN)-size.width)-10;
+            pos_x=((self.frame.size.width-RIGTH_MARGIN)-size.width)-10;
         } else {
             pos_x= LEFT_MARGIN+10;
         }
@@ -143,7 +150,7 @@
         width_globo=size.width+20;
     }
     if (fromMe) {
-        globo_pos_x=((320-RIGTH_MARGIN)- width_globo);
+        globo_pos_x=((self.frame.size.width-RIGTH_MARGIN)- width_globo);
     } else {
         globo_pos_x= LEFT_MARGIN;
     }
@@ -157,7 +164,7 @@
     [dateFormat setLocale:[NSLocale systemLocale]];
     [dateFormat setDateFormat:@"hh:mm aaa"];
     NSString *strFecha= [dateFormat stringFromDate:self.message.fecha];
-    CGSize sizeFecha=[strFecha sizeWithFont:dateFont constrainedToSize:CGSizeMake(320-MAX_WIDTH, 2000)];
+    CGSize sizeFecha=[strFecha sizeWithFont:dateFont constrainedToSize:CGSizeMake(self.frame.size.width-max_width, 2000)];
     
     float date_pos_x;
     float date_pos_y;
