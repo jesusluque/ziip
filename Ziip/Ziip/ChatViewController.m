@@ -126,7 +126,8 @@ NSLog(@"diferencia: %f",diferencia);
     CGRect imageFrame = CGRectMake(self.view.frame.size.width -110 ,5,34,34);
     UIButton *imgUsuario = [[UIButton alloc] init];
     imgUsuario.frame = imageFrame;
-    imgUsuario.backgroundColor = [UIColor darkGrayColor];
+    imgUsuario.backgroundColor = [UIColor foregroundColor];
+    
     [imgUsuario setImage:[self.imageCache getCachedImage:self.ultimoMensaje.img] forState:UIControlStateNormal];
     [imgUsuario.layer setCornerRadius:5.0f];
     [imgUsuario.layer setMasksToBounds:YES];
