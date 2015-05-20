@@ -60,6 +60,7 @@
 		9F2F2C771B0BC4EA00A977C7 /* enviarChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F2C741B0BC4EA00A977C7 /* enviarChat.png */; };
 		9F2F2C781B0BC4EA00A977C7 /* enviarChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F2C751B0BC4EA00A977C7 /* enviarChat@2x.png */; };
 		9F2F2C791B0BC4EA00A977C7 /* enviarChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F2C761B0BC4EA00A977C7 /* enviarChat@3x.png */; };
+		9F2F2C7C1B0D090800A977C7 /* ContactosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F2C7B1B0D090800A977C7 /* ContactosCell.m */; };
 		9FA184951AF4D832009910CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA184941AF4D832009910CD /* main.m */; };
 		9FA184981AF4D832009910CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA184971AF4D832009910CD /* AppDelegate.m */; };
 		9FA1849B1AF4D832009910CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA1849A1AF4D832009910CD /* ViewController.m */; };
@@ -222,6 +223,8 @@
 		9F2F2C741B0BC4EA00A977C7 /* enviarChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enviarChat.png; sourceTree = "<group>"; };
 		9F2F2C751B0BC4EA00A977C7 /* enviarChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enviarChat@2x.png"; sourceTree = "<group>"; };
 		9F2F2C761B0BC4EA00A977C7 /* enviarChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enviarChat@3x.png"; sourceTree = "<group>"; };
+		9F2F2C7A1B0D090800A977C7 /* ContactosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactosCell.h; sourceTree = "<group>"; };
+		9F2F2C7B1B0D090800A977C7 /* ContactosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactosCell.m; sourceTree = "<group>"; };
 		9FA1848F1AF4D832009910CD /* Ziip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ziip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA184931AF4D832009910CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FA184941AF4D832009910CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -542,6 +545,8 @@
 				9FA184971AF4D832009910CD /* AppDelegate.m */,
 				9FBD00C31AFE901000346802 /* ConfirmacionMovilViewController.h */,
 				9FBD00C41AFE901000346802 /* ConfirmacionMovilViewController.m */,
+				9F2F2C7A1B0D090800A977C7 /* ContactosCell.h */,
+				9F2F2C7B1B0D090800A977C7 /* ContactosCell.m */,
 				9FF2516D1AF4EB40000BD6CB /* ContactosViewController.h */,
 				9FF2516E1AF4EB40000BD6CB /* ContactosViewController.m */,
 				9F0D48701B08A49E004421F4 /* CustomTabBarViewController.h */,
@@ -812,6 +817,7 @@
 				9F0D48381B074385004421F4 /* SRWebSocket.m in Sources */,
 				9F0D482D1B07435F004421F4 /* SocketIOTransportXHR.m in Sources */,
 				9F0D482B1B07435F004421F4 /* SocketIOPacket.m in Sources */,
+				9F2F2C7C1B0D090800A977C7 /* ContactosCell.m in Sources */,
 				9FBD00CB1AFFBA6100346802 /* AccionesContactosViewController.m in Sources */,
 				9F0D482A1B07435F004421F4 /* SocketIOJSONSerialization.m in Sources */,
 				9F0D48291B07435F004421F4 /* SocketIO.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "ContactosViewController.h"
 #import <AddressBook/AddressBook.h>
+#import "ContactosCell.h"
 
 @interface ContactosViewController ()
 
@@ -111,12 +112,12 @@
     
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    ContactosCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[ContactosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-   cell.textLabel.text = person.fullName;
+   cell.nombre.text = person.fullName;
     return cell;
 }
 
