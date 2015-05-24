@@ -10,6 +10,7 @@
 
 @interface Recientes : NSManagedObject
 
+@property(nonatomic, retain) NSNumber *id;
 @property(nonatomic, retain) NSString *accion;
 @property(nonatomic, retain) NSString *contacto_nombre;
 @property(nonatomic, retain) NSString *contacto2_nombre;

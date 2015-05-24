@@ -10,7 +10,7 @@
 
 @implementation Recientes
 
-
+@dynamic id;
 @dynamic accion;
 @dynamic contacto_nombre;
 @dynamic contacto2_nombre;
