@@ -21,7 +21,10 @@
 #define TIPO_MENSAJE_BLOQUEAR = 4
 #define TIPO_MENSAJE_DESBLOQUEAR = 5
 
-
+#define ACCION_ANONIMO = "1"
+#define ACCION_CELESTINO = "2"
+#define ACCION_CONTACTA = "3"
+#define ACCION_BANG = "4"
 
 #endif
 

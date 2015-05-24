@@ -9,6 +9,7 @@
 #import "ContactosViewController.h"
 #import <AddressBook/AddressBook.h>
 #import "ContactosCell.h"
+#import "AccionesContactosViewController.h"
 
 @interface ContactosViewController ()
 
@@ -39,8 +40,7 @@
         NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
         
         //3
-        NSUInteger i = 0; for (i = 0; i < [allContacts count]; i++)
-        {
+        NSUInteger i = 0; for (i = 0; i < [allContacts count]; i++) {
             Person *person = [[Person alloc] init];
             ABRecordRef contactPerson = (__bridge ABRecordRef)allContacts[i];
             
@@ -120,5 +120,24 @@
    cell.nombre.text = person.fullName;
     return cell;
 }
+
+
+-(void)  tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.contactoSeleccionado =  [self.listaPersonas objectAtIndex:indexPath.row];
+    
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"acciones_contactos_segue"]) {
+        AccionesContactosViewController *accionesContactosViewController = (AccionesContactosViewController *)[segue destinationViewController];
+        accionesContactosViewController.contacto = self.contactoSeleccionado;
+        
+    }
+}
+
+
 
 @end

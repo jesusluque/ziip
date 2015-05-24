@@ -52,8 +52,12 @@
     
     if ([[datos objectForKey:@"resource"] isEqualToString:@"confirmacionMovil"]) {
         if ([[datos objectForKey:@"status"]isEqualToString:@"ok"]) {
-
-            [self performSegueWithIdentifier:@"segue_principal" sender: self];
+            if (self.proceso_registro) {
+                [self performSegueWithIdentifier:@"segue_principal" sender: self];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
             
             
         } else  {

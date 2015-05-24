@@ -7,7 +7,7 @@
 //
 
 #import "RegistroViewController.h"
-
+#import "ConfirmacionMovilViewController.h"
 
 @implementation RegistroViewController
 
@@ -30,7 +30,15 @@
         [self.txtUsuario becomeFirstResponder];
         errores = [[NSString alloc] initWithFormat:@"%@\n%@", errores, @"El usuario es obligatorio."];
     }
-    
+    if ([self.txtEmail.text isEqualToString:@""]) {
+        [self.txtEmail becomeFirstResponder];
+        errores = [[NSString alloc] initWithFormat:@"%@\n%@", errores, @"El email es obligatorio."];
+    } else {
+        if (! [self isValidEmail:self.txtEmail.text ]) {
+            errores = [[NSString alloc] initWithFormat:@"%@\n%@", errores, @"El email tiene un formato invalido."];
+        }
+        
+    }
     if ([self.txtPassword.text isEqualToString:@""]) {
         if([errores isEqualToString:@""]){
             [self.txtPassword becomeFirstResponder];
@@ -55,8 +63,8 @@
         [alertView show];
     } else {
         
-        NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"user",@"password",@"movil", nil];
-        NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtPassword.text,self.movil.text, nil];
+        NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"user",@"email",@"password",@"movil", nil];
+        NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtEmail.text,self.txtPassword.text,self.movil.text, nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if ([defaults objectForKey:@"pushToken"]) {
@@ -103,5 +111,25 @@
         
     }
 }
+
+-(BOOL) isValidEmail:(NSString *)checkString {
+    
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"segue_cod_movil"]) {
+        ConfirmacionMovilViewController *movilViewController = (ConfirmacionMovilViewController *)[segue destinationViewController];
+        movilViewController.proceso_registro = YES;
+    }
+}
+
 
 @end

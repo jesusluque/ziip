@@ -13,4 +13,6 @@
 
 @property (nonatomic) NSMutableArray *listaPersonas;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
+@property (nonatomic, retain) Person *contactoSeleccionado;
+
 @end

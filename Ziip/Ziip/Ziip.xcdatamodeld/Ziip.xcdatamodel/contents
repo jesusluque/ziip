@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ChatMessage" syncable="YES">
         <attribute name="fecha" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fechaLeido" optional="YES" attributeType="Date" syncable="YES"/>
@@ -22,8 +22,16 @@
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="Recientes" syncable="YES">
+        <attribute name="accion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contacto_nombre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contacto2_nombre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fecha" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="mensaje" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="ChatMessage" positionX="-54" positionY="-9" width="128" height="180"/>
         <element name="LastsMessages" positionX="-36" positionY="81" width="128" height="180"/>
+        <element name="Recientes" positionX="-45" positionY="108" width="128" height="120"/>
     </elements>
 </model>

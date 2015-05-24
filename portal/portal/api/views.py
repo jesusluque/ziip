@@ -93,10 +93,11 @@ def login(request):
 def alta(request):
     lista_usuarios = Usuarios.objects.filter(usuario=request.POST["user"])  
     mensaje=""
-    if len(lista_usuarios) ==0:
+    if len(lista_usuarios) == 0:
         usuario=Usuarios()
         usuario.usuario = request.POST["user"]
         usuario.password = request.POST["password"]
+        usuario.email = request.POST["email"]
         if request.POST["movil"] != "":
             usuario.num_telefono = request.POST["movil"]
             usuario.codigo = generaCodigoSolicitud()

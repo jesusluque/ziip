@@ -11,6 +11,7 @@
 @interface ConfirmacionMovilViewController : ZiipBase
 
 @property (nonatomic, retain) IBOutlet UITextField *codigo;
+@property (nonatomic) bool proceso_registro;
 
 -(IBAction) enviar;
 

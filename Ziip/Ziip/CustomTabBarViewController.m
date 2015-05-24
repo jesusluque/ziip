@@ -30,10 +30,12 @@
         
         NSString *imageName;
         if (i==0) {
-            imageName= @"agendaA.png";
+            imageName= @"recientesA.png";
         } else if (i==1) {
+            imageName= @"agendaA.png";
+        } else if (i==2) {
             imageName= @"chatA.png";
-        } else if ( i==2) {
+        } else if (i==3) {
             imageName= @"ajustesA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
@@ -50,19 +52,24 @@
         
     }
     
-    self.tabBar.tintColor =[UIColor redColor];
-    self.tabBar.backgroundColor = [UIColor redColor];
     
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
     
-    //UIColor *color =[UIColor yellowColor];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+
     
-    UIColor *color =[UIColor colorWithRed:130 green:81 blue:160 alpha:0];
+
+
     
-    [[UITabBar appearance] setBarTintColor:color];
+    //self.tabBar.backgroundColor = [UIColor redColor];
+
+    
+    //[[UITabBar appearance] setBarTintColor:[UIColor foregroundColor]];
+    
     
     //esto funciona, pero es una imagen
     self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"backA"];
-    //self.tabBar.selectedImageTintColor = [UIColor foregroundColor];
+    
     
 }
 

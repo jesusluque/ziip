@@ -38,7 +38,6 @@
 @property (nonatomic,retain) ChatMessage *showLoc;
 @property (nonatomic,retain) ChatMessage *deleteMSg;
 @property (nonatomic,retain) ChatCell *selCell;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,retain) IBOutlet UITextField *texto;
 @property (nonatomic,retain) IBOutlet UIButton *btnEnviar;
 @property (nonatomic,retain) IBOutlet UIButton *btnMas;

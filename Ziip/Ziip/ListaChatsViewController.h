@@ -36,7 +36,6 @@
 @property (nonatomic) bool conectar;
 @property (nonatomic) bool conectado;
 @property (nonatomic,retain) SocketIO *miSocket;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (retain, nonatomic) NSNumber *myId;
 @property (retain, nonatomic) IBOutlet UITableView *myTableView;
 @property (retain, nonatomic) NSNumber *lastMessageId;
