@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
+#import "PublicidadViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,6 +33,8 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
         
     }
+    self.publicidadViewController = [[PublicidadViewController alloc] init];
+    [self.publicidadViewController inicializa];
 
     if ([self canChangeBadge]) {
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

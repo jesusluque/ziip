@@ -120,6 +120,7 @@
 		9FF396FE1B093A64004B31BD /* recientesB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF396E31B093A64004B31BD /* recientesB@2x.png */; };
 		9FF397021B093AE9004B31BD /* delVecino.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF397001B093AE9004B31BD /* delVecino.png */; };
 		9FF397031B093AE9004B31BD /* propio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF397011B093AE9004B31BD /* propio.png */; };
+		9FF6B3991B13A48B001DC1A4 /* PublicidadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */; };
 		9FF73EFF1B10CDCB00C7CF94 /* bloquear.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF73EF91B10CDCB00C7CF94 /* bloquear.png */; };
 		9FF73F001B10CDCB00C7CF94 /* bloquear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF73EFA1B10CDCB00C7CF94 /* bloquear@2x.png */; };
 		9FF73F011B10CDCB00C7CF94 /* bloquear@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF73EFB1B10CDCB00C7CF94 /* bloquear@3x.png */; };
@@ -327,6 +328,8 @@
 		9FF396E31B093A64004B31BD /* recientesB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recientesB@2x.png"; sourceTree = "<group>"; };
 		9FF397001B093AE9004B31BD /* delVecino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delVecino.png; sourceTree = "<group>"; };
 		9FF397011B093AE9004B31BD /* propio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = propio.png; sourceTree = "<group>"; };
+		9FF6B3971B13A48B001DC1A4 /* PublicidadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicidadViewController.h; sourceTree = "<group>"; };
+		9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicidadViewController.m; sourceTree = "<group>"; };
 		9FF73EF91B10CDCB00C7CF94 /* bloquear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bloquear.png; sourceTree = "<group>"; };
 		9FF73EFA1B10CDCB00C7CF94 /* bloquear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bloquear@2x.png"; sourceTree = "<group>"; };
 		9FF73EFB1B10CDCB00C7CF94 /* bloquear@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bloquear@3x.png"; sourceTree = "<group>"; };
@@ -642,6 +645,8 @@
 				9FF73F091B10F54100C7CF94 /* NSData+Base64.m */,
 				9FBD00C61AFFB49D00346802 /* Person.h */,
 				9FBD00C71AFFB49D00346802 /* Person.m */,
+				9FF6B3971B13A48B001DC1A4 /* PublicidadViewController.h */,
+				9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */,
 				9FBD00B31AFA95D600346802 /* Reachability.h */,
 				9FBD00B41AFA95D600346802 /* Reachability.m */,
 				9FF73F1A1B122C1500C7CF94 /* RecientesTableViewCell.h */,
@@ -886,6 +891,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FA1849B1AF4D832009910CD /* ViewController.m in Sources */,
+				9FF6B3991B13A48B001DC1A4 /* PublicidadViewController.m in Sources */,
 				9FF73F101B121D3E00C7CF94 /* CelestinoViewController.m in Sources */,
 				9F0D48431B074A19004421F4 /* OBGradientView.m in Sources */,
 				9FF2516C1AF4EAA7000BD6CB /* RegistroViewController.m in Sources */,

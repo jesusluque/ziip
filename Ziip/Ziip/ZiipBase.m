@@ -20,7 +20,15 @@
     self.imageCache = [[ImageCache alloc]init];
 }
 
+
+-(void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+}
+
+
 - (void)recibeDatos:(NSDictionary *)datos {
+
 }
 
 
@@ -28,6 +36,7 @@
     
     NSLog(@"no autorizado");
 }
+
 
 - (void)muestra_fallo_red {
     
@@ -99,6 +108,11 @@
     
     [SVProgressHUD dismiss];
 }
+
+
+
+
+
 
 
 @end
