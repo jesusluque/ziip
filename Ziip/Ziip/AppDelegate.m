@@ -114,6 +114,9 @@
 - (void)crearDirectorioCache {
     
     [self crearDirectorio:@"usuarios"];
+    [self crearDirectorio:@"uploads"];
+    [self crearDirectorio:@"uploads/publicidad"];
+    
 }
 
 

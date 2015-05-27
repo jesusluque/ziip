@@ -14,6 +14,8 @@
 
 - (void) cacheImage: (NSString *) ImageURLString;
 - (UIImage *) getCachedImage: (NSString *) ImageURLString;
+- (UIImage *) getCachedImagePubli: (NSString *) ImageURLString;
+
 - (UIImage *) getChatCachedImage: (NSString *) ImageURLString;
 + (UIImage *) redimensionaImage: (UIImage *) image maxWidth: (float) max_width andMaxHeight:(float) max_height;
 - (UIImage *) getChatCachedImageThumb: (NSString *) ImageURLString;

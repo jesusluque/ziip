@@ -121,6 +121,7 @@
 		9FF397021B093AE9004B31BD /* delVecino.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF397001B093AE9004B31BD /* delVecino.png */; };
 		9FF397031B093AE9004B31BD /* propio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF397011B093AE9004B31BD /* propio.png */; };
 		9FF6B3991B13A48B001DC1A4 /* PublicidadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */; };
+		9FF6B39B1B14F4F4001DC1A4 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */; };
 		9FF73EFF1B10CDCB00C7CF94 /* bloquear.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF73EF91B10CDCB00C7CF94 /* bloquear.png */; };
 		9FF73F001B10CDCB00C7CF94 /* bloquear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF73EFA1B10CDCB00C7CF94 /* bloquear@2x.png */; };
 		9FF73F011B10CDCB00C7CF94 /* bloquear@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF73EFB1B10CDCB00C7CF94 /* bloquear@3x.png */; };
@@ -330,6 +331,7 @@
 		9FF397011B093AE9004B31BD /* propio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = propio.png; sourceTree = "<group>"; };
 		9FF6B3971B13A48B001DC1A4 /* PublicidadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicidadViewController.h; sourceTree = "<group>"; };
 		9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicidadViewController.m; sourceTree = "<group>"; };
+		9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		9FF73EF91B10CDCB00C7CF94 /* bloquear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bloquear.png; sourceTree = "<group>"; };
 		9FF73EFA1B10CDCB00C7CF94 /* bloquear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bloquear@2x.png"; sourceTree = "<group>"; };
 		9FF73EFB1B10CDCB00C7CF94 /* bloquear@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bloquear@3x.png"; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF6B39B1B14F4F4001DC1A4 /* iAd.framework in Frameworks */,
 				9F0D48541B0750AE004421F4 /* Foundation.framework in Frameworks */,
 				9F0D48521B0750A5004421F4 /* libicucore.dylib in Frameworks */,
 				9F0D48501B075058004421F4 /* SystemConfiguration.framework in Frameworks */,
@@ -582,6 +585,7 @@
 		9FA184861AF4D832009910CD = {
 			isa = PBXGroup;
 			children = (
+				9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */,
 				9F0D48531B0750AE004421F4 /* Foundation.framework */,
 				9F0D48511B0750A5004421F4 /* libicucore.dylib */,
 				9F0D484F1B075058004421F4 /* SystemConfiguration.framework */,

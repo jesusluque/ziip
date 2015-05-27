@@ -18,17 +18,28 @@
     self.r = [[ZiipRequest alloc] init];
     self.r.delegate = self;
     self.imageCache = [[ImageCache alloc]init];
+    self.miDelegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [self cambiaPublicidad];
 }
 
 
 -(void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
+    NSLog(@"En el view did appear");
+    [self cambiaPublicidad];
 }
 
 
 - (void)recibeDatos:(NSDictionary *)datos {
 
+}
+
+-(void) cambiaPublicidad {
+    
+    [self.miDelegado.publicidadViewController cambiaPublicidad:self.publicidad];
+    
+    [NSTimer scheduledTimerWithTimeInterval:[self.miDelegado.publicidadViewController.tiempo_recarga_publi doubleValue ] target:self selector:@selector(cambiaPublicidad) userInfo:nil repeats:NO];
 }
 
 

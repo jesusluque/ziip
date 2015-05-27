@@ -13,8 +13,11 @@
 #define d3_Define_h
 
 #define CONEXION_URL @"http://ziip.marodriguez.com/api/"
+#define IMAGENES_URL @"http://ziip.marodriguez.com/uploads/"
+#define PUBLICIDAD_URL @"http://relax.marodriguez.com/api/"
+#define IMAGENES_PUBLI_URL @"http://relax.marodriguez.com"
 
-#define IMAGENES_URL @"http://ziip.marodriguez.com:8000/uploads/"
+
 #define CHAT_URL @"ziip.marodriguez.com"
 
 
@@ -25,6 +28,10 @@
 #define ACCION_CELESTINO = "2"
 #define ACCION_CONTACTA = "3"
 #define ACCION_BANG = "4"
+
+
+#define PUBLICIDAD_TIPO_IAD = @"1"
+#define PUBLICIDAD_TIPO_PROPIO = @"2"
 
 #endif
 
