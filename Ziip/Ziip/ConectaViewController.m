@@ -15,23 +15,61 @@
 @implementation ConectaViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(IBAction) enviar {
+    
+
+    NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"telefono",@"email", nil];
+    NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.telefono,self.email, nil];
+    [self.r send:@"sendConecta" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:NO];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void) recibeDatos:(NSDictionary *)datos {
+    
+    if ([[datos objectForKey:@"resource"] isEqualToString:@"sendConecta"]) {
+        
+        UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
+        CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.confirmacionViewController.view.frame = frame;
+        self.confirmacionViewController.delegate = self;
+        
+        
+        
+        NSDictionary *dict_tipo = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"id", nil];
+        
+        NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];
+        NSArray *valores;
+        if ([[datos objectForKey:@"status"]isEqualToString:@"ok"]) {
+            valores = [[NSArray alloc] initWithObjects:@"Invitacion enviada correctamente",@"Su invitacion se ha enviado correctamente", dict_tipo, nil];
+            
+        } else  {
+            valores = [[NSArray alloc] initWithObjects:@"Invitacion no enviada", [datos objectForKey:@"motivo_error"], dict_tipo, nil];
+        }
+        
+        NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
+        
+        [self.confirmacionViewController configuraPantalla:confirmacion];
+        
+        [self.view addSubview:self.confirmacionViewController.view];
+        
+    }
 }
-*/
+
+
+-(void) cierraConfirmacion {
+    
+    [self.confirmacionViewController.view removeFromSuperview];
+}
+
+
+-(void) respuestaUsuario:(bool)respuesta {
+    
+}
 
 @end

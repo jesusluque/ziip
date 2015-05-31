@@ -28,7 +28,7 @@
 
 
 
-//- (void) configuraPantalla:(NSDictionary *) confirmacion;
+- (void) configuraPantalla:(NSDictionary *) confirmacion;
 - (IBAction)cancelar:(id)sender;
 - (IBAction)aceptar:(id)sender;
 - (IBAction)cerrar:(id)sender;

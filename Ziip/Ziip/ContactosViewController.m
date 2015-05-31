@@ -10,6 +10,11 @@
 #import <AddressBook/AddressBook.h>
 #import "ContactosCell.h"
 #import "AccionesContactosViewController.h"
+#import "MensajeAnonimoViewController.h"
+#import "ConectaViewController.h"
+#import "CelestinoViewController.h"
+#import "SeleccionaContactoViewController.h"
+
 
 @interface ContactosViewController ()
 
@@ -54,12 +59,18 @@
             person.firstName = firstName; person.lastName = lastName;
             person.fullName = fullName;
             
-            //email
-            //5
+            ABMultiValueRef phones = ABRecordCopyValue(contactPerson, kABPersonPhoneProperty);
+            NSUInteger j = 0;
+            for (j = 0; j < ABMultiValueGetCount(phones); j++) {
+                NSString *telefono = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, j);
+                if (j == 0) {
+                    person.phone = telefono;
+                }
+            }
+
             ABMultiValueRef emails = ABRecordCopyValue(contactPerson, kABPersonEmailProperty);
             
-            //6
-            NSUInteger j = 0;
+            
             for (j = 0; j < ABMultiValueGetCount(emails); j++) {
                 NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails, j);
                 if (j == 0) {
@@ -125,17 +136,49 @@
 -(void)  tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     self.contactoSeleccionado =  [self.listaPersonas objectAtIndex:indexPath.row];
-    
+    if ([self.accion isEqualToString:@"anonimo"]) {
+        [self performSegueWithIdentifier:@"mensaje_anonimo_segue" sender:nil];
+    } else if ([self.accion isEqualToString:@"conecta"]) {
+        [self performSegueWithIdentifier:@"conecta_segue" sender:nil];
+    } else if ([self.accion isEqualToString:@"celestino_segue"]) {
+        [self performSegueWithIdentifier:@"celestino_segue" sender:nil];
+    }else if ([self.accion isEqualToString:@"celestino2_segue"]) {
+        [self performSegueWithIdentifier:@"celestino2_segue" sender:nil];
+    }
 }
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([[segue identifier] isEqualToString:@"acciones_contactos_segue"]) {
-        AccionesContactosViewController *accionesContactosViewController = (AccionesContactosViewController *)[segue destinationViewController];
-        accionesContactosViewController.contacto = self.contactoSeleccionado;
+    if ([[segue identifier] isEqualToString:@"mensaje_anonimo_segue"]) {
+        MensajeAnonimoViewController *accionesContactosViewController = (MensajeAnonimoViewController *)[segue destinationViewController];
+        accionesContactosViewController.telefono = self.contactoSeleccionado.phone;
+        accionesContactosViewController.email = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.contacto_nombre = self.contactoSeleccionado.fullName;
+    } else if ([[segue identifier] isEqualToString:@"conecta_segue"]) {
+        ConectaViewController *accionesContactosViewController = (ConectaViewController *)[segue destinationViewController];
+        accionesContactosViewController.telefono = self.contactoSeleccionado.phone;
+        accionesContactosViewController.email = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.contacto_nombre = self.contactoSeleccionado.fullName;
+    } else if ([[segue identifier] isEqualToString:@"celestino_segue"]) {
+        SeleccionaContactoViewController *accionesContactosViewController = (SeleccionaContactoViewController *)[segue destinationViewController];
+        accionesContactosViewController.telefono1 = self.contactoSeleccionado.phone;
+        accionesContactosViewController.email1 = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.contacto1_nombre = self.contactoSeleccionado.fullName;
+        accionesContactosViewController.accion = @"celestino2";
         
+    } else if ([[segue identifier] isEqualToString:@"celestino2_segue"]) {
+        CelestinoViewController *accionesContactosViewController = (CelestinoViewController *)[segue destinationViewController];
+        accionesContactosViewController.telefono1 = self.telefono1;
+        accionesContactosViewController.email1 = self.email1;
+        accionesContactosViewController.contacto1_nombre = self.contacto1_nombre;
+        accionesContactosViewController.telefono2 = self.contactoSeleccionado.phone;
+        accionesContactosViewController.email2 = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.contacto2_nombre = self.contactoSeleccionado.fullName;
+
     }
+    
+    
 }
 
 

@@ -30,14 +30,21 @@
     
     
     if (![errores isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@""
-                                  message:errores
-                                  delegate:self
-                                  cancelButtonTitle:@"Ok"
-                                  otherButtonTitles: nil];
+
+        UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
+        CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.confirmacionViewController.view.frame = frame;
+        self.confirmacionViewController.delegate = self;
         
-        [alertView show];
+        NSDictionary *dict_tipo = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"id", nil];
+        
+        NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];
+        NSArray *valores= [[NSArray alloc] initWithObjects:@"Error",errores, dict_tipo, nil];
+        NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
+        [self.confirmacionViewController configuraPantalla:confirmacion];
+        [self.view addSubview:self.confirmacionViewController.view];
+
     } else {
         
         NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"codigo", nil];
@@ -61,16 +68,35 @@
             
             
         } else  {
-            UIAlertView *alertView = [[UIAlertView alloc]
-                                      initWithTitle:@""
-                                      message:[datos objectForKey:@"mensaje"]
-                                      delegate:self
-                                      cancelButtonTitle:@"Ok"
-                                      otherButtonTitles: nil];
-            [alertView show];
+            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
+            CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            self.confirmacionViewController.view.frame = frame;
+            self.confirmacionViewController.delegate = self;
+            
+            NSDictionary *dict_tipo = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"id", nil];
+            
+            NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];
+            NSArray *valores= [[NSArray alloc] initWithObjects:@"Error",[datos objectForKey:@"mensaje"], dict_tipo, nil];
+            NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
+            [self.confirmacionViewController configuraPantalla:confirmacion];
+            [self.view addSubview:self.confirmacionViewController.view];
+
+            
         }
         
     }
+}
+
+
+-(void) cierraConfirmacion {
+    
+    [self.confirmacionViewController.view removeFromSuperview];
+}
+
+
+-(void) respuestaUsuario:(bool)respuesta {
+    
 }
 
 @end

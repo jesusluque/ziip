@@ -29,10 +29,14 @@
         UIImage *image = tbi.image;
         
         NSString *imageName;
-        if (i==0) {
-            imageName= @"recientesA.png";
-        } else if (i==1) {
+        /*if (i==0) {
             imageName= @"agendaA.png";
+        } else
+        */
+        if (i==0) {
+            imageName= @"ziipA.png";
+        } else if (i==1) {
+            imageName= @"recentA.png";
         } else if (i==2) {
             imageName= @"chatA.png";
         } else if (i==3) {

@@ -9,11 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "Person.h"
 #import "ZiipBase.h"
+#import "ConfirmacionViewController.h"
 
-@interface ConectaViewController : ZiipBase
+
+@interface ConectaViewController : ZiipBase <ConfirmacionViewControllerDelegate>
 
 
 @property (nonatomic, retain) Person *contacto;
+@property (nonatomic, retain)  NSString *email;
+@property (nonatomic, retain)  NSString *telefono;
+@property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
+@property (nonatomic, retain)  NSString *contacto_nombre;
+
+-(IBAction) enviar;
 
 
 @end

@@ -14,7 +14,11 @@
 @property(nonatomic, retain) NSString *accion;
 @property(nonatomic, retain) NSString *contacto_nombre;
 @property(nonatomic, retain) NSString *contacto2_nombre;
+@property(nonatomic, retain) NSString *contacto_contacto;
+@property(nonatomic, retain) NSString *contacto2_contacto;
 @property(nonatomic, retain) NSString *mensaje;
+@property(nonatomic, retain) NSString *mensaje_anonimo;
+
 @property(nonatomic, retain) NSDate *fecha;
 
 @end

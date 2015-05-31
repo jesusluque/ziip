@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ZiipBase.h"
+#import "ConfirmacionViewController.h"
 
-@interface RegistroViewController : ZiipBase
+@interface RegistroViewController : ZiipBase <ConfirmacionViewControllerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITextField *txtUsuario;
@@ -19,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *movil;
 @property (strong,nonatomic) IBOutlet UIScrollView  *scrollView;
 @property (weak,nonatomic) IBOutlet UIView *vistaCampos;
-
+@property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 
 
 - (IBAction)enviar:(id)sender;

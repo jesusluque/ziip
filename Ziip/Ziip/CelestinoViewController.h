@@ -8,10 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "ZiipBase.h"
-#import "Person.h"
+#import "ConfirmacionViewController.h"
 
-@interface CelestinoViewController : ZiipBase
 
-@property (nonatomic, retain) Person *contacto;
+@interface CelestinoViewController : ZiipBase <ConfirmacionViewControllerDelegate,UITableViewDataSource,UITableViewDelegate, UITextViewDelegate>
+
+
+@property (nonatomic, retain) NSString *telefono1;
+@property (nonatomic, retain) NSString *email1;
+@property (nonatomic, retain)  NSString *contacto1_nombre;
+@property (nonatomic, retain) NSString *telefono2;
+@property (nonatomic, retain) NSString *email2;
+@property (nonatomic, retain)  NSString *contacto2_nombre;
+@property (nonatomic, retain) IBOutlet UITextView *mensaje;
+@property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
+@property (nonatomic, retain)  NSMutableArray *listaMensajes;
+@property (nonatomic, retain) IBOutlet UITableView *myTableView;
 
 @end

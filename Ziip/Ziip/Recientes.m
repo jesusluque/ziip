@@ -14,6 +14,9 @@
 @dynamic accion;
 @dynamic contacto_nombre;
 @dynamic contacto2_nombre;
+@dynamic contacto_contacto;
+@dynamic contacto2_contacto;
 @dynamic mensaje;
+@dynamic mensaje_anonimo;
 @dynamic fecha;
 @end

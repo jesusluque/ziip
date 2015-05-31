@@ -38,7 +38,7 @@
 }
 
 
-/*
+
 - (void) configuraPantalla:(NSDictionary *) confirmacion{
     
     self.titulo.text = [confirmacion objectForKey:@"cabecera"];
@@ -54,7 +54,7 @@
         self.btnAceptar.hidden = YES;
     }
 }
-*/
+
 
 
 @end

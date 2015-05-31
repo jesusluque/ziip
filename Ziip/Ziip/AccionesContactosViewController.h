@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Person.h"
 #import "ZiipBase.h"
-#import "AnonimoViewcontroller.h"
+#import "SeleccionaContactoViewcontroller.h"
 #import "ConectaViewController.h"
 #import "CelestinoViewController.h"
 

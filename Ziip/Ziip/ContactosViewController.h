@@ -15,4 +15,10 @@
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) Person *contactoSeleccionado;
 
+@property (nonatomic, retain) NSString *accion;
+@property (nonatomic, retain) NSString *email1;
+@property (nonatomic, retain) NSString *telefono1;
+@property (nonatomic, retain) NSString *contacto1_nombre;
+
+
 @end

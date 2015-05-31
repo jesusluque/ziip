@@ -237,7 +237,7 @@
         <scene sceneID="pVj-Z5-xwY">
             <objects>
                 <navigationController id="GHt-ra-ull" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recientes" id="mrw-m8-bRC"/>
+                    <tabBarItem key="tabBarItem" title="Recientes" image="recentB.png" id="mrw-m8-bRC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lbh-kF-3Xi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -375,22 +375,13 @@
                                 <rect key="frame" x="16" y="82" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rDz-yp-aVY">
-                                <rect key="frame" x="47" y="211" width="41" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hnY-nu-wkA">
+                                <rect key="frame" x="132" y="166" width="168" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Editar">
+                                <state key="normal" image="guardar.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="editarImagen" destination="sOp-iG-Zw5" eventType="touchUpInside" id="xte-vo-L8c"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hnY-nu-wkA">
-                                <rect key="frame" x="161" y="169" width="111" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Guardar">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="highlighted" image="guardarB.png"/>
                                 <connections>
                                     <action selector="guardar" destination="sOp-iG-Zw5" eventType="touchUpInside" id="Ffv-wq-iNj"/>
                                 </connections>
@@ -408,6 +399,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rDz-yp-aVY">
+                                <rect key="frame" x="-36" y="204" width="216" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="editar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="editarB.png"/>
+                                <connections>
+                                    <action selector="editarImagen" destination="sOp-iG-Zw5" eventType="touchUpInside" id="xte-vo-L8c"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -425,23 +427,158 @@
             </objects>
             <point key="canvasLocation" x="1345" y="1062"/>
         </scene>
-        <!--Contactos-->
+        <!--Conecta-->
         <scene sceneID="TLA-0I-Wz7">
             <objects>
                 <navigationController storyboardIdentifier="Contactos" id="da8-5s-AIu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contactos" image="agendaB.png" id="ApF-zQ-t5J"/>
+                    <tabBarItem key="tabBarItem" title="Conecta" image="ziipB.png" id="ApF-zQ-t5J"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z2u-Gz-cxp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="PUf-sL-v9d" kind="relationship" relationship="rootViewController" id="gF8-tr-htW"/>
+                        <segue destination="5Uy-ZU-Px9" kind="relationship" relationship="rootViewController" id="ldc-pt-30t"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZG-fH-fnN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="907" y="-158"/>
+        </scene>
+        <!--Ziip View Controller-->
+        <scene sceneID="EZx-Ll-epu">
+            <objects>
+                <viewController id="5Uy-ZU-Px9" customClass="ZiipViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vTF-qO-ABk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="TuV-rW-06e">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ujg-iE-1V4">
+                                <rect key="frame" x="71" y="159" width="178" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="mensA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="mensB.png"/>
+                                <connections>
+                                    <segue destination="KrV-Rr-Jjn" kind="push" identifier="anonimo_segue" id="eaL-H2-RMc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SwJ-xo-V9d">
+                                <rect key="frame" x="71" y="280" width="178" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="btnConectaA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="btnConectaB.png"/>
+                                <connections>
+                                    <segue destination="KrV-Rr-Jjn" kind="push" identifier="conecta_segue" id="uQB-gf-e3C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XTH-oH-VOO">
+                                <rect key="frame" x="71" y="216" width="178" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="celesA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="celesB.png"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UaZ-Cq-BEE"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WKa-Gd-vLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1324" y="-158"/>
+        </scene>
+        <!--Celestino View Controller-->
+        <scene sceneID="Rne-pY-LLg">
+            <objects>
+                <viewController id="ACq-vG-g96" customClass="CelestinoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="feE-f0-S95">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="GPB-D0-bnI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" id="T5C-h1-3fG">
+                                <rect key="frame" x="19" y="56" width="282" height="124"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MensajesCell" rowHeight="50" id="00D-Yi-A9e" customClass="MensajesCell">
+                                        <rect key="frame" x="0.0" y="1" width="282" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="00D-Yi-A9e" id="rrp-eq-cZh">
+                                            <rect key="frame" x="0.0" y="0.0" width="282" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label bla bla3" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wat-8q-bfI">
+                                                    <rect key="frame" x="8" y="0.0" width="266" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mensaje" destination="wat-8q-bfI" id="gaC-Zl-U8O"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ACq-vG-g96" id="qP3-Mn-3Hl"/>
+                                    <outlet property="delegate" destination="ACq-vG-g96" id="mYs-BK-VqU"/>
+                                </connections>
+                            </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="VfB-Er-WQz">
+                                <rect key="frame" x="19" y="217" width="282" height="142"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98969072160000005" green="0.97938144329999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje Personalizado" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X66-b0-kni">
+                                <rect key="frame" x="19" y="188" width="178" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ToC-Xk-y46">
+                                <rect key="frame" x="72" y="379" width="177" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" image="enviarA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="enviarB.png"/>
+                                <connections>
+                                    <action selector="enviar" destination="nK7-DU-Lxn" eventType="touchUpInside" id="cti-dr-twJ"/>
+                                    <action selector="enviar" destination="ACq-vG-g96" eventType="touchUpInside" id="r89-4L-hmX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wxx-4Y-Q4V"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="mensaje" destination="VfB-Er-WQz" id="2Mv-3D-Rix"/>
+                        <outlet property="myTableView" destination="T5C-h1-3fG" id="HiB-cK-dVu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RCr-zr-qaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2181" y="-1219"/>
         </scene>
         <!--Contactos-->
         <scene sceneID="4P6-fJ-7An">
@@ -451,6 +588,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="VYN-0c-2pO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" id="9qe-WL-Uxe">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -459,7 +600,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SimpleTableItem" rowHeight="40" id="6uA-4Q-MQE" customClass="ContactosCell">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6uA-4Q-MQE" id="zba-Tu-vh7">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="40"/>
@@ -483,7 +624,6 @@
                                         <color key="tintColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="nombre" destination="bqB-bd-YEO" id="Ttw-Zi-iM9"/>
-                                            <segue destination="X3F-M1-P3z" kind="push" identifier="acciones_contactos_segue" id="Gxf-hi-gej"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -493,87 +633,136 @@
                                     <outlet property="delegate" destination="PUf-sL-v9d" id="ago-pR-FJp"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="VYN-0c-2pO">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Contactos" id="0qq-MN-tw7"/>
                     <navigationItem key="navigationItem" id="RrS-WF-VFM"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="myTableView" destination="9qe-WL-Uxe" id="LGH-7h-lVZ"/>
+                        <segue destination="nK7-DU-Lxn" kind="push" identifier="mensaje_anonimo_segue" id="ui9-uc-q8X"/>
+                        <segue destination="KO7-N6-b4F" kind="push" identifier="conecta_segue" id="DSs-sb-OBI"/>
+                        <segue destination="ACq-vG-g96" kind="push" identifier="celestino2_segue" id="vc9-zP-rAS"/>
+                        <segue destination="KrV-Rr-Jjn" kind="push" identifier="celestino_segue" id="YUE-xY-mHJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zb8-fN-aQy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1345" y="-158"/>
+            <point key="canvasLocation" x="2646" y="-1123"/>
         </scene>
-        <!--Acciones Contactos View Controller-->
-        <scene sceneID="3cL-9w-ecP">
+        <!--Mensaje Anonimo View Controller-->
+        <scene sceneID="VKu-i1-Xln">
             <objects>
-                <viewController id="X3F-M1-P3z" customClass="AccionesContactosViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="b6o-ff-5ky">
+                <viewController id="nK7-DU-Lxn" customClass="MensajeAnonimoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lyA-oy-7IG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="kws-Lr-gGt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="7Xj-7m-tVx">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0m5-Uk-hYK">
-                                <rect key="frame" x="71" y="128" width="178" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="mensA.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="mensB.png"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" id="A83-tM-7FH">
+                                <rect key="frame" x="16" y="75" width="282" height="124"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MensajesCell" rowHeight="50" id="CYq-El-poI" customClass="MensajesCell">
+                                        <rect key="frame" x="0.0" y="1" width="282" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CYq-El-poI" id="9hp-rf-9Nh">
+                                            <rect key="frame" x="0.0" y="0.0" width="282" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label bla bla3" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mJg-rZ-qLO">
+                                                    <rect key="frame" x="8" y="0.0" width="266" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mensaje" destination="mJg-rZ-qLO" id="zyg-UT-IkJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <segue destination="KrV-Rr-Jjn" kind="push" identifier="anonimo_segue" id="hr6-rr-f1f"/>
+                                    <outlet property="dataSource" destination="nK7-DU-Lxn" id="AKB-vr-Qef"/>
+                                    <outlet property="delegate" destination="nK7-DU-Lxn" id="weq-d5-5E8"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kO6-Jy-65Z">
-                                <rect key="frame" x="72" y="178" width="177" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="celesA.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="celesB.png"/>
-                                <connections>
-                                    <segue destination="I2D-Bc-sbc" kind="push" identifier="celestino_segue" id="dZb-7D-tBM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bAc-20-rIL">
-                                <rect key="frame" x="72" y="228" width="177" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="btnConectaA.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="btnConectaB.png"/>
-                                <connections>
-                                    <segue destination="U3F-0T-FDj" kind="push" identifier="conecta_segue" id="9na-qr-3tg"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mkf-IW-wQ7">
-                                <rect key="frame" x="16" y="86" width="288" height="21"/>
+                            </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0HQ-Um-2PO">
+                                <rect key="frame" x="16" y="236" width="282" height="142"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98969072164948457" green="0.97938144329896903" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje Personalizado" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nrr-A2-JIK">
+                                <rect key="frame" x="16" y="207" width="178" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="72a-CJ-mfD">
+                                <rect key="frame" x="72" y="393" width="177" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" image="enviarA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="enviarB.png"/>
+                                <connections>
+                                    <action selector="enviar" destination="nK7-DU-Lxn" eventType="touchUpInside" id="xuQ-HK-W6a"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TGs-zL-mqs"/>
+                    <connections>
+                        <outlet property="mensaje" destination="0HQ-Um-2PO" id="93H-dX-hGG"/>
+                        <outlet property="myTableView" destination="A83-tM-7FH" id="M08-eb-uBk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rGw-xQ-wh6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2646" y="-564"/>
+        </scene>
+        <!--Conecta View Controller-->
+        <scene sceneID="7br-SN-mJ0">
+            <objects>
+                <viewController id="KO7-N6-b4F" customClass="ConectaViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LBf-Eh-wKG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="XXZ-Lu-cP6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Qbb-HS-qAc">
+                                <rect key="frame" x="72" y="225" width="177" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="enviarA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="enviarB.png"/>
+                                <connections>
+                                    <action selector="enviar" destination="KO7-N6-b4F" eventType="touchUpInside" id="lVV-3q-u0Q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rqH-fH-4ce"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="contactoNombre" destination="mkf-IW-wQ7" id="9aR-Wi-clb"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="ozS-bA-Oby"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kYk-Yw-m8h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xhI-TK-T8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800" y="-158"/>
+            <point key="canvasLocation" x="2646" y="27"/>
         </scene>
         <!--Custom Tab Bar View Controller-->
         <scene sceneID="gBa-ql-idx">
@@ -593,8 +782,8 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
+                        <segue destination="da8-5s-AIu" kind="relationship" relationship="viewControllers" id="F4f-iR-rzX"/>
                         <segue destination="GHt-ra-ull" kind="relationship" relationship="viewControllers" id="Svy-wX-Vf6"/>
-                        <segue destination="da8-5s-AIu" kind="relationship" relationship="viewControllers" id="pDL-7Q-x2l"/>
                         <segue destination="r6M-mp-Ijj" kind="relationship" relationship="viewControllers" id="1aQ-RG-hR0"/>
                         <segue destination="0gy-jg-Ltd" kind="relationship" relationship="viewControllers" id="7pw-NK-JXM"/>
                     </connections>
@@ -713,10 +902,10 @@
             </objects>
             <point key="canvasLocation" x="1748" y="437"/>
         </scene>
-        <!--Anonimo View Controller-->
+        <!--Selecciona Contacto View Controller-->
         <scene sceneID="oIX-4D-Uxf">
             <objects>
-                <viewController id="KrV-Rr-Jjn" customClass="AnonimoViewController" sceneMemberID="viewController">
+                <viewController id="KrV-Rr-Jjn" customClass="SeleccionaContactoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lmz-Ke-8xu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -725,77 +914,121 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje anonimo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TaI-GD-HUY">
-                                <rect key="frame" x="92" y="121" width="136" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telefono" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NLj-z7-Ks2">
+                                <rect key="frame" x="16" y="81" width="65" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a1x-wk-wu1">
+                                <rect key="frame" x="16" y="134" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6PZ-kI-b9a">
+                                <rect key="frame" x="155" y="108" width="10" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="tmT-4m-7vE">
+                                <rect key="frame" x="107" y="77" width="191" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="MoZ-lN-Zz3">
+                                <rect key="frame" x="107" y="130" width="191" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecciona de tus contactos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QDc-b2-1u7">
+                                <rect key="frame" x="16" y="186" width="218" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tVe-Yw-EIB">
+                                <rect key="frame" x="76" y="263" width="169" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" image="siguienteA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="siguienteB.png"/>
+                                <connections>
+                                    <action selector="enviar" destination="KrV-Rr-Jjn" eventType="touchUpInside" id="t6q-Ye-6So"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wd0-Ot-Chp">
+                                <rect key="frame" x="155" y="157" width="10" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OCC-Q4-O0b">
+                                <rect key="frame" x="25" y="399" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KrV-Rr-Jjn" kind="push" identifier="celestino_segue" id="HbI-jG-Q51"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="88d-2h-dvg">
+                                <rect key="frame" x="180" y="120" width="120" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="8CI-5Z-q2K">
+                                <rect key="frame" x="20" y="120" width="120" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="JYB-HC-QnM">
+                                <rect key="frame" x="180" y="168" width="120" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="CdM-96-NHA">
+                                <rect key="frame" x="20" y="168" width="120" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QV4-v7-H2k">
+                                <rect key="frame" x="258" y="177" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="contactoA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="contactoB.png"/>
+                                <connections>
+                                    <segue destination="PUf-sL-v9d" kind="push" identifier="contactos_segue" id="E7g-Og-3LB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="GVh-cv-oyn"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="email" destination="MoZ-lN-Zz3" id="Mm4-HN-I6W"/>
+                        <outlet property="telefono" destination="tmT-4m-7vE" id="p4l-Lv-bHo"/>
+                        <segue destination="nK7-DU-Lxn" kind="push" identifier="mensaje_anonimo_segue" id="RWi-iM-9ba"/>
+                        <segue destination="KO7-N6-b4F" kind="push" identifier="conecta_segue" id="lOv-0W-s0Z"/>
+                        <segue destination="ACq-vG-g96" kind="push" identifier="celestino2_segue" id="Gtu-9M-Zb3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gij-WA-F7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2195" y="-922"/>
-        </scene>
-        <!--Celestino View Controller-->
-        <scene sceneID="E7S-CL-gEQ">
-            <objects>
-                <viewController id="I2D-Bc-sbc" customClass="CelestinoViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jrg-gU-lHh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="NKh-3a-LnG">
-                                <rect key="frame" x="15" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Celestino" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M3v-wy-LhO">
-                                <rect key="frame" x="124" y="113" width="72" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="q8h-0P-3l5"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jHm-mb-chl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2615" y="-626"/>
-        </scene>
-        <!--Conecta View Controller-->
-        <scene sceneID="ulr-17-8Vo">
-            <objects>
-                <viewController id="U3F-0T-FDj" customClass="ConectaViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7hK-yQ-b3l">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background3.png" id="2gu-Wr-PLJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conecta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2na-xP-bEZ">
-                                <rect key="frame" x="128" y="119" width="65" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="YXn-N4-Yxw"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TO1-E6-nc2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2615" y="-14"/>
+            <point key="canvasLocation" x="2001" y="-564"/>
         </scene>
         <!--Perfil Usuario View Controller-->
         <scene sceneID="tS0-C0-xrz">
@@ -965,11 +1198,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" id="bPt-eA-sgf" userLabel="Dialogo">
                                 <rect key="frame" x="20" y="184" width="280" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b4W-f1-aaE" userLabel="Titulo">
                                         <rect key="frame" x="8" y="8" width="264" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -977,14 +1210,14 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ApB-tL-2Uc" userLabel="Mensaje">
                                         <rect key="frame" x="8" y="48" width="264" height="84"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Zl-7a-dOb" userLabel="Cancelar">
                                         <rect key="frame" x="40" y="132" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.74509803919999995" green="0.23529411759999999" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="cancelar_small.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -995,7 +1228,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TP5-s4-r43" userLabel="Aceptar">
                                         <rect key="frame" x="192" y="132" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.59999999999999998" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="aceptar_small.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1006,7 +1239,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5mL-g7-cXA" userLabel="Aceptar">
                                         <rect key="frame" x="116" y="132" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.59999999999999998" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="aceptar_small.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1037,7 +1270,6 @@
     </scenes>
     <resources>
         <image name="aceptar_small.png" width="20" height="18"/>
-        <image name="agendaB.png" width="42" height="54"/>
         <image name="ajustesB.png" width="42" height="54"/>
         <image name="background3.png" width="320" height="480"/>
         <image name="bloquear.png" width="156" height="40"/>
@@ -1049,16 +1281,26 @@
         <image name="celesA.png" width="177" height="40"/>
         <image name="celesB.png" width="177" height="40"/>
         <image name="chatB.png" width="42" height="54"/>
+        <image name="contactoA.png" width="40" height="40"/>
+        <image name="contactoB.png" width="40" height="40"/>
+        <image name="editar.png" width="169" height="40"/>
+        <image name="editarB.png" width="168" height="40"/>
         <image name="enviarA.png" width="177" height="40"/>
         <image name="enviarB.png" width="177" height="40"/>
         <image name="enviarChat.png" width="76" height="30"/>
         <image name="flecha_tableView.png" width="16" height="16"/>
+        <image name="guardar.png" width="168" height="40"/>
+        <image name="guardarB.png" width="169" height="40"/>
         <image name="loginA.png" width="177" height="40"/>
         <image name="loginB.png" width="177" height="40"/>
         <image name="mensA.png" width="178" height="41"/>
         <image name="mensB.png" width="178" height="41"/>
         <image name="nuevoA.png" width="177" height="40"/>
         <image name="nuevoB.png" width="177" height="40"/>
+        <image name="recentB.png" width="42" height="54"/>
+        <image name="siguienteA.png" width="169" height="40"/>
+        <image name="siguienteB.png" width="169" height="40"/>
+        <image name="ziipB.png" width="42" height="54"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -1066,7 +1308,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="BEb-DR-460"/>
+        <segue reference="fHr-dO-WGI"/>
         <segue reference="qk4-eU-Rmq"/>
+        <segue reference="uQB-gf-e3C"/>
+        <segue reference="RWi-iM-9ba"/>
+        <segue reference="lOv-0W-s0Z"/>
+        <segue reference="Gtu-9M-Zb3"/>
     </inferredMetricsTieBreakers>
 </document>
