@@ -1,6 +1,6 @@
 
 var join = require('path').join
-  , pfx = join(__dirname, 'certificado.p12');
+  , pfx = join(__dirname, 'Certificates.p12');
   //, pfx = join(__dirname, 'cert/apn_developer_identity2.p12');
 
 /*!
@@ -15,8 +15,8 @@ var apnagent = require('apnagent')
  */
 
 agent
-  .set('pfx file', pfx);
-//  .enable('sandbox');
+  .set('pfx file', pfx)
+  .enable('sandbox');
 
 /*!
  * Error Mitigation
