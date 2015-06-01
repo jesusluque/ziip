@@ -119,6 +119,12 @@
 		9FF396FE1B093A64004B31BD /* recientesB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF396E31B093A64004B31BD /* recientesB@2x.png */; };
 		9FF397021B093AE9004B31BD /* delVecino.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF397001B093AE9004B31BD /* delVecino.png */; };
 		9FF397031B093AE9004B31BD /* propio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF397011B093AE9004B31BD /* propio.png */; };
+		9FF3D7AA1B1CE402000B18E1 /* botonEnviar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3D7A71B1CE402000B18E1 /* botonEnviar.png */; };
+		9FF3D7AB1B1CE402000B18E1 /* botonEnviar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3D7A81B1CE402000B18E1 /* botonEnviar@2x.png */; };
+		9FF3D7AC1B1CE402000B18E1 /* botonEnviar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3D7A91B1CE402000B18E1 /* botonEnviar@3x.png */; };
+		9FF3D7B01B1CE9CD000B18E1 /* fecha.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3D7AD1B1CE9CD000B18E1 /* fecha.png */; };
+		9FF3D7B11B1CE9CD000B18E1 /* fecha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3D7AE1B1CE9CD000B18E1 /* fecha@2x.png */; };
+		9FF3D7B21B1CE9CD000B18E1 /* fecha@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3D7AF1B1CE9CD000B18E1 /* fecha@3x.png */; };
 		9FF6B3991B13A48B001DC1A4 /* PublicidadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */; };
 		9FF6B39B1B14F4F4001DC1A4 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */; };
 		9FF6B39D1B1795A1001DC1A4 /* ziipA.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF6B39C1B1795A1001DC1A4 /* ziipA.png */; };
@@ -462,6 +468,12 @@
 		9FF396E31B093A64004B31BD /* recientesB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recientesB@2x.png"; sourceTree = "<group>"; };
 		9FF397001B093AE9004B31BD /* delVecino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delVecino.png; sourceTree = "<group>"; };
 		9FF397011B093AE9004B31BD /* propio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = propio.png; sourceTree = "<group>"; };
+		9FF3D7A71B1CE402000B18E1 /* botonEnviar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botonEnviar.png; sourceTree = "<group>"; };
+		9FF3D7A81B1CE402000B18E1 /* botonEnviar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botonEnviar@2x.png"; sourceTree = "<group>"; };
+		9FF3D7A91B1CE402000B18E1 /* botonEnviar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botonEnviar@3x.png"; sourceTree = "<group>"; };
+		9FF3D7AD1B1CE9CD000B18E1 /* fecha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fecha.png; sourceTree = "<group>"; };
+		9FF3D7AE1B1CE9CD000B18E1 /* fecha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fecha@2x.png"; sourceTree = "<group>"; };
+		9FF3D7AF1B1CE9CD000B18E1 /* fecha@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fecha@3x.png"; sourceTree = "<group>"; };
 		9FF6B3971B13A48B001DC1A4 /* PublicidadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicidadViewController.h; sourceTree = "<group>"; };
 		9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicidadViewController.m; sourceTree = "<group>"; };
 		9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -902,6 +914,9 @@
 				9FF7494E1B0A5E7100859337 /* bocadilloMorado.png */,
 				9FF749551B0A669600859337 /* bocadilloMorado2.png */,
 				9FF749561B0A669600859337 /* bocadilloBlanco2.png */,
+				9FF3D7A71B1CE402000B18E1 /* botonEnviar.png */,
+				9FF3D7A81B1CE402000B18E1 /* botonEnviar@2x.png */,
+				9FF3D7A91B1CE402000B18E1 /* botonEnviar@3x.png */,
 				9FF749691B0A75D500859337 /* btnConectaA.png */,
 				9FF7496A1B0A75D500859337 /* btnConectaB.png */,
 				9F0D48811B08B65F004421F4 /* cancelarA.png */,
@@ -947,6 +962,9 @@
 				9F2F2C761B0BC4EA00A977C7 /* enviarChat@3x.png */,
 				9F0D487D1B08B632004421F4 /* enviarA.png */,
 				9F0D487E1B08B632004421F4 /* enviarB.png */,
+				9FF3D7AD1B1CE9CD000B18E1 /* fecha.png */,
+				9FF3D7AE1B1CE9CD000B18E1 /* fecha@2x.png */,
+				9FF3D7AF1B1CE9CD000B18E1 /* fecha@3x.png */,
 				9F0D485D1B077F41004421F4 /* flecha_tableView.png */,
 				9FFDBBB61B1B61A700A3D395 /* guardar.png */,
 				9FFDBBB71B1B61A700A3D395 /* guardar@2x.png */,
@@ -1228,8 +1246,10 @@
 				EAF34DD91B1C6170003127FF /* jcelestinaB@3x.png in Resources */,
 				EAF34DA61B1C5B45003127FF /* jNuevoUsuarioA@3x.png in Resources */,
 				EA84CB281B1CB8E0008D1CEC /* jicconectaA.png in Resources */,
+				9FF3D7AA1B1CE402000B18E1 /* botonEnviar.png in Resources */,
 				9FF396ED1B093A64004B31BD /* backA@2x.png in Resources */,
 				EA84CB141B1CB8E0008D1CEC /* jicanonimoB@2x.png in Resources */,
+				9FF3D7B21B1CE9CD000B18E1 /* fecha@3x.png in Resources */,
 				9FF6B39F1B1795A9001DC1A4 /* ziipA@2x.png in Resources */,
 				9FF749751B0A768F00859337 /* bmorado@3x.png in Resources */,
 				EAF34DBD1B1C5EFC003127FF /* jcancelarA@2x.png in Resources */,
@@ -1261,6 +1281,7 @@
 				EA84CB101B1CB8E0008D1CEC /* jicsettingA@3x.png in Resources */,
 				9FF396F71B093A64004B31BD /* conectaA@2x.png in Resources */,
 				9FFDBBA61B1B5B1C00A3D395 /* siguienteA.png in Resources */,
+				9FF3D7B01B1CE9CD000B18E1 /* fecha.png in Resources */,
 				9FF6B39D1B1795A1001DC1A4 /* ziipA.png in Resources */,
 				9FF749571B0A669600859337 /* bocadilloMorado2.png in Resources */,
 				9FF396C01B08E015004B31BD /* celesA.png in Resources */,
@@ -1277,6 +1298,7 @@
 				9F0D486B1B08A24F004421F4 /* chatB.png in Resources */,
 				EAA975111B1CA9DC0022EAD3 /* tickA@3x.png in Resources */,
 				9FFDBBB41B1B616100A3D395 /* editar@2x.png in Resources */,
+				9FF3D7AB1B1CE402000B18E1 /* botonEnviar@2x.png in Resources */,
 				9FF396E91B093A64004B31BD /* ajustesB@2x.png in Resources */,
 				EAF34DE11B1C61DF003127FF /* jconectaA@2x.png in Resources */,
 				EA84CB221B1CB8E0008D1CEC /* jicanonimoB.png in Resources */,
@@ -1294,6 +1316,7 @@
 				9FF396E71B093A64004B31BD /* agendaB@2x.png in Resources */,
 				9FFDBBBC1B1B61A700A3D395 /* guardar.png in Resources */,
 				EA84CB2A1B1CB8E0008D1CEC /* jicrecentB.png in Resources */,
+				9FF3D7B11B1CE9CD000B18E1 /* fecha@2x.png in Resources */,
 				9FF749771B0A768F00859337 /* bblanco.png in Resources */,
 				EA84CB0D1B1CB8E0008D1CEC /* jicconectaB@3x.png in Resources */,
 				EAF34DE01B1C61DF003127FF /* jconectaA.png in Resources */,
@@ -1400,6 +1423,7 @@
 				EAF34DB41B1C5C36003127FF /* jenviarB@2x.png in Resources */,
 				EA84CB011B1CB8E0008D1CEC /* jicziipA@2x.png in Resources */,
 				9FF396F51B093A64004B31BD /* chatA@2x.png in Resources */,
+				9FF3D7AC1B1CE402000B18E1 /* botonEnviar@3x.png in Resources */,
 				EAF34DD41B1C6170003127FF /* jcelestinaA.png in Resources */,
 				9FF396FD1B093A64004B31BD /* recientesB.png in Resources */,
 				EAF34DA51B1C5B45003127FF /* jNuevoUsuarioA@2x.png in Resources */,
@@ -1614,10 +1638,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Morales (B872475K68)";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "869dfa87-0a14-4b7e-8b37-a4dfaa27a472";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1628,10 +1654,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Morales (B872475K68)";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "869dfa87-0a14-4b7e-8b37-a4dfaa27a472";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

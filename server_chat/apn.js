@@ -1,6 +1,6 @@
 
 var join = require('path').join
-  , pfx = join(__dirname, 'cert/push_notification.p12');
+  , pfx = join(__dirname, 'certificado.p12');
   //, pfx = join(__dirname, 'cert/apn_developer_identity2.p12');
 
 /*!

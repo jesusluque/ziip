@@ -56,12 +56,13 @@ def enviaSmsCodigo(telefono,codigo):
 @csrf_exempt
 def login(request):
     usuarios = Usuarios.objects.filter(usuario=request.POST["user"], password=request.POST["password"])
+    print request.POST
     if len(usuarios)>0:
         status = "ok"
         usuario = usuarios[0]
         usuario.token = generaTokenUsuario()
         usuario.save()
-        token = usuario.token
+        user_token = usuario.token
         mensaje = ""        
         if request.POST.has_key("pushToken"):
             lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
@@ -85,7 +86,7 @@ def login(request):
         
 
 
-    response = json.dumps({"resource":"login","status":status, "token":token,"mensaje":mensaje})
+    response = json.dumps({"resource":"login","status":status, "token":user_token,"mensaje":mensaje})
     return HttpResponse(response)
 
 

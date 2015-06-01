@@ -25,7 +25,9 @@ var connection = mysql.createConnection({
 fs = require('fs');
 
 //definimos el agente para las notificaciones push
-//var notify = require('./notify');
+var notify = require('./notify');
+
+
 
 function handleDisconnect(connection) {
   connection.on('error', function(err) {
@@ -339,7 +341,7 @@ io.sockets.on('connection', function(socket) {
 		                    if (socketsInRoom.length==0) {
                                  var userName = objOrigen.userName;
                                  var text = userName+": "+data.text;
-                                 //sendNotification(connection,data.to,text,message);
+                                 sendNotification(connection,data.to,text,message);
                                  //Tenemos desactivadas las notificaciones push
                             } else {
                                 var roomsDone=0;
@@ -360,7 +362,7 @@ io.sockets.on('connection', function(socket) {
                                                 logger.emit('newEvent', 'el destino no esta conectado, notificamos por PUSH',null);
                                                 var userName = objOrigen.userName;
                                                 var text = userName+": "+data.text;
-                                                //sendNotification(connection,data.to,text,message);
+                                                sendNotification(connection,data.to,text,message);
                                             }
                                         }
                                     });

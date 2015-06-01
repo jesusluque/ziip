@@ -34,13 +34,13 @@
         } else
         */
         if (i==0) {
-            imageName= @"ziipA.png";
+            imageName= @"jicziipA.png";
         } else if (i==1) {
-            imageName= @"recentA.png";
+            imageName= @"jicrecentA.png";
         } else if (i==2) {
-            imageName= @"chatA.png";
+            imageName= @"jicchatA.png";
         } else if (i==3) {
-            imageName= @"ajustesA.png";
+            imageName= @"jicsettingsA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
 
@@ -50,7 +50,11 @@
         //tbi.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         
-        [tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        //[tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        
+        [tbi setFinishedSelectedImage: selectedImage withFinishedUnselectedImage:image ];
+        
+        
         i++;
         
         
@@ -59,7 +63,7 @@
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
 
     
 
@@ -72,7 +76,7 @@
     
     
     //esto funciona, pero es una imagen
-    self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"backA"];
+    //self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"backA"];
     
     
 }

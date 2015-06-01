@@ -26,10 +26,12 @@
     
     
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+         NSLog(@"Pedimos notificaciones");
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
         
     } else {
+        NSLog(@"Pedimos notificaciones");
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
         
     }
@@ -63,11 +65,12 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
-    ;
+     NSLog(@"Guardamos notificaciones");
     NSString *newToken = [deviceToken description];
     newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",newToken);
     [defaults setObject:newToken forKey:@"pushToken"];
     [defaults synchronize];
 }
