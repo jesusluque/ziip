@@ -7,10 +7,13 @@
 //
 
 #import "ZiipBase.h"
+#import "ConfirmacionViewController.h"
 
-@interface ConfirmacionMovilViewController : ZiipBase
+@interface ConfirmacionMovilViewController : ZiipBase <ConfirmacionViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextField *codigo;
+@property (nonatomic) bool proceso_registro;
+@property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 
 -(IBAction) enviar;
 

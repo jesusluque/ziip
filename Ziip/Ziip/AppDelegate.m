@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
+#import "PublicidadViewController.h"
 
 @interface AppDelegate ()
 
@@ -25,18 +26,23 @@
     
     
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+         NSLog(@"Pedimos notificaciones");
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
         
     } else {
+        NSLog(@"Pedimos notificaciones");
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
         
     }
+    self.publicidadViewController = [[PublicidadViewController alloc] init];
+    [self.publicidadViewController inicializa];
 
     if ([self canChangeBadge]) {
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
     
+    [[UILabel appearance] setFont:[UIFont fontWithName:@"Futura Medium" size:14.0]];
     return YES;
 }
 
@@ -59,11 +65,12 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
-    ;
+     NSLog(@"Guardamos notificaciones");
     NSString *newToken = [deviceToken description];
     newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"%@",newToken);
     [defaults setObject:newToken forKey:@"pushToken"];
     [defaults synchronize];
 }
@@ -111,6 +118,9 @@
 - (void)crearDirectorioCache {
     
     [self crearDirectorio:@"usuarios"];
+    [self crearDirectorio:@"uploads"];
+    [self crearDirectorio:@"uploads/publicidad"];
+    
 }
 
 

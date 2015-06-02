@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "CoreDataHelper.h"
 #import "ChatMessage.h"
-#import "MapaViewController.h"
+
 //#import "NSData+Base64.h"
 #import <QuartzCore/QuartzCore.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -123,10 +123,11 @@ NSLog(@"diferencia: %f",diferencia);
     }
     
     UIView *vista = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 44)];
-    CGRect imageFrame = CGRectMake(210,5,34,34);
+    CGRect imageFrame = CGRectMake(self.view.frame.size.width -110 ,5,34,34);
     UIButton *imgUsuario = [[UIButton alloc] init];
     imgUsuario.frame = imageFrame;
-    imgUsuario.backgroundColor = [UIColor darkGrayColor];
+    imgUsuario.backgroundColor = [UIColor foregroundColor];
+    
     [imgUsuario setImage:[self.imageCache getCachedImage:self.ultimoMensaje.img] forState:UIControlStateNormal];
     [imgUsuario.layer setCornerRadius:5.0f];
     [imgUsuario.layer setMasksToBounds:YES];
@@ -366,15 +367,17 @@ NSLog(@"diferencia: %f",diferencia);
         view.backgroundColor = [UIColor clearColor];
         UIFont *dateFont = [UIFont systemFontOfSize:13.0f];
         CGSize sizeFecha = [fecha sizeWithFont:dateFont constrainedToSize:CGSizeMake(320, 2000)];
-        UILabel *lblFecha = [[UILabel alloc] initWithFrame:CGRectMake((300-sizeFecha.width) /2,0,sizeFecha.width+20,sizeFecha.height)];
+        UILabel *lblFecha = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width-sizeFecha.width) /2,0,sizeFecha.width+20,sizeFecha.height)];
         lblFecha.backgroundColor = [UIColor clearColor];
-        lblFecha.textColor = [UIColor blackColor];
+        lblFecha.textColor = [UIColor foregroundColor];
         lblFecha.font = dateFont;
         lblFecha.text = fecha;
         lblFecha.textAlignment = NSTextAlignmentCenter;
         CGRect frame = lblFecha.frame;
+        
+        /*
         CGRect frameFondoFecha = CGRectMake(frame.origin.x, frame.origin.y-1, frame.size.width, frame.size.height+2);
-        UIView *fondoFecha = [[UIView alloc] initWithFrame:frameFondoFecha];
+         UIView *fondoFecha = [[UIView alloc] initWithFrame:frameFondoFecha];
         [fondoFecha.layer setCornerRadius:3.0f];
         [fondoFecha.layer setMasksToBounds:YES];
         fondoFecha.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -384,6 +387,13 @@ NSLog(@"diferencia: %f",diferencia);
         [fondoFecha.layer setMasksToBounds:YES];
         fondoFecha.layer.borderColor = [UIColor lightGrayColor].CGColor;
         fondoFecha.layer.borderWidth = 1.0f;
+        */
+        CGRect frameFondoFecha = CGRectMake(frame.origin.x, frame.origin.y-2, sizeFecha.width+20, 20);
+        UIImageView *fondoFecha = [[UIImageView alloc] initWithFrame:frameFondoFecha];
+        [fondoFecha setImage:[UIImage imageNamed:@"fecha.png"]];
+        
+        
+        
         [view addSubview:fondoFecha];
         [view addSubview:lblFecha];
         

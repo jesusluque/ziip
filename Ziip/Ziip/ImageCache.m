@@ -37,6 +37,28 @@
 	}
 }
 
+- (void)cacheImagePubli:(NSString *)imageURLString {
+    
+    NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_PUBLI_URL, imageURLString ];
+    NSLog(@"%@",url_imagen);
+    NSURL *imageURL = [NSURL URLWithString:url_imagen];
+    // Generate a unique path to a resource representing the image you want
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
+        
+        NSData *data = [[NSData alloc] initWithContentsOfURL:imageURL];
+        UIImage *image = [[UIImage alloc] initWithData:data];
+        if ([imageURLString rangeOfString:@".png" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            
+            NSError *error;
+            [UIImagePNGRepresentation(image) writeToFile:uniquePath options:NSDataWritingAtomic error:&error];
+        } else if ( [imageURLString rangeOfString:@".jpg" options:NSCaseInsensitiveSearch].location != NSNotFound ||[imageURLString rangeOfString:@".jpeg" options:NSCaseInsensitiveSearch].location != NSNotFound ) {
+            [UIImageJPEGRepresentation(image, 100) writeToFile:uniquePath atomically:YES];
+        }
+    }
+}
 
 - (void)cacheChatImage:(NSString *)ImageURLString {
     
@@ -79,6 +101,29 @@
 	}
 
 	return image;
+}
+
+
+
+- (UIImage *)getCachedImagePubli:(NSString *)imageURLString {
+    
+    NSLog(@"url imagen: %@",imageURLString);
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
+    UIImage *image = nil;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
+        image = [UIImage imageWithContentsOfFile:uniquePath];                          // this is the cached image
+    } else {
+        // get a new one
+        [self cacheImagePubli:imageURLString];
+        //Y volvemos a comprobar si existe, porque ha podido fallar la descarga.
+        if ([[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
+            image = [UIImage imageWithContentsOfFile:uniquePath];
+        } else {
+        }
+    }
+    
+    return image;
 }
 
 

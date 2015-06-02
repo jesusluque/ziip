@@ -7,7 +7,7 @@
 //
 
 #import "RegistroViewController.h"
-
+#import "ConfirmacionMovilViewController.h"
 
 @implementation RegistroViewController
 
@@ -30,7 +30,15 @@
         [self.txtUsuario becomeFirstResponder];
         errores = [[NSString alloc] initWithFormat:@"%@\n%@", errores, @"El usuario es obligatorio."];
     }
-    
+    if ([self.txtEmail.text isEqualToString:@""]) {
+        [self.txtEmail becomeFirstResponder];
+        errores = [[NSString alloc] initWithFormat:@"%@\n%@", errores, @"El email es obligatorio."];
+    } else {
+        if (! [self isValidEmail:self.txtEmail.text ]) {
+            errores = [[NSString alloc] initWithFormat:@"%@\n%@", errores, @"El email tiene un formato invalido."];
+        }
+        
+    }
     if ([self.txtPassword.text isEqualToString:@""]) {
         if([errores isEqualToString:@""]){
             [self.txtPassword becomeFirstResponder];
@@ -45,18 +53,23 @@
     }
     
     if (![errores isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@""
-                                  message:errores
-                                  delegate:self
-                                  cancelButtonTitle:@"Ok"
-                                  otherButtonTitles: nil];
+        UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
+        CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.confirmacionViewController.view.frame = frame;
+        self.confirmacionViewController.delegate = self;
         
-        [alertView show];
+        NSDictionary *dict_tipo = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"id", nil];
+        
+        NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];
+        NSArray *valores= [[NSArray alloc] initWithObjects:@"Error",errores, dict_tipo, nil];
+        NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
+        [self.confirmacionViewController configuraPantalla:confirmacion];
+        [self.view addSubview:self.confirmacionViewController.view];
     } else {
         
-        NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"user",@"password",@"movil", nil];
-        NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtPassword.text,self.movil.text, nil];
+        NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"user",@"email",@"password",@"movil", nil];
+        NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtEmail.text,self.txtPassword.text,self.movil.text, nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if ([defaults objectForKey:@"pushToken"]) {
@@ -92,16 +105,52 @@
             
             
         } else  {
-            UIAlertView *alertView = [[UIAlertView alloc]
-                                      initWithTitle:@""
-                                      message:[datos objectForKey:@"mensaje"] 
-                                      delegate:self
-                                      cancelButtonTitle:@"Ok"
-                                      otherButtonTitles: nil];
-            [alertView show];
+            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
+            CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            self.confirmacionViewController.view.frame = frame;
+            self.confirmacionViewController.delegate = self;
+            
+            NSDictionary *dict_tipo = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"id", nil];
+            
+            NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];
+            NSArray *valores= [[NSArray alloc] initWithObjects:@"Error",[datos objectForKey:@"mensaje"], dict_tipo, nil];
+            NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
+            [self.confirmacionViewController configuraPantalla:confirmacion];
+            [self.view addSubview:self.confirmacionViewController.view];
         }
         
     }
+}
+
+-(BOOL) isValidEmail:(NSString *)checkString {
+    
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"segue_cod_movil"]) {
+        ConfirmacionMovilViewController *movilViewController = (ConfirmacionMovilViewController *)[segue destinationViewController];
+        movilViewController.proceso_registro = YES;
+    }
+}
+
+
+-(void) cierraConfirmacion {
+    
+    [self.confirmacionViewController.view removeFromSuperview];
+}
+
+
+-(void) respuestaUsuario:(bool)respuesta {
+    
 }
 
 @end

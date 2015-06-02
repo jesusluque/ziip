@@ -11,9 +11,17 @@
 #import "Define.h"
 #import "AppDelegate.h"
 #import "ImageCache.h"
+#import "PublicidadViewController.h"
+
 
 @interface ZiipBase : UIViewController <ZiipRequestDelegate>
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) IBOutlet UIView *publicidad;
+
+//@property (nonatomic, retain) PublicidadViewController *publicidadViewController;
+
 @property (nonatomic, retain) ZiipRequest *r;
 @property (nonatomic,retain) ImageCache *imageCache;
+@property (nonatomic, retain) AppDelegate *miDelegado;
 @end

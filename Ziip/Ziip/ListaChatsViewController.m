@@ -497,7 +497,7 @@
     
     message.tipo = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"type"]intValue]];
     
-    if (message.tipo.intValue ==1) {
+    if (message.tipo.intValue == 1) {
         
         message.text = [datos objectForKey:@"text"];
     }
@@ -522,9 +522,9 @@
     // Lo añadimos tb a lastMEssages
     NSString *lastUserID;
     if ( [[datos objectForKey:@"from" ] isEqualToString: [self.myId stringValue]]){
-        lastUserID=[datos objectForKey:@"destination" ];
+        lastUserID = [datos objectForKey:@"destination" ];
     } else {
-        lastUserID =[datos objectForKey:@"from"];
+        lastUserID = [datos objectForKey:@"from"];
     }
     
     NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"userId=%@", lastUserID]];
@@ -624,9 +624,9 @@
     if ([[segue identifier] isEqualToString:@"chatSegue"]) {
         
         self.chatViewController = (ChatViewController *)[segue destinationViewController];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *idUsuario = [defaults objectForKey:@"id"];
-        self.chatViewController.myId = idUsuario;
+        //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //NSString *idUsuario = [defaults objectForKey:@"id"];
+        self.chatViewController.myId = [self.myId stringValue];
         self.chatViewController.delegate = self;
         self.chatViewController.userId = [[NSString alloc]  initWithFormat:@"%@",self.ultimoMensaje.userId ];
         self.chatViewController.title =  self.ultimoMensaje.userName;

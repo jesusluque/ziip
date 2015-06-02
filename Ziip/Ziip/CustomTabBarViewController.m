@@ -7,6 +7,7 @@
 //
 
 #import "CustomTabBarViewController.h"
+#import "Define.h"
 
 @interface CustomTabBarViewController ()
 
@@ -28,12 +29,18 @@
         UIImage *image = tbi.image;
         
         NSString *imageName;
+        /*if (i==0) {
+            imageName= @"agendaA.png";
+        } else
+        */
         if (i==0) {
-            imageName= @"agendaB.png";
+            imageName= @"jicziipA.png";
         } else if (i==1) {
-            imageName= @"chatB.png";
-        } else if ( i==2) {
-            imageName= @"ajustesB.png";
+            imageName= @"jicrecentA.png";
+        } else if (i==2) {
+            imageName= @"jicchatA.png";
+        } else if (i==3) {
+            imageName= @"jicsettingsA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
 
@@ -43,23 +50,42 @@
         //tbi.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         
-        [tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        //[tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] withFinishedUnselectedImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        
+        [tbi setFinishedSelectedImage: selectedImage withFinishedUnselectedImage:image ];
+        
+        
         i++;
+        
+        
     }
     
-    self.tabBar.tintColor =[UIColor redColor];
-    self.tabBar.backgroundColor = [UIColor redColor];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+
+    
+
+
+    
+    //self.tabBar.backgroundColor = [UIColor redColor];
+
+    
+    //[[UITabBar appearance] setBarTintColor:[UIColor foregroundColor]];
     
     
-    //UIColor *color =[UIColor yellowColor];
+    //esto funciona, pero es una imagen
+    //self.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"backA"];
     
-    UIColor *color =[UIColor colorWithRed:130 green:81 blue:160 alpha:0];
-    
-    [[UITabBar appearance] setBarTintColor:color];
-    //[[UITabbar appearance] setBarTintColor:[UIColor yellowColor]]
-    //[[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:130 green:81 blue:160 alpha:0]];
     
 }
+
+-(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    
+    NSLog(@"%@",item);
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

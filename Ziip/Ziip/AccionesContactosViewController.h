@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Person.h"
+#import "ZiipBase.h"
+#import "SeleccionaContactoViewcontroller.h"
+#import "ConectaViewController.h"
+#import "CelestinoViewController.h"
 
-@interface AccionesContactosViewController : UIViewController
+
+@interface AccionesContactosViewController : ZiipBase
+
+@property (nonatomic, retain) IBOutlet UILabel *contactoNombre;
+@property (nonatomic, retain) Person *contacto;
 
 
 -(IBAction) volver;
+
 @end

@@ -7,14 +7,16 @@
 //
 
 #import "ZiipBase.h"
+#import "ConfirmacionViewController.h"
 
-@interface LoginViewController : ZiipBase
+@interface LoginViewController : ZiipBase <ConfirmacionViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtUsuario;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (strong,nonatomic) IBOutlet UIScrollView  *scrollView;
 @property (weak,nonatomic) IBOutlet UIView *vistaCampos;
 @property (strong,nonatomic) IBOutlet UIButton  *btnLogin;
+@property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 
 
 
