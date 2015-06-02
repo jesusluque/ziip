@@ -636,7 +636,6 @@ io.sockets.on('connection', function(socket) {
     });
 });
 
-/*
 //Gestion de errores
 var logStream = fs.createWriteStream(conf.errorLog, {flags:'a'});
 process.on('uncaughtException', function (err) {
@@ -645,4 +644,3 @@ process.on('uncaughtException', function (err) {
 	    logStream.write(err.stack);
 });
 
-*/
