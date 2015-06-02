@@ -1,22 +1,51 @@
 
-var join = require('path').join
-  , pfx = join(__dirname, 'Certificates.p12');
+join = require('path').join;
+//pfx = join(__dirname, 'Certificados.cert');
+fs = require('fs')
+
+
+pfx = join(__dirname, 'CertificadosUltimo.p12');
   //, pfx = join(__dirname, 'cert/apn_developer_identity2.p12');
+
+
+//cert = join(__dirname, 'certificado.cer');
+//key = join(__dirname, 'clave_privada.cer');
+
+
+
+cert = fs.readFileSync(join(__dirname, 'certificado.cer'));
+key = fs.readFileSync(join(__dirname, 'clave_privada.cer'));
+
 
 /*!
  * Create a new gateway agent
  */
 
-var apnagent = require('apnagent')
-  , agent = module.exports = new apnagent.Agent();
+apnagent = require('apnagent')
+agent = module.exports = new apnagent.Agent();
 
 /*!
  * Configure agent
  */
+auth=
+    key, key
+    cert, cert
 
 agent
-  .set('pfx file', pfx)
-  .enable('sandbox');
+    //.set(auth)
+  
+    .set('pfx file', pfx)
+  
+
+    //.set('cert',cert)
+    //.set('key',key)
+
+    .enable('sandbox')
+
+    
+    
+
+  //.set('passphrase', '1234')
 
 /*!
  * Error Mitigation
