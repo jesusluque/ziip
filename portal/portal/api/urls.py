@@ -5,7 +5,15 @@ urlpatterns = patterns('',
     url(r'^login$', 'portal.api.views.login'),
     url(r'^alta$', 'portal.api.views.alta'),
     url(r'^confirmacionMovil$', 'portal.api.views.confirmacionMovil'),
-     
+    url(r'^editaMovil$', 'portal.api.views.editaMovil'),
+    url(r'^editaImagen$', 'portal.api.views.editaImagen'),
+    
+    url(r'^sendMensajeAnonimo$', 'portal.api.views.sendMensajeAnonimo'),
+    url(r'^sendConecta$', 'portal.api.views.sendConecta'),
+    url(r'^sendCelestino$', 'portal.api.views.sendCelestino'),
+    
+    
+    
     
     
     

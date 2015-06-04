@@ -6,7 +6,16 @@
     "estado_solicitud_bang": {
         "1": "Pendiente",
         "2": "Aceptada"
+    },
+    "tipos_peticion": {
+        "1": "Anonimo",
+        "2": "Conecta",
+        "3": "Celestino"
+    },
+    "estados_peticion": {
+        "1": "Solicitado",
+        "2": "Aceptado",
+        "3": "Denegado"
     }
-    
     
 }

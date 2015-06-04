@@ -37,6 +37,20 @@ class ChatBloqueos(models.Model):
     bloqueado = models.IntegerField()
     
     
+class Peticiones(models.Model):
+    usuario = models.ForeignKey(Usuarios)
+    tipo = models.CharField(max_length=2, choices = valores["tipos_peticion"].items(),default=TIPO_PETICION_CONECTA)
+    telefono = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+    telefono2 = models.CharField(max_length=250)
+    email2 = models.CharField(max_length=250)
+    mensaje = models.TextField()
+    mensaje_anonimo = models.TextField()
+    estado = models.CharField(max_length=2, choices = valores["estados_peticion"].items(),default=ESTADO_PETICION_SOLICITADO)
+    
+    
+    
+    
 """
 class SolicitudesRegistro(models.Model):
     num_telefono = models.CharField(max_length=250)

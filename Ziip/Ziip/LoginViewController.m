@@ -16,8 +16,8 @@
 
 - (void)viewDidLoad {
     
-    NSLog(@"%f",self.view.frame.size.width);
     [super viewDidLoad];
+    [[self scrollView] setContentSize:self.vistaCampos.frame.size];
     self.btnLogin.layer.cornerRadius = 5;
     self.btnLogin.clipsToBounds = YES;
     
@@ -175,6 +175,11 @@
         if ([[datos objectForKey:@"status"]isEqualToString:@"ok"]) {
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:[datos objectForKey:@"token"] forKey:@"api_auth_token"];
+            NSDictionary *usuario = [datos objectForKey:@"usuario"];
+            [defaults setObject:[usuario objectForKey:@"telefono"] forKey:@"telefono"];
+            [defaults setObject:[usuario objectForKey:@"email"] forKey:@"email"];
+            [defaults setObject:[usuario objectForKey:@"imagen"] forKey:@"imagen"];
+            
             [defaults synchronize];
             [self performSegueWithIdentifier:@"segue_principal" sender: self];
             

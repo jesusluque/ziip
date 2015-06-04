@@ -55,14 +55,16 @@ def enviaSmsCodigo(telefono,codigo):
 
 @csrf_exempt
 def login(request):
+    usuario={}
     usuarios = Usuarios.objects.filter(usuario=request.POST["user"], password=request.POST["password"])
-    print request.POST
     if len(usuarios)>0:
         status = "ok"
         usuario = usuarios[0]
         usuario.token = generaTokenUsuario()
         usuario.save()
         user_token = usuario.token
+        usuario = {"telefono":usuario.num_telefono,"email":usuario.email,"imagen":usuario.imagen}
+        
         mensaje = ""        
         if request.POST.has_key("pushToken"):
             lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
@@ -82,11 +84,8 @@ def login(request):
         status = "ko"
         token = ""
         mensaje = "Usuario o password invalido"
-        
-        
 
-
-    response = json.dumps({"resource":"login","status":status, "token":user_token,"mensaje":mensaje})
+    response = json.dumps({"resource":"login","status":status, "token":user_token,"mensaje":mensaje, "usuario":usuario})
     return HttpResponse(response)
 
 
@@ -95,7 +94,7 @@ def alta(request):
     lista_usuarios = Usuarios.objects.filter(usuario=request.POST["user"])  
     mensaje=""
     if len(lista_usuarios) == 0:
-        usuario=Usuarios()
+        usuario = Usuarios()
         usuario.usuario = request.POST["user"]
         usuario.password = request.POST["password"]
         usuario.email = request.POST["email"]
@@ -107,7 +106,6 @@ def alta(request):
         usuario.fecha_registro = datetime.now()
         usuario.token = generaTokenUsuario()
         usuario.save()
-        token = usuario.token
         status = "ok"
         if request.POST.has_key("pushToken"):
             lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
@@ -122,15 +120,12 @@ def alta(request):
                 token.token = request.POST["pushToken"]
                 token.device = request.POST["device"]
                 token.save()
-
-
-            
     else:
         status = "ko"
         mensaje = "El usuario ya existe"
         
     
-    response = json.dumps({"resource":"alta","status":status, "token":token,"mensaje":mensaje})
+    response = json.dumps({"resource":"alta","status":status, "token":usuario.token,"mensaje":mensaje})
     return HttpResponse(response)
     
 @csrf_exempt
@@ -161,6 +156,191 @@ def confirmacionMovil(request):
         mensaje = "no hay token"
     response = json.dumps({"resource":"confirmacionMovil","status":status,"mensaje":mensaje})
     return HttpResponse(response)
+    
+    
+@csrf_exempt
+def editaMovil(request):  
+    status = "ok"
+    mensaje = ""   
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token=request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            usuario.num_telefono = request.POST["movil"]
+            usuario.codigo = generaCodigoSolicitud()
+            usuario.save()
+            enviaSmsCodigo(request.POST["movil"],usuario.codigo)
+        else:
+            status = "ko"
+            mensaje=" no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"editaMovil","status":status,"mensaje":mensaje})
+    return HttpResponse(response)    
+    
+    
+@csrf_exempt
+def editaImagen(request):      
+    status = "ok"
+    mensaje = ""   
+    file_url = ""
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token = request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            imagen = request.FILES['imagen']
+            listado = fichero.name.split(".")
+            extension = listado[len(listado)-1]
+            timestamp = str(int(time.time()))
+            file_url = "uploads/"+timestamp+"."+extension
+            f = open(settings.PROJECT_ROOT+file_url,'w')
+            f.write(fichero.read())
+            f.close()
+            usuario.imagen = file_url
+            usuario.save
+
+        else:
+            status = "ko"
+            mensaje = "no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"editaImagen","status":status,"mensaje":mensaje,"imagen":file_url})
+    return HttpResponse(response)
+    
+    
+    
+@csrf_exempt
+def sendMensajeAnonimo(request):      
+    status = "ok"
+    mensaje = ""   
+    motivo_error=""
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token = request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            
+            telefono = request.POST["telefono"]
+            email = request.POST["email"]
+            mensaje_anonimo = request.POST["mensaje_anonimo"]
+            mensaje = request.POST["mensaje"]
+            
+            peticion = Peticiones()
+            peticion.usuario_id = usuario.pk
+            peticion.tipo = TIPO_PETICION_ANONIMO
+            peticion.telefono = request.POST["telefono"]
+            peticion.email = request.POST["email"]
+            peticion.mensaje = request.POST["mensaje"]
+            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+            peticion.estado = ESTADO_PETICION_SOLICITADO
+            peticion.save()
+            
+            enviaPeticion(peticion)
+            
+        else:
+            status = "ko"
+            mensaje = "no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"sendMensajeAnonimo","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
+    return HttpResponse(response)
+    
+@csrf_exempt
+def sendConecta(request):      
+    status = "ok"
+    mensaje = ""   
+
+    motivo_error = ""
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token = request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            
+            telefono = request.POST["telefono"]
+            email = request.POST["email"]
+            mensaje_anonimo = request.POST["mensaje_anonimo"]
+            mensaje = request.POST["mensaje"]
+            
+            peticion = Peticiones()
+            peticion.usuario_id = usuario.pk
+            peticion.tipo = TIPO_PETICION_CONECTA
+            peticion.telefono = request.POST["telefono"]
+            peticion.email = request.POST["email"]
+            peticion.mensaje = request.POST["mensaje"]
+            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+            peticion.estado = ESTADO_PETICION_SOLICITADO
+            peticion.save()
+            
+            enviaPeticion(peticion)
+            
+        else:
+            status = "ko"
+            mensaje = "no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"sendMensajeAnonimo","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
+    return HttpResponse(response)
+
+
+@csrf_exempt
+def sendCelestino(request):      
+    status = "ok"
+    mensaje = ""   
+    
+    motivo_error = ""
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token = request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            
+            telefono = request.POST["telefono"]
+            email = request.POST["email"]
+            mensaje_anonimo = request.POST["mensaje_anonimo"]
+            mensaje = request.POST["mensaje"]
+            
+            peticion = Peticiones()
+            peticion.usuario_id = usuario.pk
+            peticion.tipo = TIPO_PETICION_CELESTINO
+            peticion.telefono = request.POST["telefono1"]
+            peticion.email = request.POST["email1"]
+            peticion.telefono2 = request.POST["telefono2"]
+            peticion.email2 = request.POST["email2"]
+            peticion.mensaje = request.POST["mensaje"]
+            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+            peticion.estado = ESTADO_PETICION_SOLICITADO
+            peticion.save()
+            
+            enviaPeticion(peticion)
+            
+        else:
+            status = "ko"
+            mensaje = "no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"sendMensajeAnonimo","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
+    return HttpResponse(response)
+    
+    
+
+ 
+
+def enviaPeticion(peticion):
+    
+    pass
+
+
+   
+    
+    
 """    
 @csrf_exempt
 def solicitudAlta(request):

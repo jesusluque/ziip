@@ -79,9 +79,17 @@
             NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson,
                                                                                   kABPersonFirstNameProperty);
             NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
+
+            NSString *fullName = @"";
             
-            NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-            
+
+            if (firstName != nil && firstName != (id)[NSNull null]) {
+                fullName = [NSString stringWithFormat:@"%@ %@", fullName, firstName];
+            }
+            if (lastName != nil && lastName != (id)[NSNull null]) {
+                fullName = [NSString stringWithFormat:@"%@ %@", fullName, lastName];
+            }
+
             person.firstName = firstName; person.lastName = lastName;
             person.fullName = fullName;
             

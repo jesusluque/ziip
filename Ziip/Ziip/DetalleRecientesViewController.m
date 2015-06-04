@@ -19,11 +19,33 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+-(void) pintaReciente {
+    
+    NSString *imagenTipo = @"";
+    if ([self.reciente.accion isEqualToString:@"1"]) {
+        self.tipoAccion.text = @"Anonimo";
+        imagenTipo=@"jicanonimoA.png";
+        
+    } else if ([self.reciente.accion isEqualToString:@"2"]) {
+        self.tipoAccion.text = @"Conecta";
+        imagenTipo=@"jicconectaA.png";
+        
+    } else if ([self.reciente.accion isEqualToString:@"3"]) {
+        self.tipoAccion.text = @"Celestina";
+        imagenTipo=@"jiccelestinaA.png";
+    }
+    
+    [self.imgTipoAccion setImage:[UIImage imageNamed:imagenTipo]];
+    
 
+    self.contacto_contacto.text = self.reciente.contacto_contacto;
+    self.contacto_nombre.text = self.reciente.contacto_nombre;
+    self.contacto2_contacto.text = self.reciente.contacto2_contacto;
+    self.contacto2_nombre.text = self.reciente.contacto2_nombre;
+    
+    self.mensaje_personalizado.text = self.reciente.mensaje;
+    self.mensaje.text = self.reciente.mensaje_anonimo;
+}
 
 
 @end

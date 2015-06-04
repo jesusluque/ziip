@@ -19,6 +19,8 @@
     self.r.delegate = self;
     self.imageCache = [[ImageCache alloc]init];
     self.miDelegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    self.managedObjectContext = self.miDelegado.managedObjectContext;
+    
     [self cambiaPublicidad];
 }
 
