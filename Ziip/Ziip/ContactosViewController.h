@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Person.h"
+#import "ZiipBase.h"
 
-@interface ContactosViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ContactosViewController : ZiipBase <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) NSMutableArray *listaPersonas;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;

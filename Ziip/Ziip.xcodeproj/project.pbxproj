@@ -1070,6 +1070,8 @@
 				9FF73F091B10F54100C7CF94 /* NSData+Base64.m */,
 				9FBD00C61AFFB49D00346802 /* Person.h */,
 				9FBD00C71AFFB49D00346802 /* Person.m */,
+				9FF73F051B10DAAE00C7CF94 /* PreferenciasViewController.h */,
+				9FF73F061B10DAAE00C7CF94 /* PreferenciasViewController.m */,
 				9FF6B3971B13A48B001DC1A4 /* PublicidadViewController.h */,
 				9FF6B3981B13A48B001DC1A4 /* PublicidadViewController.m */,
 				9FBD00B31AFA95D600346802 /* Reachability.h */,
@@ -1082,8 +1084,6 @@
 				9FF2516B1AF4EAA7000BD6CB /* RegistroViewController.m */,
 				9FF73F0B1B121C3D00C7CF94 /* SeleccionaContactoViewController.h */,
 				9FF73F0C1B121C3D00C7CF94 /* SeleccionaContactoViewController.m */,
-				9FF73F051B10DAAE00C7CF94 /* PreferenciasViewController.h */,
-				9FF73F061B10DAAE00C7CF94 /* PreferenciasViewController.m */,
 				9FA184991AF4D832009910CD /* ViewController.h */,
 				9FA1849A1AF4D832009910CD /* ViewController.m */,
 				9FA184921AF4D832009910CD /* Supporting Files */,
@@ -1637,13 +1637,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Morales (B872475K68)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "869dfa87-0a14-4b7e-8b37-a4dfaa27a472";
+				PROVISIONING_PROFILE = "6daccbfc-e34a-48c1-9611-8dfc62f6b9f6";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1653,13 +1653,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Morales (B872475K68)";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "869dfa87-0a14-4b7e-8b37-a4dfaa27a472";
+				PROVISIONING_PROFILE = "6daccbfc-e34a-48c1-9611-8dfc62f6b9f6";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

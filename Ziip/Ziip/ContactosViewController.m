@@ -38,14 +38,40 @@
     CFErrorRef error = NULL;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
     
+    
+    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        
+        
+        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+            // First time access has been granted, add the contact
+            //[self _addContactToAddressBook];
+            [self recargaContactos];
+        });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        // The user has previously given access, add the contact
+        //[self _addContactToAddressBook];
+         NSLog(@"Permisos2");
+    }
+    else {
+        // The user has previously denied access
+        // Send an alert telling user to change privacy setting in settings app
+         NSLog(@"Denegado");
+    }
+    
     if (addressBook != nil) {
-        NSLog(@"Succesful.");
+        NSLog(@"Succesful. %@",addressBook);
         
         //2
+        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+         NSLog(@"%@",allPeople);
         NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
-        
+        NSLog(@"%@",allContacts);
         //3
         NSUInteger i = 0; for (i = 0; i < [allContacts count]; i++) {
+            
+            NSLog(@"Un contacto");
             Person *person = [[Person alloc] init];
             ABRecordRef contactPerson = (__bridge ABRecordRef)allContacts[i];
             
@@ -53,9 +79,17 @@
             NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson,
                                                                                   kABPersonFirstNameProperty);
             NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
+
+            NSString *fullName = @"";
             
-            NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-            
+
+            if (firstName != nil && firstName != (id)[NSNull null]) {
+                fullName = [NSString stringWithFormat:@"%@ %@", fullName, firstName];
+            }
+            if (lastName != nil && lastName != (id)[NSNull null]) {
+                fullName = [NSString stringWithFormat:@"%@ %@", fullName, lastName];
+            }
+
             person.firstName = firstName; person.lastName = lastName;
             person.fullName = fullName;
             
@@ -180,6 +214,7 @@
     
     
 }
+
 
 
 

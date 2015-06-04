@@ -8,7 +8,7 @@
 
 #import "CelestinoViewController.h"
 #import "MensajesCell.h"
-
+#import "Recientes.h"
 
 @interface CelestinoViewController ()
 
@@ -106,7 +106,7 @@
             NSString *mensaje_anonimo =  [self.listaMensajes objectAtIndex:indexPath.row];
             NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"telefono1",@"email1",@"telefono2",@"email2",@"mensaje_anonimo",@"mensaje", nil];
             NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.telefono1,self.email1,self.telefono2,self.email2,mensaje_anonimo,self.mensaje.text, nil];
-            [self.r send:@"sendCelestino" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:NO];
+            [self.r send:@"sendCelestino" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:YES];
         }
     }
 }
@@ -137,6 +137,40 @@
         
         [self.confirmacionViewController configuraPantalla:confirmacion];
         
+        
+        NSIndexPath *indexPath = self.myTableView.indexPathForSelectedRow;
+        NSString *mensaje_anonimo =  [self.listaMensajes objectAtIndex:indexPath.row];
+        Recientes *reciente = (Recientes *)[NSEntityDescription insertNewObjectForEntityForName:@"Recientes" inManagedObjectContext:self.managedObjectContext];
+        
+        NSString *contacto1;
+        if ([self.telefono1 isEqualToString:@""]) {
+            contacto1 = self.email1;
+        }
+        else {
+            contacto1 = self.telefono1 ;
+        }
+        NSString *contacto2;
+        if ([self.telefono2 isEqualToString:@""]) {
+            contacto2 = self.email2;
+        }
+        else {
+            contacto2 = self.telefono2 ;
+        }
+        reciente.accion = @"anonimo";
+        reciente.contacto_nombre = self.contacto1_nombre;
+        reciente.contacto_contacto = contacto1;
+        reciente.contacto2_nombre = self.contacto2_nombre;
+        reciente.contacto2_contacto = contacto2;
+        reciente.mensaje = self.mensaje.text;
+        reciente.mensaje_anonimo = mensaje_anonimo;
+        reciente.fecha = [NSDate date];
+        
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Failed to add new data with error: %@", [error domain]);
+        }
+        
+        
         [self.view addSubview:self.confirmacionViewController.view];
         
     }
@@ -146,6 +180,7 @@
 -(void) cierraConfirmacion {
     
     [self.confirmacionViewController.view removeFromSuperview];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

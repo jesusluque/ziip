@@ -52,7 +52,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     static NSString *CellIdentifier = @"RecientesTableViewCell";
     RecientesTableViewCell *cell = (RecientesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -68,6 +67,17 @@
     cell.contacto2Nombre.text = item.contacto2_nombre;
     cell.fecha.text = [NSDateFormatter  localizedStringFromDate:item.fecha   dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
 
+    
+    NSString *imagenTipo = @"";
+    if ([item.accion isEqualToString:@"1"]) {
+        imagenTipo=@"jicanonimoA.png";
+    } else if ([item.accion isEqualToString:@"2"]) {
+        imagenTipo=@"jicconectaA.png";
+    } else if ([item.accion isEqualToString:@"3"]) {
+        imagenTipo=@"jiccelestinaA.png";
+    }
+    [cell.imageView setImage:[UIImage imageNamed:imagenTipo]];
+    
     return cell;
 }
 
@@ -84,7 +94,7 @@
     if ([[segue identifier] isEqualToString:@"detalle_recientes_segue"]) {
         DetalleRecientesViewController *accionesContactosViewController = (DetalleRecientesViewController *)[segue destinationViewController];
         accionesContactosViewController.reciente = self.recienteSeleccionado;
-        
+        [accionesContactosViewController pintaReciente];
     }
 }
 

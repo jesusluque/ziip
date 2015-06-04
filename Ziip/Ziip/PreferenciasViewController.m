@@ -51,7 +51,7 @@
     self.editMovil.hidden=YES;
     NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"movil",nil];
     NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.movil.text, nil];
-    [self.r send:@"editaMovil" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:NO];
+    [self.r send:@"editaMovil" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:YES];
     
 }
 
@@ -70,38 +70,37 @@
     
     if ([[datos objectForKey:@"resource"] isEqualToString:@"editaMovil"]) {
         [self performSegueWithIdentifier:@"segue_cod_movil" sender: self];
-    } if ([[datos objectForKey:@"resource"] isEqualToString:@"editaImagen"]) {
-      //Ponemos en user default la url de la imagen.
+    }
+    if ([[datos objectForKey:@"resource"] isEqualToString:@"editaImagen"]) {
+        //Ponemos en user default la url de la imagen.
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[datos objectForKey:@"imagen"] forKey:@"imagen"];
+        [defaults synchronize];
     }
 }
-
-
-
-
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     if ([[info objectForKey:@"UIImagePickerControllerMediaType"] isEqualToString: (NSString *) kUTTypeImage ]) {
         //Foto
-        
         UIImage *image = [self fixrotation:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
         
         [self.imagen setImage:image];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            NSData *imageData = UIImageJPEGRepresentation(image, 0.4);
-            NSString *imgStr = [imageData base64EncodedString];
+            //NSData *imageData = UIImageJPEGRepresentation(image, 0.4);
+            //NSString *imgStr = [imageData base64EncodedString];
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"imagen",nil];
-                NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:imgStr, nil];
-                [self.r send:@"editaImagen" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:NO];
+                //NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"imagen",nil];
+                //NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:imgStr, nil];
+                NSArray *imagenes = [[NSArray alloc] initWithObjects:image, nil];
+                [self.r send:@"editaImagen" tipo_peticion:@"POST" withParams:nil andValues:nil  imagenes:imagenes enviarToken:YES];
             });
         });
         
     }
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 
