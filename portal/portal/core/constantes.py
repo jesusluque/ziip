@@ -20,7 +20,9 @@ ESTADO_PETICION_SOLICITADO = "1"
 ESTADO_PETICION_ACEPTADO = "2"
 ESTADO_PETICION_DENEGADO = "3"
 
-
+SEXO_HOMBRE = "1"
+SEXO_MUJER = "2"
+SEXO_NODEFINIDO = "3"
 
 
 json_data = open(os.path.join(FILE_ROOT, 'array_config.json'))

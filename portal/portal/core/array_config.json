@@ -16,6 +16,10 @@
         "1": "Solicitado",
         "2": "Aceptado",
         "3": "Denegado"
+    },
+    "sexo": {
+        "1": "Hombre",
+        "2": "Mujer",
+        "3": "No definido"
     }
-    
 }

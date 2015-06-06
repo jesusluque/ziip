@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>80E402D6-4D18-4CDC-9275-EC636EE26440</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Ziip</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>7A9F54A4D816FE06DF801313F16056F1D1C86955</key>
 		<string>github.com:jesusluque/ziip.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Ziip/Ziip.xcodeproj/project.xcworkspace</string>
+	<string>Ziip/Ziip.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>7A9F54A4D816FE06DF801313F16056F1D1C86955</key>

@@ -63,7 +63,7 @@ def login(request):
         usuario.token = generaTokenUsuario()
         usuario.save()
         user_token = usuario.token
-        usuario = {"telefono":usuario.num_telefono,"email":usuario.email,"imagen":usuario.imagen}
+        usuario = {"telefono":usuario.num_telefono or "","email":usuario.email or "","imagen":usuario.imagen or ""}
         
         mensaje = ""        
         if request.POST.has_key("pushToken"):
@@ -98,6 +98,8 @@ def alta(request):
         usuario.usuario = request.POST["user"]
         usuario.password = request.POST["password"]
         usuario.email = request.POST["email"]
+        usuario.sexo = request.POST["sexo"]
+        
         if request.POST["movil"] != "":
             usuario.num_telefono = request.POST["movil"]
             usuario.codigo = generaCodigoSolicitud()
@@ -130,9 +132,6 @@ def alta(request):
     
 @csrf_exempt
 def confirmacionMovil(request):    
-    print request
-    #print request.META 
-    
     status = "ok"
     mensaje = ""   
     if request.META.has_key("HTTP_X_AUTH_TOKEN"):
@@ -330,6 +329,36 @@ def sendCelestino(request):
     return HttpResponse(response)
     
     
+def getContactos(request):
+    status = "ok"
+    mensaje = ""   
+    lista_contactos=[]
+    motivo_error = ""
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token = request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            contactos = Contactos.objects.filter(usuario_id = usuario.pk)
+            
+            for contacto in contactos:
+                con = {}
+                con["id"]=contacto.usuario2.pk
+                con["usuario"]=contacto.usuario2.usuario
+                con["imagen"]=contacto.usuario2.imagen
+                lista_contactos.append(con)
+            
+        else:
+            status = "ko"
+            mensaje = "no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"getContactos","status":status,"mensaje":mensaje,"contactos":lista_contactos})
+    return HttpResponse(response)
+               
+    
+
 
  
 
