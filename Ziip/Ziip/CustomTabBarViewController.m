@@ -36,11 +36,14 @@
         if (i==0) {
             imageName= @"jicziipA.png";
         } else if (i==1) {
-            imageName= @"jicrecentA.png";
+            imageName= @"jiccontactosA.png";
+            
         } else if (i==2) {
-            imageName= @"jicchatA.png";
+            imageName= @"jicrecentA.png";
         } else if (i==3) {
-            imageName= @"jicsettingsA.png";
+            imageName= @"jicchatA.png";
+        } else if (i==4) {
+            imageName= @"jicsettingA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
 

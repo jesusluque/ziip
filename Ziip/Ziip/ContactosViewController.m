@@ -93,32 +93,25 @@
             person.firstName = firstName; person.lastName = lastName;
             person.fullName = fullName;
             
+            person.listaTelefonos = [[NSMutableArray alloc] initWithObjects:nil];
+            person.listaEmails = [[NSMutableArray alloc] initWithObjects:nil];
+            
+            
             ABMultiValueRef phones = ABRecordCopyValue(contactPerson, kABPersonPhoneProperty);
             NSUInteger j = 0;
             for (j = 0; j < ABMultiValueGetCount(phones); j++) {
                 NSString *telefono = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, j);
-                if (j == 0) {
-                    person.phone = telefono;
-                }
+                [person.listaTelefonos addObject:telefono];
             }
 
             ABMultiValueRef emails = ABRecordCopyValue(contactPerson, kABPersonEmailProperty);
-            
-            
             for (j = 0; j < ABMultiValueGetCount(emails); j++) {
                 NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails, j);
-                if (j == 0) {
-                    person.homeEmail = email;
-                   
-                }
-                else if (j==1) person.workEmail = email; 
+                [person.listaEmails addObject:email];
             }
-            
-            //7 
             [self.listaPersonas addObject:person];
         }
-        
-        //8
+
         CFRelease(addressBook);
     } else { 
         //9
@@ -169,7 +162,50 @@
 
 -(void)  tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    Person *person = [self.listaPersonas objectAtIndex:indexPath.row];
+    NSMutableArray *lista_contactos = [[NSMutableArray alloc] initWithArray: person.listaTelefonos];
+    [lista_contactos  addObjectsFromArray:person.listaEmails];
+    
+    
+    if ([lista_contactos count]==1) {
+        [self eleccionContacto: [lista_contactos objectAtIndex:0]];
+    } else {
+        UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.detalleContactoViewController = (DetalleContactoViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"DetalleContactoViewController"];
+        CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.detalleContactoViewController.view.frame = frame;
+        self.detalleContactoViewController.delegate = self;
+        
+        self.detalleContactoViewController.listaContactos = lista_contactos;
+        [self.detalleContactoViewController recargaTableView];
+        [self.view addSubview:self.detalleContactoViewController.view];
+
+    }
+}
+
+
+- (void)eleccionContacto:(NSString *)strContacto {
+    
+    
+    NSIndexPath *indexPath = self.myTableView.indexPathForSelectedRow;
+    
     self.contactoSeleccionado =  [self.listaPersonas objectAtIndex:indexPath.row];
+    self.contactoSeleccionado.email = @"";
+    self.contactoSeleccionado.telefono= @"";
+    
+    for (NSString *telefono in self.contactoSeleccionado.listaTelefonos) {
+        if ([telefono isEqualToString:strContacto]) {
+            self.contactoSeleccionado.telefono = strContacto;
+        }
+    }
+    for (NSString *email in self.contactoSeleccionado.listaEmails) {
+        if ([email isEqualToString:strContacto]) {
+            self.contactoSeleccionado.email = strContacto;
+        }
+        
+        
+    }
+    
     if ([self.accion isEqualToString:@"anonimo"]) {
         [self performSegueWithIdentifier:@"mensaje_anonimo_segue" sender:nil];
     } else if ([self.accion isEqualToString:@"conecta"]) {
@@ -186,18 +222,18 @@
     
     if ([[segue identifier] isEqualToString:@"mensaje_anonimo_segue"]) {
         MensajeAnonimoViewController *accionesContactosViewController = (MensajeAnonimoViewController *)[segue destinationViewController];
-        accionesContactosViewController.telefono = self.contactoSeleccionado.phone;
-        accionesContactosViewController.email = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.telefono = self.contactoSeleccionado.telefono;
+        accionesContactosViewController.email = self.contactoSeleccionado.email;
         accionesContactosViewController.contacto_nombre = self.contactoSeleccionado.fullName;
     } else if ([[segue identifier] isEqualToString:@"conecta_segue"]) {
         ConectaViewController *accionesContactosViewController = (ConectaViewController *)[segue destinationViewController];
-        accionesContactosViewController.telefono = self.contactoSeleccionado.phone;
-        accionesContactosViewController.email = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.telefono = self.contactoSeleccionado.telefono;
+        accionesContactosViewController.email = self.contactoSeleccionado.email;
         accionesContactosViewController.contacto_nombre = self.contactoSeleccionado.fullName;
     } else if ([[segue identifier] isEqualToString:@"celestino_segue"]) {
         SeleccionaContactoViewController *accionesContactosViewController = (SeleccionaContactoViewController *)[segue destinationViewController];
-        accionesContactosViewController.telefono1 = self.contactoSeleccionado.phone;
-        accionesContactosViewController.email1 = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.telefono1 = self.contactoSeleccionado.telefono;
+        accionesContactosViewController.email1 = self.contactoSeleccionado.email;
         accionesContactosViewController.contacto1_nombre = self.contactoSeleccionado.fullName;
         accionesContactosViewController.accion = @"celestino2";
         
@@ -206,14 +242,14 @@
         accionesContactosViewController.telefono1 = self.telefono1;
         accionesContactosViewController.email1 = self.email1;
         accionesContactosViewController.contacto1_nombre = self.contacto1_nombre;
-        accionesContactosViewController.telefono2 = self.contactoSeleccionado.phone;
-        accionesContactosViewController.email2 = self.contactoSeleccionado.homeEmail;
+        accionesContactosViewController.telefono2 = self.contactoSeleccionado.telefono;
+        accionesContactosViewController.email2 = self.contactoSeleccionado.email;
         accionesContactosViewController.contacto2_nombre = self.contactoSeleccionado.fullName;
 
     }
-    
-    
 }
+
+
 
 
 

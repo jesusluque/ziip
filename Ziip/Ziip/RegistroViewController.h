@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword2;
 @property (weak, nonatomic) IBOutlet UITextField *movil;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sexo;
 @property (strong,nonatomic) IBOutlet UIScrollView  *scrollView;
 @property (weak,nonatomic) IBOutlet UIView *vistaCampos;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;

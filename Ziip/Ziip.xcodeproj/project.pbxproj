@@ -194,6 +194,8 @@
 		9FFDBBD11B1B669900A3D395 /* editarB.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFDBBCE1B1B669900A3D395 /* editarB.png */; };
 		9FFDBBD21B1B669900A3D395 /* editarB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFDBBCF1B1B669900A3D395 /* editarB@2x.png */; };
 		9FFDBBD31B1B669900A3D395 /* editarB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFDBBD01B1B669900A3D395 /* editarB@3x.png */; };
+		9FFE72781B233FB10061EFA5 /* ListadoContactosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE72771B233FB10061EFA5 /* ListadoContactosViewController.m */; };
+		9FFE727B1B2356D20061EFA5 /* DetalleContactoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE727A1B2356D20061EFA5 /* DetalleContactoViewController.m */; };
 		EA84CAFE1B1CB8E0008D1CEC /* jicziipB.png in Resources */ = {isa = PBXBuildFile; fileRef = EA84CACE1B1CB8E0008D1CEC /* jicziipB.png */; };
 		EA84CAFF1B1CB8E0008D1CEC /* jicziipA.png in Resources */ = {isa = PBXBuildFile; fileRef = EA84CACF1B1CB8E0008D1CEC /* jicziipA.png */; };
 		EA84CB001B1CB8E0008D1CEC /* jicziipB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA84CAD01B1CB8E0008D1CEC /* jicziipB@2x.png */; };
@@ -556,6 +558,10 @@
 		9FFDBBCE1B1B669900A3D395 /* editarB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editarB.png; sourceTree = "<group>"; };
 		9FFDBBCF1B1B669900A3D395 /* editarB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editarB@2x.png"; sourceTree = "<group>"; };
 		9FFDBBD01B1B669900A3D395 /* editarB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editarB@3x.png"; sourceTree = "<group>"; };
+		9FFE72761B233FB10061EFA5 /* ListadoContactosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListadoContactosViewController.h; sourceTree = "<group>"; };
+		9FFE72771B233FB10061EFA5 /* ListadoContactosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListadoContactosViewController.m; sourceTree = "<group>"; };
+		9FFE72791B2356D20061EFA5 /* DetalleContactoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleContactoViewController.h; sourceTree = "<group>"; };
+		9FFE727A1B2356D20061EFA5 /* DetalleContactoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetalleContactoViewController.m; sourceTree = "<group>"; };
 		EA84CACE1B1CB8E0008D1CEC /* jicziipB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jicziipB.png; sourceTree = "<group>"; };
 		EA84CACF1B1CB8E0008D1CEC /* jicziipA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jicziipA.png; sourceTree = "<group>"; };
 		EA84CAD01B1CB8E0008D1CEC /* jicziipB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jicziipB@2x.png"; sourceTree = "<group>"; };
@@ -1053,6 +1059,8 @@
 				9F0D48711B08A49E004421F4 /* CustomTabBarViewController.m */,
 				9FBD00B01AFA956C00346802 /* Define.h */,
 				9FBD00B11AFA956C00346802 /* Define.m */,
+				9FFE72791B2356D20061EFA5 /* DetalleContactoViewController.h */,
+				9FFE727A1B2356D20061EFA5 /* DetalleContactoViewController.m */,
 				9FF73F1D1B123EBF00C7CF94 /* DetalleRecientesViewController.h */,
 				9FF73F1E1B123EBF00C7CF94 /* DetalleRecientesViewController.m */,
 				9FA1849F1AF4D832009910CD /* Images.xcassets */,
@@ -1060,6 +1068,8 @@
 				9FBD00B71AFA95F000346802 /* JSONKit.m */,
 				9FA184A11AF4D832009910CD /* LaunchScreen.xib */,
 				9FA1849C1AF4D832009910CD /* Main.storyboard */,
+				9FFE72761B233FB10061EFA5 /* ListadoContactosViewController.h */,
+				9FFE72771B233FB10061EFA5 /* ListadoContactosViewController.m */,
 				9FBD00C01AFA98B100346802 /* LoginViewController.h */,
 				9FBD00C11AFA98B100346802 /* LoginViewController.m */,
 				9FF6B3A51B19D54F001DC1A4 /* MensajesCell.h */,
@@ -1462,6 +1472,7 @@
 				9FF73F101B121D3E00C7CF94 /* CelestinoViewController.m in Sources */,
 				9F0D48431B074A19004421F4 /* OBGradientView.m in Sources */,
 				9FF2516C1AF4EAA7000BD6CB /* RegistroViewController.m in Sources */,
+				9FFE727B1B2356D20061EFA5 /* DetalleContactoViewController.m in Sources */,
 				9FBD00B81AFA95F000346802 /* JSONKit.m in Sources */,
 				9F0D48061B07319B004421F4 /* ChatCell.m in Sources */,
 				9F0D48401B074A04004421F4 /* MPNotificationView.m in Sources */,
@@ -1494,6 +1505,7 @@
 				9FBD00AC1AFA925200346802 /* ZiipBase.m in Sources */,
 				9FF73F0D1B121C3D00C7CF94 /* SeleccionaContactoViewController.m in Sources */,
 				9FF73F131B121DB800C7CF94 /* ConectaViewController.m in Sources */,
+				9FFE72781B233FB10061EFA5 /* ListadoContactosViewController.m in Sources */,
 				9FBD00C81AFFB49D00346802 /* Person.m in Sources */,
 				9F0D48381B074385004421F4 /* SRWebSocket.m in Sources */,
 				9F0D482D1B07435F004421F4 /* SocketIOTransportXHR.m in Sources */,

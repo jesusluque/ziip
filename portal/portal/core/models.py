@@ -15,7 +15,9 @@ class Usuarios(models.Model):
     codigo = models.CharField(max_length=250) #Para confirmar el movil
     confirmado = models.BooleanField(default=False)
     imagen = models.CharField(max_length=250)
+    sexo = models.CharField(max_length=2, choices = valores["sexo"].items(),default=SEXO_HOMBRE)
     
+        
 class Tokens(models.Model):
     usuario = models.ForeignKey(Usuarios)
     token = models.EmailField(max_length=250)
@@ -49,7 +51,10 @@ class Peticiones(models.Model):
     estado = models.CharField(max_length=2, choices = valores["estados_peticion"].items(),default=ESTADO_PETICION_SOLICITADO)
     
     
-    
+class Contactos(models.Model):
+    usuario = models.ForeignKey(Usuarios, related_name = "contactos_usuario")
+    usuario2 = models.ForeignKey(Usuarios, related_name = "contactos_usuario2")
+    fecha = models.DateTimeField(default=datetime.now)
     
 """
 class SolicitudesRegistro(models.Model):

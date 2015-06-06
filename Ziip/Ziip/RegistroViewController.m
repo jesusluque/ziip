@@ -68,8 +68,8 @@
         [self.view addSubview:self.confirmacionViewController.view];
     } else {
         
-        NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"user",@"email",@"password",@"movil", nil];
-        NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtEmail.text,self.txtPassword.text,self.movil.text, nil];
+        NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"user",@"email",@"password",@"movil",@"sexo", nil];
+        NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtEmail.text,self.txtPassword.text,self.movil.text,@(self.sexo.selectedSegmentIndex +1), nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if ([defaults objectForKey:@"pushToken"]) {
