@@ -24,7 +24,6 @@
     self.username.text = [defaults objectForKey:@"user"];
     NSString *movil = [defaults objectForKey:@"telefono"];
     
-    NSLog(@"movil: %@",movil);
     if (movil) {
         self.movil.hidden=YES;
         self.editMovil.hidden=YES;

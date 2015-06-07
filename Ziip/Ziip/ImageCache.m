@@ -17,7 +17,6 @@
 - (void)cacheImage:(NSString *)imageURLString {
     
     NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_URL, imageURLString ];
-    NSLog(@"%@",url_imagen);
 	NSURL *imageURL = [NSURL URLWithString:url_imagen];
 	// Generate a unique path to a resource representing the image you want
 	NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -40,7 +39,6 @@
 - (void)cacheImagePubli:(NSString *)imageURLString {
     
     NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_PUBLI_URL, imageURLString ];
-    NSLog(@"%@",url_imagen);
     NSURL *imageURL = [NSURL URLWithString:url_imagen];
     // Generate a unique path to a resource representing the image you want
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -84,7 +82,6 @@
 
 - (UIImage *)getCachedImage:(NSString *)imageURLString {
     
-    NSLog(@"url imagen: %@",imageURLString);
 	NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
 	UIImage *image = nil;
@@ -107,7 +104,6 @@
 
 - (UIImage *)getCachedImagePubli:(NSString *)imageURLString {
     
-    NSLog(@"url imagen: %@",imageURLString);
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
     UIImage *image = nil;

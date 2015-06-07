@@ -45,33 +45,30 @@
         
         ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
             // First time access has been granted, add the contact
-            //[self _addContactToAddressBook];
             [self recargaContactos];
         });
     }
     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-        // The user has previously given access, add the contact
-        //[self _addContactToAddressBook];
-         NSLog(@"Permisos2");
+
+
     }
     else {
         // The user has previously denied access
         // Send an alert telling user to change privacy setting in settings app
-         NSLog(@"Denegado");
+
     }
     
     if (addressBook != nil) {
-        NSLog(@"Succesful. %@",addressBook);
+
         
         //2
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
-         NSLog(@"%@",allPeople);
+        //CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+
         NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
-        NSLog(@"%@",allContacts);
+
         //3
         NSUInteger i = 0; for (i = 0; i < [allContacts count]; i++) {
-            
-            NSLog(@"Un contacto");
+
             Person *person = [[Person alloc] init];
             ABRecordRef contactPerson = (__bridge ABRecordRef)allContacts[i];
             
@@ -101,6 +98,7 @@
             NSUInteger j = 0;
             for (j = 0; j < ABMultiValueGetCount(phones); j++) {
                 NSString *telefono = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, j);
+                NSLog(@"telefono:%@",telefono);
                 [person.listaTelefonos addObject:telefono];
             }
 
@@ -108,10 +106,12 @@
             for (j = 0; j < ABMultiValueGetCount(emails); j++) {
                 NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails, j);
                 [person.listaEmails addObject:email];
+                NSLog(@"email:%@",email);
             }
             [self.listaPersonas addObject:person];
         }
 
+        NSLog(@"listaPersonas: %@",self.listaPersonas );
         CFRelease(addressBook);
     } else { 
         //9
@@ -137,7 +137,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"contando: %@",self.listaPersonas);
     return [self.listaPersonas count];
 
 }
@@ -145,9 +144,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Person *person = [self.listaPersonas objectAtIndex:indexPath.row];
-    
-    NSLog(@"%@",person);
-    
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
     ContactosCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -191,6 +187,8 @@
         self.detalleContactoViewController.delegate = self;
         
         self.detalleContactoViewController.listaContactos = lista_contactos;
+        
+        NSLog(@"listado de contactos: %@", lista_contactos);
         [self.detalleContactoViewController recargaTableView];
         [self.view addSubview:self.detalleContactoViewController.view];
 

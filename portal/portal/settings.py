@@ -17,6 +17,14 @@ ADMINS = (
      ('Manuel Rodriguez', 'manuel@realcomabroad.com'),
 )
 
+MAIL_FROM="noreply@growinfinance.com"
+MAIL_TO="manuthema.rodriguez@gmail.com"
+EMAIL_HOST="email-smtp.eu-west-1.amazonaws.com"
+EMAIL_PORT=587
+EMAIL_HOST_USER="AKIAJQTA3SCAJQMAHWNQ"
+EMAIL_HOST_PASSWORD="AnnbBlWheEEEKzNR5NnZ1E/0id9wyiRDRc8nJHg/AIeF"
+EMAIL_USE_TLS=True
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 

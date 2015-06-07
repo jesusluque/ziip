@@ -92,7 +92,6 @@
 
 - (void)conectarSocket {
     
-    NSLog(@"conectar socket");
     if (self.conectar) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *user = [defaults objectForKey:@"user"];
@@ -109,14 +108,14 @@
 
 
 - (void)toForeground {
-    NSLog(@"to foreground");
+    
     self.conectar = YES;
     [self conectarSocket];
 }
 
 
 - (void)toBackground {
-    NSLog(@"to background");
+
     self.conectar = NO;
     [self.miSocket disconnect];
 }
@@ -131,7 +130,7 @@
 
 
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error; {
-    NSLog(@" socket did disconnected");
+
     self.conectado = NO;
     if (self.chatAbierto) {
         [self.chatViewController desactivaBotonSend];
@@ -141,7 +140,7 @@
 
 
 - (void)desconectar {
-    NSLog(@"desconectar");
+
     self.conectar = NO;
     [self.miSocket disconnect];
 }
@@ -232,7 +231,6 @@
             cell.imgTipoUsuario.hidden = YES;
         }
     */
-    NSLog(@"Vamos a pedir la imagen");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage *img = [self.imageCache getCachedImage:last.img];
         dispatch_async(dispatch_get_main_queue(), ^{
