@@ -14,9 +14,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 ADMINS = (
-     ('Manuel Rodriguez', 'manuel@realcomabroad.com'),
+     ('Manuel Rodriguez', 'manuthema.rodriguez@gmail.com'),
+
 )
 
+SERVER_EMAIL="noreply@growinfinance.com"
 MAIL_FROM="noreply@growinfinance.com"
 MAIL_TO="manuthema.rodriguez@gmail.com"
 EMAIL_HOST="email-smtp.eu-west-1.amazonaws.com"
@@ -43,8 +45,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/marodriguez/git/ziip/portal/templates',
-    '/var/www/sitios/ziip/portal/templates',
+    '/Users/marodriguez/git/ziip/portal/portal/templates',
+    '/var/www/sitios/ziip/portal/portal/templates',
 )
 
 
@@ -59,7 +61,8 @@ DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ziip.marodriguez.com"]
+
 
 
 # Application definition
