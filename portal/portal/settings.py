@@ -39,7 +39,13 @@ DATABASES = {
 }
 
 
-
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    '/Users/marodriguez/git/ziip/portal/templates',
+    '/var/www/sitios/ziip/portal/templates',
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -51,7 +57,7 @@ SECRET_KEY = '!pr4jb%w57w&!oztvey4vkv_n5gr#%%c@%c*m69tokwx!8$u(n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
