@@ -15,7 +15,19 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSString *contacto;
+    if ([self.telefono isEqualToString:@""]) {
+        contacto=self.email;
+        
+    } else {
+        contacto=self.telefono;
+    }
+    
+    
+    NSString *mensajeA = [[NSString alloc] initWithFormat:@"Vas a enviar un mensaje a: %@ %@", self.contacto_nombre,contacto];
+    self.mensajeA.text = mensajeA;
 }
+
 
 -(IBAction) enviar {
     

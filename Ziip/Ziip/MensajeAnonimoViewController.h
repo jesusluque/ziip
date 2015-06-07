@@ -27,7 +27,7 @@
 @property (nonatomic, retain)  NSMutableArray *listaMensajes;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) IBOutlet UIButton *btnEnviar;
-
+@property (nonatomic, retain) IBOutlet UILabel *mensajeA;
 
 -(IBAction) enviar;
 

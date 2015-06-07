@@ -263,12 +263,7 @@ def sendConecta(request):
         lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
-            
-            telefono = request.POST["telefono"]
-            email = request.POST["email"]
-            mensaje_anonimo = request.POST["mensaje_anonimo"]
-            mensaje = request.POST["mensaje"]
-            
+
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
             peticion.tipo = TIPO_PETICION_CONECTA

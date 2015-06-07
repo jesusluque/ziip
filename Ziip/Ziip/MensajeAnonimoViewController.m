@@ -31,6 +31,18 @@
                                                                                     action:@selector(scrollViewPulsado)];
     [tapRecognizer setCancelsTouchesInView:NO];
     [[self scrollView] addGestureRecognizer:tapRecognizer];
+    
+    NSString *contacto;
+    if ([self.telefono isEqualToString:@""]) {
+        contacto=self.email;
+        
+    } else {
+        contacto=self.telefono;
+    }
+    
+    NSString *mensajeA = [[NSString alloc] initWithFormat:@"Vas a enviar un mensaje a: %@ %@", self.contacto_nombre,contacto];
+    self.mensajeA.text = mensajeA;
+
 }
 
 
