@@ -16,7 +16,7 @@
 //#define CONEXION_URL @"http://192.168.1.129:8000/api/"
 
 
-#define IMAGENES_URL @"http://ziip.marodriguez.com/uploads/"
+#define IMAGENES_URL @"http://ziip.marodriguez.com/"
 #define PUBLICIDAD_URL @"http://relax.marodriguez.com/api/"
 #define IMAGENES_PUBLI_URL @"http://relax.marodriguez.com"
 

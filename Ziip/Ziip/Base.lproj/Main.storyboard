@@ -452,6 +452,24 @@
             <point key="canvasLocation" x="907" y="1728"/>
         </scene>
         <!--Contactos-->
+        <scene sceneID="nKZ-OW-ri6">
+            <objects>
+                <navigationController id="VQD-BS-fDi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contactos" image="agendaB.png" id="WJi-az-PCl"/>
+                    <navigationItem key="navigationItem" id="dmR-gi-QKf"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bym-o1-5uZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Bwm-2b-wAf" kind="relationship" relationship="rootViewController" id="h0W-DP-jrd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FNW-ly-wTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="929" y="1111"/>
+        </scene>
+        <!--Contactos-->
         <scene sceneID="0zZ-tp-fv4">
             <objects>
                 <viewController id="Bwm-2b-wAf" customClass="ListadoContactosViewController" sceneMemberID="viewController">
@@ -464,7 +482,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eZu-PQ-Qgc">
-                                <rect key="frame" x="0.0" y="50" width="320" height="430"/>
+                                <rect key="frame" x="0.0" y="114" width="320" height="430"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -507,7 +525,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="qeC-vI-9lL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -515,6 +533,7 @@
                         <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Contactos" image="agendaB.png" id="0Ch-nq-MvJ"/>
+                    <navigationItem key="navigationItem" title="Contactos" id="wdc-X6-sYX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="myTableView" destination="eZu-PQ-Qgc" id="P9S-H8-VUw"/>
@@ -523,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyR-zw-XKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="907" y="1124"/>
+            <point key="canvasLocation" x="1486" y="1770"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="sAk-Ho-HCH">
@@ -555,7 +574,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6aq-Rj-ruO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fotoFija.png" id="6aq-Rj-ruO">
                                 <rect key="frame" x="16" y="138" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -826,7 +845,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="VYN-0c-2pO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="VTV-6G-ydJ">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
@@ -875,7 +894,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96470588239999999" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Contactos" id="0qq-MN-tw7"/>
                     <navigationItem key="navigationItem" title="Contactos" id="RrS-WF-VFM"/>
@@ -974,7 +993,7 @@
                                             <view contentMode="scaleToFill" id="rTZ-pp-wAD">
                                                 <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0HQ-Um-2PO">
                                                 <rect key="frame" x="19" y="345" width="376" height="142"/>
@@ -1134,7 +1153,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="da8-5s-AIu" kind="relationship" relationship="viewControllers" id="F4f-iR-rzX"/>
-                        <segue destination="Bwm-2b-wAf" kind="relationship" relationship="viewControllers" id="Htn-W1-Raq"/>
+                        <segue destination="VQD-BS-fDi" kind="relationship" relationship="viewControllers" id="rTj-TQ-8u6"/>
                         <segue destination="GHt-ra-ull" kind="relationship" relationship="viewControllers" id="Svy-wX-Vf6"/>
                         <segue destination="r6M-mp-Ijj" kind="relationship" relationship="viewControllers" id="1aQ-RG-hR0"/>
                         <segue destination="0gy-jg-Ltd" kind="relationship" relationship="viewControllers" id="7pw-NK-JXM"/>
@@ -1261,7 +1280,7 @@
                             <view contentMode="scaleToFill" id="Ur1-2P-DML">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tVe-Yw-EIB">
                                 <rect key="frame" x="87" y="351" width="160" height="40"/>
@@ -1611,6 +1630,7 @@
         <image name="editar.png" width="169" height="40"/>
         <image name="editarB.png" width="168" height="40"/>
         <image name="flecha_tableView.png" width="16" height="16"/>
+        <image name="fotoFija.png" width="100" height="100"/>
         <image name="guardar.png" width="168" height="40"/>
         <image name="guardarB.png" width="169" height="40"/>
         <image name="jNuevoUsuarioA.png" width="160" height="40"/>
@@ -1644,10 +1664,10 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="kth-nL-gbt"/>
-        <segue reference="Ln1-hK-I91"/>
-        <segue reference="uQB-gf-e3C"/>
-        <segue reference="lOv-0W-s0Z"/>
-        <segue reference="Gtu-9M-Zb3"/>
-        <segue reference="RWi-iM-9ba"/>
+        <segue reference="qk4-eU-Rmq"/>
+        <segue reference="YUE-xY-mHJ"/>
+        <segue reference="DSs-sb-OBI"/>
+        <segue reference="ui9-uc-q8X"/>
+        <segue reference="vc9-zP-rAS"/>
     </inferredMetricsTieBreakers>
 </document>

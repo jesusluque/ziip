@@ -17,6 +17,8 @@
 - (void)cacheImage:(NSString *)imageURLString {
     
     NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_URL, imageURLString ];
+    
+    NSLog(@"%@",url_imagen);
 	NSURL *imageURL = [NSURL URLWithString:url_imagen];
 	// Generate a unique path to a resource representing the image you want
 	NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
