@@ -14,9 +14,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 ADMINS = (
-     ('Manuel Rodriguez', 'manuel@realcomabroad.com'),
+     ('Manuel Rodriguez', 'manuthema.rodriguez@gmail.com'),
 )
 
+SERVER_EMAIL="noreply@growinfinance.com"
 MAIL_FROM="noreply@growinfinance.com"
 MAIL_TO="manuthema.rodriguez@gmail.com"
 EMAIL_HOST="email-smtp.eu-west-1.amazonaws.com"
