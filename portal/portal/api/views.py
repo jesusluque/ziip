@@ -205,7 +205,7 @@ def editaImagen(request):
             f.write(fichero.read())
             f.close()
             usuario.imagen = file_url
-            usuario.save
+            usuario.save()
 
         else:
             status = "ko"
