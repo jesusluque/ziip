@@ -15,7 +15,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 ADMINS = (
      ('Manuel Rodriguez', 'manuthema.rodriguez@gmail.com'),
-
 )
 
 SERVER_EMAIL="noreply@growinfinance.com"

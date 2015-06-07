@@ -56,7 +56,7 @@ def enviaSmsCodigo(telefono,codigo):
 
 @csrf_exempt
 def login(request):
-    usuario={}
+    dict_usuario={}
     usuarios = Usuarios.objects.filter(usuario=request.POST["user"], password=request.POST["password"])
     if len(usuarios)>0:
         status = "ok"
@@ -64,7 +64,7 @@ def login(request):
         usuario.token = generaTokenUsuario()
         usuario.save()
         user_token = usuario.token
-        usuario = {"telefono":usuario.num_telefono or "","email":usuario.email or "","imagen":usuario.imagen or ""}
+        dict_usuario = {"telefono":usuario.num_telefono or "","email":usuario.email or "","imagen":usuario.imagen or ""}
         
         mensaje = ""        
         if request.POST.has_key("pushToken"):
@@ -86,7 +86,7 @@ def login(request):
         token = ""
         mensaje = "Usuario o password invalido"
 
-    response = json.dumps({"resource":"login","status":status, "token":user_token,"mensaje":mensaje, "usuario":usuario})
+    response = json.dumps({"resource":"login","status":status, "token":user_token,"mensaje":mensaje, "usuario":dict_usuario})
     return HttpResponse(response)
 
 
@@ -205,7 +205,7 @@ def editaImagen(request):
             f.write(fichero.read())
             f.close()
             usuario.imagen = file_url
-            usuario.save
+            usuario.save()
 
         else:
             status = "ko"
