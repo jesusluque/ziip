@@ -122,10 +122,11 @@
             NSMutableData *body = [NSMutableData data];
             
             for (UIImage *imagen in imagenes ){
+                NSLog(@"enviando imagen");
                 
                 NSData* fileData = UIImageJPEGRepresentation (imagen,1);
                 [body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                [body appendData:[@"Content-Disposition: form-data; name=\"files[]\"; filename=\"image.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[@"Content-Disposition: form-data; name=\"imagen\"; filename=\"image.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [body appendData:[NSData dataWithData:fileData]];
                 [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];

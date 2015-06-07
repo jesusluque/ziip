@@ -13,6 +13,7 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *imagen;
 @property (nonatomic, retain) IBOutlet UILabel *username;
+@property (nonatomic, retain) IBOutlet UILabel *telefono;
 @property (nonatomic, retain) IBOutlet UITextField *movil;
 @property (nonatomic, retain) IBOutlet UIButton *editMovil;
 @property (nonatomic,retain) UIImagePickerController *imagePicker;

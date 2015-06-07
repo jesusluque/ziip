@@ -4,7 +4,8 @@ from portal.core.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import random
-
+import time
+from portal.settings import *
     
 CARACTERES_TOKEN = 'abcdefghijklmnopqrstuvwxyz1234567890'
 NUM_CARACTERES_TOKEN = 20
@@ -185,17 +186,22 @@ def editaImagen(request):
     status = "ok"
     mensaje = ""   
     file_url = ""
+    print request
+    print request.FILES
+    
+    print request.FILES['imagen']
+    
     if request.META.has_key("HTTP_X_AUTH_TOKEN"):
         token = request.META["HTTP_X_AUTH_TOKEN"]
         lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
-            imagen = request.FILES['imagen']
+            fichero = request.FILES['imagen']
             listado = fichero.name.split(".")
             extension = listado[len(listado)-1]
             timestamp = str(int(time.time()))
-            file_url = "uploads/"+timestamp+"."+extension
-            f = open(settings.PROJECT_ROOT+file_url,'w')
+            file_url = "/uploads/"+timestamp+"."+extension
+            f = open(BASE_DIR+"/portal"+file_url,'w')
             f.write(fichero.read())
             f.close()
             usuario.imagen = file_url

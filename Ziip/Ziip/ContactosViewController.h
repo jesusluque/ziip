@@ -10,8 +10,9 @@
 #import "Person.h"
 #import "ZiipBase.h"
 #import "DetalleContactoViewController.h"
+#import "ConfirmacionViewController.h"
 
-@interface ContactosViewController : ZiipBase <UITableViewDataSource, UITableViewDelegate,DetalleContactoDelegate>
+@interface ContactosViewController : ZiipBase <ConfirmacionViewControllerDelegate,UITableViewDataSource, UITableViewDelegate,DetalleContactoDelegate>
 
 @property (nonatomic) NSMutableArray *listaPersonas;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
@@ -22,6 +23,7 @@
 @property (nonatomic, retain) NSString *telefono1;
 @property (nonatomic, retain) NSString *contacto1_nombre;
 @property (nonatomic, retain) DetalleContactoViewController *detalleContactoViewController;
+@property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 
 
 @end
