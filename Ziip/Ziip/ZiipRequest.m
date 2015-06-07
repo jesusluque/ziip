@@ -27,29 +27,21 @@
         NSString *completeUrl = [[[NSString alloc] initWithFormat:@"%@%@",CONEXION_URL,action]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         if (parametros == nil) {
-            NSLog(@" es nulo");
+
             parametros = [[NSMutableArray alloc] init];
             valores = [[NSMutableArray alloc] init];
             
         }
         if ([parametros count] ==[valores count]) {
-            NSLog(@"uno");
-            NSLog(@"action: %@",action);
-            
-            
             if ([action rangeOfString:@"status"].location != NSNotFound) {
-                NSLog(@"dos");
                 if ([defaults objectForKey:@"fechaUltimoMensaje"]) {
-                    NSLog(@"tres");
                     [parametros addObject:@"lastMessage"];
                     [valores addObject:[defaults objectForKey:@"fechaUltimoMensaje"]];
                 }
             }
             
             NSString *parametros_procesados = [self procesa_parametros:parametros conValores:valores ];
-            
-            
-            NSLog(@"parametros:%@",parametros_procesados);
+
             NSMutableURLRequest *request;
             if ([tipo_peticion isEqualToString:@"GET"]) {
                 completeUrl = [[[NSString alloc] initWithFormat:@"%@?%@",completeUrl,parametros_procesados]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -59,7 +51,6 @@
                 request = [[NSMutableURLRequest alloc]  initWithURL:[NSURL URLWithString:completeUrl]];
                 [request setHTTPBody:[parametros_procesados dataUsingEncoding:NSUTF8StringEncoding]];
             }
-            NSLog(@"compleeUrl:%@",completeUrl);
             
             [request setHTTPMethod:tipo_peticion];
             
@@ -76,16 +67,16 @@
             
             [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]  completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 [self.delegate hideLoading];
-                NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"str_Data: %@",str_data);
+                //NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                //NSLog(@"str_Data: %@",str_data);
                 if (error == nil) {
                     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                    NSLog(@"resultado: %@",result);
+                    //NSLog(@"resultado: %@",result);
 
                     [self.delegate recibeDatos:result];
                 } else {
                     
-                    NSLog(@"%@",error);
+                    //NSLog(@"%@",error);
                     [self.delegate muestra_fallo_red];
                 }
             }];

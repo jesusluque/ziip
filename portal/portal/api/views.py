@@ -186,10 +186,7 @@ def editaImagen(request):
     status = "ok"
     mensaje = ""   
     file_url = ""
-    print request
-    print request.FILES
-    
-    print request.FILES['imagen']
+
     
     if request.META.has_key("HTTP_X_AUTH_TOKEN"):
         token = request.META["HTTP_X_AUTH_TOKEN"]
@@ -306,8 +303,8 @@ def sendCelestino(request):
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
             
-            telefono = request.POST["telefono"]
-            email = request.POST["email"]
+            telefono = request.POST["telefono1"]
+            email = request.POST["email1"]
             mensaje_anonimo = request.POST["mensaje_anonimo"]
             mensaje = request.POST["mensaje"]
             

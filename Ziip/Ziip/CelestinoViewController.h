@@ -24,5 +24,7 @@
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 @property (nonatomic, retain)  NSMutableArray *listaMensajes;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
-
+@property (nonatomic, retain) IBOutlet UIButton *btnEnviar;
+@property (strong,nonatomic) IBOutlet UIScrollView  *scrollView;
+@property (weak,nonatomic) IBOutlet UIView *vistaCampos;
 @end

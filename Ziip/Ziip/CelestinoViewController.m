@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [[self scrollView] setContentSize:self.vistaCampos.frame.size];
     self.listaMensajes = [[NSMutableArray alloc] initWithObjects: nil];
     
     [self.listaMensajes addObject:@"Trabajo con vosotros y creo que deberíais conoceros mejor."];
@@ -26,6 +27,11 @@
     [self.listaMensajes addObject:@"Nos conocemos los tres y creo que os gustáis."];
     [self.listaMensajes addObject:@"Os he visto a ambos en clase, creo que hacéis buena pareja."];    
     [self.myTableView reloadData];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(scrollViewPulsado)];
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [[self scrollView] addGestureRecognizer:tapRecognizer];
     
 }
 
@@ -114,6 +120,7 @@
 
 -(void) recibeDatos:(NSDictionary *)datos {
     
+    NSLog(@"%@",datos);
     if ([[datos objectForKey:@"resource"] isEqualToString:@"sendCelestino"]) {
         
         UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -186,6 +193,51 @@
 
 -(void) respuestaUsuario:(bool)respuesta {
     
+}
+
+
+-(void) textViewDidBeginEditing:(UITextView *)textView {
+    
+    [self performSelector:@selector(scrollToView:) withObject:self.btnEnviar afterDelay:0.1];
+}
+
+
+- (void)keyboardDidShow: (NSNotification *) notification{
+    
+    NSDictionary* info = [notification userInfo];
+    CGRect kbRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    kbRect = [self.view convertRect:kbRect fromView:nil];
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbRect.size.height + 10, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbRect.size.height;
+    
+    if(!CGRectContainsPoint(aRect, self.btnEnviar.frame.origin)){
+        [self performSelector:@selector(scrollToView:) withObject:self.btnEnviar afterDelay:0.1];
+    }
+}
+
+
+- (void) scrollToView:(UIView *)aView {
+    
+    [self.scrollView scrollRectToVisible:aView.frame animated:YES];
+}
+
+
+- (void)keyboardDidHide: (NSNotification *) notification{
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+}
+
+
+- (void) scrollViewPulsado {
+    
+    [[self vistaCampos] endEditing:YES];
 }
 
 
