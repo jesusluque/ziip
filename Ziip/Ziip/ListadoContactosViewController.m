@@ -23,13 +23,13 @@
     
     NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:nil];
     NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects: nil];
-    [self.r send:@"sendContactos" tipo_peticion:@"GET" withParams:parametros andValues:valores enviarToken:YES];
+    [self.r send:@"getContactos" tipo_peticion:@"GET" withParams:parametros andValues:valores enviarToken:YES];
 }
 
 
 - (void) recibeDatos:(NSDictionary *)datos {
     
-    if ([[datos objectForKey:@"resource"] isEqualToString:@"sendContactos"]) {
+    if ([[datos objectForKey:@"resource"] isEqualToString:@"getContactos"]) {
         
         self.listaContactos = [datos objectForKey:@"contactos"];
         [self.myTableView reloadData];
@@ -46,6 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    NSLog(@"numero de rows %lu",(unsigned long)[self.listaContactos count]);
     return [self.listaContactos count];
     
 }
@@ -53,13 +54,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    NSLog(@"Cell for row");
     NSDictionary *contacto = [self.listaContactos objectAtIndex:indexPath.row];
     static NSString *simpleTableIdentifier = @"ContactosCell";
     ContactosCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (cell == nil) {
         cell = [[ContactosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    cell.nombre.text = [contacto objectForKey:@"username"];
+    cell.nombre.text = [contacto objectForKey:@"usuario"];
+    
+    [cell.imageView setImage:[self.imageCache getCachedImage:[contacto objectForKey:@"imagen"]]];
     return cell;
     
 }

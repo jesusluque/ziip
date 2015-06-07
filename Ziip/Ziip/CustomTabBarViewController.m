@@ -36,7 +36,7 @@
         if (i==0) {
             imageName= @"jicziipA.png";
         } else if (i==1) {
-            imageName= @"jiccontactosA.png";
+            imageName= @"agendaA.png";
             
         } else if (i==2) {
             imageName= @"jicrecentA.png";

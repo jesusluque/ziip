@@ -22,11 +22,16 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     self.username.text = [defaults objectForKey:@"user"];
-    NSString *movil = [defaults objectForKey:@"movil"];
+    NSString *movil = [defaults objectForKey:@"telefono"];
     
+    NSLog(@"movil: %@",movil);
     if (movil) {
         self.movil.hidden=YES;
         self.editMovil.hidden=YES;
+        self.telefono.text = movil;
+        self.telefono.hidden = NO;
+    } else {
+        self.telefono.hidden = YES;
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

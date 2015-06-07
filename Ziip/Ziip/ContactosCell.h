@@ -12,4 +12,6 @@
 
 
 @property (nonatomic,retain) IBOutlet UILabel *nombre;
+@property (nonatomic,retain) IBOutlet UIImageView *imagen;
+
 @end
