@@ -17,6 +17,14 @@ ADMINS = (
      ('Manuel Rodriguez', 'manuel@realcomabroad.com'),
 )
 
+MAIL_FROM="noreply@growinfinance.com"
+MAIL_TO="manuthema.rodriguez@gmail.com"
+EMAIL_HOST="email-smtp.eu-west-1.amazonaws.com"
+EMAIL_PORT=587
+EMAIL_HOST_USER="AKIAJQTA3SCAJQMAHWNQ"
+EMAIL_HOST_PASSWORD="AnnbBlWheEEEKzNR5NnZ1E/0id9wyiRDRc8nJHg/AIeF"
+EMAIL_USE_TLS=True
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -41,9 +49,9 @@ DATABASES = {
 SECRET_KEY = '!pr4jb%w57w&!oztvey4vkv_n5gr#%%c@%c*m69tokwx!8$u(n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 

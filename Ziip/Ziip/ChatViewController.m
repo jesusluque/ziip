@@ -67,17 +67,12 @@
 
 -(void) cambioAltoTeclado:(NSNotification *)notification{
 
-    NSLog(@"Cambio alto teclado");
+
     NSDictionary *userInfo = notification.userInfo;
     CGRect inicio = [[userInfo objectForKey:@"UIKeyboardFrameBeginUserInfoKey"]CGRectValue];
     CGRect fin = [[userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"]CGRectValue];
-    
-    
-    NSLog(@"posicion texto y:%f ",self.texto.frame.origin.y);
-    NSLog(@"inicio:%f  fin:%f",inicio.origin.y,fin.origin.y);
-    
+
     float diferencia = inicio.origin.y -fin.origin.y;
-NSLog(@"diferencia: %f",diferencia);
     
     [UIView animateWithDuration:0.25 animations:^{
         self.myTableView.frame = CGRectMake(self.myTableView.frame.origin.x,self.myTableView.frame.origin.y,self.myTableView.frame.size.width,self.myTableView.frame.size.height-diferencia);
@@ -192,7 +187,6 @@ NSLog(@"diferencia: %f",diferencia);
     NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(from=%@ or to=%@) and tipo=1",self.userId,self.userId]];
     self.listaMensajes = [CoreDataHelper searchObjectsForEntity:@"ChatMessage" withPredicate:itemPredicate andSortKey:@"fecha" andSortAscending:false andContext:self.managedObjectContext];
     self.total_mensajes = [self.listaMensajes count];
-    NSLog(@"total_mensajes: %ld",self.total_mensajes);
 }
 
 
@@ -285,7 +279,7 @@ NSLog(@"diferencia: %f",diferencia);
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"en cell for row: %@",self.mensajes);
+
     NSString *fecha = [self.dias objectAtIndex:([self.dias count]-indexPath.section)-1];
     if ([fecha isEqualToString:@"vermas"]){
         MensajesAntiguosCell *cell;

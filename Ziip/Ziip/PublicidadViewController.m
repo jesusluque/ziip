@@ -52,7 +52,7 @@
 
 -(void) cambiaPublicidad: ( UIView *) vista {
     
-    NSLog(@"Cambiando publicidad");
+
     //seleccionamos la publicidad.
     NSDictionary *publi = [self seleccionaPublicidad];
     
@@ -61,7 +61,6 @@
         [subvista removeFromSuperview];
     }
 
-    NSLog(@" publicidad seleccionada: %@",publi);
     if ([[publi objectForKey:@"tipo"]  intValue] == 1) {
         //Si es iad
         
@@ -69,7 +68,6 @@
         
         
     } else {
-        NSLog(@" publicidad propia");
         //si es propia
         NSArray *items = [[publi objectForKey:@"imagen"] componentsSeparatedByString:@"."];
         
@@ -77,7 +75,6 @@
         
         
         NSString *url_img_publicidad = [[NSString alloc] initWithFormat:@"%@_%d.%@",[items objectAtIndex:0], (int)vista.frame.size.width,[items objectAtIndex:1] ];
-        NSLog(@"url imagen: %@",url_img_publicidad);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage *img = [self.imageCache getCachedImagePubli:url_img_publicidad];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -141,11 +138,7 @@
         
     }
     return publi_seleccionada;
-    
-    
 }
-
-
 
 
 - (void) solicitaInfoServer {
@@ -153,7 +146,6 @@
     NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"latitud",@"lontigud", nil];
     NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:@(self.location.coordinate.latitude),@(self.location.coordinate.longitude), nil];
     [self send:@"getPublicidad" tipo_peticion:@"GET" withParams:parametros andValues:valores enviarToken:NO];
-    
 }
 
 
@@ -187,29 +179,20 @@
         NSString *completeUrl = [[[NSString alloc] initWithFormat:@"%@%@",PUBLICIDAD_URL,action]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         if (parametros == nil) {
-            NSLog(@" es nulo");
             parametros = [[NSMutableArray alloc] init];
             valores = [[NSMutableArray alloc] init];
             
         }
         if ([parametros count] ==[valores count]) {
-            NSLog(@"uno");
-            NSLog(@"action: %@",action);
-            
-            
+
             if ([action rangeOfString:@"status"].location != NSNotFound) {
-                NSLog(@"dos");
                 if ([defaults objectForKey:@"fechaUltimoMensaje"]) {
-                    NSLog(@"tres");
                     [parametros addObject:@"lastMessage"];
                     [valores addObject:[defaults objectForKey:@"fechaUltimoMensaje"]];
                 }
             }
             
             NSString *parametros_procesados = [self procesa_parametros:parametros conValores:valores ];
-            
-            
-            NSLog(@"parametros:%@",parametros_procesados);
             NSMutableURLRequest *request;
             if ([tipo_peticion isEqualToString:@"GET"]) {
                 completeUrl = [[[NSString alloc] initWithFormat:@"%@?%@",completeUrl,parametros_procesados]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -219,8 +202,6 @@
                 request = [[NSMutableURLRequest alloc]  initWithURL:[NSURL URLWithString:completeUrl]];
                 [request setHTTPBody:[parametros_procesados dataUsingEncoding:NSUTF8StringEncoding]];
             }
-            NSLog(@"compleeUrl:%@",completeUrl);
-            
             [request setHTTPMethod:tipo_peticion];
             
             [request setValue:[NSString stringWithFormat:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"] forHTTPHeaderField:@"Accept"];
@@ -236,16 +217,14 @@
             
             [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]  completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 [self hideLoading];
-                NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"str_Data: %@",str_data);
+                //NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                //NSLog(@"str_Data: %@",str_data);
                 if (error == nil) {
                     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                    NSLog(@"resultado: %@",result);
-                    
+
                     [self recibeDatos:result];
                 } else {
-                    
-                    NSLog(@"%@",error);
+
                     [self muestra_fallo_red];
                 }
             }];

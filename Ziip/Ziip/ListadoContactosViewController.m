@@ -46,7 +46,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"numero de rows %lu",(unsigned long)[self.listaContactos count]);
     return [self.listaContactos count];
     
 }
@@ -54,7 +53,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"Cell for row");
+
     NSDictionary *contacto = [self.listaContactos objectAtIndex:indexPath.row];
     static NSString *simpleTableIdentifier = @"ContactosCell";
     ContactosCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];

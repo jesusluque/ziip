@@ -17,7 +17,7 @@
     [super viewDidLoad];
     self.listaContactos = [[NSMutableArray alloc] initWithObjects: nil];
     
-    
+    NSLog(@"view did load de detalle de contactos");
 }
 
 - (void) recargaTableView {
