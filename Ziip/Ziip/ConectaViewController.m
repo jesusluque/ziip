@@ -73,7 +73,7 @@
         else {
             contacto = self.telefono ;
         }
-        reciente.accion = @"anonimo";
+        reciente.accion = @"conecta";
         reciente.contacto_nombre = self.contacto_nombre;
         reciente.contacto_contacto = contacto;
         reciente.mensaje = @"";

@@ -46,7 +46,7 @@
 
 -(IBAction) enviar {
     
-    if ([self.telefono.text isEqualToString:@""] && [self.telefono.text isEqualToString:@""]) {
+    if ([self.telefono.text isEqualToString:@""] && [self.email.text isEqualToString:@""]) {
         UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
         CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

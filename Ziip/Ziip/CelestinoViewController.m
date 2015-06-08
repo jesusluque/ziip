@@ -163,7 +163,7 @@
         else {
             contacto2 = self.telefono2 ;
         }
-        reciente.accion = @"anonimo";
+        reciente.accion = @"celestino";
         reciente.contacto_nombre = self.contacto1_nombre;
         reciente.contacto_contacto = contacto1;
         reciente.contacto2_nombre = self.contacto2_nombre;

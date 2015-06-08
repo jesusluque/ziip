@@ -94,6 +94,7 @@ def login(request):
 def alta(request):
     lista_usuarios = Usuarios.objects.filter(usuario=request.POST["user"])  
     mensaje=""
+    token_usuario=""
     if len(lista_usuarios) == 0:
         usuario = Usuarios()
         usuario.usuario = request.POST["user"]
@@ -109,6 +110,7 @@ def alta(request):
         usuario.fecha_registro = datetime.now()
         usuario.token = generaTokenUsuario()
         usuario.save()
+        token_usuario = usuario.token
         status = "ok"
         if request.POST.has_key("pushToken"):
             lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
@@ -128,7 +130,7 @@ def alta(request):
         mensaje = "El usuario ya existe"
         
     
-    response = json.dumps({"resource":"alta","status":status, "token":usuario.token,"mensaje":mensaje})
+    response = json.dumps({"resource":"alta","status":status, "token":token_usuario,"mensaje":mensaje})
     return HttpResponse(response)
     
 @csrf_exempt

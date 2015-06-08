@@ -15,6 +15,7 @@
 @implementation DetalleRecientesViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -22,15 +23,15 @@
 -(void) pintaReciente {
     
     NSString *imagenTipo = @"";
-    if ([self.reciente.accion isEqualToString:@"1"]) {
+    if ([self.reciente.accion isEqualToString:@"anonimo"]) {
         self.tipoAccion.text = @"Anonimo";
         imagenTipo=@"jicanonimoA.png";
         
-    } else if ([self.reciente.accion isEqualToString:@"2"]) {
+    } else if ([self.reciente.accion isEqualToString:@"conecta"]) {
         self.tipoAccion.text = @"Conecta";
         imagenTipo=@"jicconectaA.png";
         
-    } else if ([self.reciente.accion isEqualToString:@"3"]) {
+    } else if ([self.reciente.accion isEqualToString:@"celestino"]) {
         self.tipoAccion.text = @"Celestina";
         imagenTipo=@"jiccelestinaA.png";
     }
@@ -47,5 +48,12 @@
     self.mensaje.text = self.reciente.mensaje_anonimo;
 }
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self pintaReciente];
+    // Do any additional setup after loading the view.
+}
 
 @end
