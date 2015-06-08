@@ -196,6 +196,9 @@
 		9FFDBBD31B1B669900A3D395 /* editarB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFDBBD01B1B669900A3D395 /* editarB@3x.png */; };
 		9FFE72781B233FB10061EFA5 /* ListadoContactosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE72771B233FB10061EFA5 /* ListadoContactosViewController.m */; };
 		9FFE727B1B2356D20061EFA5 /* DetalleContactoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE727A1B2356D20061EFA5 /* DetalleContactoViewController.m */; };
+		9FFE727F1B24DFAA0061EFA5 /* fotoFija.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFE727C1B24DFAA0061EFA5 /* fotoFija.png */; };
+		9FFE72801B24DFAA0061EFA5 /* fotoFija@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFE727D1B24DFAA0061EFA5 /* fotoFija@2x.png */; };
+		9FFE72811B24DFAA0061EFA5 /* fotoFija@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFE727E1B24DFAA0061EFA5 /* fotoFija@3x.png */; };
 		EA84CAFE1B1CB8E0008D1CEC /* jicziipB.png in Resources */ = {isa = PBXBuildFile; fileRef = EA84CACE1B1CB8E0008D1CEC /* jicziipB.png */; };
 		EA84CAFF1B1CB8E0008D1CEC /* jicziipA.png in Resources */ = {isa = PBXBuildFile; fileRef = EA84CACF1B1CB8E0008D1CEC /* jicziipA.png */; };
 		EA84CB001B1CB8E0008D1CEC /* jicziipB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA84CAD01B1CB8E0008D1CEC /* jicziipB@2x.png */; };
@@ -562,6 +565,9 @@
 		9FFE72771B233FB10061EFA5 /* ListadoContactosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListadoContactosViewController.m; sourceTree = "<group>"; };
 		9FFE72791B2356D20061EFA5 /* DetalleContactoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleContactoViewController.h; sourceTree = "<group>"; };
 		9FFE727A1B2356D20061EFA5 /* DetalleContactoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetalleContactoViewController.m; sourceTree = "<group>"; };
+		9FFE727C1B24DFAA0061EFA5 /* fotoFija.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fotoFija.png; sourceTree = "<group>"; };
+		9FFE727D1B24DFAA0061EFA5 /* fotoFija@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fotoFija@2x.png"; sourceTree = "<group>"; };
+		9FFE727E1B24DFAA0061EFA5 /* fotoFija@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fotoFija@3x.png"; sourceTree = "<group>"; };
 		EA84CACE1B1CB8E0008D1CEC /* jicziipB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jicziipB.png; sourceTree = "<group>"; };
 		EA84CACF1B1CB8E0008D1CEC /* jicziipA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jicziipA.png; sourceTree = "<group>"; };
 		EA84CAD01B1CB8E0008D1CEC /* jicziipB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jicziipB@2x.png"; sourceTree = "<group>"; };
@@ -784,6 +790,9 @@
 		9F0D48581B077F09004421F4 /* imagenes */ = {
 			isa = PBXGroup;
 			children = (
+				9FFE727C1B24DFAA0061EFA5 /* fotoFija.png */,
+				9FFE727D1B24DFAA0061EFA5 /* fotoFija@2x.png */,
+				9FFE727E1B24DFAA0061EFA5 /* fotoFija@3x.png */,
 				EA84CACE1B1CB8E0008D1CEC /* jicziipB.png */,
 				EA84CACF1B1CB8E0008D1CEC /* jicziipA.png */,
 				EA84CAD01B1CB8E0008D1CEC /* jicziipB@2x.png */,
@@ -1244,6 +1253,7 @@
 				9F0D48801B08B632004421F4 /* enviarB.png in Resources */,
 				EA84CB0C1B1CB8E0008D1CEC /* jicconectaA@3x.png in Resources */,
 				9F0D48671B08A244004421F4 /* ajustesB.png in Resources */,
+				9FFE72811B24DFAA0061EFA5 /* fotoFija@3x.png in Resources */,
 				9F0D485B1B077F24004421F4 /* bocadillo_blanco.png in Resources */,
 				9FF396F21B093A64004B31BD /* celestinaA@2x.png in Resources */,
 				9FF397031B093AE9004B31BD /* propio.png in Resources */,
@@ -1312,6 +1322,7 @@
 				9FF396E91B093A64004B31BD /* ajustesB@2x.png in Resources */,
 				EAF34DE11B1C61DF003127FF /* jconectaA@2x.png in Resources */,
 				EA84CB221B1CB8E0008D1CEC /* jicanonimoB.png in Resources */,
+				9FFE72801B24DFAA0061EFA5 /* fotoFija@2x.png in Resources */,
 				EAA975151B1CACE90022EAD3 /* tickB.png in Resources */,
 				EAA975171B1CACE90022EAD3 /* tickB@3x.png in Resources */,
 				9F0D487B1B08B3BF004421F4 /* nuevoA.png in Resources */,
@@ -1340,6 +1351,7 @@
 				EA84CB061B1CB8E0008D1CEC /* jicagendaB@3x.png in Resources */,
 				EA84CB081B1CB8E0008D1CEC /* jiccelestinaA@3x.png in Resources */,
 				EAF34DD81B1C6170003127FF /* jcelestinaB@2x.png in Resources */,
+				9FFE727F1B24DFAA0061EFA5 /* fotoFija.png in Resources */,
 				EA84CB201B1CB8E0008D1CEC /* jicagendaA.png in Resources */,
 				EAF34D9C1B1C5AB4003127FF /* jloginB@2x.png in Resources */,
 				EAF34DB01B1C5C36003127FF /* jenviarA.png in Resources */,

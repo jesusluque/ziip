@@ -98,7 +98,6 @@
             NSUInteger j = 0;
             for (j = 0; j < ABMultiValueGetCount(phones); j++) {
                 NSString *telefono = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phones, j);
-                NSLog(@"telefono:%@",telefono);
                 [person.listaTelefonos addObject:telefono];
             }
 
@@ -106,12 +105,9 @@
             for (j = 0; j < ABMultiValueGetCount(emails); j++) {
                 NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails, j);
                 [person.listaEmails addObject:email];
-                NSLog(@"email:%@",email);
             }
             [self.listaPersonas addObject:person];
         }
-
-        NSLog(@"listaPersonas: %@",self.listaPersonas );
         CFRelease(addressBook);
     } else { 
         //9
@@ -187,8 +183,6 @@
         self.detalleContactoViewController.delegate = self;
         
         self.detalleContactoViewController.listaContactos = lista_contactos;
-        
-        NSLog(@"listado de contactos: %@", lista_contactos);
         [self.detalleContactoViewController recargaTableView];
         [self.view addSubview:self.detalleContactoViewController.view];
 
@@ -214,17 +208,17 @@
         if ([email isEqualToString:strContacto]) {
             self.contactoSeleccionado.email = strContacto;
         }
-        
-        
     }
+    NSLog(@"accion:%@",self.accion);
+    
     
     if ([self.accion isEqualToString:@"anonimo"]) {
         [self performSegueWithIdentifier:@"mensaje_anonimo_segue" sender:nil];
     } else if ([self.accion isEqualToString:@"conecta"]) {
         [self performSegueWithIdentifier:@"conecta_segue" sender:nil];
-    } else if ([self.accion isEqualToString:@"celestino_segue"]) {
+    } else if ([self.accion isEqualToString:@"celestino"]) {
         [self performSegueWithIdentifier:@"celestino_segue" sender:nil];
-    }else if ([self.accion isEqualToString:@"celestino2_segue"]) {
+    }else if ([self.accion isEqualToString:@"celestino2"]) {
         [self performSegueWithIdentifier:@"celestino2_segue" sender:nil];
     }
 }

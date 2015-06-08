@@ -21,11 +21,13 @@
 @property (nonatomic, retain)  NSString *email;
 @property (nonatomic, retain)  NSString *telefono;
 @property (nonatomic, retain)  NSString *contacto_nombre;
+@property (strong,nonatomic) IBOutlet UIScrollView  *scrollView;
+@property (weak,nonatomic) IBOutlet UIView *vistaCampos;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 @property (nonatomic, retain)  NSMutableArray *listaMensajes;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
-
-
+@property (nonatomic, retain) IBOutlet UIButton *btnEnviar;
+@property (nonatomic, retain) IBOutlet UILabel *mensajeA;
 
 -(IBAction) enviar;
 

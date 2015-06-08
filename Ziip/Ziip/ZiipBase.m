@@ -58,7 +58,7 @@
     NSDate *now = [[NSDate alloc] init];
     if (ultimo_error == nil){
         appDelegate.lastConnectionError = now;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Dialoga D3"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ziip"
                                                             message:@"Conexion no disponible."
                                                            delegate:self
                                                   cancelButtonTitle:nil
@@ -71,7 +71,7 @@
         
         if ([ultimo_error compare:now] == NSOrderedAscending) {
             appDelegate.lastConnectionError = now;
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Dialoga D3"
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ziip"
                                                                 message:@"Conexion no disponible."
                                                                delegate:self
                                                       cancelButtonTitle:nil
@@ -89,7 +89,7 @@
     NSDate *now = [[NSDate alloc] init];
     if (ultimo_error == nil){
         appDelegate.lastConnectionError = now;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Dialoga D3"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ziip"
                                                             message:@"Ha ocurrido un error, cierra la aplicacion y vuelve a probar."
                                                            delegate:self
                                                   cancelButtonTitle:nil
@@ -101,7 +101,7 @@
         
         if ([ultimo_error compare:now] == NSOrderedAscending) {
             appDelegate.lastConnectionError = now;
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Dialoga D3"
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Ziip"
                                                                 message:@"Ha ocurrido un error, cierra la aplicacion y vuelve a probar."
                                                                delegate:self
                                                       cancelButtonTitle:nil

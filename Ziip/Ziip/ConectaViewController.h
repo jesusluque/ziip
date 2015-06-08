@@ -20,6 +20,7 @@
 @property (nonatomic, retain)  NSString *telefono;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 @property (nonatomic, retain)  NSString *contacto_nombre;
+@property (nonatomic, retain) IBOutlet UILabel *mensajeA;
 
 -(IBAction) enviar;
 

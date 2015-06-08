@@ -45,7 +45,7 @@
             imageName= @"jicsettingA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
-        [tbi setFinishedSelectedImage: selectedImage withFinishedUnselectedImage:image ];
+        [tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ] withFinishedUnselectedImage:image ];
         
         
         i++;
@@ -54,22 +54,20 @@
     }
     
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+    //[[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-}
-
--(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-    
-    NSLog(@"%@",item);
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //[[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor foregroundColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
 }
 
 
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    NSLog(@"did selecte item");
+}
+
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:      (UIViewController *)viewController
+{
+    NSLog(@"Selected view controller");
+}
 @end

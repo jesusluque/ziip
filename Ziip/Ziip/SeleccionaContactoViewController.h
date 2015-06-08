@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString *email1;
 @property (nonatomic, retain)  NSString *contacto1_nombre;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
+@property (nonatomic, retain) IBOutlet UILabel *enviandoA;
 
 -(IBAction) enviar;
 

@@ -27,6 +27,8 @@
     AppDelegate *delegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.managedObjectContext = delegado.managedObjectContext;
     self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"id" andSortAscending:false andContext:self.managedObjectContext];
+    [self.myTableView reloadData];
+    NSLog(@"array:%@",self.arrayRecientes);
 }
 
 
@@ -41,6 +43,7 @@
     
     [super viewDidAppear:animated];
     self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"id" andSortAscending:false andContext:self.managedObjectContext];
+    [self.myTableView reloadData];
 }
 
 
@@ -65,17 +68,19 @@
     Recientes *item = [self.arrayRecientes objectAtIndex:indexPath.row];
     cell.contactoNombre.text = item.contacto_nombre;
     cell.contacto2Nombre.text = item.contacto2_nombre;
-    cell.fecha.text = [NSDateFormatter  localizedStringFromDate:item.fecha   dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+    cell.fecha.text = [NSDateFormatter  localizedStringFromDate:item.fecha   dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
 
     
     NSString *imagenTipo = @"";
-    if ([item.accion isEqualToString:@"1"]) {
+    if ([item.accion isEqualToString:@"anonimo"]) {
         imagenTipo=@"jicanonimoA.png";
-    } else if ([item.accion isEqualToString:@"2"]) {
+    } else if ([item.accion isEqualToString:@"conecta"]) {
         imagenTipo=@"jicconectaA.png";
-    } else if ([item.accion isEqualToString:@"3"]) {
+    } else if ([item.accion isEqualToString:@"celestino"]) {
         imagenTipo=@"jiccelestinaA.png";
     }
+     NSLog(@"item.accion: %@",item.accion);
+    NSLog(@"imagen: %@",imagenTipo);
     [cell.imageView setImage:[UIImage imageNamed:imagenTipo]];
     
     return cell;

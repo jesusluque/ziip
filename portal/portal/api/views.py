@@ -94,6 +94,7 @@ def login(request):
 def alta(request):
     lista_usuarios = Usuarios.objects.filter(usuario=request.POST["user"])  
     mensaje=""
+    token_usuario=""
     if len(lista_usuarios) == 0:
         usuario = Usuarios()
         usuario.usuario = request.POST["user"]
@@ -109,6 +110,7 @@ def alta(request):
         usuario.fecha_registro = datetime.now()
         usuario.token = generaTokenUsuario()
         usuario.save()
+        token_usuario = usuario.token
         status = "ok"
         if request.POST.has_key("pushToken"):
             lista_tokens = Tokens.objects.filter(token=request.POST["pushToken"])
@@ -128,7 +130,7 @@ def alta(request):
         mensaje = "El usuario ya existe"
         
     
-    response = json.dumps({"resource":"alta","status":status, "token":usuario.token,"mensaje":mensaje})
+    response = json.dumps({"resource":"alta","status":status, "token":token_usuario,"mensaje":mensaje})
     return HttpResponse(response)
     
 @csrf_exempt
@@ -186,10 +188,7 @@ def editaImagen(request):
     status = "ok"
     mensaje = ""   
     file_url = ""
-    print request
-    print request.FILES
-    
-    print request.FILES['imagen']
+
     
     if request.META.has_key("HTTP_X_AUTH_TOKEN"):
         token = request.META["HTTP_X_AUTH_TOKEN"]
@@ -266,12 +265,7 @@ def sendConecta(request):
         lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
-            
-            telefono = request.POST["telefono"]
-            email = request.POST["email"]
-            mensaje_anonimo = request.POST["mensaje_anonimo"]
-            mensaje = request.POST["mensaje"]
-            
+
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
             peticion.tipo = TIPO_PETICION_CONECTA
@@ -306,8 +300,8 @@ def sendCelestino(request):
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
             
-            telefono = request.POST["telefono"]
-            email = request.POST["email"]
+            telefono = request.POST["telefono1"]
+            email = request.POST["email1"]
             mensaje_anonimo = request.POST["mensaje_anonimo"]
             mensaje = request.POST["mensaje"]
             

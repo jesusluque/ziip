@@ -22,6 +22,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSString *mensaje;
+    if ([self.accion isEqualToString:@"anonimo"]){
+        mensaje = @"Selecciona a la persona para enviarle un mensaje anonimo";
+    } else if ([self.accion isEqualToString:@"conecta"]){
+        mensaje = @"Selecciona a la persona para enviarle una invitacion";
+        
+    }else if ([self.accion isEqualToString:@"celestino"]){
+        mensaje = @"Selecciona a la primera persona que conoces";
+    }else if ([self.accion isEqualToString:@"celestino2"]){
+        mensaje = @"Selecciona a la segunda persona que conoces";
+    }
+    self.enviandoA.text = mensaje;
 }
 
 
@@ -33,7 +46,7 @@
 
 -(IBAction) enviar {
     
-    if ([self.telefono.text isEqualToString:@""] && [self.telefono.text isEqualToString:@""]) {
+    if ([self.telefono.text isEqualToString:@""] && [self.email.text isEqualToString:@""]) {
         UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
         CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

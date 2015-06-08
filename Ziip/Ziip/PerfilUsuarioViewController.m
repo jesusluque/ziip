@@ -35,16 +35,13 @@
 
 - (IBAction)bloquear{
  
-    NSLog(@"%@",self.ultimoMensaje.bloqueado);
     if ([self.ultimoMensaje.bloqueado intValue]==0) {
-        NSLog(@"Bloqueamos");
         [self.delegate bloquear:self.ultimoMensaje.userId estado:@(1)];
         //[self.btnBloquear setTitle:@"Desloquear usuario" forState:UIControlStateNormal];
         [self.btnBloquear setImage:[UIImage imageNamed:@"desbloquear"] forState:UIControlStateNormal];
         self.ultimoMensaje.bloqueado=@(1);
         
     } else {
-        NSLog(@"Desbloqueamos");
         [self.delegate bloquear:self.ultimoMensaje.userId estado:@(0)];
         //[self.btnBloquear setTitle:@"Bloquear usuario" forState:UIControlStateNormal];
         [self.btnBloquear setImage:[UIImage imageNamed:@"bloquear"] forState:UIControlStateNormal];
