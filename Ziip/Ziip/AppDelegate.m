@@ -43,6 +43,24 @@
     }
     
     [[UILabel appearance] setFont:[UIFont fontWithName:@"Futura Medium" size:14.0]];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    NSString *reqSysVer = @"8.0";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
+        NSLog(@"entra aqui");
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+    
+    if ([self.locationManager respondsToSelector:@selector(pausesLocationUpdatesAutomatically)]) {
+        self.locationManager.pausesLocationUpdatesAutomatically = NO;
+    }
+    
     return YES;
 }
 
@@ -99,6 +117,7 @@
     
     //NSLog(@"Did become active");
     
+    [self.locationManager startUpdatingLocation];
     
     if ([self canChangeBadge]) {
         
@@ -203,6 +222,22 @@
 }
 
 
+
+
+
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    // *********************************************************************************************************
+    // esta funcion hace que el servidor sepa donde estamos
+    // cuando nos movemos  mas de X metros, envia nuestra posicion
+    // *********************************************************************************************************
+    //NSLog(@"Update location %f",newLocation.coordinate.longitude);
+    self.longitudActual = newLocation.coordinate.longitude;
+    self.latitudActual = newLocation.coordinate.latitude;
+    
+}
 
 
 @end

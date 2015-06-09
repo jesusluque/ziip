@@ -12,6 +12,8 @@ NUM_CARACTERES_TOKEN = 20
 CARACTERES_CODIGO = '1234567890'
 NUM_CARACTERES_CODIGO = 6
     
+    
+    
 def test(request):
     
     return HttpResponse("prueba")
@@ -57,6 +59,7 @@ def enviaSmsCodigo(telefono,codigo):
 @csrf_exempt
 def login(request):
     dict_usuario={}
+    user_token=""
     usuarios = Usuarios.objects.filter(usuario=request.POST["user"], password=request.POST["password"])
     if len(usuarios)>0:
         status = "ok"
@@ -271,8 +274,6 @@ def sendConecta(request):
             peticion.tipo = TIPO_PETICION_CONECTA
             peticion.telefono = request.POST["telefono"]
             peticion.email = request.POST["email"]
-            peticion.mensaje = request.POST["mensaje"]
-            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
             peticion.estado = ESTADO_PETICION_SOLICITADO
             peticion.save()
             

@@ -41,5 +41,7 @@
 	</array>
 	<key>aps-environment</key>
 	<string>development</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Filtro de contactos</string>
 </dict>
 </plist>
