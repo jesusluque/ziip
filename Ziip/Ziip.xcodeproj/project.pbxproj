@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F0460621B276A6400531A82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0460611B276A6400531A82 /* CoreLocation.framework */; };
 		9F0D48061B07319B004421F4 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D47FB1B07319B004421F4 /* ChatCell.m */; };
 		9F0D480B1B07319B004421F4 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D48051B07319B004421F4 /* UserCell.m */; };
 		9F0D48131B073490004421F4 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D48121B073490004421F4 /* CoreDataHelper.m */; };
@@ -298,6 +299,9 @@
 		EAF34DE91B1C8D93003127FF /* jbackground4.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF34DE61B1C8D93003127FF /* jbackground4.png */; };
 		EAF34DEA1B1C8D93003127FF /* jbackground4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF34DE71B1C8D93003127FF /* jbackground4@2x.png */; };
 		EAF34DEB1B1C8D93003127FF /* jbackground4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF34DE81B1C8D93003127FF /* jbackground4@3x.png */; };
+		EAFB5E751B27255E00132FD7 /* logoZiip.png in Resources */ = {isa = PBXBuildFile; fileRef = EAFB5E721B27255E00132FD7 /* logoZiip.png */; };
+		EAFB5E761B27255E00132FD7 /* logoZiip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAFB5E731B27255E00132FD7 /* logoZiip@2x.png */; };
+		EAFB5E771B27255E00132FD7 /* logoZiip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAFB5E741B27255E00132FD7 /* logoZiip@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,6 +315,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F0460611B276A6400531A82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9F0D47FA1B07319B004421F4 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		9F0D47FB1B07319B004421F4 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		9F0D47FC1B07319B004421F4 /* ImgChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgChatViewController.h; sourceTree = "<group>"; };
@@ -667,6 +672,9 @@
 		EAF34DE61B1C8D93003127FF /* jbackground4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jbackground4.png; sourceTree = "<group>"; };
 		EAF34DE71B1C8D93003127FF /* jbackground4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jbackground4@2x.png"; sourceTree = "<group>"; };
 		EAF34DE81B1C8D93003127FF /* jbackground4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jbackground4@3x.png"; sourceTree = "<group>"; };
+		EAFB5E721B27255E00132FD7 /* logoZiip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoZiip.png; sourceTree = "<group>"; };
+		EAFB5E731B27255E00132FD7 /* logoZiip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoZiip@2x.png"; sourceTree = "<group>"; };
+		EAFB5E741B27255E00132FD7 /* logoZiip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoZiip@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -674,6 +682,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F0460621B276A6400531A82 /* CoreLocation.framework in Frameworks */,
 				9FF6B39B1B14F4F4001DC1A4 /* iAd.framework in Frameworks */,
 				9F0D48541B0750AE004421F4 /* Foundation.framework in Frameworks */,
 				9F0D48521B0750A5004421F4 /* libicucore.dylib in Frameworks */,
@@ -790,6 +799,9 @@
 		9F0D48581B077F09004421F4 /* imagenes */ = {
 			isa = PBXGroup;
 			children = (
+				EAFB5E721B27255E00132FD7 /* logoZiip.png */,
+				EAFB5E731B27255E00132FD7 /* logoZiip@2x.png */,
+				EAFB5E741B27255E00132FD7 /* logoZiip@3x.png */,
 				9FFE727C1B24DFAA0061EFA5 /* fotoFija.png */,
 				9FFE727D1B24DFAA0061EFA5 /* fotoFija@2x.png */,
 				9FFE727E1B24DFAA0061EFA5 /* fotoFija@3x.png */,
@@ -1019,6 +1031,7 @@
 		9FA184861AF4D832009910CD = {
 			isa = PBXGroup;
 			children = (
+				9F0460611B276A6400531A82 /* CoreLocation.framework */,
 				9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */,
 				9F0D48531B0750AE004421F4 /* Foundation.framework */,
 				9F0D48511B0750A5004421F4 /* libicucore.dylib */,
@@ -1397,12 +1410,14 @@
 				EAF34DC11B1C5EFC003127FF /* jcancelarB@3x.png in Resources */,
 				9FFDBBAF1B1B5B4D00A3D395 /* siguienteB@3x.png in Resources */,
 				9F0D485E1B077F41004421F4 /* flecha_tableView.png in Resources */,
+				EAFB5E761B27255E00132FD7 /* logoZiip@2x.png in Resources */,
 				EA84CB091B1CB8E0008D1CEC /* jiccelestinaB@3x.png in Resources */,
 				9F0D487C1B08B3BF004421F4 /* nuevoB.png in Resources */,
 				9FFDBB9C1B1B534800A3D395 /* recentA.png in Resources */,
 				9FF396E61B093A64004B31BD /* agendaA@2x.png in Resources */,
 				EA84CB131B1CB8E0008D1CEC /* jicagendaB@2x.png in Resources */,
 				9FFDBBD31B1B669900A3D395 /* editarB@3x.png in Resources */,
+				EAFB5E751B27255E00132FD7 /* logoZiip.png in Resources */,
 				EAF34DB31B1C5C36003127FF /* jenviarB.png in Resources */,
 				EA84CB181B1CB8E0008D1CEC /* jicchatA@2x.png in Resources */,
 				9FA184A01AF4D832009910CD /* Images.xcassets in Resources */,
@@ -1432,6 +1447,7 @@
 				EA84CB151B1CB8E0008D1CEC /* jicanonimoA@2x.png in Resources */,
 				9FFDBBC91B1B667E00A3D395 /* contactoA@2x.png in Resources */,
 				9FFDBBB51B1B616100A3D395 /* editar@3x.png in Resources */,
+				EAFB5E771B27255E00132FD7 /* logoZiip@3x.png in Resources */,
 				EAF34DE21B1C61DF003127FF /* jconectaA@3x.png in Resources */,
 				EAA975101B1CA9DC0022EAD3 /* tickA@2x.png in Resources */,
 				EA84CB1C1B1CB8E0008D1CEC /* jicrecentB@2x.png in Resources */,
@@ -1661,13 +1677,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6daccbfc-e34a-48c1-9611-8dfc62f6b9f6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1677,13 +1693,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6daccbfc-e34a-48c1-9611-8dfc62f6b9f6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

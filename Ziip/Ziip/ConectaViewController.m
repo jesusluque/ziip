@@ -22,9 +22,11 @@
     } else {
         contacto=self.telefono;
     }
+    if ( !self.contacto_nombre) {
+        self.contacto_nombre=@"";
+    }
     
-    
-    NSString *mensajeA = [[NSString alloc] initWithFormat:@"Vas a enviar un mensaje a: %@ %@", self.contacto_nombre,contacto];
+    NSString *mensajeA = [[NSString alloc] initWithFormat:@"Invita a tu amigo %@ %@ a usar Ziip", self.contacto_nombre,contacto];
     self.mensajeA.text = mensajeA;
 }
 

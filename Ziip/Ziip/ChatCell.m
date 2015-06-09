@@ -80,7 +80,9 @@
     
     if ([self.message.tipo intValue]==1) {
         
-        UIFont *font = [UIFont systemFontOfSize:17.0f];
+        //UIFont *font = [UIFont  systemFontOfSize:17.0f];
+        UIFont *font = [UIFont  fontWithName:@"Futura-Medium" size:17.0f];
+        
         size = [self.message.text sizeWithFont:font constrainedToSize:CGSizeMake(max_width, 2000)];
         if (fromMe){
             pos_x=((self.frame.size.width-RIGTH_MARGIN)-size.width)-10;
@@ -158,7 +160,10 @@
     
     
     //La fecha
-    UIFont *dateFont = [UIFont systemFontOfSize:12.0f];
+    //UIFont *dateFont = [UIFont systemFontOfSize:12.0f];
+    UIFont *dateFont = [UIFont  fontWithName:@"Futura-Medium" size:12.0f];
+
+    
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setLocale:[NSLocale systemLocale]];

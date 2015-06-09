@@ -10,6 +10,9 @@
 #import "Define.h"
 #import "Reachability.h"
 #import "JSONKit.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+
 
 @interface PublicidadViewController ()
 
@@ -34,6 +37,7 @@
     self.adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,0 , self.view.frame.size.width, 50)];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     self.tiempo_recarga_publi=@(60);
     self.tiempo_recarga_server= @(3600);
@@ -151,7 +155,19 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
-    self.location = newLocation;
+    
+    MKMapPoint start = MKMapPointForCoordinate(newLocation.coordinate);
+    MKMapPoint end = MKMapPointForCoordinate(self.location.coordinate);
+    
+    double distancia = MKMetersBetweenMapPoints(start,end) ;
+    
+    
+    if (distancia > 1000) {
+        self.location = newLocation;
+        [self solicitaInfoServer];
+    }
+    
+    
 }
 
 
