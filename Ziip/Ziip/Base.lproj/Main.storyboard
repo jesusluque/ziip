@@ -324,7 +324,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T9c-pR-3I9">
-                                                    <rect key="frame" x="257" y="12" width="55" height="21"/>
+                                                    <rect key="frame" x="249" y="12" width="63" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -588,7 +588,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fotoFija.png" id="6aq-Rj-ruO">
-                                <rect key="frame" x="16" y="144" width="100" height="150"/>
+                                <rect key="frame" x="16" y="156" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VVO-JE-zJ9">
@@ -1108,11 +1108,11 @@
             <objects>
                 <viewController id="KO7-N6-b4F" customClass="ConectaViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LBf-Eh-wKG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="XXZ-Lu-cP6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="yTf-oC-Le6">
@@ -1681,11 +1681,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="eaL-H2-RMc"/>
         <segue reference="kth-nL-gbt"/>
         <segue reference="qk4-eU-Rmq"/>
-        <segue reference="YUE-xY-mHJ"/>
-        <segue reference="ui9-uc-q8X"/>
-        <segue reference="DSs-sb-OBI"/>
-        <segue reference="vc9-zP-rAS"/>
+        <segue reference="lOv-0W-s0Z"/>
+        <segue reference="Gtu-9M-Zb3"/>
+        <segue reference="RWi-iM-9ba"/>
     </inferredMetricsTieBreakers>
 </document>

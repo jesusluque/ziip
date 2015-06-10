@@ -83,7 +83,7 @@
     }
 }
 
-
+/*
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     if ([[info objectForKey:@"UIImagePickerControllerMediaType"] isEqualToString: (NSString *) kUTTypeImage ]) {
@@ -106,6 +106,10 @@
     }
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
+*/
+
+
+
 
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -190,6 +194,51 @@
     CGImageRelease(cgimg);
     return img;
 }
+
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    if ([[info objectForKey:@"UIImagePickerControllerMediaType"] isEqualToString: (NSString *) kUTTypeImage ]) {
+        UIImage *image = [self fixrotation:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
+        
+
+        self.imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image cropMode:RSKImageCropModeSquare];
+        self.imageCropVC.delegate = self;
+        [self.navigationController pushViewController:self.imageCropVC animated:YES];
+        
+    }
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller {
+    
+    
+    [self.imageCropVC.navigationController popViewControllerAnimated:YES];
+}
+
+/*
+- (void)imageCropViewController:(RSKImageCropViewController *)controller willCropImage:(UIImage *)originalImage {
+    
+    
+}*/
+
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
+    
+   
+    [self.imagen setImage:croppedImage];
+    NSArray *imagenes = [[NSArray alloc] initWithObjects:croppedImage, nil];
+    [self.r send:@"editaImagen" tipo_peticion:@"POST" withParams:nil andValues:nil  imagenes:imagenes enviarToken:YES];
+
+    [self.imageCropVC.navigationController popViewControllerAnimated:YES];
+    
+    
+}
+
+
+
 
 
 

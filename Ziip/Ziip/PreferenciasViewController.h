@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ZiipBase.h"
+#import "RSKImageCropper.h"
 
-@interface PreferenciasViewController : ZiipBase <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PreferenciasViewController : ZiipBase <UIImagePickerControllerDelegate,UINavigationControllerDelegate,RSKImageCropViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIImageView *imagen;
 @property (nonatomic, retain) IBOutlet UILabel *username;
@@ -17,6 +18,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *movil;
 @property (nonatomic, retain) IBOutlet UIButton *editMovil;
 @property (nonatomic,retain) UIImagePickerController *imagePicker;
+@property (nonatomic,retain) RSKImageCropViewController *imageCropVC;
 
 - (IBAction) guardar;
 - (IBAction) editarImagen;

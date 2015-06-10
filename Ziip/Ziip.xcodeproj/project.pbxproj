@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9F0460621B276A6400531A82 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0460611B276A6400531A82 /* CoreLocation.framework */; };
+		9F0460741B28B90500531A82 /* CGGeometry+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0460681B28B90500531A82 /* CGGeometry+RSKImageCropper.m */; };
+		9F0460751B28B90500531A82 /* RSKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F04606B1B28B90500531A82 /* RSKImageCropViewController.m */; };
+		9F0460761B28B90500531A82 /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F04606D1B28B90500531A82 /* RSKImageScrollView.m */; };
+		9F0460771B28B90500531A82 /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F04606F1B28B90500531A82 /* RSKTouchView.m */; };
+		9F0460781B28B90500531A82 /* UIApplication+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0460711B28B90500531A82 /* UIApplication+RSKImageCropper.m */; };
+		9F0460791B28B90500531A82 /* UIImage+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0460731B28B90500531A82 /* UIImage+RSKImageCropper.m */; };
 		9F0D48061B07319B004421F4 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D47FB1B07319B004421F4 /* ChatCell.m */; };
 		9F0D480B1B07319B004421F4 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D48051B07319B004421F4 /* UserCell.m */; };
 		9F0D48131B073490004421F4 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0D48121B073490004421F4 /* CoreDataHelper.m */; };
@@ -316,6 +322,19 @@
 
 /* Begin PBXFileReference section */
 		9F0460611B276A6400531A82 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9F0460671B28B90500531A82 /* CGGeometry+RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGGeometry+RSKImageCropper.h"; sourceTree = "<group>"; };
+		9F0460681B28B90500531A82 /* CGGeometry+RSKImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CGGeometry+RSKImageCropper.m"; sourceTree = "<group>"; };
+		9F0460691B28B90500531A82 /* RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropper.h; sourceTree = "<group>"; };
+		9F04606A1B28B90500531A82 /* RSKImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropViewController.h; sourceTree = "<group>"; };
+		9F04606B1B28B90500531A82 /* RSKImageCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageCropViewController.m; sourceTree = "<group>"; };
+		9F04606C1B28B90500531A82 /* RSKImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageScrollView.h; sourceTree = "<group>"; };
+		9F04606D1B28B90500531A82 /* RSKImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageScrollView.m; sourceTree = "<group>"; };
+		9F04606E1B28B90500531A82 /* RSKTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKTouchView.h; sourceTree = "<group>"; };
+		9F04606F1B28B90500531A82 /* RSKTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKTouchView.m; sourceTree = "<group>"; };
+		9F0460701B28B90500531A82 /* UIApplication+RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+RSKImageCropper.h"; sourceTree = "<group>"; };
+		9F0460711B28B90500531A82 /* UIApplication+RSKImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+RSKImageCropper.m"; sourceTree = "<group>"; };
+		9F0460721B28B90500531A82 /* UIImage+RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RSKImageCropper.h"; sourceTree = "<group>"; };
+		9F0460731B28B90500531A82 /* UIImage+RSKImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RSKImageCropper.m"; sourceTree = "<group>"; };
 		9F0D47FA1B07319B004421F4 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		9F0D47FB1B07319B004421F4 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		9F0D47FC1B07319B004421F4 /* ImgChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgChatViewController.h; sourceTree = "<group>"; };
@@ -706,6 +725,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F0460661B28B8F500531A82 /* RSKImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				9F0460671B28B90500531A82 /* CGGeometry+RSKImageCropper.h */,
+				9F0460681B28B90500531A82 /* CGGeometry+RSKImageCropper.m */,
+				9F0460691B28B90500531A82 /* RSKImageCropper.h */,
+				9F04606A1B28B90500531A82 /* RSKImageCropViewController.h */,
+				9F04606B1B28B90500531A82 /* RSKImageCropViewController.m */,
+				9F04606C1B28B90500531A82 /* RSKImageScrollView.h */,
+				9F04606D1B28B90500531A82 /* RSKImageScrollView.m */,
+				9F04606E1B28B90500531A82 /* RSKTouchView.h */,
+				9F04606F1B28B90500531A82 /* RSKTouchView.m */,
+				9F0460701B28B90500531A82 /* UIApplication+RSKImageCropper.h */,
+				9F0460711B28B90500531A82 /* UIApplication+RSKImageCropper.m */,
+				9F0460721B28B90500531A82 /* UIImage+RSKImageCropper.h */,
+				9F0460731B28B90500531A82 /* UIImage+RSKImageCropper.m */,
+			);
+			name = RSKImageCropper;
+			sourceTree = "<group>";
+		};
 		9F0D480F1B0733E6004421F4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,6 +1094,7 @@
 		9FA184911AF4D832009910CD /* Ziip */ = {
 			isa = PBXGroup;
 			children = (
+				9F0460661B28B8F500531A82 /* RSKImageCropper */,
 				9F0D48581B077F09004421F4 /* imagenes */,
 				9F0D48441B074FDB004421F4 /* Frameworks */,
 				9F0D481D1B07434F004421F4 /* SocketIO */,
@@ -1499,10 +1539,12 @@
 				9FF6B3991B13A48B001DC1A4 /* PublicidadViewController.m in Sources */,
 				9FF73F101B121D3E00C7CF94 /* CelestinoViewController.m in Sources */,
 				9F0D48431B074A19004421F4 /* OBGradientView.m in Sources */,
+				9F0460791B28B90500531A82 /* UIImage+RSKImageCropper.m in Sources */,
 				9FF2516C1AF4EAA7000BD6CB /* RegistroViewController.m in Sources */,
 				9FFE727B1B2356D20061EFA5 /* DetalleContactoViewController.m in Sources */,
 				9FBD00B81AFA95F000346802 /* JSONKit.m in Sources */,
 				9F0D48061B07319B004421F4 /* ChatCell.m in Sources */,
+				9F0460751B28B90500531A82 /* RSKImageCropViewController.m in Sources */,
 				9F0D48401B074A04004421F4 /* MPNotificationView.m in Sources */,
 				9F0D480B1B07319B004421F4 /* UserCell.m in Sources */,
 				9F0D48131B073490004421F4 /* CoreDataHelper.m in Sources */,
@@ -1511,9 +1553,11 @@
 				9FF2516F1AF4EB40000BD6CB /* ContactosViewController.m in Sources */,
 				9F0D482C1B07435F004421F4 /* SocketIOTransportWebsocket.m in Sources */,
 				9F0D48621B07ADA9004421F4 /* PerfilUsuarioViewController.m in Sources */,
+				9F0460761B28B90500531A82 /* RSKImageScrollView.m in Sources */,
 				9FBD00C21AFA98B100346802 /* LoginViewController.m in Sources */,
 				9F0D48361B074385004421F4 /* base64.c in Sources */,
 				9FBD00B51AFA95D600346802 /* Reachability.m in Sources */,
+				9F0460771B28B90500531A82 /* RSKTouchView.m in Sources */,
 				9FA184981AF4D832009910CD /* AppDelegate.m in Sources */,
 				9F0D485F1B078410004421F4 /* ChatViewController.m in Sources */,
 				9FF73F0A1B10F54100C7CF94 /* NSData+Base64.m in Sources */,
@@ -1536,6 +1580,7 @@
 				9FFE72781B233FB10061EFA5 /* ListadoContactosViewController.m in Sources */,
 				9FBD00C81AFFB49D00346802 /* Person.m in Sources */,
 				9F0D48381B074385004421F4 /* SRWebSocket.m in Sources */,
+				9F0460781B28B90500531A82 /* UIApplication+RSKImageCropper.m in Sources */,
 				9F0D482D1B07435F004421F4 /* SocketIOTransportXHR.m in Sources */,
 				9F0D482B1B07435F004421F4 /* SocketIOPacket.m in Sources */,
 				9FEC6F0C1B0E5A24005C505D /* ConfirmacionViewController.m in Sources */,
@@ -1548,6 +1593,7 @@
 				9F0D481C1B0734BB004421F4 /* Ziip.xcdatamodeld in Sources */,
 				9FF2517B1AF6668D000BD6CB /* ListaChatsViewController.m in Sources */,
 				9FA184951AF4D832009910CD /* main.m in Sources */,
+				9F0460741B28B90500531A82 /* CGGeometry+RSKImageCropper.m in Sources */,
 				9FF73F1F1B123EBF00C7CF94 /* DetalleRecientesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

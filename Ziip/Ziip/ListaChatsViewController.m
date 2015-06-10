@@ -696,9 +696,39 @@
     [datos setObject:strFecha forKey:@"date"];
     
     [self.miSocket sendEvent:@"newMsg" withData:datos];
-    
-    
-    
-    
+ 
 }
+
+- (void) abrirChat:(NSDictionary *) usuario{
+    
+    NSLog(@"Abrimos chat: %@",usuario);
+    
+    NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"userId=%@",  [usuario objectForKey:@"id"]]];
+    NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:itemPredicate andSortKey:@"userId" andSortAscending:false andContext:self.managedObjectContext];
+    
+    LastsMessages *last;
+    if ([self.ultimosMensajes count]==0) {
+        
+        last = (LastsMessages *)[NSEntityDescription insertNewObjectForEntityForName:@"LastsMessages" inManagedObjectContext:self.managedObjectContext];
+        last.userId = [usuario objectForKey:@"id"];
+    } else {
+        last = [listaMensajes objectAtIndex:0];
+    }
+
+    
+    
+    [self cargarChat:last];
+    self.openUserId = [[NSString alloc] initWithFormat:@"%d", [ last.userId intValue]];;
+    self.chatAbierto = YES;
+    last.noRead = [[NSNumber alloc] initWithInt:0];
+}
+
+
+
+
+
+
+
+
+
 @end

@@ -51,5 +51,6 @@
 @property (nonatomic,retain) LastsMessages *ultimoMensaje;
 
 - (void) newMsg:(NSDictionary *) datos;
+- (void) abrirChat:(NSDictionary *) usuario;
 - (void)desconectar;
 @end

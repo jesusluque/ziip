@@ -26,7 +26,7 @@
     
     AppDelegate *delegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.managedObjectContext = delegado.managedObjectContext;
-    self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"id" andSortAscending:YES andContext:self.managedObjectContext];
+    self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"fecha" andSortAscending:NO andContext:self.managedObjectContext];
     [self.myTableView reloadData];
     NSLog(@"array:%@",self.arrayRecientes);
 }
@@ -42,7 +42,7 @@
 -(void) viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"id" andSortAscending:YES andContext:self.managedObjectContext];
+    self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"fecha" andSortAscending:NO andContext:self.managedObjectContext];
     [self.myTableView reloadData];
 }
 
