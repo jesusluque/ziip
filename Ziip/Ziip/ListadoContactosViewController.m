@@ -83,7 +83,9 @@
     ListaChatsViewController *lista_chats = [controllers_nav objectAtIndex:0];
     
     
-    [lista_chats abrirChat:contacto];
+    lista_chats.abrirChatUsuario=contacto;
+     
+    
     
     [self.tabBarController setSelectedIndex:3];
     

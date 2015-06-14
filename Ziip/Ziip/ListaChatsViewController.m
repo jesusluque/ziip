@@ -22,8 +22,23 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
+    NSLog(@"View did appear");
     self.chatAbierto = NO;
     [super viewDidAppear:animated];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    self.chatAbierto = NO;
+    [self recarga];
+    if (self.abrirChatUsuario) {
+        [self abrirChat:self.abrirChatUsuario];
+        self.abrirChatUsuario=nil;
+        
+    }
+
 }
 
 
@@ -121,12 +136,7 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    self.chatAbierto = NO;
-    [self recarga];
-}
+
 
 
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error; {

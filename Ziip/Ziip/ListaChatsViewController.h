@@ -49,6 +49,9 @@
 @property (nonatomic,retain) NSString *openUserImg;
 @property (nonatomic,retain) NSString *openUserCity;
 @property (nonatomic,retain) LastsMessages *ultimoMensaje;
+@property (nonatomic,retain) NSDictionary *abrirChatUsuario;
+
+
 
 - (void) newMsg:(NSDictionary *) datos;
 - (void) abrirChat:(NSDictionary *) usuario;
