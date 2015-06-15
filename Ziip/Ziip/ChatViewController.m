@@ -135,12 +135,12 @@
     CGSize size = [self.ultimoMensaje.userName sizeWithFont:font constrainedToSize:CGSizeMake(200, 2000)];
     while (size.height >25) {
         fontSize--;
-        font = [UIFont systemFontOfSize:fontSize];
+        font = [UIFont  fontWithName:@"Futura-Medium" size:fontSize];
         size = [self.ultimoMensaje.userName sizeWithFont:font constrainedToSize:CGSizeMake(200, 2000)];
     }
     
     
-    CGRect labelFrame = CGRectMake((vista.frame.size.width-200) /2,5,size.width,size.height);
+    CGRect labelFrame = CGRectMake((vista.frame.size.width-200) /2,10,size.width,size.height);
     UILabel *nombre = [[UILabel alloc] initWithFrame:labelFrame];
     nombre.backgroundColor = [UIColor clearColor];
     nombre.font = font;

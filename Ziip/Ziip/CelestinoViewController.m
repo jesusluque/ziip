@@ -186,8 +186,21 @@
 
 -(void) cierraConfirmacion {
     
+    bool error = NO;
+    if ( [self.mensaje.text isEqualToString:@""]) {
+        error=YES;
+    }
+    if (!error) {
+        NSIndexPath *indexPath = self.myTableView.indexPathForSelectedRow;
+        if (! indexPath) {
+            error=YES;
+        }
+    }
     [self.confirmacionViewController.view removeFromSuperview];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (!error) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
 }
 
 

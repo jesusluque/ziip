@@ -39,6 +39,9 @@
     } else {
         contacto=self.telefono;
     }
+    if ( !self.contacto_nombre) {
+        self.contacto_nombre=@"";
+    }
     
     NSString *mensajeA = [[NSString alloc] initWithFormat:@"Vas a enviar un mensaje a: %@ %@", self.contacto_nombre,contacto];
     self.mensajeA.text = mensajeA;
@@ -155,6 +158,8 @@
         reciente.accion = @"anonimo";
         reciente.contacto_nombre = self.contacto_nombre;
         reciente.contacto_contacto = contacto;
+        reciente.contacto2_nombre = @"";
+        reciente.contacto2_contacto = @"";
         reciente.mensaje = self.mensaje.text;
         reciente.mensaje_anonimo = mensaje_anonimo;
         reciente.fecha = [NSDate date];

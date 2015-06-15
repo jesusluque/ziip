@@ -306,6 +306,10 @@
         LastsMessages *last = [self.ultimosMensajes objectAtIndex:indexPath.row];
         [self.ultimosMensajes removeObjectAtIndex:indexPath.row];
         [self.managedObjectContext deleteObject:last];
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Failed to add new data with error: %@", [error domain]);
+        }
         [self recarga];
     }
 }

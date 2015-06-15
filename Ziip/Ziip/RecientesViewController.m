@@ -66,8 +66,16 @@
         }
     }
     Recientes *item = [self.arrayRecientes objectAtIndex:indexPath.row];
-    cell.contactoNombre.text = item.contacto_nombre;
-    cell.contacto2Nombre.text = item.contacto2_nombre;
+    NSLog(@"contacto1:%@",item.contacto_contacto);
+    
+    
+    NSString *contacto1 = [[NSString alloc] initWithFormat:@"%@ %@",item.contacto_nombre,item.contacto_contacto];
+    NSString *contacto2 = [[NSString alloc] initWithFormat:@"%@ %@",item.contacto2_nombre,item.contacto2_contacto];
+    
+    NSLog(@"contacto1:%@",contacto1);
+    
+    cell.contactoNombre.text = contacto1;
+    cell.contacto2Nombre.text = contacto2;
     cell.fecha.text = [NSDateFormatter  localizedStringFromDate:item.fecha   dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
 
     
