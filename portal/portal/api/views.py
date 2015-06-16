@@ -285,7 +285,7 @@ def sendConecta(request):
     else:
         status = "ko"
         mensaje = "no hay token"
-    response = json.dumps({"resource":"sendMensajeAnonimo","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
+    response = json.dumps({"resource":"sendConecta","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
     return HttpResponse(response)
 
 
@@ -326,7 +326,7 @@ def sendCelestino(request):
     else:
         status = "ko"
         mensaje = "no hay token"
-    response = json.dumps({"resource":"sendMensajeAnonimo","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
+    response = json.dumps({"resource":"sendCelestino","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
     return HttpResponse(response)
     
     
