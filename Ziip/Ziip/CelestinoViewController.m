@@ -28,6 +28,15 @@
     [self.listaMensajes addObject:@"Os he visto a ambos en clase, creo que hacéis buena pareja."];    
     [self.myTableView reloadData];
     
+    if ( !self.contacto1_nombre) {
+        self.contacto1_nombre=@"";
+    }
+    
+    if ( !self.contacto2_nombre) {
+        self.contacto2_nombre=@"";
+    }
+    
+    
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(scrollViewPulsado)];
     [tapRecognizer setCancelsTouchesInView:NO];

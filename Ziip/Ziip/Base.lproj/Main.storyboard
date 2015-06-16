@@ -1426,7 +1426,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="BhR-Gy-weQ">
-                                <rect key="frame" x="22" y="83" width="100" height="150"/>
+                                <rect key="frame" x="22" y="90" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -1682,7 +1682,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="fHr-dO-WGI"/>
-        <segue reference="Ln1-hK-I91"/>
+        <segue reference="qk4-eU-Rmq"/>
         <segue reference="YUE-xY-mHJ"/>
         <segue reference="ui9-uc-q8X"/>
         <segue reference="vc9-zP-rAS"/>

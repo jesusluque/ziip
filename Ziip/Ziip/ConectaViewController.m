@@ -79,6 +79,10 @@
         reciente.accion = @"conecta";
         reciente.contacto_nombre = self.contacto_nombre;
         reciente.contacto_contacto = contacto;
+        reciente.contacto2_nombre = @"";
+        reciente.contacto2_contacto = @"";
+
+        
         reciente.mensaje = @"";
         reciente.mensaje_anonimo = @"";
         reciente.fecha = [NSDate date];
