@@ -42,6 +42,7 @@
 
 -(void) recibeDatos:(NSDictionary *)datos {
     
+    NSLog(@"%@",datos);
     if ([[datos objectForKey:@"resource"] isEqualToString:@"sendConecta"]) {
         
         UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

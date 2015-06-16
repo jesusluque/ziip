@@ -22,8 +22,23 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
+    NSLog(@"View did appear");
     self.chatAbierto = NO;
     [super viewDidAppear:animated];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    self.chatAbierto = NO;
+    [self recarga];
+    if (self.abrirChatUsuario) {
+        [self abrirChat:self.abrirChatUsuario];
+        self.abrirChatUsuario=nil;
+        
+    }
+
 }
 
 
@@ -121,12 +136,7 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    self.chatAbierto = NO;
-    [self recarga];
-}
+
 
 
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error; {
@@ -296,6 +306,10 @@
         LastsMessages *last = [self.ultimosMensajes objectAtIndex:indexPath.row];
         [self.ultimosMensajes removeObjectAtIndex:indexPath.row];
         [self.managedObjectContext deleteObject:last];
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Failed to add new data with error: %@", [error domain]);
+        }
         [self recarga];
     }
 }
@@ -696,9 +710,39 @@
     [datos setObject:strFecha forKey:@"date"];
     
     [self.miSocket sendEvent:@"newMsg" withData:datos];
-    
-    
-    
-    
+ 
 }
+
+- (void) abrirChat:(NSDictionary *) usuario{
+    
+    NSLog(@"Abrimos chat: %@",usuario);
+    
+    NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"userId=%@",  [usuario objectForKey:@"id"]]];
+    NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:itemPredicate andSortKey:@"userId" andSortAscending:false andContext:self.managedObjectContext];
+    
+    LastsMessages *last;
+    if ([self.ultimosMensajes count]==0) {
+        
+        last = (LastsMessages *)[NSEntityDescription insertNewObjectForEntityForName:@"LastsMessages" inManagedObjectContext:self.managedObjectContext];
+        last.userId = [usuario objectForKey:@"id"];
+    } else {
+        last = [listaMensajes objectAtIndex:0];
+    }
+
+    
+    
+    [self cargarChat:last];
+    self.openUserId = [[NSString alloc] initWithFormat:@"%d", [ last.userId intValue]];;
+    self.chatAbierto = YES;
+    last.noRead = [[NSNumber alloc] initWithInt:0];
+}
+
+
+
+
+
+
+
+
+
 @end

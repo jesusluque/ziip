@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>es</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -42,6 +42,6 @@
 	<key>aps-environment</key>
 	<string>development</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Filtro de contactos</string>
+	<string>Ponemos en contacto personas, es una aplicación de dating. Necesitamos conocer su localización geográfica para ofrecer el servicio.</string>
 </dict>
 </plist>
