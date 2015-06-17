@@ -18,20 +18,23 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"Enview did load");
 }
+
 
 -(void) pintaReciente {
     
+    NSLog(@"En pinta recientes");
     NSString *imagenTipo = @"";
-    if ([self.reciente.accion isEqualToString:@"anonimo"]) {
+    if ([[self.reciente objectForKey:@"tipo" ] isEqualToString:@"1"]) {
         self.tipoAccion.text = @"Anonimo";
         imagenTipo=@"jicanonimoA.png";
         
-    } else if ([self.reciente.accion isEqualToString:@"conecta"]) {
+    } else if ([[self.reciente objectForKey:@"tipo" ] isEqualToString:@"2"]) {
         self.tipoAccion.text = @"Conecta";
         imagenTipo=@"jicconectaA.png";
         
-    } else if ([self.reciente.accion isEqualToString:@"celestino"]) {
+    } else if ([[self.reciente objectForKey:@"tipo" ] isEqualToString:@"3"]) {
         self.tipoAccion.text = @"Celestina";
         imagenTipo=@"jiccelestinaA.png";
     }
@@ -39,14 +42,12 @@
     [self.imgTipoAccion setImage:[UIImage imageNamed:imagenTipo]];
     
 
-    self.contacto_contacto.text = self.reciente.contacto_contacto;
-    self.contacto_nombre.text = self.reciente.contacto_nombre;
-    self.contacto2_contacto.text = self.reciente.contacto2_contacto;
-    self.contacto2_nombre.text = self.reciente.contacto2_nombre;
-    
-    self.mensaje_personalizado.text = self.reciente.mensaje;
-    self.mensaje.text = self.reciente.mensaje_anonimo;
-}
+    self.contacto_contacto.text = [self.reciente objectForKey:@"contacto_contacto"];
+    self.contacto_nombre.text = [self.reciente objectForKey:@"contacto_nombre"];
+    self.contacto2_contacto.text = [self.reciente objectForKey:@"contacto2_contacto"];
+    self.contacto2_nombre.text = [self.reciente objectForKey:@"contacto2_nombre"];
+    self.mensaje_personalizado.text = [self.reciente objectForKey:@"mensaje"];
+    self.mensaje.text = [self.reciente objectForKey:@"mensaje_anonimo"];}
 
 
 - (void)viewWillAppear:(BOOL)animated{

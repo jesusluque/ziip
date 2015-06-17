@@ -7,11 +7,11 @@
 //
 
 #import "ZiipBase.h"
-#import "Recientes.h"
+
 
 @interface DetalleRecientesViewController : ZiipBase
 
-@property (nonatomic, retain) Recientes *reciente;
+@property (nonatomic, retain) NSDictionary *reciente;
 
 @property (nonatomic, retain) IBOutlet UIImageView *imgTipoAccion;
 

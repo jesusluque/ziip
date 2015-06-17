@@ -7,7 +7,6 @@
 //
 
 #import "MensajeAnonimoViewController.h"
-#import "Recientes.h"
 #import "CoreDataHelper.h"
 
 
@@ -144,30 +143,6 @@
         
         [self.view addSubview:self.confirmacionViewController.view];
         
-        NSIndexPath *indexPath = self.myTableView.indexPathForSelectedRow;
-        NSString *mensaje_anonimo =  [self.listaMensajes objectAtIndex:indexPath.row];
-        Recientes *reciente = (Recientes *)[NSEntityDescription insertNewObjectForEntityForName:@"Recientes" inManagedObjectContext:self.managedObjectContext];
-        
-        NSString *contacto;
-        if ([self.telefono isEqualToString:@""]) {
-            contacto = self.email;
-        }
-        else {
-            contacto = self.telefono ;
-        }
-        reciente.accion = @"anonimo";
-        reciente.contacto_nombre = self.contacto_nombre;
-        reciente.contacto_contacto = contacto;
-        reciente.contacto2_nombre = @"";
-        reciente.contacto2_contacto = @"";
-        reciente.mensaje = self.mensaje.text;
-        reciente.mensaje_anonimo = mensaje_anonimo;
-        reciente.fecha = [NSDate date];
-        
-        NSError *error;
-        if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Failed to add new data with error: %@", [error domain]);
-        }
     }
 }
 

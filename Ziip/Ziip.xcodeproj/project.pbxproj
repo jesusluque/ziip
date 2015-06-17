@@ -151,7 +151,6 @@
 		9FF73F0D1B121C3D00C7CF94 /* SeleccionaContactoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F0C1B121C3D00C7CF94 /* SeleccionaContactoViewController.m */; };
 		9FF73F101B121D3E00C7CF94 /* CelestinoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F0F1B121D3E00C7CF94 /* CelestinoViewController.m */; };
 		9FF73F131B121DB800C7CF94 /* ConectaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F121B121DB800C7CF94 /* ConectaViewController.m */; };
-		9FF73F161B12271D00C7CF94 /* Recientes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F151B12271D00C7CF94 /* Recientes.m */; };
 		9FF73F191B122A1E00C7CF94 /* RecientesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F181B122A1E00C7CF94 /* RecientesViewController.m */; };
 		9FF73F1C1B122C1500C7CF94 /* RecientesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F1B1B122C1500C7CF94 /* RecientesTableViewCell.m */; };
 		9FF73F1F1B123EBF00C7CF94 /* DetalleRecientesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF73F1E1B123EBF00C7CF94 /* DetalleRecientesViewController.m */; };
@@ -531,8 +530,6 @@
 		9FF73F0F1B121D3E00C7CF94 /* CelestinoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CelestinoViewController.m; sourceTree = "<group>"; };
 		9FF73F111B121DB800C7CF94 /* ConectaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConectaViewController.h; sourceTree = "<group>"; };
 		9FF73F121B121DB800C7CF94 /* ConectaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConectaViewController.m; sourceTree = "<group>"; };
-		9FF73F141B12271D00C7CF94 /* Recientes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recientes.h; sourceTree = "<group>"; };
-		9FF73F151B12271D00C7CF94 /* Recientes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recientes.m; sourceTree = "<group>"; };
 		9FF73F171B122A1E00C7CF94 /* RecientesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecientesViewController.h; sourceTree = "<group>"; };
 		9FF73F181B122A1E00C7CF94 /* RecientesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecientesViewController.m; sourceTree = "<group>"; };
 		9FF73F1A1B122C1500C7CF94 /* RecientesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecientesTableViewCell.h; sourceTree = "<group>"; };
@@ -783,8 +780,6 @@
 				9F0D48171B0734A7004421F4 /* ChatMessage.m */,
 				9F0D48111B073490004421F4 /* CoreDataHelper.h */,
 				9F0D48121B073490004421F4 /* CoreDataHelper.m */,
-				9FF73F141B12271D00C7CF94 /* Recientes.h */,
-				9FF73F151B12271D00C7CF94 /* Recientes.m */,
 				9F0D481A1B0734BB004421F4 /* Ziip.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -1571,7 +1566,6 @@
 				9FBD00B21AFA956C00346802 /* Define.m in Sources */,
 				9F0D48721B08A49E004421F4 /* CustomTabBarViewController.m in Sources */,
 				9F0D48631B07C96D004421F4 /* MensajesAntiguosCell.m in Sources */,
-				9FF73F161B12271D00C7CF94 /* Recientes.m in Sources */,
 				9FF73F071B10DAAE00C7CF94 /* PreferenciasViewController.m in Sources */,
 				9F0D48181B0734A7004421F4 /* LastsMessages.m in Sources */,
 				9FBD00AC1AFA925200346802 /* ZiipBase.m in Sources */,

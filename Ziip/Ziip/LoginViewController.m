@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 
+#import "CoreDataHelper.h"
+
 @interface LoginViewController ()
 
 @end
@@ -158,12 +160,6 @@
             [parametros addObject:@"device"];
             [valores addObject:@"ios"];
         }
-        
-        
-        
-        [defaults setObject:self.txtUsuario.text forKey:@"user"];
-        [defaults setObject:self.txtPassword.text forKey:@"password"];
-        [defaults synchronize];
         [self.r send:@"login" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:NO];
     }
 }
@@ -173,9 +169,21 @@
     
     if ([[datos objectForKey:@"resource"] isEqualToString:@"login"]) {
         if ([[datos objectForKey:@"status"]isEqualToString:@"ok"]) {
+            
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[datos objectForKey:@"token"] forKey:@"api_auth_token"];
+            NSString *old_usuario = [defaults objectForKey:@"user"];
+            
+            if (![old_usuario isEqualToString:self.txtUsuario.text]){
+                NSLog(@"usuario distinto: %@",old_usuario);
+                //y limpiamos la base de datos
+                [CoreDataHelper deleteAllObjectsForEntity:@"LastsMessages" andContext:self.managedObjectContext];
+                [CoreDataHelper deleteAllObjectsForEntity:@"ChatMessage" andContext:self.managedObjectContext];
+                [CoreDataHelper deleteAllObjectsForEntity:@"Recientes" andContext:self.managedObjectContext];
+            }
             NSDictionary *usuario = [datos objectForKey:@"usuario"];
+            [defaults setObject:self.txtUsuario.text forKey:@"user"];
+            [defaults setObject:self.txtPassword.text forKey:@"password"];
+            [defaults setObject:[datos objectForKey:@"token"] forKey:@"api_auth_token"];
             [defaults setObject:[usuario objectForKey:@"telefono"] forKey:@"telefono"];
             [defaults setObject:[usuario objectForKey:@"email"] forKey:@"email"];
             [defaults setObject:[usuario objectForKey:@"imagen"] forKey:@"imagen"];

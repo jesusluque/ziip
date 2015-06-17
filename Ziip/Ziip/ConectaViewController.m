@@ -7,7 +7,6 @@
 //
 
 #import "ConectaViewController.h"
-#import "Recientes.h"
 
 @implementation ConectaViewController
 
@@ -67,26 +66,6 @@
         NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
         
         [self.confirmacionViewController configuraPantalla:confirmacion];
-        Recientes *reciente = (Recientes *)[NSEntityDescription insertNewObjectForEntityForName:@"Recientes" inManagedObjectContext:self.managedObjectContext];
-        
-        NSString *contacto;
-        if ([self.telefono isEqualToString:@""]) {
-            contacto = self.email;
-        }
-        else {
-            contacto = self.telefono ;
-        }
-        reciente.accion = @"conecta";
-        reciente.contacto_nombre = self.contacto_nombre;
-        reciente.contacto_contacto = contacto;
-        reciente.mensaje = @"";
-        reciente.mensaje_anonimo = @"";
-        reciente.fecha = [NSDate date];
-        
-        NSError *error;
-        if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Failed to add new data with error: %@", [error domain]);
-        }
         [self.view addSubview:self.confirmacionViewController.view];
     }
 }

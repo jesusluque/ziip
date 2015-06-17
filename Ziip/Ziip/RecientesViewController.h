@@ -7,13 +7,11 @@
 //
 
 #import "ZiipBase.h"
-#import "Recientes.h"
 #import "DetalleRecientesViewController.h"
 
 @interface RecientesViewController : ZiipBase <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
 @property (nonatomic, retain) NSMutableArray *arrayRecientes;
-@property (nonatomic, retain) Recientes *recienteSeleccionado;
 
 @end

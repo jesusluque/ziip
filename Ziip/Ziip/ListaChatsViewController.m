@@ -721,7 +721,10 @@
     NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:itemPredicate andSortKey:@"userId" andSortAscending:false andContext:self.managedObjectContext];
     
     LastsMessages *last;
-    if ([self.ultimosMensajes count]==0) {
+    
+    
+    if ([listaMensajes count]==0) {
+
         
         last = (LastsMessages *)[NSEntityDescription insertNewObjectForEntityForName:@"LastsMessages" inManagedObjectContext:self.managedObjectContext];
         last.userId = [usuario objectForKey:@"id"];

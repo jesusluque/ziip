@@ -22,20 +22,8 @@
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Recientes" syncable="YES">
-        <attribute name="accion" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contacto_contacto" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contacto_nombre" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contacto2_contacto" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contacto2_nombre" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="fecha" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="mensaje" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mensaje_anonimo" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <elements>
         <element name="ChatMessage" positionX="-54" positionY="-9" width="128" height="180"/>
         <element name="LastsMessages" positionX="-36" positionY="81" width="128" height="180"/>
-        <element name="Recientes" positionX="-45" positionY="108" width="128" height="180"/>
     </elements>
 </model>
