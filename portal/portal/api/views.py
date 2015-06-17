@@ -359,6 +359,41 @@ def getContactos(request):
     return HttpResponse(response)
                
     
+def getRecientes(peticion):
+    
+    status = "ok"
+    mensaje = ""   
+    lista_recientes=[]
+    motivo_error = ""
+    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
+        token = request.META["HTTP_X_AUTH_TOKEN"]
+        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
+        if len(lista_usuarios)>0:
+            usuario = lista_usuarios[0]
+            
+            recientes = Peticiones.objects.filter(usuario_id = usuario.pk)
+            
+            for reciente in recientes:
+                con = {}
+                con["id"]=reciente.id
+                con["tipo"]=reciente.tipo
+                con["telefono"] = reciente.telefono
+                con["email"] = reciente.email
+                con["telefono2"] = reciente.telefono2
+                con["email2"] = reciente.email2
+                con["mensaje"] = reciente.mensaje
+                con["mensaje_anonimo"] = reciente.mensaje_anonimo
+                con["fecha"] = reciente.fecha
+                
+                lista_recientes.append(con)
+        else:
+            status = "ko"
+            mensaje = "no hay usuario"
+    else:
+        status = "ko"
+        mensaje = "no hay token"
+    response = json.dumps({"resource":"getRecientes","status":status,"recientes":lista_recientes})
+    return HttpResponse(response)
 
 
  

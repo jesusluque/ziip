@@ -23,12 +23,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    /*
     AppDelegate *delegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.managedObjectContext = delegado.managedObjectContext;
     self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"fecha" andSortAscending:NO andContext:self.managedObjectContext];
-    [self.myTableView reloadData];
-    NSLog(@"array:%@",self.arrayRecientes);
+    */
+    
+    self.arrayRecientes = [[NSMutableArray alloc] initWithObjects: nil];
+    [self recargaRecientes];
 }
 
 
@@ -37,6 +39,24 @@
     [super didReceiveMemoryWarning];
 
 }
+
+-(void) recargaRecientes {
+    
+    NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:nil];
+    NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects: nil];
+    [self.r send:@"getRecientes" tipo_peticion:@"GET" withParams:parametros andValues:valores enviarToken:YES];
+}
+
+
+- (void) recibeDatos:(NSDictionary *)datos {
+    
+    if ([[datos objectForKey:@"resource"] isEqualToString:@"getRecientes"]) {
+        
+        self.arrayRecientes = [datos objectForKey:@"recientes"];
+        [self.myTableView reloadData];
+    }
+}
+
 
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -65,49 +85,44 @@
             }
         }
     }
-    Recientes *item = [self.arrayRecientes objectAtIndex:indexPath.row];
-    NSLog(@"contacto1:%@",item.contacto_contacto);
+    NSDictionary *item = [self.arrayRecientes objectAtIndex:indexPath.row];
+
     
     
-    NSString *contacto1 = [[NSString alloc] initWithFormat:@"%@ %@",item.contacto_nombre,item.contacto_contacto];
-    NSString *contacto2 = [[NSString alloc] initWithFormat:@"%@ %@",item.contacto2_nombre,item.contacto2_contacto];
+    NSString *contacto1 = [[NSString alloc] initWithFormat:@"%@ %@",[item objectForKey:@"contacto_nombre"],[item objectForKey:@"contacto_contacto"]];
+    NSString *contacto2 = [[NSString alloc] initWithFormat:@"%@ %@",[item objectForKey:@"contacto2_nombre"],[item objectForKey:@"contacto2_contacto"]];
     
-    NSLog(@"contacto1:%@",contacto1);
-    
+
     cell.contactoNombre.text = contacto1;
     cell.contacto2Nombre.text = contacto2;
-    cell.fecha.text = [NSDateFormatter  localizedStringFromDate:item.fecha   dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
+    cell.fecha.text = [NSDateFormatter  localizedStringFromDate:[item objectForKey:@"fecha"]   dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
 
     
     NSString *imagenTipo = @"";
-    if ([item.accion isEqualToString:@"anonimo"]) {
+    if ([[item objectForKey:@"tipo"] isEqualToString:@"1"]) {
         imagenTipo=@"jicanonimoA.png";
-    } else if ([item.accion isEqualToString:@"conecta"]) {
+    } else if ([[item objectForKey:@"tipo"] isEqualToString:@"2"]) {
         imagenTipo=@"jicconectaA.png";
-    } else if ([item.accion isEqualToString:@"celestino"]) {
+    } else if ([[item objectForKey:@"tipo"] isEqualToString:@"3"]) {
         imagenTipo=@"jiccelestinaA.png";
     }
-     NSLog(@"item.accion: %@",item.accion);
-    NSLog(@"imagen: %@",imagenTipo);
     [cell.imageView setImage:[UIImage imageNamed:imagenTipo]];
     
     return cell;
 }
 
 
--(void)  tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    self.recienteSeleccionado =  [self.arrayRecientes objectAtIndex:indexPath.row];
-    
-}
+
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"detalle_recientes_segue"]) {
+        NSDictionary * recienteSeleccionado =  [self.arrayRecientes objectAtIndex:self.myTableView.indexPathForSelectedRow.row];
         DetalleRecientesViewController *accionesContactosViewController = (DetalleRecientesViewController *)[segue destinationViewController];
-        accionesContactosViewController.reciente = self.recienteSeleccionado;
+        accionesContactosViewController.reciente = recienteSeleccionado;
         [accionesContactosViewController pintaReciente];
+        NSLog(@"Fin prepare for segue");
     }
 }
 
