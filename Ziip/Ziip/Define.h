@@ -12,9 +12,9 @@
 #ifndef d3_Define_h
 #define d3_Define_h
 
-//#define CONEXION_URL @"http://ziip.marodriguez.com/api/"
+#define CONEXION_URL @"http://ziip.marodriguez.com/api/"
 //#define CONEXION_URL @"http://192.168.1.129:8000/api/"
-#define CONEXION_URL @"http://127.0.0.1:8000/api/"
+//#define CONEXION_URL @"http://127.0.0.1:8000/api/"
 
 
 
