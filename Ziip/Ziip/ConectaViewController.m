@@ -33,8 +33,8 @@
 -(IBAction) enviar {
     
 
-    NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"telefono",@"email", nil];
-    NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.telefono,self.email, nil];
+    NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"nombre1",@"telefono",@"email", nil];
+    NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.contacto_nombre, self.telefono,self.email, nil];
     [self.r send:@"sendConecta" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:YES];
 }
 

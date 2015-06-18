@@ -22,13 +22,6 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    /*
-    AppDelegate *delegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    self.managedObjectContext = delegado.managedObjectContext;
-    self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"fecha" andSortAscending:NO andContext:self.managedObjectContext];
-    */
-    
     self.arrayRecientes = [[NSMutableArray alloc] initWithObjects: nil];
     [self recargaRecientes];
 }
@@ -50,6 +43,7 @@
 
 - (void) recibeDatos:(NSDictionary *)datos {
     
+    NSLog(@"datos:%@",datos);
     if ([[datos objectForKey:@"resource"] isEqualToString:@"getRecientes"]) {
         
         self.arrayRecientes = [datos objectForKey:@"recientes"];
@@ -62,8 +56,7 @@
 -(void) viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    self.arrayRecientes = [CoreDataHelper searchObjectsForEntity:@"Recientes" withPredicate:nil andSortKey:@"fecha" andSortAscending:NO andContext:self.managedObjectContext];
-    [self.myTableView reloadData];
+    [self recargaRecientes];
 }
 
 
@@ -89,7 +82,7 @@
 
     
     
-    NSString *contacto1 = [[NSString alloc] initWithFormat:@"%@ %@",[item objectForKey:@"contacto_nombre"],[item objectForKey:@"contacto_contacto"]];
+    NSString *contacto1 = [[NSString alloc] initWithFormat:@"%@ %@",[item objectForKey:@"contacto1_nombre"],[item objectForKey:@"contacto1_contacto"]];
     NSString *contacto2 = [[NSString alloc] initWithFormat:@"%@ %@",[item objectForKey:@"contacto2_nombre"],[item objectForKey:@"contacto2_contacto"]];
     
 
@@ -110,9 +103,6 @@
     
     return cell;
 }
-
-
-
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

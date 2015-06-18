@@ -178,7 +178,6 @@
                 //y limpiamos la base de datos
                 [CoreDataHelper deleteAllObjectsForEntity:@"LastsMessages" andContext:self.managedObjectContext];
                 [CoreDataHelper deleteAllObjectsForEntity:@"ChatMessage" andContext:self.managedObjectContext];
-                [CoreDataHelper deleteAllObjectsForEntity:@"Recientes" andContext:self.managedObjectContext];
             }
             NSDictionary *usuario = [datos objectForKey:@"usuario"];
             [defaults setObject:self.txtUsuario.text forKey:@"user"];
