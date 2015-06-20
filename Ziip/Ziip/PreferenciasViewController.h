@@ -23,5 +23,6 @@
 - (IBAction) guardar;
 - (IBAction) editarImagen;
 
+-(IBAction) logout;
 
 @end

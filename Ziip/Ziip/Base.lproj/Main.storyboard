@@ -10,23 +10,23 @@
             <objects>
                 <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="qyR-ZQ-IPh">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9H8-vW-Z7g">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="fRA-CQ-5cS">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clave" minimumFontSize="17" id="5V0-4f-uOe" customClass="UICustomTextField">
-                                                <rect key="frame" x="85" y="273" width="244" height="30"/>
+                                                <rect key="frame" x="38" y="273" width="244" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.96470588235294119" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,7 +37,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2aT-K6-pwp">
-                                                <rect key="frame" x="119" y="324" width="177" height="40"/>
+                                                <rect key="frame" x="72" y="343" width="177" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="jloginA.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,7 +48,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p2n-7x-SfY">
-                                                <rect key="frame" x="119" y="389" width="177" height="40"/>
+                                                <rect key="frame" x="72" y="389" width="177" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="jNuevoUsuarioA.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,11 +59,11 @@
                                                 </connections>
                                             </button>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logoZiip.png" id="40V-bl-QXC">
-                                                <rect key="frame" x="157" y="99" width="100" height="100"/>
+                                                <rect key="frame" x="110" y="99" width="100" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Usuario" minimumFontSize="17" id="jDv-Kp-Yae" customClass="UICustomTextField">
-                                                <rect key="frame" x="85" y="225" width="244" height="30"/>
+                                                <rect key="frame" x="38" y="225" width="244" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.96470588235294119" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,6 +74,23 @@
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wJE-Eq-z3x"/>
                                                 </connections>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g1b-RH-sMD">
+                                                <rect key="frame" x="30" y="306" width="54" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="tick2B.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="autologin" destination="BYZ-38-t0r" eventType="touchUpInside" id="HGN-u1-bcX"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recordar usuario" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LFR-9X-JzY">
+                                                <rect key="frame" x="92" y="313" width="180" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <color key="textColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -82,8 +99,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.90980392156862744" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="btnAutologin" destination="g1b-RH-sMD" id="AD1-nM-IlW"/>
                         <outlet property="btnLogin" destination="2aT-K6-pwp" id="UUd-52-CUZ"/>
                         <outlet property="scrollView" destination="9H8-vW-Z7g" id="vrP-EK-Hm0"/>
                         <outlet property="txtPassword" destination="5V0-4f-uOe" id="NLp-Gj-EDU"/>
@@ -642,6 +660,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Dpg-xH-TYi">
+                                <rect key="frame" x="52" y="383" width="217" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="desConectarA.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="desConectarB.png"/>
+                                <connections>
+                                    <action selector="logout" destination="sOp-iG-Zw5" eventType="touchUpInside" id="Z2L-Lh-oQa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -875,7 +904,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" id="9qe-WL-Uxe">
-                                <rect key="frame" x="0.0" y="114" width="320" height="366"/>
+                                <rect key="frame" x="0.0" y="158" width="320" height="322"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -915,6 +944,14 @@
                                     <outlet property="delegate" destination="PUf-sL-v9d" id="ago-pR-FJp"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" id="zFF-AH-NrV">
+                                <rect key="frame" x="0.0" y="114" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PUf-sL-v9d" id="4lg-i5-eLk"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.90980392160000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -922,6 +959,7 @@
                     <navigationItem key="navigationItem" title="Contactos" id="RrS-WF-VFM"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="buscador" destination="zFF-AH-NrV" id="3rb-uD-Tmc"/>
                         <outlet property="myTableView" destination="9qe-WL-Uxe" id="LGH-7h-lVZ"/>
                         <outlet property="publicidad" destination="VTV-6G-ydJ" id="zJh-fZ-Cr5"/>
                         <segue destination="nK7-DU-Lxn" kind="push" identifier="mensaje_anonimo_segue" id="ui9-uc-q8X"/>
@@ -1644,6 +1682,8 @@
         <image name="botonEnviar.png" width="76" height="31"/>
         <image name="contactoA.png" width="40" height="40"/>
         <image name="contactoB.png" width="40" height="40"/>
+        <image name="desConectarA.png" width="160" height="40"/>
+        <image name="desConectarB.png" width="160" height="40"/>
         <image name="editar.png" width="169" height="40"/>
         <image name="editarB.png" width="168" height="40"/>
         <image name="flecha_tableView.png" width="16" height="16"/>
@@ -1672,6 +1712,7 @@
         <image name="logoZiip.png" width="100" height="100"/>
         <image name="siguienteA.png" width="169" height="40"/>
         <image name="siguienteB.png" width="169" height="40"/>
+        <image name="tick2B.png" width="40" height="40"/>
         <image name="tickA.png" width="40" height="40"/>
         <image name="tickB.png" width="40" height="40"/>
     </resources>

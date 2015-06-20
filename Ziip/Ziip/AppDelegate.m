@@ -42,7 +42,7 @@
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
     
-    [[UILabel appearance] setFont:[UIFont fontWithName:@"Futura Medium" size:14.0]];
+    //[[UILabel appearance] setFont:[UIFont fontWithName:@"Futura Medium" size:14.0]];
     
     self.locationManager = [[CLLocationManager alloc] init];
     NSString *reqSysVer = @"8.0";

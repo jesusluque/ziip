@@ -19,8 +19,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property(nonatomic, strong)CLLocationManager *locationManager;
+@property(nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic,retain) PublicidadViewController *publicidadViewController;
+@property (nonatomic,retain) UIViewController *loginViewController;
+
 @property(nonatomic) double latitudActual;
 @property(nonatomic) double longitudActual;
 

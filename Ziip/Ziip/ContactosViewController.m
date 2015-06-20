@@ -25,8 +25,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.listaPersonas= [[NSMutableArray alloc] initWithObjects: nil];
-    
+    self.listaPersonas = [[NSMutableArray alloc] initWithObjects: nil];
+    self.listaPersonasFinal = [NSArray alloc];
     [self recargaContactos];
     
     //self.listaItems = [[NSArray alloc] initWithObjects:@"Ana",@"Carmen",@"Luis",@"Nacho",@"Sonia", nil];
@@ -67,6 +67,7 @@
         NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
 
         //3
+        self.listaPersonas  = [[NSMutableArray alloc] initWithObjects: nil];
         NSUInteger i = 0; for (i = 0; i < [allContacts count]; i++) {
 
             Person *person = [[Person alloc] init];
@@ -87,7 +88,8 @@
                 fullName = [NSString stringWithFormat:@"%@ %@", fullName, lastName];
             }
 
-            person.firstName = firstName; person.lastName = lastName;
+            person.firstName = firstName;
+            person.lastName = lastName;
             person.fullName = fullName;
             
             person.listaTelefonos = [[NSMutableArray alloc] initWithObjects:nil];
@@ -114,6 +116,9 @@
         NSLog(@"Error reading Address Book");
     }
     
+    self.listaPersonasFinal = self.listaPersonas;
+     
+    
 }
 
 
@@ -133,13 +138,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.listaPersonas count];
+    return [self.listaPersonasFinal count];
 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Person *person = [self.listaPersonas objectAtIndex:indexPath.row];
+    Person *person = [self.listaPersonasFinal objectAtIndex:indexPath.row];
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
     ContactosCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -154,7 +159,7 @@
 
 -(void)  tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Person *person = [self.listaPersonas objectAtIndex:indexPath.row];
+    Person *person = [self.listaPersonasFinal objectAtIndex:indexPath.row];
     NSMutableArray *lista_contactos = [[NSMutableArray alloc] initWithArray: person.listaTelefonos];
     [lista_contactos  addObjectsFromArray:person.listaEmails];
     
@@ -195,7 +200,7 @@
     
     NSIndexPath *indexPath = self.myTableView.indexPathForSelectedRow;
     
-    self.contactoSeleccionado =  [self.listaPersonas objectAtIndex:indexPath.row];
+    self.contactoSeleccionado =  [self.listaPersonasFinal objectAtIndex:indexPath.row];
     self.contactoSeleccionado.email = @"";
     self.contactoSeleccionado.telefono= @"";
     
@@ -265,5 +270,51 @@
 -(void) respuestaUsuario:(bool)respuesta {
     
 }
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    [self cargarLista: searchBar.text];
+}
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [self handleSearch:searchBar];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+    
+    self.listaPersonasFinal = self.listaPersonas;
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+    [self.myTableView reloadData];
+}
+
+- (void)handleSearch:(UISearchBar *)searchBar {
+    
+    [self cargarLista: searchBar.text];
+    [searchBar resignFirstResponder];
+}
+
+
+- (void)cargarLista: (NSString *)key {
+    
+    NSString *keySearch = [[NSString alloc] initWithFormat:@"*%@*",key];
+    
+    if ([key isEqualToString:@""]) {
+        
+        self.listaPersonasFinal = self.listaPersonas;
+        
+    } else {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fullName Like[cd] %@ ", keySearch];
+        NSLog(@"%@",predicate);
+        self.listaPersonasFinal = [self.listaPersonas filteredArrayUsingPredicate:predicate];
+    }
+    [self.myTableView reloadData];
+}
+
+
 
 @end

@@ -218,12 +218,6 @@
     [self.imageCropVC.navigationController popViewControllerAnimated:YES];
 }
 
-/*
-- (void)imageCropViewController:(RSKImageCropViewController *)controller willCropImage:(UIImage *)originalImage {
-    
-    
-}*/
-
 
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage usingCropRect:(CGRect)cropRect {
     
@@ -231,15 +225,24 @@
     [self.imagen setImage:croppedImage];
     NSArray *imagenes = [[NSArray alloc] initWithObjects:croppedImage, nil];
     [self.r send:@"editaImagen" tipo_peticion:@"POST" withParams:nil andValues:nil  imagenes:imagenes enviarToken:YES];
-
     [self.imageCropVC.navigationController popViewControllerAnimated:YES];
-    
-    
 }
 
 
-
-
+-(IBAction) logout {
+    
+    NSLog(@"logout");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject: [NSNumber numberWithBool:NO] forKey:@"autologin"];
+    [defaults synchronize];
+    
+    
+    
+    
+    self.miDelegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [self.miDelegado.loginViewController dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 
 @end

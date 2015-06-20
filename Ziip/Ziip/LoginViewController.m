@@ -23,6 +23,10 @@
     self.btnLogin.layer.cornerRadius = 5;
     self.btnLogin.clipsToBounds = YES;
     
+     self.miDelegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    self.miDelegado.loginViewController = self;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
@@ -41,6 +45,25 @@
     
 }
 
+
+- (void) viewWillAppear:(BOOL)animated {
+    self.autoLoginStatus = NO;
+    self.txtUsuario.text = @"";
+    self.txtPassword.text = @"";
+    [self.btnAutologin setImage:[UIImage imageNamed:@"tick2B"] forState:UIControlStateNormal];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSNumber *numberAutologin = [defaults objectForKey:@"autologin"];
+    
+    NSLog(@"numberAutoLogin:%@",numberAutologin);
+    if ([numberAutologin boolValue]) {
+        
+        [self performSegueWithIdentifier:@"segue_principal" sender: self];
+    }
+        
+    
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
     
@@ -186,13 +209,11 @@
             [defaults setObject:[usuario objectForKey:@"telefono"] forKey:@"telefono"];
             [defaults setObject:[usuario objectForKey:@"email"] forKey:@"email"];
             [defaults setObject:[usuario objectForKey:@"imagen"] forKey:@"imagen"];
-            
+            [defaults setObject: [NSNumber numberWithBool:self.autoLoginStatus] forKey:@"autologin"];
             [defaults synchronize];
             [self performSegueWithIdentifier:@"segue_principal" sender: self];
             
-            
         } else  {
-
             UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];
             CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -206,12 +227,10 @@
             NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
             [self.confirmacionViewController configuraPantalla:confirmacion];
             [self.view addSubview:self.confirmacionViewController.view];
-
-            
         }
-        
     }
 }
+
 
 -(void) cierraConfirmacion {
     
@@ -223,5 +242,17 @@
     
 }
 
+
+-(IBAction)autologin {
+    
+    if (self.autoLoginStatus) {
+        self.autoLoginStatus = NO;
+        [self.btnAutologin setImage:[UIImage imageNamed:@"tick2B"] forState:UIControlStateNormal];
+        
+    } else {
+        self.autoLoginStatus = YES;
+        [self.btnAutologin setImage:[UIImage imageNamed:@"tick2A"] forState:UIControlStateNormal];
+    }
+}
 
 @end

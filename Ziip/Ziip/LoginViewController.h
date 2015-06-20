@@ -17,10 +17,14 @@
 @property (weak,nonatomic) IBOutlet UIView *vistaCampos;
 @property (strong,nonatomic) IBOutlet UIButton  *btnLogin;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
-
-
-
+@property (strong,nonatomic) IBOutlet UIButton  *btnAutologin;
+@property (nonatomic) bool autoLoginStatus;
 
 - (IBAction)enviar:(id)sender;
+- (IBAction)autologin;
+
+
+
+
 
 @end

@@ -12,7 +12,7 @@
 #import "DetalleContactoViewController.h"
 #import "ConfirmacionViewController.h"
 
-@interface ContactosViewController : ZiipBase <ConfirmacionViewControllerDelegate,UITableViewDataSource, UITableViewDelegate,DetalleContactoDelegate>
+@interface ContactosViewController : ZiipBase <ConfirmacionViewControllerDelegate,UITableViewDataSource, UITableViewDelegate,DetalleContactoDelegate,UISearchBarDelegate>
 
 @property (nonatomic) NSMutableArray *listaPersonas;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;
@@ -24,6 +24,11 @@
 @property (nonatomic, retain) NSString *contacto1_nombre;
 @property (nonatomic, retain) DetalleContactoViewController *detalleContactoViewController;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
+
+
+@property (nonatomic, retain) IBOutlet UISearchBar *buscador;
+@property (retain, nonatomic) NSArray *listaPersonasFinal;
+
 
 
 @end
