@@ -29,6 +29,6 @@
 @property (nonatomic, retain) IBOutlet UISearchBar *buscador;
 @property (retain, nonatomic) NSArray *listaPersonasFinal;
 
-
+-(IBAction) salirBuscar;
 
 @end

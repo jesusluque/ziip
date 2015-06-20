@@ -484,12 +484,22 @@
         
         [self recarga];
         // hemos hecho login, vamos a traernos los mensajes antiguos
-        NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"ChatMessage" withPredicate:nil andSortKey:@"serverId" andSortAscending:false andContext:self.managedObjectContext];
+        
         NSString *lastMsg = @"0";
+        /*
+        NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"ChatMessage" withPredicate:nil andSortKey:@"serverId" andSortAscending:false andContext:self.managedObjectContext];
         if ([listaMensajes count] > 0) {
             ChatMessage *msg = [listaMensajes objectAtIndex:0];
             lastMsg = [[NSString alloc] initWithFormat:@"%@", msg.serverId];
+        }*/
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSNumber *lastId = [defaults objectForKey:@"lastId"];
+        
+        if(lastId) {
+            lastMsg = [lastId stringValue];
         }
+         NSLog(@"En el login, el ultimo id es:%@",lastMsg);
+
         NSArray *valores = [[NSArray alloc] initWithObjects:lastMsg, nil];
         NSArray *parametros = [[NSArray alloc] initWithObjects:@"lastMsg", nil];
         NSDictionary *datos = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
@@ -508,6 +518,27 @@
     if ([listaMensajes count] > 0) {
         ChatMessage *msg = [listaMensajes objectAtIndex:0];
         msg.serverId = [datos objectForKey:@"serverId"];
+        
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSNumber *lastId = [defaults objectForKey:@"lastId"];
+        
+        if (lastId) {
+            NSLog(@"if last id");
+            if (lastId < msg.serverId){
+                NSLog(@"las id es menor");
+
+                [defaults setObject:msg.serverId forKey:@"lastId"];
+            }
+        } else {
+            NSLog(@"el el else");
+            [defaults setObject:msg.serverId forKey:@"lastId"];
+        }
+        
+        [defaults synchronize];
+        NSLog(@"el ultimo id es:%@",[defaults objectForKey:@"lastId"]);
+        
+        
         NSError *error;
         if (![self.managedObjectContext save:&error]) {
             NSLog(@"Failed to add new data with error: %@", [error domain]);
@@ -537,6 +568,9 @@
 - (void)newMsg:(NSDictionary *)datos {
     
     self.lastMessageId = [NSNumber numberWithFloat:([self.lastMessageId intValue] + 1)];
+    
+    
+    
     ChatMessage *message = (ChatMessage *)[NSEntityDescription insertNewObjectForEntityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext];
     
     message.tipo = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"type"]intValue]];
@@ -559,6 +593,25 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss z"];
     message.fecha =  [dateFormat dateFromString:fecha];
     message.serverId = [datos objectForKey:@"serverId"];
+    
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *lastId = [defaults objectForKey:@"lastId"];
+    
+    if (lastId) {
+        if (lastId < message.serverId){
+            [defaults setObject:message.serverId forKey:@"lastId"];
+        }
+    } else {
+        [defaults setObject:message.serverId forKey:@"lastId"];
+    }
+    
+    [defaults synchronize];
+    NSLog(@"el ultimo id es:%@",[defaults objectForKey:@"lastId"]);
+    
+    
+    
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Failed to add new data with error: %@", [error domain]);

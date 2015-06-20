@@ -47,23 +47,26 @@
 
 
 - (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
     self.autoLoginStatus = NO;
     self.txtUsuario.text = @"";
     self.txtPassword.text = @"";
     [self.btnAutologin setImage:[UIImage imageNamed:@"tick2B"] forState:UIControlStateNormal];
     
+    }
+
+-(void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     NSNumber *numberAutologin = [defaults objectForKey:@"autologin"];
-    
     NSLog(@"numberAutoLogin:%@",numberAutologin);
     if ([numberAutologin boolValue]) {
-        
         [self performSegueWithIdentifier:@"segue_principal" sender: self];
     }
-        
-    
 }
+
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
     

@@ -29,9 +29,20 @@
     self.listaPersonasFinal = [NSArray alloc];
     [self recargaContactos];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     //self.listaItems = [[NSArray alloc] initWithObjects:@"Ana",@"Carmen",@"Luis",@"Nacho",@"Sonia", nil];
+    
 }
 
+- (void) dismissKeyboard {
+    
+    [self.buscador resignFirstResponder];
+}
 
 - (void)recargaContactos {
     
@@ -315,6 +326,16 @@
     [self.myTableView reloadData];
 }
 
+
+-(IBAction) salirBuscar {
+    NSLog(@"Salir del buscar");
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal {
+    
+    NSLog(@"disable automatic");
+    return NO;
+}
 
 
 @end

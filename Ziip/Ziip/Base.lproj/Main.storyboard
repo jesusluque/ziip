@@ -948,6 +948,10 @@
                                 <rect key="frame" x="0.0" y="114" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="PUf-sL-v9d" id="4lg-i5-eLk"/>
                                 </connections>
@@ -970,7 +974,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zb8-fN-aQy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="-1158"/>
+            <point key="canvasLocation" x="2624" y="-1161"/>
         </scene>
         <!--Detalle Contacto View Controller-->
         <scene sceneID="2MB-fW-rfR">
