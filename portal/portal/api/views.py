@@ -231,6 +231,8 @@ def sendMensajeAnonimo(request):
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
             
+            
+            print request.POST
             telefono = request.POST["telefono"]
             email = request.POST["email"]
             mensaje_anonimo = request.POST["mensaje_anonimo"]
@@ -239,14 +241,24 @@ def sendMensajeAnonimo(request):
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
             peticion.tipo = TIPO_PETICION_ANONIMO
-            peticion.telefono = request.POST["telefono"]
-            peticion.email = request.POST["email"]
+            peticion.contacto_nombre = request.POST["nombre1"]
+            
+            if request.POST["telefono"]=="":
+                contacto = request.POST["email"]
+            else:
+                contacto = request.POST["telefono"]
+            peticion.contacto_contacto = contacto
+            
+            
+            
             peticion.mensaje = request.POST["mensaje"]
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
             peticion.estado = ESTADO_PETICION_SOLICITADO
             peticion.save()
             
             enviaPeticion(peticion)
+            
+            
             
         else:
             status = "ko"
@@ -272,8 +284,15 @@ def sendConecta(request):
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
             peticion.tipo = TIPO_PETICION_CONECTA
-            peticion.telefono = request.POST["telefono"]
-            peticion.email = request.POST["email"]
+            peticion.contacto_nombre = request.POST["nombre1"]
+            
+            if request.POST["telefono"]=="":
+                contacto = request.POST["email"]
+            else:
+                contacto = request.POST["telefono"]
+            peticion.contacto_contacto = contacto
+            
+            
             peticion.estado = ESTADO_PETICION_SOLICITADO
             peticion.save()
             
@@ -309,10 +328,25 @@ def sendCelestino(request):
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
             peticion.tipo = TIPO_PETICION_CELESTINO
-            peticion.telefono = request.POST["telefono1"]
-            peticion.email = request.POST["email1"]
-            peticion.telefono2 = request.POST["telefono2"]
-            peticion.email2 = request.POST["email2"]
+
+            
+            peticion.contacto_nombre = request.POST["nombre1"]
+            
+            if request.POST["telefono1"]=="":
+                contacto = request.POST["email1"]
+            else:
+                contacto = request.POST["telefono1"]
+            peticion.contacto_contacto = contacto
+            peticion.contacto2_nombre = request.POST["nombre2"]
+            
+            if request.POST["telefono2"]=="":
+                contacto2 = request.POST["email2"]
+            else:
+                contacto2 = request.POST["telefono2"]
+            peticion.contacto2_contacto = contacto2
+            
+            
+            
             peticion.mensaje = request.POST["mensaje"]
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
             peticion.estado = ESTADO_PETICION_SOLICITADO
@@ -359,7 +393,7 @@ def getContactos(request):
     return HttpResponse(response)
                
     
-def getRecientes(peticion):
+def getRecientes(request):
     
     status = "ok"
     mensaje = ""   
@@ -371,19 +405,19 @@ def getRecientes(peticion):
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
             
-            recientes = Peticiones.objects.filter(usuario_id = usuario.pk)
+            recientes = Peticiones.objects.filter(usuario_id = usuario.pk).order_by("-id")
             
             for reciente in recientes:
                 con = {}
                 con["id"]=reciente.id
                 con["tipo"]=reciente.tipo
-                con["telefono"] = reciente.telefono
-                con["email"] = reciente.email
-                con["telefono2"] = reciente.telefono2
-                con["email2"] = reciente.email2
+                con["contacto1_contacto"] = reciente.contacto_contacto
+                con["contacto1_nombre"] = reciente.contacto_nombre
+                con["contacto2_contacto"] = reciente.contacto2_contacto
+                con["contacto2_nombre"] = reciente.contacto2_nombre
                 con["mensaje"] = reciente.mensaje
                 con["mensaje_anonimo"] = reciente.mensaje_anonimo
-                con["fecha"] = reciente.fecha
+                con["fecha"] = str(reciente.fecha)
                 
                 lista_recientes.append(con)
         else:

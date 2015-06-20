@@ -118,8 +118,8 @@
             
             
             NSString *mensaje_anonimo =  [self.listaMensajes objectAtIndex:indexPath.row];
-            NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"telefono1",@"email1",@"telefono2",@"email2",@"mensaje_anonimo",@"mensaje", nil];
-            NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.telefono1,self.email1,self.telefono2,self.email2,mensaje_anonimo,self.mensaje.text, nil];
+            NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"nombre1",@"telefono1",@"email1",@"nombre2",@"telefono2",@"email2",@"mensaje_anonimo",@"mensaje", nil];
+            NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.contacto1_nombre, self.telefono1,self.email1,self.contacto2_nombre,self.telefono2,self.email2,mensaje_anonimo,self.mensaje.text, nil];
             [self.r send:@"sendCelestino" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:YES];
         }
     }

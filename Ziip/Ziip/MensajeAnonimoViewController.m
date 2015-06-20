@@ -108,8 +108,8 @@
         
         if (!error) {
             NSString *mensaje_anonimo =  [self.listaMensajes objectAtIndex:indexPath.row];
-            NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"telefono",@"email",@"mensaje_anonimo",@"mensaje", nil];
-            NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.telefono,self.email,mensaje_anonimo,self.mensaje.text, nil];
+            NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"nombre1",@"telefono",@"email",@"mensaje_anonimo",@"mensaje", nil];
+            NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.contacto_nombre,self.telefono,self.email,mensaje_anonimo,self.mensaje.text, nil];
             [self.r send:@"sendMensajeAnonimo" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:YES];
         }
     }

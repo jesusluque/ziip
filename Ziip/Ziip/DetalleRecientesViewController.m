@@ -42,8 +42,8 @@
     [self.imgTipoAccion setImage:[UIImage imageNamed:imagenTipo]];
     
 
-    self.contacto_contacto.text = [self.reciente objectForKey:@"contacto_contacto"];
-    self.contacto_nombre.text = [self.reciente objectForKey:@"contacto_nombre"];
+    self.contacto_contacto.text = [self.reciente objectForKey:@"contacto1_contacto"];
+    self.contacto_nombre.text = [self.reciente objectForKey:@"contacto1_nombre"];
     self.contacto2_contacto.text = [self.reciente objectForKey:@"contacto2_contacto"];
     self.contacto2_nombre.text = [self.reciente objectForKey:@"contacto2_nombre"];
     self.mensaje_personalizado.text = [self.reciente objectForKey:@"mensaje"];

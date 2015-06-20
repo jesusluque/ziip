@@ -5,6 +5,7 @@ from datetime import datetime, date
 from portal.core.constantes import *
 
 
+
 class Usuarios(models.Model):
     token = models.CharField(max_length=250) #token para acceder en cada peticion
     num_telefono = models.CharField(max_length=250)
@@ -49,7 +50,7 @@ class Peticiones(models.Model):
     mensaje = models.TextField()
     mensaje_anonimo = models.TextField()
     estado = models.CharField(max_length=2, choices = valores["estados_peticion"].items(),default=ESTADO_PETICION_SOLICITADO)
-    fecha =models.DatetimeField(default=datetime.now)
+    fecha = models.DateTimeField(default=datetime.now)
     
 class Contactos(models.Model):
     usuario = models.ForeignKey(Usuarios, related_name = "contactos_usuario")
