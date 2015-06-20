@@ -25,7 +25,7 @@ var connection = mysql.createConnection({
 fs = require('fs');
 
 //definimos el agente para las notificaciones push
-var notify = require('./notify');
+//var notify = require('./notify');
 
 
 
@@ -260,9 +260,10 @@ io.sockets.on('connection', function(socket) {
 						data.text=conf.imgPublicPath+'image_'+this_img+'.png';	
 					}
                     */
-                    
+                    console.log( data.type );
                     if (data.type==4 || data.type==5){
-                        //Bloqueamos o desbloqueamos
+                         console.log("Data type es 4 o 5");
+                        //Bloqueamos o desloqueamos
                 		var bloq_user = [];
                 		if (bloqueos[userId]) {
                 			bloq_user = bloqueos[userId];
@@ -271,19 +272,22 @@ io.sockets.on('connection', function(socket) {
                 		}
                         var sql
                         if (data.type=="4") {
+                            console.log("data type es 4");
                             console.log("bloqueamos");
-                			bloq_user.push(data.bloqueado_id);
-                            sql='insert core_bloqueoschat (usuario,bloqueado) values ("'+userId+'","'+data.to+'")';
+                			bloq_user.push(data.to);
+                            sql='insert core_chatbloqueos (usuario,bloqueado) values ("'+userId+'","'+data.to+'")';
                     
                 		} else {
                              console.log("desbloqueamos");
-                			if (bloq_user.indexOf(data.destination)>=0) {
+                			if (bloq_user.indexOf(data.to)>=0) {
                 				bloq_user.splice(bloq_user.indexOf(data.to),1);
                 			}
-                            sql='delete * from core_bloqueoschat where usuario="'+userId+'" and bloqueado="'+data.to+'" ';
+                            sql='delete from core_chatbloqueos where usuario="'+userId+'" and bloqueado="'+data.to+'" ';
                     
                 		}
                 		bloqueos[userId]= bloq_user;
+                              
+logger.emit('newEvent', 'bloqueos:', bloqueos);
         				connection.query(sql, function(err, result) {
         					if (err) return logger.emit('newEvent', 'error en bloquear usuario', {'sql':sql, 'error':err});
                         });
@@ -291,13 +295,15 @@ io.sockets.on('connection', function(socket) {
                     
 					//comprobamos si esta bloqueado
 					var blocked = "0";
-				
 					if (bloqueos[data.to]) {
 						var bloqueos_del_user = bloqueos[data.to];
-						if (bloqueos_del_user.indexOf(userId)>=0) {
+
+						if (bloqueos_del_user.indexOf(parseInt(userId))>=0) {
+                                                        console.log("bloqueado");
 							blocked="1";
 						}
 					}
+                                        console.log("blocked es:",blocked);
 					
 					connection.query('insert into core_chatmensajes (texto,fecha,recibido,usuario,destinatario,tipo, bloqueado) values ("'+data.text+'","'+data.date+'","'+str_fecha+'","'+userId+'","'+data.to+'","'+data.type+'","'+blocked+'")', function(err, result) {
 						//Le indicamos que lo hemos recibido
@@ -604,7 +610,7 @@ io.sockets.on('connection', function(socket) {
         		} else {
                      console.log("desbloqueamos");
         			if (bloq_user.indexOf(data.destination)>=0) {
-        				bloq_user.splice(bloq_user.indexOf(data.bloqueado_id),1);
+        				bloq_user.splice(bloq_user.indexOf(data.to),1);
         			}
                     sql='delete * from core_bloqueoschat where usuario="'+userId+'"';
                     
@@ -638,7 +644,6 @@ io.sockets.on('connection', function(socket) {
     });
 });
 
-/*
 //Gestion de errores
 var logStream = fs.createWriteStream(conf.errorLog, {flags:'a'});
 process.on('uncaughtException', function (err) {
@@ -647,4 +652,3 @@ process.on('uncaughtException', function (err) {
 	    logStream.write(err.stack);
 });
 
-*/

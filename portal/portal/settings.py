@@ -44,8 +44,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/marodriguez/git/ziip/portal/templates',
-    '/var/www/sitios/ziip/portal/templates',
+    '/Users/marodriguez/git/ziip/portal/portal/templates',
+    '/var/www/sitios/ziip/portal/portal/templates',
 )
 
 
@@ -56,11 +56,12 @@ TEMPLATE_DIRS = (
 SECRET_KEY = '!pr4jb%w57w&!oztvey4vkv_n5gr#%%c@%c*m69tokwx!8$u(n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ziip.marodriguez.com"]
+
 
 
 # Application definition

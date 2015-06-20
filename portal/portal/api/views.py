@@ -380,7 +380,7 @@ def getContactos(request):
                 con = {}
                 con["id"]=contacto.usuario2.pk
                 con["usuario"]=contacto.usuario2.usuario
-                con["imagen"] = contacto.usuario2.imagen or ""
+                con["imagen"]=contacto.usuario2.imagen or ""
                 lista_contactos.append(con)
             
         else:
