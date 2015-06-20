@@ -241,6 +241,8 @@
             cell.imgTipoUsuario.hidden = YES;
         }
     */
+    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage *img = [self.imageCache getCachedImage:last.img];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -250,7 +252,7 @@
             UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             [cell.fotoUsuario setImage:scaledImage];
-            [cell.fotoUsuario.layer setCornerRadius:6.0f];
+            [cell.fotoUsuario.layer setCornerRadius:5.0f];
             [cell.fotoUsuario.layer setMasksToBounds:YES];
         });
     });
@@ -304,9 +306,24 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         LastsMessages *last = [self.ultimosMensajes objectAtIndex:indexPath.row];
+        
+        NSError *error;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext]];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"from =  %@ or to = %@", last.userId, last.userId];
+        [request setPredicate:predicate];
+        
+        NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
+        //if(![results count]==0) {
+        for (ChatMessage *item in results) {
+            //[self.managedObjectContext deleteObject:[results objectAtIndex:0]];
+            [self.managedObjectContext deleteObject:item];
+        }
         [self.ultimosMensajes removeObjectAtIndex:indexPath.row];
         [self.managedObjectContext deleteObject:last];
-        NSError *error;
+        
         if (![self.managedObjectContext save:&error]) {
             NSLog(@"Failed to add new data with error: %@", [error domain]);
         }
@@ -436,6 +453,21 @@
     if (self.notifica) {
         NSDictionary *userInfo = [[NSDictionary alloc]initWithObjects:[[NSArray alloc] initWithObjects:@"datos", @"chatOther", nil] forKeys:[[NSArray alloc] initWithObjects:@"data", @"type", nil]];
         [MPNotificationView notifyWithText:last.userName detail:last.text image:scaledImage andDuration:5.0f andUserInfo:userInfo];
+    }
+    
+    
+    if (self.chatAbierto) {
+        //if ([last.userId isEqualToString:self.openUserId]) {
+        if ([[last.userId stringValue]isEqualToString:self.openUserId]){
+                
+            
+            
+            self.chatViewController.ultimoMensaje = last;
+            [self.chatViewController montaCabecera];
+        }
+         
+        
+        
     }
     [self.myTableView reloadData];
     
@@ -570,6 +602,8 @@
     
     NSString *strFrom = [datos objectForKey:@"from"];
     if (self.chatAbierto) {
+        
+
         if ([strFrom isEqualToString:self.openUserId]) {
             [self.chatViewController recarga];
             [self.chatViewController goFin];
@@ -722,12 +756,17 @@
     
     LastsMessages *last;
     
+    NSLog(@"listaMensajes: %@",listaMensajes);
     
     if ([listaMensajes count]==0) {
 
-        
         last = (LastsMessages *)[NSEntityDescription insertNewObjectForEntityForName:@"LastsMessages" inManagedObjectContext:self.managedObjectContext];
         last.userId = [usuario objectForKey:@"id"];
+        NSLog(@"abrimos chat, sin ningun last message");
+        NSMutableDictionary *user_data = [[NSMutableDictionary alloc]init];
+        [user_data setObject:[usuario objectForKey:@"id"] forKey:@"id"];
+        [self.miSocket sendEvent:@"getUserInfo" withData:user_data];
+
     } else {
         last = [listaMensajes objectAtIndex:0];
     }

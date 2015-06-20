@@ -1489,11 +1489,6 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="redraw" id="J8m-Na-Mex">
                                                     <rect key="frame" x="10" y="6" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.45000000000000001" alpha="1" colorSpace="calibratedWhite"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="redraw" id="lxs-Yd-KoG">
-                                                    <rect key="frame" x="10" y="6" width="50" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label   LBA" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xGW-bI-KaI">
@@ -1535,7 +1530,6 @@
                                         <connections>
                                             <outlet property="fotoUsuario" destination="J8m-Na-Mex" id="beT-S3-FG6"/>
                                             <outlet property="hora" destination="IzJ-dH-w8j" id="7cl-lp-ERi"/>
-                                            <outlet property="imgTipoUsuario" destination="lxs-Yd-KoG" id="zPf-Gk-wDc"/>
                                             <outlet property="numMensajes" destination="rbh-xk-PHi" id="aRj-fw-R6A"/>
                                             <outlet property="texto" destination="xGW-bI-KaI" id="irQ-Hs-HmC"/>
                                             <outlet property="usuario" destination="pop-4M-6z7" id="H8D-Ob-hyO"/>

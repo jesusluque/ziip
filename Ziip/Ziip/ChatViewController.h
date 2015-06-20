@@ -69,6 +69,7 @@
 - (void) goFin;
 - (void) activaBotonSend;
 - (void) desactivaBotonSend;
+- (void) montaCabecera;
 
 
 
