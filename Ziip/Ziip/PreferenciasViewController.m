@@ -109,14 +109,10 @@
 */
 
 
-
-
-
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 
 - (UIImage *)fixrotation:(UIImage *)image{
@@ -196,17 +192,13 @@
 }
 
 
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     if ([[info objectForKey:@"UIImagePickerControllerMediaType"] isEqualToString: (NSString *) kUTTypeImage ]) {
         UIImage *image = [self fixrotation:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
-        
-
         self.imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image cropMode:RSKImageCropModeSquare];
         self.imageCropVC.delegate = self;
         [self.navigationController pushViewController:self.imageCropVC animated:YES];
-        
     }
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -231,17 +223,11 @@
 
 -(IBAction) logout {
     
-    NSLog(@"logout");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject: [NSNumber numberWithBool:NO] forKey:@"autologin"];
     [defaults synchronize];
-    
-    
-    
-    
     self.miDelegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [self.miDelegado.loginViewController dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 

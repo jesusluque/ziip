@@ -67,7 +67,10 @@ def login(request):
         usuario.token = generaTokenUsuario()
         usuario.save()
         user_token = usuario.token
-        dict_usuario = {"telefono":usuario.num_telefono or "","email":usuario.email or "","imagen":usuario.imagen or ""}
+        telefono=""
+        if usuario.confirmado:
+            telefono=usuario.num_telefono
+        dict_usuario = {"telefono":telefono or "","email":usuario.email or "","imagen":usuario.imagen or ""}
         
         mensaje = ""        
         if request.POST.has_key("pushToken"):

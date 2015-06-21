@@ -64,7 +64,13 @@
     }
     cell.nombre.text = [contacto objectForKey:@"usuario"];
     
-    [cell.imageView setImage:[self.imageCache getCachedImage:[contacto objectForKey:@"imagen"]]];
+    
+    //+ (UIImage *)redimensionaImage:(UIImage *)image maxWidth:(float)max_width andMaxHeight:(float)max_height {
+    
+        
+    [cell.imageView setImage:[ImageCache redimensionaImage:[self.imageCache getCachedImage:[contacto objectForKey:@"imagen"]] maxWidth:50.0 andMaxHeight:50.0] ];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imageView.clipsToBounds = YES;
     return cell;
     
 }
