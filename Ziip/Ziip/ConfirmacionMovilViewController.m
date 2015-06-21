@@ -59,9 +59,15 @@
     
     if ([[datos objectForKey:@"resource"] isEqualToString:@"confirmacionMovil"]) {
         if ([[datos objectForKey:@"status"]isEqualToString:@"ok"]) {
+            
             if (self.proceso_registro) {
+
                 [self performSegueWithIdentifier:@"segue_principal" sender: self];
             } else {
+                NSLog(@"Gurado telefono: %@",self.telefono);
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:self.telefono forKey:@"telefono"];
+                [defaults synchronize];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             
