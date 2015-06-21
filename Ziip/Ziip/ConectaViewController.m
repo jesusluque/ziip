@@ -57,10 +57,10 @@
         NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];
         NSArray *valores;
         if ([[datos objectForKey:@"status"]isEqualToString:@"ok"]) {
-            valores = [[NSArray alloc] initWithObjects:@"Invitacion enviada correctamente",@"Su invitacion se ha enviado correctamente", dict_tipo, nil];
+            valores = [[NSArray alloc] initWithObjects:@"Invitación enviada correctamente",@"Su invitación se ha enviado correctamente", dict_tipo, nil];
             
         } else  {
-            valores = [[NSArray alloc] initWithObjects:@"Invitacion no enviada", [datos objectForKey:@"motivo_error"], dict_tipo, nil];
+            valores = [[NSArray alloc] initWithObjects:@"Invitación no enviada", [datos objectForKey:@"motivo_error"], dict_tipo, nil];
         }
         
         NSDictionary *confirmacion = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
