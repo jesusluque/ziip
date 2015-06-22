@@ -27,7 +27,7 @@
     if ([self.accion isEqualToString:@"anonimo"]){
         mensaje = @"Selecciona a la persona para enviarle un mensaje anonimo";
     } else if ([self.accion isEqualToString:@"conecta"]){
-        mensaje = @"Selecciona a la persona para enviarle una invitacion";
+        mensaje = @"Selecciona a la persona para enviarle una invitación";
         
     }else if ([self.accion isEqualToString:@"celestino"]){
         mensaje = @"Selecciona a la primera persona que conoces";

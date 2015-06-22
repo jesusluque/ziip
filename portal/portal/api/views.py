@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import EmailMultiAlternatives
 from portal.core.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import random
 import time
 from portal.settings import *
+import httplib,urllib
+from django.template.loader import render_to_string
+   
     
 CARACTERES_TOKEN = 'abcdefghijklmnopqrstuvwxyz1234567890'
 NUM_CARACTERES_TOKEN = 20
@@ -53,8 +57,11 @@ def generaCodigoSolicitud():
     return token
 
 def enviaSmsCodigo(telefono,codigo):
+    mensaje="Su codigo para Ziip es: "+codigo
     print codigo
-    
+    enviaSMS(telefono,mensaje):
+        
+
 
 @csrf_exempt
 def login(request):
@@ -234,8 +241,6 @@ def sendMensajeAnonimo(request):
         if len(lista_usuarios)>0:
             usuario = lista_usuarios[0]
             
-            
-            print request.POST
             telefono = request.POST["telefono"]
             email = request.POST["email"]
             mensaje_anonimo = request.POST["mensaje_anonimo"]
@@ -437,10 +442,66 @@ def getRecientes(request):
 
 def enviaPeticion(peticion):
     
-    pass
+
+    if peticion.tipo == TIPO_PETICION_ANONIMO:
+        
+        
+        
+    
+    else if peticion.tipo == TIPO_PETICION_CONECTA:
+        
+        
+    else if peticion.tipo == TIPO_PETICION_CELESTINO:
+        
+        
+    
+    
+
+    """
+    peticion = Peticiones()
+    peticion.usuario_id = usuario.pk
+    peticion.tipo = TIPO_PETICION_ANONIMO
+    peticion.contacto_nombre = request.POST["nombre1"]
+    
+    if request.POST["telefono"]=="":
+        contacto = request.POST["email"]
+    else:
+        contacto = request.POST["telefono"]
+    peticion.contacto_contacto = contacto
+    
+    
+    
+    peticion.mensaje = request.POST["mensaje"]
+    peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+    """
+def isTelefono(contacto):
+    
+    if len(contacto)==9 and contacto.isdigit()
+        return True
+    else:
+        return False
+    
+    
+def enviaSMS(telefono,mensaje):
+    
+    auth_key="JzroaddoWbG4Ag6X8dZ80ts4AImVpbhZ"
+    str_from="Ziip"
+    url="api.smsarena.es"
+    params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':telefono,'text':mensaje,"id":'123'})
+    h1 = httplib.HTTPSConnection(url)
+    h1.request("GET", "/http/sms.php?"+params)
+    r1 = h1.getresponse()
+    data = r1.read()
 
 
-   
+def enviaMail(email,asunto,texto):
+    
+    data = {"content":texto}
+    rendered = render_to_string("mails/base.html", data)
+    msg = EmailMultiAlternatives("asunto", "", MAIL_FROM, [email])
+    msg.attach_alternative(rendered, "text/html")
+    msg.send()
+    
     
     
 """    

@@ -12,6 +12,7 @@
 @interface ConfirmacionMovilViewController : ZiipBase <ConfirmacionViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextField *codigo;
+@property (nonatomic, retain)  NSString *telefono;
 @property (nonatomic) bool proceso_registro;
 @property (nonatomic, retain) ConfirmacionViewController *confirmacionViewController;
 

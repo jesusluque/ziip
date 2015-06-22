@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -222,7 +222,7 @@
             <objects>
                 <viewController id="Yb8-sC-jxm" customClass="ConfirmacionMovilViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="buh-Nm-9De">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="tHZ-Ft-A2G">
@@ -309,7 +309,7 @@
             <objects>
                 <viewController id="JUn-zw-RJ3" customClass="RecientesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WLE-56-Z7P">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="cwJ-w4-6yL">
@@ -401,7 +401,7 @@
             <objects>
                 <viewController id="Erf-jH-rDi" customClass="DetalleRecientesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="foc-2j-QWY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="rNG-gu-1Iq">
@@ -422,7 +422,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje anonimo j" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hoT-1T-zlX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje anónimo j" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hoT-1T-zlX">
                                 <rect key="frame" x="20" y="311" width="284" height="43"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -455,7 +455,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menaje Personalizado" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LmE-Xh-Uyp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje personalizado" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LmE-Xh-Uyp">
                                 <rect key="frame" x="20" y="362" width="284" height="68"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -509,7 +509,7 @@
             <objects>
                 <viewController id="Bwm-2b-wAf" customClass="ListadoContactosViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ptA-Iq-5Yf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="7Ed-Hw-7rL">
@@ -602,7 +602,7 @@
             <objects>
                 <viewController id="sOp-iG-Zw5" customClass="PreferenciasViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Rn-1p-3SB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="xTI-Fq-7SR">
@@ -714,7 +714,7 @@
             <objects>
                 <viewController id="5Uy-ZU-Px9" customClass="ZiipViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vTF-qO-ABk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="TuV-rW-06e">
@@ -857,7 +857,7 @@
                                                     <outlet property="delegate" destination="ACq-vG-g96" id="mYs-BK-VqU"/>
                                                 </connections>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje Estandard para ambos contactos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zhr-hY-ONp">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje estándar para ambos contactos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zhr-hY-ONp">
                                                 <rect key="frame" x="19" y="138" width="272" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
@@ -1069,7 +1069,7 @@
                                                     <outlet property="delegate" destination="nK7-DU-Lxn" id="I1F-jh-tuj"/>
                                                 </connections>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje Personal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nrr-A2-JIK">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje personal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nrr-A2-JIK">
                                                 <rect key="frame" x="18" y="321" width="178" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
@@ -1232,7 +1232,7 @@
             <objects>
                 <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="gkg-cE-4XD" customClass="ChatViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7h3-R3-RgS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="ng7-k3-EtV">
@@ -1271,7 +1271,7 @@
                                                     <rect key="frame" x="17" y="4" width="286" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                                    <state key="normal" title="Cargar Mensajes Anteriores">
+                                                    <state key="normal" title="Cargar mensajes anteriores">
                                                         <color key="titleColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1397,17 +1397,17 @@
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telefono" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NLj-z7-Ks2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teléfono" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NLj-z7-Ks2">
                                 <rect key="frame" x="16" y="177" width="88" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecciona a la persona para enviarle un mensaje anonimo" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HAM-Qb-Uaz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecciona el contacto para enviarle un mensaje anónimo" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HAM-Qb-Uaz">
                                 <rect key="frame" x="16" y="122" width="288" height="43"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <color key="textColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1442,7 +1442,7 @@
             <objects>
                 <viewController id="MGf-B5-POt" customClass="PerfilUsuarioViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bms-kK-lWz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="mgq-5I-gbL">
@@ -1496,7 +1496,7 @@
             <objects>
                 <viewController storyboardIdentifier="ListaChatsViewController" id="dQz-uc-n1F" customClass="ListaChatsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0mu-5G-Gxi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jbackground4.png" id="ida-Is-L2q">
@@ -1615,7 +1615,7 @@
                                 <rect key="frame" x="20" y="184" width="284" height="200"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b4W-f1-aaE" userLabel="Titulo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b4W-f1-aaE" userLabel="Titulo">
                                         <rect key="frame" x="8" y="8" width="264" height="40"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.43137254899999999" green="0.2274509804" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1726,11 +1726,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="Gtu-9M-Zb3"/>
         <segue reference="YUE-xY-mHJ"/>
-        <segue reference="vc9-zP-rAS"/>
-        <segue reference="ui9-uc-q8X"/>
-        <segue reference="DSs-sb-OBI"/>
-        <segue reference="BEb-DR-460"/>
+        <segue reference="RWi-iM-9ba"/>
+        <segue reference="lOv-0W-s0Z"/>
         <segue reference="qk4-eU-Rmq"/>
+        <segue reference="BEb-DR-460"/>
     </inferredMetricsTieBreakers>
 </document>

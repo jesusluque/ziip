@@ -9,6 +9,8 @@
 #import "PreferenciasViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "NSData+Base64.h"
+#import "ConfirmacionMovilViewController.h"
+
 
 @interface PreferenciasViewController ()
 
@@ -20,19 +22,7 @@
     
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     self.username.text = [defaults objectForKey:@"user"];
-    NSString *movil = [defaults objectForKey:@"telefono"];
-    
-    if (movil) {
-        self.movil.hidden=YES;
-        self.editMovil.hidden=YES;
-        self.telefono.text = movil;
-        self.telefono.hidden = NO;
-    } else {
-        self.telefono.hidden = YES;
-    }
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage *img = [self.imageCache getCachedImage:[defaults objectForKey:@"imagen"]];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -49,8 +39,34 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    NSString *movil = [defaults objectForKey:@"telefono"];
+    
+    NSLog(@"movil:%@",movil);
+    if (movil && ![movil isEqualToString:@""]) {
+        NSLog(@"No movil");
+        self.movil.hidden=YES;
+        self.editMovil.hidden=YES;
+        self.telefono.text = movil;
+        self.telefono.hidden = NO;
+    } else {
+        self.telefono.hidden = YES;
+        self.movil.hidden = NO;
+        self.editMovil.hidden=NO;
+        self.movil.text=@"";
+        
+    }
+
+}
+
+
 - (IBAction) guardar {
     
+    [self.movil resignFirstResponder];
     self.movil.hidden=YES;
     self.editMovil.hidden=YES;
     NSMutableArray *parametros = [[NSMutableArray alloc] initWithObjects:@"movil",nil];
@@ -228,6 +244,16 @@
     [defaults synchronize];
     self.miDelegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [self.miDelegado.loginViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"segue_cod_movil"]) {
+        ConfirmacionMovilViewController *accionViewController = (ConfirmacionMovilViewController *)[segue destinationViewController];
+        accionViewController.telefono = self.movil.text;
+    }
+    
 }
 
 
