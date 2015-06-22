@@ -158,7 +158,8 @@
 
 - (void)recarga {
     
-    NSArray *listaLastMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:nil andSortKey:@"fecha" andSortAscending:false andContext:self.managedObjectContext];
+    NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"userId<>%@", self.myId]];
+    NSArray *listaLastMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:itemPredicate andSortKey:@"fecha" andSortAscending:false andContext:self.managedObjectContext];
     self.ultimosMensajes = [[NSMutableArray alloc] init];
     for (LastsMessages *last in listaLastMensajes) {
         [self.ultimosMensajes addObject:last];
