@@ -444,15 +444,39 @@ def enviaPeticion(peticion):
     
 
     if peticion.tipo == TIPO_PETICION_ANONIMO:
-        
-        
-        
+        if isTelefono(peticion.contacto_contacto):
+            mensaje = ""
+            enviaSMS(contacto_contacto,mensaje)
+        else:
+            texto = ""
+            asunto = ""
+            enviaMail(contacto_contacto,asunto,texto)
     
     else if peticion.tipo == TIPO_PETICION_CONECTA:
-        
+        if isTelefono(peticion.contacto_contacto):
+            mensaje = ""
+            enviaSMS(contacto_contacto,mensaje)
+        else:
+            texto = ""
+            asunto = ""
+            enviaMail(contacto_contacto,asunto,texto)
         
     else if peticion.tipo == TIPO_PETICION_CELESTINO:
-        
+        if isTelefono(peticion.contacto_contacto):
+            mensaje = ""
+            enviaSMS(contacto_contacto,mensaje)
+        else:
+            texto = ""
+            asunto = ""
+            enviaMail(contacto_contacto,asunto,texto)
+            
+        if isTelefono(peticion.contacto2_contacto):
+            mensaje = ""
+            enviaSMS(contacto2_contacto,mensaje)
+        else:
+            texto = ""
+            asunto = ""
+            enviaMail(contacto2_contacto,asunto,texto)
         
     
     
