@@ -59,7 +59,7 @@ def generaCodigoSolicitud():
 def enviaSmsCodigo(telefono,codigo):
     mensaje="Su codigo para Ziip es: "+codigo
     print codigo
-    enviaSMS(telefono,mensaje):
+    enviaSMS(telefono,mensaje)
         
 
 
@@ -445,38 +445,42 @@ def enviaPeticion(peticion):
 
     if peticion.tipo == TIPO_PETICION_ANONIMO:
         if isTelefono(peticion.contacto_contacto):
-            mensaje = ""
-            enviaSMS(contacto_contacto,mensaje)
+            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.id)
+            enviaSMS(peticion.contacto_contacto,mensaje)
         else:
-            texto = ""
-            asunto = ""
-            enviaMail(contacto_contacto,asunto,texto)
+            data = {"codigo_peticion":peticion.id,"mensaje_anonimo":peticion.mensaje_anonimo}
+            rendered = render_to_string("mails/peticion.html", data)
+            asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
+            enviaMail(peticion.contacto_contacto,asunto,rendered)
     
-    else if peticion.tipo == TIPO_PETICION_CONECTA:
+    elif peticion.tipo == TIPO_PETICION_CONECTA:
         if isTelefono(peticion.contacto_contacto):
-            mensaje = ""
-            enviaSMS(contacto_contacto,mensaje)
+            mensaje = "Te ha invitado a usar nuestra aplicación. Primera plataforma de contacto anónima. http://ziip.es"
+            enviaSMS(peticion.contacto_contacto,mensaje)
         else:
-            texto = ""
-            asunto = ""
-            enviaMail(contacto_contacto,asunto,texto)
+            data = {}
+            rendered = render_to_string("mails/conecta.html", data)
+            asunto = "Invitación a ziip.es "
+            enviaMail(peticion.contacto_contacto,asunto,rendered)
         
-    else if peticion.tipo == TIPO_PETICION_CELESTINO:
+    elif peticion.tipo == TIPO_PETICION_CELESTINO:
         if isTelefono(peticion.contacto_contacto):
-            mensaje = ""
-            enviaSMS(contacto_contacto,mensaje)
+            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.id)
+            enviaSMS(peticion.contacto_contacto,mensaje)
         else:
-            texto = ""
-            asunto = ""
-            enviaMail(contacto_contacto,asunto,texto)
+            data = {"codigo_peticion":peticion.id,"mensaje_anonimo":peticion.mensaje_anonimo}
+            rendered = render_to_string("mails/peticion.html", data)
+            asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
+            enviaMail(peticion.contacto_contacto,asunto,texto)
             
         if isTelefono(peticion.contacto2_contacto):
-            mensaje = ""
-            enviaSMS(contacto2_contacto,mensaje)
+            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.id)
+            enviaSMS(peticion.contacto2_contacto,mensaje)
         else:
-            texto = ""
-            asunto = ""
-            enviaMail(contacto2_contacto,asunto,texto)
+            data = {"codigo_peticion":peticion.id,"mensaje_anonimo":peticion.mensaje_anonimo}
+            rendered = render_to_string("mails/peticion.html", data)
+            asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
+            enviaMail(peticion.contacto2_contacto,asunto,texto)
         
     
     
@@ -500,7 +504,7 @@ def enviaPeticion(peticion):
     """
 def isTelefono(contacto):
     
-    if len(contacto)==9 and contacto.isdigit()
+    if len(contacto)==9 and contacto.isdigit():
         return True
     else:
         return False
@@ -522,7 +526,7 @@ def enviaMail(email,asunto,texto):
     
     data = {"content":texto}
     rendered = render_to_string("mails/base.html", data)
-    msg = EmailMultiAlternatives("asunto", "", MAIL_FROM, [email])
+    msg = EmailMultiAlternatives(asunto, "", MAIL_FROM, [email])
     msg.attach_alternative(rendered, "text/html")
     msg.send()
     

@@ -67,11 +67,11 @@
             
             [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]  completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 [self.delegate hideLoading];
-                //NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                //NSLog(@"str_Data: %@",str_data);
+                NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"str_Data: %@",str_data);
                 if (error == nil) {
                     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                    //NSLog(@"resultado: %@",result);
+                    NSLog(@"resultado: %@",result);
 
                     [self.delegate recibeDatos:result];
                 } else {
