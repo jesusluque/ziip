@@ -14,8 +14,8 @@ var notify = require('./notify');
 
 connection.connect();
 
-user_id="1" //user id  
-text="texto"
+user_id="9" //user id  
+text="Hola Jesus"
 message={
     "serverId": "data.serverId",
     "text": "data.text",

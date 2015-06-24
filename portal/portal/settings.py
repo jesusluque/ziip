@@ -17,13 +17,13 @@ ADMINS = (
      ('Manuel Rodriguez', 'manuthema.rodriguez@gmail.com'),
 )
 
-SERVER_EMAIL="noreply@growinfinance.com"
-MAIL_FROM="noreply@growinfinance.com"
+SERVER_EMAIL="contacto@ziip.es"
+MAIL_FROM="contacto@ziip.es"
 MAIL_TO="manuthema.rodriguez@gmail.com"
-EMAIL_HOST="email-smtp.eu-west-1.amazonaws.com"
-EMAIL_PORT=587
-EMAIL_HOST_USER="AKIAJQTA3SCAJQMAHWNQ"
-EMAIL_HOST_PASSWORD="AnnbBlWheEEEKzNR5NnZ1E/0id9wyiRDRc8nJHg/AIeF"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=25
+EMAIL_HOST_USER="contacto@beyondthebox.eu"
+EMAIL_HOST_PASSWORD="b20contacto"
 EMAIL_USE_TLS=True
 
 # Database
@@ -56,7 +56,7 @@ TEMPLATE_DIRS = (
 SECRET_KEY = '!pr4jb%w57w&!oztvey4vkv_n5gr#%%c@%c*m69tokwx!8$u(n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
