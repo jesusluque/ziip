@@ -14,7 +14,7 @@ var notify = require('./notify');
 
 connection.connect();
 
-user_id="9" //user id  
+user_id="1" //user id  
 text="Hola Jesus"
 message={
     "serverId": "data.serverId",
@@ -26,5 +26,8 @@ message={
     "destination": "data.destination"
 }
 
-sendNotification(connection,user_id,text,message);
+setTimeout(function() {
+  sendNotification(connection,user_id,text,message);
+}, 5000);
+
 

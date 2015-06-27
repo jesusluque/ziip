@@ -45,7 +45,7 @@
             imageName= @"jicsettingA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
-        [tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ] withFinishedUnselectedImage:image ];
+        //[tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ] withFinishedUnselectedImage:image ];
         
         
         i++;
