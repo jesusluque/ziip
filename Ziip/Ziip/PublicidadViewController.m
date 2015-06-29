@@ -34,10 +34,18 @@
 -(void) inicializa {
     
     self.locationManager = [[CLLocationManager alloc] init];
+    NSString *reqSysVer = @"8.0";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    
     self.adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,0 , self.view.frame.size.width, 50)];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-    //[self.locationManager requestWhenInUseAuthorization];
+
+
+
     [self.locationManager startUpdatingLocation];
     self.tiempo_recarga_publi=@(60);
     self.tiempo_recarga_server= @(3600);

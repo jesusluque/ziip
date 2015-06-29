@@ -47,9 +47,10 @@
     self.locationManager = [[CLLocationManager alloc] init];
     NSString *reqSysVer = @"8.0";
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
-        NSLog(@"entra aqui");
-        //[self.locationManager requestWhenInUseAuthorization];
+
+        [self.locationManager requestWhenInUseAuthorization];
     }
 
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -87,6 +88,7 @@
     newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"registramos %@",newToken);
     [defaults setObject:newToken forKey:@"pushToken"];
     [defaults synchronize];
 }

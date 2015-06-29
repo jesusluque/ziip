@@ -45,8 +45,14 @@
             imageName= @"jicsettingA.png";
         }
         UIImage *selectedImage = [UIImage imageNamed:imageName];
-        //[tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ] withFinishedUnselectedImage:image ];
+        NSString *reqSysVer = @"7.0";
+        NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+        if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
+            [tbi setFinishedSelectedImage: [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ] withFinishedUnselectedImage:image ];
+
+        }
         
+        //
         
         i++;
         
