@@ -1,11 +1,13 @@
 
 join = require('path').join;
-//pfx = join(__dirname, 'Certificados.cert');
 fs = require('fs')
 
 
-pfx = join(__dirname, 'CertificadosUltimo.p12');
+pfx = join(__dirname, 'Certificados2.p12');
+//pfx = join(__dirname, 'CertificadosUltimo.p12');
   //, pfx = join(__dirname, 'cert/apn_developer_identity2.p12');
+
+//pfx = join(__dirname, 'cert.pem');
 
 
 //cert = join(__dirname, 'certificado.cer');
@@ -13,8 +15,8 @@ pfx = join(__dirname, 'CertificadosUltimo.p12');
 
 
 
-cert = fs.readFileSync(join(__dirname, 'certificado.cer'));
-key = fs.readFileSync(join(__dirname, 'clave_privada.cer'));
+//cert = fs.readFileSync(join(__dirname, 'certificado.cer'));
+//key = fs.readFileSync(join(__dirname, 'clave_privada.cer'));
 
 
 /*!
@@ -27,25 +29,22 @@ agent = module.exports = new apnagent.Agent();
 /*!
  * Configure agent
  */
-auth=
-    key, key
-    cert, cert
+//auth=
+//    key, key
+//    cert, cert
 
 agent
-    //.set(auth)
-  
     .set('pfx file', pfx)
-  
+    //.set(auth)
+    .set('debug','on')
+    .enable('sandbox');
 
+    
     //.set('cert',cert)
     //.set('key',key)
-
-    .enable('sandbox')
-
     
     
-
-  //.set('passphrase', '1234')
+    //agent.set('passphrase', '1234');
 
 /*!
  * Error Mitigation
@@ -89,7 +88,11 @@ agent.connect(function (err) {
 console.log("Conectando el agente");
   // gracefully handle auth problems
   if (err && err.name === 'GatewayAuthorizationError') {
+      
     console.log('Authentication Error: %s', err.message);
+    console.log("bla");
+    console.log(err.code)
+    
     process.exit(1);
   }
   if (err){

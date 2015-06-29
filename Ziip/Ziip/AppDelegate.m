@@ -49,7 +49,7 @@
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
         NSLog(@"entra aqui");
-        [self.locationManager requestWhenInUseAuthorization];
+        //[self.locationManager requestWhenInUseAuthorization];
     }
 
     self.locationManager.distanceFilter = kCLDistanceFilterNone;

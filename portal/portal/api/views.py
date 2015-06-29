@@ -505,10 +505,15 @@ def enviaPeticion(peticion):
     """
 def isTelefono(contacto):
     
-    if len(contacto)==9 and contacto.isdigit():
+    telefono = limpiaTelefono(contacto)
+    
+    if len(telefono)==9 and telefono.isdigit():
         return True
     else:
         return False
+    
+def limpiaTelefono(telefono):
+    return telefono.replace("+34","").replace(" ","")
     
     
 def enviaSMS(telefono,mensaje,id_mensaje):
@@ -517,7 +522,7 @@ def enviaSMS(telefono,mensaje,id_mensaje):
     auth_key="JzroaddoWbG4Ag6X8dZ80ts4AImVpbhZ"
     str_from="Ziip"
     url="api.smsarena.es"
-    params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':telefono,'text':mensaje,"id":id_mensaje})
+    params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':limpiaTelefono(telefono),'text':mensaje,"id":id_mensaje})
     h1 = httplib.HTTPSConnection(url)
     h1.request("GET", "/http/sms.php?"+params)
     r1 = h1.getresponse()

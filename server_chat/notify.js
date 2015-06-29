@@ -1,8 +1,24 @@
 var agent = require('./apn');
-var agent_dev = require('./apn_dev');
+//var agent_dev = require('./apn_dev');
 var GCM = require('./gcm');
 
-var gcm = new GCM("");//Falta el codigo para las apps android
+//var gcm = new GCM("");//Falta el codigo para las apps android
+user_id="9" //user id  
+text="Hola Jesus"
+message={
+    "serverId": "data.serverId",
+    "text": "data.text",
+    "from": "data.from",
+    "type": "data.type",
+    "date": "data.date",
+    "readed": "data.readed",
+    "destination": "data.destination"
+}
+agent.on('connect', function (err, msg) {
+    console.log("enviamos");
+sendNotification(connection,user_id,text,message);
+});
+
 
 sendNotification = function(connection, userId, text, data) {
     //Primero comprobamos si el usuario tiene activas las notificaciones
@@ -53,12 +69,13 @@ sendNotification = function(connection, userId, text, data) {
 
                 console.log(agent.connected);
                        
-                agent.createMessage()
+                b=agent.createMessage()
                 .device(row.token)
                 .alert(msg)
                 .sound("default")
                 .send();
-
+                console.log("Enviado");
+                
                 //Comprobamos si hay token de desarrollo
 
                        

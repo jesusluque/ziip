@@ -41,6 +41,7 @@
 - (void)cacheImagePubli:(NSString *)imageURLString {
     
     NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_PUBLI_URL, imageURLString ];
+    NSLog(@"url publi:%@",url_imagen);
     NSURL *imageURL = [NSURL URLWithString:url_imagen];
     // Generate a unique path to a resource representing the image you want
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

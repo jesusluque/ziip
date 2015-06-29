@@ -92,6 +92,9 @@
         
     };
     [reach startNotifier];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1  target:self  selector:@selector(checkChatConnection) userInfo:nil repeats:YES];
+    
 }
 
 
@@ -104,6 +107,13 @@
     }
 }
 
+
+- (void)checkChatConnection {
+
+    if (self.conectado == NO) {
+        [self conectarSocket];
+    }
+}
 
 - (void)conectarSocket {
     
@@ -141,6 +151,7 @@
 
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error; {
 
+    NSLog(@"Desconectado");
     self.conectado = NO;
     if (self.chatAbierto) {
         [self.chatViewController desactivaBotonSend];
@@ -335,9 +346,14 @@
 
 - (void)enviaMensaje:(NSMutableDictionary *)datos {
     
+    NSLog(@"Enviadno mensaje");
     self.lastMessageId = [NSNumber numberWithFloat:([self.lastMessageId intValue] + 1)];
     ChatMessage *message = (ChatMessage *)[NSEntityDescription insertNewObjectForEntityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext];
+    
+    
     message.to = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"to"]intValue]];
+    
+    
     message.tipo = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"type"]intValue]];
     message.text = [datos objectForKey:@"text"];
     /*
@@ -362,7 +378,12 @@
     }
      */
     message.from = self.myId;
+    NSLog(@"to %@",message.to);
+    NSLog(@"from %@",message.from);
+    NSLog(@"text %@",message.text);
+    
     message.fecha = [NSDate date];
+    NSLog(@"data %@",message.fecha);
     message.idMessage = self.lastMessageId;
     NSError *error;
     if (![self.managedObjectContext save:&error]) {

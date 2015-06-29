@@ -205,6 +205,10 @@
     
     NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(from=%@ or to=%@ ) and tipo=1",self.userId,self.userId]];
     self.listaMensajes = [CoreDataHelper searchObjectsForEntity:@"ChatMessage" withPredicate:itemPredicate andSortKey:@"idMessage" andSortAscending:NO andContext:self.managedObjectContext andLimit:MSG_POR_PAGINA*self.num_paginas];
+
+    //self.listaMensajes = [CoreDataHelper searchObjectsForEntity:@"ChatMessage" withPredicate:itemPredicate andSortKey:@"idMessage" andSortAscending:NO andContext:self.managedObjectContext];
+    //NSLog(@"num_mensajes:%ul",[self.listaMensajes count]);
+    
     NSString *fecha = @"";
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setLocale:[NSLocale systemLocale]];
@@ -687,6 +691,7 @@
 
 - (void) desactivaBotonSend{
     
+    NSLog(@"desconectamos el boton, enabled false");
     [self.btnEnviar setEnabled:NO];
     
 }
