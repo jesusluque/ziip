@@ -77,12 +77,21 @@ class Contactos(models.Model):
     fecha = models.DateTimeField(default=datetime.now)
     
     
-   
+class EnviosSMS(models.Model):
+    telefono = models.CharField(max_length=255)
+    texto = models.CharField(max_length=255)
+    fecha = models.DateTimeField(default=datetime.now)
+    enviado = models.BooleanField(default=False)
+    num_intentos = models.IntegerField(default=0)
+    fecha_ultimo_intento = models.DateTimeField(blank=True, null=True,)
+    fallido = models.BooleanField(default=False)
+    motivo_error = models.TextField()
+    
 
 
 
 
-"""
+""""
 class SolicitudesRegistro(models.Model):
     num_telefono = models.CharField(max_length=250)
     token = models.CharField(max_length=250)

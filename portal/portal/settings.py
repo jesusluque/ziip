@@ -26,6 +26,8 @@ EMAIL_HOST_USER="contacto@beyondthebox.eu"
 EMAIL_HOST_PASSWORD="b20contacto"
 EMAIL_USE_TLS=True
 
+QUEUE_DEFAULT = "celery"
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
