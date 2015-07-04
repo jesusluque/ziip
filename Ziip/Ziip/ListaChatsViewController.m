@@ -37,9 +37,7 @@
     if (self.abrirChatUsuario) {
         [self abrirChat:self.abrirChatUsuario];
         self.abrirChatUsuario=nil;
-        
     }
-
 }
 
 
@@ -77,6 +75,7 @@
                                              selector:@selector(toBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
+    
     
     
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
@@ -137,6 +136,14 @@
     
     self.conectar = YES;
     [self conectarSocket];
+    
+    if (self.abrirChatUsuario) {
+        [self abrirChat:self.abrirChatUsuario];
+        self.abrirChatUsuario=nil;
+    }
+
+    
+    
 }
 
 
