@@ -240,8 +240,18 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     NSLog(@"%@", userInfo);
+    
     NSDictionary *current = [userInfo objectForKey:@"aps"];
-    NSString *theAction = [current objectForKey:@"action"];;
+    NSDictionary *alert = [current objectForKey:@"alert"];
+    NSDictionary *args = [alert objectForKey:@"loc-args"];
+    NSString *theAction = [args objectForKey:@"action"];;
+    
+    NSLog(@"current: %@", current);
+    NSLog(@"alert: %@", alert);
+    NSLog(@"args: %@", args);
+    NSLog(@"theAction: %@", theAction);
+    
+    
     
     if ([theAction isEqualToString:@"newMessage"]) {
         if (application.applicationState == UIApplicationStateActive) {
