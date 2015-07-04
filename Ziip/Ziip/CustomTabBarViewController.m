@@ -67,13 +67,11 @@
 
 
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
-    NSLog(@"did selecte item");
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+
 }
 
--(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:      (UIViewController *)viewController
-{
-    NSLog(@"Selected view controller");
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController: (UIViewController *)viewController {
+
 }
 @end

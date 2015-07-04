@@ -18,13 +18,11 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"Enview did load");
 }
 
 
 -(void) pintaReciente {
     
-    NSLog(@"En pinta recientes");
     NSString *imagenTipo = @"";
     if ([[self.reciente objectForKey:@"tipo" ] isEqualToString:@"1"]) {
         self.tipoAccion.text = @"Anonimo";
@@ -40,8 +38,6 @@
     }
     
     [self.imgTipoAccion setImage:[UIImage imageNamed:imagenTipo]];
-    
-
     self.contacto_contacto.text = [self.reciente objectForKey:@"contacto1_contacto"];
     self.contacto_nombre.text = [self.reciente objectForKey:@"contacto1_nombre"];
     self.contacto2_contacto.text = [self.reciente objectForKey:@"contacto2_contacto"];

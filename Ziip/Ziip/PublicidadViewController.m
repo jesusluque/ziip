@@ -64,7 +64,6 @@
 
 -(void) cambiaPublicidad: ( UIView *) vista {
     
-
     //seleccionamos la publicidad.
     NSDictionary *publi = [self seleccionaPublicidad];
     
@@ -96,10 +95,7 @@
                 [boton setImage:img forState:UIControlStateNormal];
                 boton.tag = [[publi objectForKey:@"id"] intValue];
                 [boton addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-                
                 [vista addSubview:boton];
-                
-                
             });
         });
     }

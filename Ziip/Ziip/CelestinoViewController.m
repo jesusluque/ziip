@@ -128,7 +128,6 @@
 
 -(void) recibeDatos:(NSDictionary *)datos {
     
-    NSLog(@"%@",datos);
     if ([[datos objectForKey:@"resource"] isEqualToString:@"sendCelestino"]) {
         
         UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

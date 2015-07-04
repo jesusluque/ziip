@@ -61,7 +61,6 @@
     [super viewDidAppear:animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *numberAutologin = [defaults objectForKey:@"autologin"];
-    NSLog(@"numberAutoLogin:%@",numberAutologin);
     if ([numberAutologin boolValue]) {
         [self performSegueWithIdentifier:@"segue_principal" sender: self];
     }
@@ -200,7 +199,6 @@
             NSString *old_usuario = [defaults objectForKey:@"user"];
             
             if (![old_usuario isEqualToString:self.txtUsuario.text]){
-                NSLog(@"usuario distinto: %@",old_usuario);
                 //y limpiamos la base de datos
                 [CoreDataHelper deleteAllObjectsForEntity:@"LastsMessages" andContext:self.managedObjectContext];
                 [CoreDataHelper deleteAllObjectsForEntity:@"ChatMessage" andContext:self.managedObjectContext];
