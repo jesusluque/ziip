@@ -80,7 +80,7 @@
             [parametros addObject:@"pushToken"];
             [valores addObject:[defaults objectForKey:@"pushToken"]];
             [parametros addObject:@"device"];
-            [valores addObject:[defaults objectForKey:@"ios"]];
+            [valores addObject:@"ios"];
         }
         
         
