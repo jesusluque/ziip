@@ -41,7 +41,6 @@
 
 -(void) recibeDatos:(NSDictionary *)datos {
     
-    NSLog(@"%@",datos);
     if ([[datos objectForKey:@"resource"] isEqualToString:@"sendConecta"]) {
         
         UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -49,9 +48,7 @@
         CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.confirmacionViewController.view.frame = frame;
         self.confirmacionViewController.delegate = self;
-        
-        
-        
+
         NSDictionary *dict_tipo = [[NSDictionary alloc] initWithObjectsAndKeys:@"2",@"id", nil];
         
         NSArray *parametros = [[NSArray alloc] initWithObjects:@"cabecera",@"texto", @"tipo", nil];

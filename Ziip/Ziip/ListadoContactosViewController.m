@@ -77,25 +77,13 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"en ");
     NSDictionary *contacto = [self.listaContactos objectAtIndex:indexPath.row];
-    NSLog(@"%@",contacto);
     NSArray *controllers = [self.tabBarController viewControllers];
     UINavigationController *navigation = [controllers objectAtIndex:3];
-    
-    
     NSArray *controllers_nav = [navigation viewControllers];
-    
     ListaChatsViewController *lista_chats = [controllers_nav objectAtIndex:0];
-    
-    
     lista_chats.abrirChatUsuario=contacto;
-     
-    
-    
-    [self.tabBarController setSelectedIndex:3];
-    
-    
+    [self.tabBarController setSelectedIndex:3]; 
 }
 
 

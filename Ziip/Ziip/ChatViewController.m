@@ -26,11 +26,13 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden=YES;
     self.num_paginas=1;
+    /*
     NSString *reqSysVer = @"7.0";
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+        //self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+    */
     self.fondo.image = [UIImage imageNamed:@"chat_bg"];
     AppDelegate *delegado = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.managedObjectContext = delegado.managedObjectContext;
@@ -108,6 +110,7 @@
 
 - (void) montaCabecera {
     
+    /*
     NSString *reqSysVer = @"7.0";
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     bool is_ios7;
@@ -156,6 +159,7 @@
     [vista addSubview:nombre];
 
     [self.navigationItem setTitleView:vista];
+    */
 }
 
 - (void) aPerfil {
@@ -651,13 +655,11 @@
 
 - (void)optionsMensaje:(ChatCell *)cell {
 
-    NSLog(@"En el delegate, optionsMensaje");
     if (self.segmentedOpen == YES){
         self.selCell.segmentedControl=NULL;
         [self.selCell setNeedsLayout];
 
     }
-
     self.selCell = cell;
     self.deleteMSg = cell.message;
     //Para ios 7 va bien, pero no en ios 8
@@ -691,9 +693,7 @@
 
 - (void) desactivaBotonSend{
     
-    NSLog(@"desconectamos el boton, enabled false");
     [self.btnEnviar setEnabled:NO];
-    
 }
 
 

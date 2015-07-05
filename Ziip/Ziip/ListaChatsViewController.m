@@ -15,6 +15,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Reachability.h"
 #import "Define.h"
+@import AudioToolbox;
+
 
 @implementation ListaChatsViewController
 
@@ -22,7 +24,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
-    NSLog(@"View did appear");
     self.chatAbierto = NO;
     [super viewDidAppear:animated];
 }
@@ -36,9 +37,7 @@
     if (self.abrirChatUsuario) {
         [self abrirChat:self.abrirChatUsuario];
         self.abrirChatUsuario=nil;
-        
     }
-
 }
 
 
@@ -76,6 +75,7 @@
                                              selector:@selector(toBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
+    
     
     
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
@@ -136,6 +136,14 @@
     
     self.conectar = YES;
     [self conectarSocket];
+    
+    if (self.abrirChatUsuario) {
+        [self abrirChat:self.abrirChatUsuario];
+        self.abrirChatUsuario=nil;
+    }
+
+    
+    
 }
 
 
@@ -146,12 +154,8 @@
 }
 
 
-
-
-
 - (void)socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error; {
 
-    NSLog(@"Desconectado");
     self.conectado = NO;
     if (self.chatAbierto) {
         [self.chatViewController desactivaBotonSend];
@@ -346,14 +350,9 @@
 
 - (void)enviaMensaje:(NSMutableDictionary *)datos {
     
-    NSLog(@"Enviadno mensaje");
     self.lastMessageId = [NSNumber numberWithFloat:([self.lastMessageId intValue] + 1)];
     ChatMessage *message = (ChatMessage *)[NSEntityDescription insertNewObjectForEntityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext];
-    
-    
     message.to = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"to"]intValue]];
-    
-    
     message.tipo = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"type"]intValue]];
     message.text = [datos objectForKey:@"text"];
     /*
@@ -378,12 +377,8 @@
     }
      */
     message.from = self.myId;
-    NSLog(@"to %@",message.to);
-    NSLog(@"from %@",message.from);
-    NSLog(@"text %@",message.text);
-    
+
     message.fecha = [NSDate date];
-    NSLog(@"data %@",message.fecha);
     message.idMessage = self.lastMessageId;
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
@@ -438,6 +433,8 @@
         [self recMsg:packet.args];
     } else if ([packet.name isEqualToString:@"newMsg"]) {
         self.notifica = YES;
+        [self suena];
+        
         datos = [packet.args objectAtIndex:0];
         [self newMsg:datos];
     } else if ([packet.name isEqualToString:@"readMsg"]) {
@@ -454,7 +451,7 @@
 
 
 - (void)getUserInfo:(NSArray *)data {
-    NSLog(@"El user info");
+
     NSDictionary *usuario = [data objectAtIndex:0];
     NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"userId=%@", [usuario objectForKey:@"id"]]];
     NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:itemPredicate andSortKey:@"userId" andSortAscending:false andContext:self.managedObjectContext];
@@ -476,24 +473,14 @@
         NSDictionary *userInfo = [[NSDictionary alloc]initWithObjects:[[NSArray alloc] initWithObjects:@"datos", @"chatOther", nil] forKeys:[[NSArray alloc] initWithObjects:@"data", @"type", nil]];
         [MPNotificationView notifyWithText:last.userName detail:last.text image:scaledImage andDuration:5.0f andUserInfo:userInfo];
     }
-    
-    
     if (self.chatAbierto) {
         //if ([last.userId isEqualToString:self.openUserId]) {
         if ([[last.userId stringValue]isEqualToString:self.openUserId]){
-                
-            
-            
             self.chatViewController.ultimoMensaje = last;
             [self.chatViewController montaCabecera];
         }
-         
-        
-        
     }
     [self.myTableView reloadData];
-    
-
 }
 
 
@@ -520,7 +507,6 @@
         if(lastId) {
             lastMsg = [lastId stringValue];
         }
-         NSLog(@"En el login, el ultimo id es:%@",lastMsg);
 
         NSArray *valores = [[NSArray alloc] initWithObjects:lastMsg, nil];
         NSArray *parametros = [[NSArray alloc] initWithObjects:@"lastMsg", nil];
@@ -540,27 +526,19 @@
     if ([listaMensajes count] > 0) {
         ChatMessage *msg = [listaMensajes objectAtIndex:0];
         msg.serverId = [datos objectForKey:@"serverId"];
-        
-        
+
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSNumber *lastId = [defaults objectForKey:@"lastId"];
         
         if (lastId) {
-            NSLog(@"if last id");
             if (lastId < msg.serverId){
-                NSLog(@"las id es menor");
-
                 [defaults setObject:msg.serverId forKey:@"lastId"];
             }
         } else {
-            NSLog(@"el el else");
             [defaults setObject:msg.serverId forKey:@"lastId"];
         }
         
         [defaults synchronize];
-        NSLog(@"el ultimo id es:%@",[defaults objectForKey:@"lastId"]);
-        
-        
         NSError *error;
         if (![self.managedObjectContext save:&error]) {
             NSLog(@"Failed to add new data with error: %@", [error domain]);
@@ -590,20 +568,13 @@
 - (void)newMsg:(NSDictionary *)datos {
     
     self.lastMessageId = [NSNumber numberWithFloat:([self.lastMessageId intValue] + 1)];
-    
-    
-    
     ChatMessage *message = (ChatMessage *)[NSEntityDescription insertNewObjectForEntityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext];
     
     message.tipo = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"type"]intValue]];
-    
     if (message.tipo.intValue == 1) {
-        
         message.text = [datos objectForKey:@"text"];
     }
-    
     message.to = [[NSNumber alloc] initWithInt:[[datos objectForKey:@"destination"]intValue]];
-    
     message.from =  [[NSNumber alloc] initWithInt:[[datos objectForKey:@"from"]intValue]];
     message.idMessage = self.lastMessageId;
     if ([[datos objectForKey:@"readed"]intValue] == 1) {
@@ -615,9 +586,6 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss z"];
     message.fecha =  [dateFormat dateFromString:fecha];
     message.serverId = [datos objectForKey:@"serverId"];
-    
-    
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *lastId = [defaults objectForKey:@"lastId"];
     
@@ -630,10 +598,6 @@
     }
     
     [defaults synchronize];
-    NSLog(@"el ultimo id es:%@",[defaults objectForKey:@"lastId"]);
-    
-    
-    
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Failed to add new data with error: %@", [error domain]);
@@ -823,21 +787,17 @@
 }
 
 - (void) abrirChat:(NSDictionary *) usuario{
-    
-    NSLog(@"Abrimos chat: %@",usuario);
-    
+
     NSPredicate *itemPredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"userId=%@",  [usuario objectForKey:@"id"]]];
     NSArray *listaMensajes = [CoreDataHelper searchObjectsForEntity:@"LastsMessages" withPredicate:itemPredicate andSortKey:@"userId" andSortAscending:false andContext:self.managedObjectContext];
     
     LastsMessages *last;
-    
-    NSLog(@"listaMensajes: %@",listaMensajes);
-    
+
     if ([listaMensajes count]==0) {
 
         last = (LastsMessages *)[NSEntityDescription insertNewObjectForEntityForName:@"LastsMessages" inManagedObjectContext:self.managedObjectContext];
         last.userId = [usuario objectForKey:@"id"];
-        NSLog(@"abrimos chat, sin ningun last message");
+
         NSMutableDictionary *user_data = [[NSMutableDictionary alloc]init];
         [user_data setObject:[usuario objectForKey:@"id"] forKey:@"id"];
         [self.miSocket sendEvent:@"getUserInfo" withData:user_data];
@@ -855,6 +815,16 @@
 }
 
 
+
+-(void) suena {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"sonido" ofType:@"mp3"];
+    NSURL *pathUrl = [NSURL fileURLWithPath:path];
+    SystemSoundID audioEffect;
+    AudioServicesCreateSystemSoundID((__bridge  CFURLRef) pathUrl,&audioEffect);
+    AudioServicesPlaySystemSound(audioEffect);
+    
+}
 
 
 

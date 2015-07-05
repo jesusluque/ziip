@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "PublicidadViewController.h"
+#import "ListaChatsViewController.h"
 
 @interface AppDelegate ()
 
@@ -88,7 +89,6 @@
     newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSLog(@"registramos %@",newToken);
     [defaults setObject:newToken forKey:@"pushToken"];
     [defaults synchronize];
 }
@@ -211,6 +211,7 @@
     return _persistentStoreCoordinator;
 }
 
+
 - (void)saveContext {
     
     NSError *error = nil;
@@ -224,11 +225,6 @@
 }
 
 
-
-
-
-
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     // *********************************************************************************************************
@@ -239,6 +235,49 @@
     self.longitudActual = newLocation.coordinate.longitude;
     self.latitudActual = newLocation.coordinate.latitude;
     
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    NSLog(@"%@", userInfo);
+    
+    NSDictionary *current = [userInfo objectForKey:@"aps"];
+    NSDictionary *alert = [current objectForKey:@"alert"];
+    NSDictionary *args = [alert objectForKey:@"loc-args"];
+    NSString *theAction = [args objectForKey:@"action"];;
+    
+    NSLog(@"current: %@", current);
+    NSLog(@"alert: %@", alert);
+    NSLog(@"args: %@", args);
+    NSLog(@"theAction: %@", theAction);
+    
+    
+    
+    if ([theAction isEqualToString:@"newMessage"]) {
+        if (application.applicationState == UIApplicationStateActive) {
+            //Si esta activa
+        } else {
+            //No esta activa.
+            NSDictionary *alert = [[userInfo objectForKey:@"aps" ]objectForKey:@"alert" ];
+            NSString *from = [[alert objectForKey:@"loc-args"] objectForKey:@"from" ];
+
+            NSLog(@"%@",from);
+            
+            NSMutableDictionary *contacto = [[NSMutableDictionary alloc]initWithObjectsAndKeys: from,@"id",nil];
+            NSLog(@"%@",contacto);
+            
+            if (self.tabBarController !=nil) {
+                NSArray *controllers = [self.tabBarController viewControllers];
+                UINavigationController *navigation = [controllers objectAtIndex:3];
+                NSArray *controllers_nav = [navigation viewControllers];
+                ListaChatsViewController *lista_chats = [controllers_nav objectAtIndex:0];
+                lista_chats.abrirChatUsuario=contacto;
+                [self.tabBarController setSelectedIndex:3];
+            }
+            
+        }
+
+    }
 }
 
 

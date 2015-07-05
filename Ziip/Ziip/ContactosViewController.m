@@ -225,9 +225,7 @@
             self.contactoSeleccionado.email = strContacto;
         }
     }
-    NSLog(@"accion:%@",self.accion);
-    
-    
+
     if ([self.accion isEqualToString:@"anonimo"]) {
         [self performSegueWithIdentifier:@"mensaje_anonimo_segue" sender:nil];
     } else if ([self.accion isEqualToString:@"conecta"]) {
@@ -312,15 +310,10 @@
 - (void)cargarLista: (NSString *)key {
     
     NSString *keySearch = [[NSString alloc] initWithFormat:@"*%@*",key];
-    
     if ([key isEqualToString:@""]) {
-        
         self.listaPersonasFinal = self.listaPersonas;
-        
     } else {
-        
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"fullName Like[cd] %@ ", keySearch];
-        NSLog(@"%@",predicate);
         self.listaPersonasFinal = [self.listaPersonas filteredArrayUsingPredicate:predicate];
     }
     [self.myTableView reloadData];
@@ -328,12 +321,11 @@
 
 
 -(IBAction) salirBuscar {
-    NSLog(@"Salir del buscar");
+
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal {
     
-    NSLog(@"disable automatic");
     return NO;
 }
 

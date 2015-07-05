@@ -16,8 +16,10 @@
 @implementation ZiipViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.miDelegado.tabBarController = self.tabBarController;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -16,8 +16,6 @@
     
     [super viewDidLoad];
     self.listaContactos = [[NSMutableArray alloc] initWithObjects: nil];
-    
-    NSLog(@"view did load de detalle de contactos");
 }
 
 - (void) recargaTableView {
@@ -27,7 +25,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [self.listaContactos count];
-    
 }
 
 
@@ -41,7 +38,6 @@
     }
     cell.nombre.text = contacto;
     return cell;
-    
 }
 
 

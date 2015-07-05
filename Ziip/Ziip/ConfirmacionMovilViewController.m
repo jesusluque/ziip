@@ -64,15 +64,11 @@
 
                 [self performSegueWithIdentifier:@"segue_principal" sender: self];
             } else {
-                NSLog(@"Gurado telefono: %@",self.telefono);
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:self.telefono forKey:@"telefono"];
                 [defaults synchronize];
                 [self.navigationController popViewControllerAnimated:YES];
             }
-            
-            
-            
         } else  {
             UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             self.confirmacionViewController = (ConfirmacionViewController *)[myStoryBoard instantiateViewControllerWithIdentifier:@"ConfirmacionViewController"];

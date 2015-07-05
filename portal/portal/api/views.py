@@ -9,6 +9,7 @@ import time
 from portal.settings import *
 import httplib,urllib
 from django.template.loader import render_to_string
+from portal.core.celery_tasks import *
    
     
 CARACTERES_TOKEN = 'abcdefghijklmnopqrstuvwxyz1234567890'
@@ -58,9 +59,12 @@ def generaCodigoSolicitud():
 
 def enviaSmsCodigo(telefono,codigo,id_alta):
     mensaje="Su codigo para Ziip es: "+codigo
-    print codigo
-    id_mensaje= 10000+id_alta
-    enviaSMS(telefono,mensaje, id_mensaje)
+    
+    envio = EnviosSMS()
+    envio.telefono = limpiaTelefono(telefono)
+    envio.texto = mensaje
+    envio.save()
+    enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
         
 
 
@@ -439,50 +443,65 @@ def getRecientes(request):
     return HttpResponse(response)
 
 
- 
-
 def enviaPeticion(peticion):
     
 
     if peticion.tipo == TIPO_PETICION_ANONIMO:
         if isTelefono(peticion.contacto_contacto):
-            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.id)
-            enviaSMS(peticion.contacto_contacto,mensaje, peticion.id)
+            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.codigo)
+            
+            envio = EnviosSMS()
+            envio.telefono = limpiaTelefono(peticion.contacto_contacto)
+            envio.texto = mensaje
+            envio.save()
+            enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
+
         else:
-            data = {"codigo_peticion":peticion.id,"mensaje_anonimo":peticion.mensaje_anonimo}
+            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
-            enviaMail(peticion.contacto_contacto,asunto,rendered)
+            enviaMail.apply_async(args=[peticion.contact2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
     
     elif peticion.tipo == TIPO_PETICION_CONECTA:
         if isTelefono(peticion.contacto_contacto):
             mensaje = "Te ha invitado a usar nuestra aplicación. Primera plataforma de contacto anónima. http://ziip.es"
-            enviaSMS(peticion.contacto_contacto,mensaje,peticion.id)
+            envio = EnviosSMS()
+            envio.telefono = limpiaTelefono(peticion.contacto_contacto)
+            envio.texto = mensaje
+            envio.save()
+            enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
         else:
             data = {}
             rendered = render_to_string("mails/conecta.html", data)
             asunto = "Invitación a ziip.es "
-            enviaMail(peticion.contacto_contacto,asunto,rendered)
+            enviaMail.apply_async(args=[peticion.contact2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
         
     elif peticion.tipo == TIPO_PETICION_CELESTINO:
         if isTelefono(peticion.contacto_contacto):
-            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.id)
-            enviaSMS(peticion.contacto_contacto,mensaje,peticion.id)
+            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.codigo)
+            envio = EnviosSMS()
+            envio.telefono = limpiaTelefono(peticion.contacto_contacto)
+            envio.texto = mensaje
+            envio.save()
+            enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
         else:
-            data = {"codigo_peticion":peticion.id,"mensaje_anonimo":peticion.mensaje_anonimo}
+            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
-            enviaMail(peticion.contacto_contacto,asunto,texto)
+            enviaMail.apply_async(args=[peticion.contact2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
             
         if isTelefono(peticion.contacto2_contacto):
-            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.id)
-            enviaSMS(peticion.contacto2_contacto,mensaje,peticion.id)
+            mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.codigo)
+            envio = EnviosSMS()
+            envio.telefono = limpiaTelefono(peticion.contacto2_contacto)
+            envio.texto = mensaje
+            envio.save()
+            enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
         else:
-            data = {"codigo_peticion":peticion.id,"mensaje_anonimo":peticion.mensaje_anonimo}
+            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
-            enviaMail(peticion.contacto2_contacto,asunto,texto)
-        
+            enviaMail.apply_async(args=[peticion.contacto2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
     
     
 
@@ -503,6 +522,7 @@ def enviaPeticion(peticion):
     peticion.mensaje = request.POST["mensaje"]
     peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
     """
+    
 def isTelefono(contacto):
     
     telefono = limpiaTelefono(contacto)
@@ -514,30 +534,6 @@ def isTelefono(contacto):
     
 def limpiaTelefono(telefono):
     return telefono.replace("+34","").replace(" ","")
-    
-    
-def enviaSMS(telefono,mensaje,id_mensaje):
-    
-    print "enviaSms"
-    auth_key="JzroaddoWbG4Ag6X8dZ80ts4AImVpbhZ"
-    str_from="Ziip"
-    url="api.smsarena.es"
-    params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':limpiaTelefono(telefono),'text':mensaje,"id":id_mensaje})
-    h1 = httplib.HTTPSConnection(url)
-    h1.request("GET", "/http/sms.php?"+params)
-    r1 = h1.getresponse()
-    print r1.status
-    data = r1.read()
-    print data
-
-
-def enviaMail(email,asunto,texto):
-    
-    data = {"content":texto}
-    rendered = render_to_string("mails/base.html", data)
-    msg = EmailMultiAlternatives(asunto, "", MAIL_FROM, [email])
-    msg.attach_alternative(rendered, "text/html")
-    msg.send()
     
     
     

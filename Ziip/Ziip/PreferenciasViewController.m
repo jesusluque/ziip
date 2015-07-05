@@ -42,13 +42,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    
     NSString *movil = [defaults objectForKey:@"telefono"];
-    
-    NSLog(@"movil:%@",movil);
     if (movil && ![movil isEqualToString:@""]) {
-        NSLog(@"No movil");
         self.movil.hidden=YES;
         self.editMovil.hidden=YES;
         self.telefono.text = movil;
@@ -58,7 +53,6 @@
         self.movil.hidden = NO;
         self.editMovil.hidden=NO;
         self.movil.text=@"";
-        
     }
 
 }
