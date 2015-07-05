@@ -16,10 +16,11 @@ var conf      = require('./config');
 //Conectamos al mysql
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : conf.mysqlHost,
-  user     : conf.mysqlUser,
-  password : conf.mysqlPass,
-  database : conf.mysqlDatabase,
+    host     : conf.mysqlHost,
+    user     : conf.mysqlUser,
+    password : conf.mysqlPass,
+    database : conf.mysqlDatabase,
+    charset  : 'utf8mb4',
 });
 
 fs = require('fs');
@@ -47,6 +48,7 @@ function handleDisconnect(connection) {
         user     : conf.mysqlUser,
         password : conf.mysqlPass,
         database : conf.mysqlDatabase,
+        charset  : 'utf8mb4',
     });
     handleDisconnect(connection);
     logger.emit('newEvent', 'Reconectamos', err);
