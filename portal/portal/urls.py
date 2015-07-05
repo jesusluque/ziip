@@ -10,6 +10,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('portal.api.urls')),
+    url(r'^', include('portal.web.urls')),
+    
     
     
 )+ (
