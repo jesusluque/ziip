@@ -3,6 +3,7 @@
 from django.db import models
 from datetime import datetime, date
 from portal.core.constantes import *
+import random
 
 CARACTERES_TOKEN = 'abcdefghijklmnopqrstuvwxyz1234567890'
 NUM_CARACTERES_CODIGO_PETICION = 9

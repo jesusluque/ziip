@@ -7,6 +7,7 @@ from celery.task import task
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+import httplib,urllib
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')

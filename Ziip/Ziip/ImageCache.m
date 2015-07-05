@@ -25,6 +25,7 @@
 
 	if (![[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
 
+        NSLog(@"se pide imagen con url: %@",imageURL);
 		NSData *data = [[NSData alloc] initWithContentsOfURL:imageURL];
 		UIImage *image = [[UIImage alloc] initWithData:data];
 		if ([imageURLString rangeOfString:@".png" options:NSCaseInsensitiveSearch].location != NSNotFound) {
@@ -47,7 +48,7 @@
     NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
-        
+        NSLog(@"se pide imagen con url: %@",imageURL);
         NSData *data = [[NSData alloc] initWithContentsOfURL:imageURL];
         UIImage *image = [[UIImage alloc] initWithData:data];
         if ([imageURLString rangeOfString:@".png" options:NSCaseInsensitiveSearch].location != NSNotFound) {

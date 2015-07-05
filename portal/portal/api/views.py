@@ -9,7 +9,8 @@ import time
 from portal.settings import *
 import httplib,urllib
 from django.template.loader import render_to_string
-   
+from portal.core.celery_tasks import *
+
     
 CARACTERES_TOKEN = 'abcdefghijklmnopqrstuvwxyz1234567890'
 NUM_CARACTERES_TOKEN = 20
