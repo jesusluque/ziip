@@ -82,6 +82,7 @@
 		9F346CF41B35B9BF00986863 /* desConectarB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F346CEE1B35B9BF00986863 /* desConectarB@3x.png */; };
 		9F8B37001B482E1E00114D82 /* sonido.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B36FF1B482E1E00114D82 /* sonido.mp3 */; };
 		9F8B37021B482F7300114D82 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8B37011B482F7200114D82 /* AudioToolbox.framework */; };
+		9F8B37041B497D6F00114D82 /* sonido2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B37031B497D6F00114D82 /* sonido2.mp3 */; };
 		9FA184951AF4D832009910CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA184941AF4D832009910CD /* main.m */; };
 		9FA184981AF4D832009910CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA184971AF4D832009910CD /* AppDelegate.m */; };
 		9FA1849B1AF4D832009910CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA1849A1AF4D832009910CD /* ViewController.m */; };
@@ -444,6 +445,7 @@
 		9F346CEE1B35B9BF00986863 /* desConectarB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "desConectarB@3x.png"; sourceTree = "<group>"; };
 		9F8B36FF1B482E1E00114D82 /* sonido.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sonido.mp3; sourceTree = "<group>"; };
 		9F8B37011B482F7200114D82 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9F8B37031B497D6F00114D82 /* sonido2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sonido2.mp3; sourceTree = "<group>"; };
 		9FA1848F1AF4D832009910CD /* Ziip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ziip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA184931AF4D832009910CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FA184941AF4D832009910CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -863,6 +865,7 @@
 			isa = PBXGroup;
 			children = (
 				9F8B36FF1B482E1E00114D82 /* sonido.mp3 */,
+				9F8B37031B497D6F00114D82 /* sonido2.mp3 */,
 				9F346CE91B35B9BE00986863 /* desConectarA.png */,
 				9F346CEA1B35B9BF00986863 /* desConectarA@2x.png */,
 				9F346CEB1B35B9BF00986863 /* desConectarA@3x.png */,
@@ -1564,6 +1567,7 @@
 				EAF34DA41B1C5B45003127FF /* jNuevoUsuarioA.png in Resources */,
 				EAF34DBF1B1C5EFC003127FF /* jcancelarB.png in Resources */,
 				9F0D48661B08A244004421F4 /* ajustesA.png in Resources */,
+				9F8B37041B497D6F00114D82 /* sonido2.mp3 in Resources */,
 				9F0D48841B08B65F004421F4 /* cancelarB.png in Resources */,
 				9F0D487F1B08B632004421F4 /* enviarA.png in Resources */,
 				EAF34DB51B1C5C36003127FF /* jenviarB@3x.png in Resources */,

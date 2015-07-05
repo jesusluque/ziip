@@ -15,6 +15,10 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(vistaPulsada)];
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapRecognizer];
 }
 
 
@@ -151,6 +155,11 @@
 
 -(void) respuestaUsuario:(bool)respuesta {
     
+}
+
+- (void) vistaPulsada {
+    
+    [self.view endEditing:YES];
 }
 
 @end
