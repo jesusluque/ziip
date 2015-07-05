@@ -7,6 +7,7 @@ from celery.task import task
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+import httplib,urllib
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
@@ -28,9 +29,9 @@ def prueba():
 def enviaSMS(envio):
     
     auth_key="JzroaddoWbG4Ag6X8dZ80ts4AImVpbhZ"
-    str_from="Ziip"
+    str_from="Ziip-es"
     url="api.smsarena.es"
-    params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':envio.telefono,'text':envio.texto,"id":envio.pk,"coding":1})
+    params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':envio.telefono,'text':envio.texto,"id":envio.pk})
     
     h1 = httplib.HTTPSConnection(url)
     h1.request("GET", "/http/sms.php?"+params)
