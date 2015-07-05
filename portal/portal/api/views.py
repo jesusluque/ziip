@@ -460,7 +460,7 @@ def enviaPeticion(peticion):
             data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
-            enviaMail.apply_async(args=[peticion.contact2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
+            enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
     
     elif peticion.tipo == TIPO_PETICION_CONECTA:
         if isTelefono(peticion.contacto_contacto):
@@ -474,7 +474,7 @@ def enviaPeticion(peticion):
             data = {}
             rendered = render_to_string("mails/conecta.html", data)
             asunto = "Invitación a ziip.es "
-            enviaMail.apply_async(args=[peticion.contact2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
+            enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
         
     elif peticion.tipo == TIPO_PETICION_CELESTINO:
         if isTelefono(peticion.contacto_contacto):
@@ -488,7 +488,7 @@ def enviaPeticion(peticion):
             data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
-            enviaMail.apply_async(args=[peticion.contact2_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
+            enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
             
         if isTelefono(peticion.contacto2_contacto):
             mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.codigo)

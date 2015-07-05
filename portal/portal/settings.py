@@ -48,6 +48,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     '/Users/marodriguez/git/ziip/portal/portal/templates',
     '/var/www/sitios/ziip/portal/portal/templates',
+    '/Users/manuthema/git/ziip/portal/portal/templates',
 )
 
 

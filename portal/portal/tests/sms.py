@@ -13,14 +13,16 @@ from api.views import *
 
 mensaje="Esto es una prueba de ziip con acentos áéíóú "
 telefono = "616927956"
-""" 
+ 
 envio = EnviosSMS()
 envio.telefono = limpiaTelefono(telefono)
 envio.texto = mensaje
 envio.save()
-"""
-envio = EnviosSMS.objects.get(pk=5)
+
+#envio = EnviosSMS.objects.get(pk=5)
+print envio.pk
 
 
-enviaSMS(envio)
+enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
+
 
