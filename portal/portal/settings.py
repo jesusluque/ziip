@@ -63,7 +63,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ["ziip.marodriguez.com"]
+ALLOWED_HOSTS = ["ziip.marodriguez.com","api.ziip.es"]
 
 
 

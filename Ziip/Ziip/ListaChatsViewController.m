@@ -567,6 +567,7 @@
 
 - (void)newMsg:(NSDictionary *)datos {
     
+    NSLog(@"newMSg: %@",datos);
     self.lastMessageId = [NSNumber numberWithFloat:([self.lastMessageId intValue] + 1)];
     ChatMessage *message = (ChatMessage *)[NSEntityDescription insertNewObjectForEntityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext];
     
