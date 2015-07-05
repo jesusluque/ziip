@@ -43,7 +43,6 @@
 
 - (void) recibeDatos:(NSDictionary *)datos {
     
-    NSLog(@"datos:%@",datos);
     if ([[datos objectForKey:@"resource"] isEqualToString:@"getRecientes"]) {
         
         self.arrayRecientes = [datos objectForKey:@"recientes"];
@@ -112,7 +111,6 @@
         DetalleRecientesViewController *accionesContactosViewController = (DetalleRecientesViewController *)[segue destinationViewController];
         accionesContactosViewController.reciente = recienteSeleccionado;
         [accionesContactosViewController pintaReciente];
-        NSLog(@"Fin prepare for segue");
     }
 }
 

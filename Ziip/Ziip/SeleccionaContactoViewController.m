@@ -35,6 +35,13 @@
         mensaje = @"Selecciona a la segunda persona que conoces";
     }
     self.enviandoA.text = mensaje;
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(vistaPulsada)];
+    [tapRecognizer setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tapRecognizer];
+    
+    
 }
 
 
@@ -125,5 +132,11 @@
 
 -(void) respuestaUsuario:(bool)respuesta {
     
+}
+
+
+- (void) vistaPulsada {
+    
+    [self.view endEditing:YES];
 }
 @end

@@ -22,6 +22,7 @@
 @property(nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic,retain) PublicidadViewController *publicidadViewController;
 @property (nonatomic,retain) UIViewController *loginViewController;
+@property (nonatomic,retain) UITabBarController *tabBarController;
 
 @property(nonatomic) double latitudActual;
 @property(nonatomic) double longitudActual;

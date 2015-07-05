@@ -17,8 +17,7 @@
 - (void)cacheImage:(NSString *)imageURLString {
     
     NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_URL, imageURLString ];
-    
-    NSLog(@"%@",url_imagen);
+
 	NSURL *imageURL = [NSURL URLWithString:url_imagen];
 	// Generate a unique path to a resource representing the image you want
 	NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -41,7 +40,7 @@
 - (void)cacheImagePubli:(NSString *)imageURLString {
     
     NSString *url_imagen = [[NSString alloc] initWithFormat:@"%@%@", IMAGENES_PUBLI_URL, imageURLString ];
-    NSLog(@"url publi:%@",url_imagen);
+
     NSURL *imageURL = [NSURL URLWithString:url_imagen];
     // Generate a unique path to a resource representing the image you want
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -85,24 +84,24 @@
 
 - (UIImage *)getCachedImage:(NSString *)imageURLString {
     
-	NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
-	UIImage *image = nil;
-	if ([[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
-		image = [UIImage imageWithContentsOfFile:uniquePath];                          // this is the cached image
-	} else {
-		// get a new one
-		[self cacheImage:imageURLString];
-        //Y volvemos a comprobar si existe, porque ha podido fallar la descarga.
+    UIImage *image = nil;
+    if (![imageURLString isEqualToString:@""]) {
+        NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *uniquePath = [NSString stringWithFormat:@"%@/%@", docDir, imageURLString];
+        
         if ([[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
-            image = [UIImage imageWithContentsOfFile:uniquePath];
+            image = [UIImage imageWithContentsOfFile:uniquePath];                          // this is the cached image
         } else {
+            // get a new one
+            [self cacheImage:imageURLString];
+            //Y volvemos a comprobar si existe, porque ha podido fallar la descarga.
+            if ([[NSFileManager defaultManager] fileExistsAtPath:uniquePath]) {
+                image = [UIImage imageWithContentsOfFile:uniquePath];
+            } else {
+            }
         }
-	}
-
-	return image;
+    } 	return image;
 }
-
 
 
 - (UIImage *)getCachedImagePubli:(NSString *)imageURLString {

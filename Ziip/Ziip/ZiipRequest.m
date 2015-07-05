@@ -67,11 +67,11 @@
             
             [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]  completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 [self.delegate hideLoading];
-                NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"str_Data: %@",str_data);
+                //NSString *str_data = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                //NSLog(@"str_Data: %@",str_data);
                 if (error == nil) {
                     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-                    NSLog(@"resultado: %@",result);
+                    //NSLog(@"resultado: %@",result);
 
                     [self.delegate recibeDatos:result];
                 } else {
@@ -89,7 +89,6 @@
 }
 
 
-
 - (void) send:(NSString *)action tipo_peticion:(NSString* )tipo_peticion withParams:(NSMutableArray *)parametros andValues:(NSMutableArray *)valores imagenes:(NSArray *)imagenes enviarToken:(bool)enviarToken {
     
     Reachability* internetReachable = [Reachability reachabilityForInternetConnection];
@@ -99,7 +98,7 @@
         
         
         NSString *completeUrl = [[[NSString alloc] initWithFormat:@"%@%@",CONEXION_URL,action]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"%@",completeUrl);
+        //NSLog(@"%@",completeUrl);
         if ([parametros count] ==[valores count]) {
             
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc]  initWithURL:[NSURL URLWithString:completeUrl]];
@@ -113,7 +112,6 @@
             NSMutableData *body = [NSMutableData data];
             
             for (UIImage *imagen in imagenes ){
-                NSLog(@"enviando imagen");
                 
                 NSData* fileData = UIImageJPEGRepresentation (imagen,1);
                 [body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -124,8 +122,8 @@
             }
             
             int i=0;
-            NSString *parametros_procesados = [self procesa_parametros:parametros conValores:valores ];
-            NSLog(@"parametros:%@",parametros_procesados);
+            //NSString *parametros_procesados = [self procesa_parametros:parametros conValores:valores ];
+           // NSLog(@"parametros:%@",parametros_procesados);
             unsigned long numItems=parametros.count;
             for (i=0;i<numItems; i++) {
                 

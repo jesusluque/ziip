@@ -80,6 +80,8 @@
 		9F346CF21B35B9BF00986863 /* desConectarB.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F346CEC1B35B9BF00986863 /* desConectarB.png */; };
 		9F346CF31B35B9BF00986863 /* desConectarB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F346CED1B35B9BF00986863 /* desConectarB@2x.png */; };
 		9F346CF41B35B9BF00986863 /* desConectarB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F346CEE1B35B9BF00986863 /* desConectarB@3x.png */; };
+		9F8B37001B482E1E00114D82 /* sonido.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F8B36FF1B482E1E00114D82 /* sonido.mp3 */; };
+		9F8B37021B482F7300114D82 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8B37011B482F7200114D82 /* AudioToolbox.framework */; };
 		9FA184951AF4D832009910CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA184941AF4D832009910CD /* main.m */; };
 		9FA184981AF4D832009910CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA184971AF4D832009910CD /* AppDelegate.m */; };
 		9FA1849B1AF4D832009910CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA1849A1AF4D832009910CD /* ViewController.m */; };
@@ -440,6 +442,8 @@
 		9F346CEC1B35B9BF00986863 /* desConectarB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desConectarB.png; sourceTree = "<group>"; };
 		9F346CED1B35B9BF00986863 /* desConectarB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "desConectarB@2x.png"; sourceTree = "<group>"; };
 		9F346CEE1B35B9BF00986863 /* desConectarB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "desConectarB@3x.png"; sourceTree = "<group>"; };
+		9F8B36FF1B482E1E00114D82 /* sonido.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sonido.mp3; sourceTree = "<group>"; };
+		9F8B37011B482F7200114D82 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9FA1848F1AF4D832009910CD /* Ziip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ziip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA184931AF4D832009910CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FA184941AF4D832009910CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -722,6 +726,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F8B37021B482F7300114D82 /* AudioToolbox.framework in Frameworks */,
 				9F0460621B276A6400531A82 /* CoreLocation.framework in Frameworks */,
 				9FF6B39B1B14F4F4001DC1A4 /* iAd.framework in Frameworks */,
 				9F0D48541B0750AE004421F4 /* Foundation.framework in Frameworks */,
@@ -857,6 +862,7 @@
 		9F0D48581B077F09004421F4 /* imagenes */ = {
 			isa = PBXGroup;
 			children = (
+				9F8B36FF1B482E1E00114D82 /* sonido.mp3 */,
 				9F346CE91B35B9BE00986863 /* desConectarA.png */,
 				9F346CEA1B35B9BF00986863 /* desConectarA@2x.png */,
 				9F346CEB1B35B9BF00986863 /* desConectarA@3x.png */,
@@ -1101,6 +1107,7 @@
 		9FA184861AF4D832009910CD = {
 			isa = PBXGroup;
 			children = (
+				9F8B37011B482F7200114D82 /* AudioToolbox.framework */,
 				9F0460611B276A6400531A82 /* CoreLocation.framework */,
 				9FF6B39A1B14F4F4001DC1A4 /* iAd.framework */,
 				9F0D48531B0750AE004421F4 /* Foundation.framework */,
@@ -1522,6 +1529,7 @@
 				9FFDBB9D1B1B534800A3D395 /* recentB.png in Resources */,
 				9FFDBBAA1B1B5B4400A3D395 /* siguienteA@2x.png in Resources */,
 				9FFDBBB31B1B616100A3D395 /* editar.png in Resources */,
+				9F8B37001B482E1E00114D82 /* sonido.mp3 in Resources */,
 				EAF34DE41B1C61DF003127FF /* jconectaB@2x.png in Resources */,
 				9FBD00BE1AFA960A00346802 /* SVProgressHUD.bundle in Resources */,
 				9FEC6F181B0E5B12005C505D /* cancelar_small@3x.png in Resources */,
@@ -1765,8 +1773,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1781,13 +1789,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manuel Rodriguez Morales (6R665G2RY7)";
 				INFOPLIST_FILE = Ziip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1decc074-37f5-4791-8e18-430e0997d50d";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
