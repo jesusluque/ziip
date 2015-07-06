@@ -14,9 +14,19 @@ def base(request,rendered,seccion_activa):
     return HttpResponse(rendered)
     
 def home(request):
-    
-    
     data={}
     rendered = render_to_string("home.html",data)
+    return base(request,rendered,"home")
+    
+def legal(request):
+    texto = Textos.objects.get()
+    data={"texto":texto.aviso_legal}
+    rendered = render_to_string("textos.html",data)
+    return base(request,rendered,"home")
+    
+def privacidad(request):
+    texto = Textos.objects.get()
+    data={"texto":texto.privacidad}
+    rendered = render_to_string("textos.html",data)
     return base(request,rendered,"home")
     

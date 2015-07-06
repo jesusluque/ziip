@@ -94,6 +94,13 @@ class EnviosSMS(models.Model):
 class Textos(models.Model):
     aviso_legal = models.TextField()
     privacidad = models.TextField()
+    class Meta:
+        verbose_name="Texto"
+        verbose_name_plural = "Textos"
+        ordering = ['-id']
+        
+    def __unicode__(self):
+        return "Textos"
 
 
 """"
