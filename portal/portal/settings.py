@@ -49,6 +49,8 @@ TEMPLATE_DIRS = (
     '/Users/marodriguez/git/ziip/portal/portal/templates',
     '/var/www/sitios/ziip/portal/portal/templates',
     '/Users/manuthema/git/ziip/portal/portal/templates',
+    '/Users/manuthema/personal/ziip/portal/portal/templates',
+    
 )
 
 
@@ -70,6 +72,7 @@ ALLOWED_HOSTS = ["ziip.marodriguez.com","api.ziip.es"]
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

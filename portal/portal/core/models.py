@@ -91,6 +91,10 @@ class EnviosSMS(models.Model):
 
 
 
+class Textos(models.Model):
+    aviso_legal = models.TextField()
+    privacidad = models.TextField()
+
 
 """"
 class SolicitudesRegistro(models.Model):

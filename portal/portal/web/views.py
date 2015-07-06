@@ -15,6 +15,8 @@ def base(request,rendered,seccion_activa):
     
 def home(request):
     
-    rendered = "bla"
+    
+    data={}
+    rendered = render_to_string("home.html",data)
     return base(request,rendered,"home")
     
