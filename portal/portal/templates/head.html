@@ -7,7 +7,7 @@
     <header>
         <div class="container">
             <!-- Site Logo -->
-            <a href="index.php" class="site-logo">
+            <a href="/" class="site-logo">
                 <i class="gi gi-flash"></i> <strong>Ziip</strong>.es
             </a>
             <!-- Site Logo -->
@@ -22,7 +22,7 @@
                 <!-- END Menu Toggle -->
 
                 <!-- Main Menu -->
-                
+
                 <ul class="site-nav">
                     <!-- Toggles menu on small screens -->
                     <li class="visible-xs visible-sm">
@@ -35,12 +35,12 @@
                     <li>
                         <a>menu1</a>
                     </li>
-                        
+
                     <li>
                         <a href="url menu">menu</a>
-                        
+
                         <ul>
-                            
+
                             <li>
                                 <a href="url submenu">submenu</a>
                             </li>
@@ -50,10 +50,10 @@
                     </li>
                     -->
                     <li>
-                        <a href="login.php" class="btn btn-primary">Login</a>
+                        <a href="login" class="btn btn-primary">Login</a>
                     </li>
                     <li>
-                        <a href="signup.php" class="btn btn-success">Registro</a>
+                        <a href="registro" class="btn btn-success">Registro</a>
                     </li>
                 </ul>
 
@@ -63,3 +63,18 @@
         </div>
     </header>
     <!-- END Site Header -->
+    <!-- Media Container -->
+    <div class="media-container">
+        <!-- Intro -->
+        <section class="site-section site-section-light site-section-top">
+            <div class="container">
+                <h1 class="text-center animation-slideDown"> <strong>{{titulo}}</strong></h1>
+                <h2 class="h3 text-center animation-slideUp"><strong>{{subtitulo}}</strong></h2>
+            </div>
+        </section>
+        <!-- END Intro -->
+
+        <!-- Gmaps.js (initialized in js/pages/about.js), for more examples you can check out http://hpneo.github.io/gmaps/examples.html -->
+        <div id="gmap-top" class="media-map"></div>
+    </div>
+    <!-- END Media Container -->
