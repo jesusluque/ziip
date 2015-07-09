@@ -7,6 +7,7 @@ import hashlib
 from django.template.defaultfilters import register
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.shortcuts import redirect
 
 from portal.settings import *
 from portal.core.models import *
@@ -45,11 +46,13 @@ def doLogin(request):
         md5_pass = m.hexdigest()
         #Se debe comentar esta linea
         md5_pass = request.POST["password"]
-        lista_usuarios = Usuarios.objects.filter(email=request.POST["email"],password=request.POST["password"])
+        print request.POST
+        lista_usuarios = Usuarios.objects.filter(usuario=request.POST["email"],password=request.POST["password"])
     else:
         lista_usuarios=[]
-
+    print lista_usuarios
     if len(lista_usuarios)>0:
+        print "usuario ok"
         usuario = lista_usuarios[0]
         request.session['user_id'] = usuario.id
         #TODO el recordar, probar
