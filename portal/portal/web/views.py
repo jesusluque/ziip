@@ -52,6 +52,11 @@ def doLogin(request):
     if len(lista_usuarios)>0:
         usuario = lista_usuarios[0]
         request.session['user_id'] = usuario.id
+        #TODO el recordar, probar
+        if request.POST.has_key("recordar"):
+            print request.POST["recordar"]
+            request.session.set_expiry(60 * 60 * 24 * 30) #UN MES
+
 
         return redirect('/home')
     else:
@@ -83,7 +88,7 @@ def doAlta(request):
     datos={}
     if request.POST.has_key("username") and request.POST["username"]!="":
         datos["username"] = request.POST["username"]
-        lista_usuarios = Usuarios.objects.get(usuario=datos["username"])
+        lista_usuarios = Usuarios.objects.filter(usuario=datos["username"])
         if len(lista_usuarios)>0:
             errores.append("El username ya existe")
     else:
@@ -95,7 +100,7 @@ def doAlta(request):
         except ValidationError as e:
             errores.append("El email es incorrecto")
         else:
-            lista_usuarios = Usuarios.objects.get(email=datos["email"])
+            lista_usuarios = Usuarios.objects.filter(email=datos["email"])
             if len(lista_usuarios)>0:
                 errores.append("El email ya esta en uso")
     else:

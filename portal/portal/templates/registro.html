@@ -2,6 +2,18 @@
 <!-- Sign Up -->
 <section class="site-content site-section">
     <div class="container">
+        {%if errores %}
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
+                <div class="alert alert-warning">
+                    Se han encontrado los siguientes errores:
+                    {%for error in errores %}
+                        <br/>{{error}}
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+        {%endif%}
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
                 <!-- Sign Up Form -->
@@ -48,6 +60,21 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <label>Sexo</label>
+                                <label class="radio-inline" for="checkout-payment-paypal">
+                                    <input type="radio" id="sexo" name="sexo" value="1">Hombre
+                                </label>
+                                <label class="radio-inline" for="sexo">
+                                    <input type="radio" id="sexo" name="sexo" value="2"> Mujer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group form-actions">
                         <div class="col-xs-6">
                             <label class="switch switch-primary" data-toggle="tooltip" title="Acepto los terminos">
