@@ -66,10 +66,10 @@
                             <div class="input-group">
                                 <label>Sexo: </label>
                                 <label class="radio-inline" for="checkout-payment-paypal">
-                                    <input type="radio" id="sexo" name="sexo" value="1">Hombre
+                                    <input type="radio" id="sexo" name="sexo" value="1" {%ifequal datos.sexo "1" %}cheked {% endifequal %} >Hombre
                                 </label>
                                 <label class="radio-inline" for="sexo">
-                                    <input type="radio" id="sexo" name="sexo" value="2"> Mujer
+                                    <input type="radio" id="sexo" name="sexo" value="2" {%ifequal datos.sexo "2" %}cheked {% endifequal %}> Mujer
                                 </label>
                             </div>
                         </div>

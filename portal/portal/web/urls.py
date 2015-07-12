@@ -13,6 +13,12 @@ urlpatterns = patterns('',
 
     url(r'^legal$', 'portal.web.views.legal'),
     url(r'^privacidad$', 'portal.web.views.privacidad'),
+    url(r'^peticionPrivado$', 'portal.web.views.peticionPrivado'),
+    url(r'^aceptarContactoPeticion$', 'portal.web.views.aceptarContactoPeticion'),
+    url(r'^contactos$', 'portal.web.views.contactos'),
+
+
+
 
     url(r'^(?P<codigo>\w{9})$', 'portal.web.views.peticion'),
 

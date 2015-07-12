@@ -53,7 +53,6 @@ def doLogin(request):
         lista_usuarios = Usuarios.objects.filter(usuario=request.POST["email"],password=request.POST["password"])
     else:
         lista_usuarios=[]
-    print lista_usuarios
     if len(lista_usuarios)>0:
         print "usuario ok"
         usuario = lista_usuarios[0]
@@ -63,8 +62,12 @@ def doLogin(request):
             print request.POST["recordar"]
             request.session.set_expiry(60 * 60 * 24 * 30) #UN MES
 
-
-        return redirect('/home')
+        if request.session.has_key("codigo_peticion"):
+            url = '/peticionPrivado?peticion='+request.session["codigo_peticion"]
+            request.session.pop("codigo_peticion")
+            return redirect(url)
+        else:
+            return redirect('/home')
     else:
         csrf_token_value = get_token(request)
         data = {"csrf_token_value":csrf_token_value,"error_login":True}
@@ -76,10 +79,10 @@ def registro(request):
     datos={}
     if request.session.has_key("errores_registro"):
         errores = request.session["errores_registro"]
-        del request.session["errores_registro"]
+        request.session.pop("errores_registro")
     if request.session.has_key("datos_registro"):
         datos = request.session["datos_registro"]
-        del request.session["datos_registro"]
+        request.session.pop("datos_registro")
     csrf_token_value = get_token(request)
     data={"csrf_token_value":csrf_token_value, "errores":errores, "datos":datos}
     rendered = render_to_string("registro.html",data)
@@ -127,6 +130,9 @@ def doAlta(request):
         if not isTelefono(request.POST["telefono"]):
             errores.append("El numero de telefono no es correcto")
 
+    if request.POST.has_key("sexo") and request.POST["sexo"]!="":
+        datos["sexo"] = request.POST["sexo"]
+
     if not request.POST.has_key("condiciones") or request.POST["condiciones"]!="1":
         errores.append("Debe aceptar las condiciones de uso")
 
@@ -147,7 +153,12 @@ def doAlta(request):
         if datos.has_key("telefono"):
             return HttpResponseRedirect('/confirmaMovil')
         else:
-            return HttpResponseRedirect('/home')
+            if request.session.has_key("codigo_peticion"):
+                url = '/peticionPrivado?peticion='+request.session["codigo_peticion"]
+                request.session.pop("codigo_peticion")
+                return redirect(url)
+            else:
+                return HttpResponseRedirect('/home')
     else:
         request.session["errores_registro"] = errores
         request.session["datos_registro"] = datos
@@ -157,7 +168,13 @@ def doAlta(request):
 @loginRequired()
 def confirmaMovil(request):
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value}
+    error_confirmacionMovil=False
+    if request.session.has_key("error_confirmacionMovil"):
+        error_confirmacionMovil=True
+        request.session.pop("error_confirmacionMovil")
+
+
+    data = {"csrf_token_value":csrf_token_value,"error_confirmacionMovil":error_confirmacionMovil}
     rendered = render_to_string("confirmacionMovil.html",data)
     return base(request,rendered,"confirmacionMovil")
 
@@ -171,6 +188,10 @@ def doConfirmaMovil(request):
             usuario.confirmado=True
             usuario.save()
             confirmado = True
+        else:
+            request.session["error_confirmacionMovil"]=True
+            return HttpResponseRedirect('/confirmaMovil')
+
     data = {"confirmado":confirmado}
     rendered = render_to_string("respuestaConfirmacionMovil.html",data)
     return base(request,rendered,"confirmacionMovil")
@@ -185,6 +206,65 @@ def peticion(request, codigo):
         data={}
         rendered = render_to_string("peticionNoExiste.html",data)
     return base(request,rendered,"peticion")
+
+def peticionPrivado(request):
+    lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        peticion = lista_peticiones[0]
+        logado = False
+        if request.session.has_key("user_id"):
+            logado = True
+        else:
+            request.session["codigo_peticion"]=peticion.codigo
+        data={"peticion":peticion,"logado":logado}
+
+
+        rendered = render_to_string("peticionPrivado.html",data)
+    else:
+        data={}
+        rendered = render_to_string("peticionNoExiste.html",data)
+    return base(request,rendered,"peticion")
+
+
+@loginRequired()
+def aceptarContactoPeticion(request):
+    lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        peticion = lista_peticiones[0]
+
+        contacto = Contactos()
+        contacto.usuario_id = peticion.usuario_id
+        contacto.usuario2_id = request.session["user_id"]
+        contacto.save()
+
+        contacto = Contactos()
+        contacto.usuario_id = request.session["user_id"]
+        contacto.usuario2_id = peticion.usuario_id
+        contacto.save()
+
+        request.session["error_contactos"] = "Contacto aceptado"
+        return HttpResponseRedirect('/contactos')
+
+    else:
+        data = {}
+        rendered = render_to_string("peticionNoExiste.html",data)
+        return base(request,rendered,"peticion")
+
+@loginRequired()
+def contactos(request):
+    contactos= Contactos.objects.filter(usuario_id=request.session["user_id"])
+    data = {"contactos":contactos}
+    rendered = render_to_string("contactos.html",data)
+    return base(request,rendered,"contactos")
+
+
+@loginRequired()
+def recientes(request):
+    recientes = Recientes.objects.filter(usuario_id=request.session["user_id"])
+    data = {"recientes":recientes}
+    rendered = render_to_string("recientes.html",data)
+    return base(request,rendered,"recientes")
+
 
 
 

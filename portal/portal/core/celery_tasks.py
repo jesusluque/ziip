@@ -23,11 +23,11 @@ from core.models import *
 @task
 def prueba():
     print "tarea celery realizada"
-    
-    
-@task    
+
+
+@task
 def enviaSMS(envio):
-    
+
     auth_key="JzroaddoWbG4Ag6X8dZ80ts4AImVpbhZ"
     str_from="Ziip-es"
     url="api.smsarena.es"
@@ -42,7 +42,7 @@ def enviaSMS(envio):
     data = r1.read()
     print r1.status
     print data
-    
+
     datos = data.split(";")
     if datos[0] == "OK":
         envio.fallido = False
@@ -50,15 +50,12 @@ def enviaSMS(envio):
         envio.fallido = True
         envio.motivo_error = datos[0]
     envio.save()
-    
+
 @task
 def enviaMail(email,asunto,texto):
-    
+
     data = {"content":texto}
     rendered = render_to_string("mails/base.html", data)
     msg = EmailMultiAlternatives(asunto, "", MAIL_FROM, [email])
     msg.attach_alternative(rendered, "text/html")
     msg.send()
-    
-        
-    

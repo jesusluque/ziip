@@ -27,7 +27,7 @@ EMAIL_HOST_PASSWORD="b20contacto"
 EMAIL_USE_TLS=True
 
 QUEUE_DEFAULT = "celery"
-
+CELERY_SEND_TASK_ERROR_EMAILS = True
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 

@@ -192,8 +192,8 @@ def sendMensajeAnonimo(request):
 
             telefono = request.POST["telefono"]
             email = request.POST["email"]
-            mensaje_anonimo = request.POST["mensaje_anonimo"]
-            mensaje = request.POST["mensaje"]
+            mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
+            mensaje = request.POST["mensaje"].encode('utf-8')
 
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
@@ -205,11 +205,8 @@ def sendMensajeAnonimo(request):
             else:
                 contacto = request.POST["telefono"]
             peticion.contacto_contacto = contacto
-
-
-
-            peticion.mensaje = request.POST["mensaje"]
-            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+            peticion.mensaje = request.POST["mensaje"].encode('utf-8')
+            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
             peticion.estado = ESTADO_PETICION_SOLICITADO
             peticion.save()
 
@@ -302,10 +299,8 @@ def sendCelestino(request):
                 contacto2 = request.POST["telefono2"]
             peticion.contacto2_contacto = contacto2
 
-
-
-            peticion.mensaje = request.POST["mensaje"]
-            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+            peticion.mensaje = request.POST["mensaje"].encode('utf-8')
+            peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
             peticion.estado = ESTADO_PETICION_SOLICITADO
             peticion.save()
 

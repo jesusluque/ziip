@@ -2,6 +2,17 @@
 <!-- Log In -->
 <section class="site-content site-section">
     <div class="container">
+      {%if error_login %}
+      <div class="row">
+          <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
+              <div class="alert alert-warning">
+                  Usuario o password invalido.
+              </div>
+          </div>
+      </div>
+      {%endif%}
+
+
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
                 <!-- Log In Form -->
@@ -48,36 +59,3 @@
     </div>
 </section>
 <!-- END Log In -->
-
-<!-- Support Links -->
-<section class="site-content site-section">
-    <div class="container">
-        <div class="row row-items text-center">
-            <div class="col-sm-3 animation-fadeIn">
-                <a href="javascript:void(0)" class="circle themed-background">
-                    <i class="gi gi-life_preserver"></i>
-                </a>
-                <h4>Open a <strong>ticket</strong></h4>
-            </div>
-            <div class="col-sm-3 animation-fadeIn">
-                <a href="javascript:void(0)" class="circle themed-background">
-                    <i class="gi gi-envelope"></i>
-                </a>
-                <h4><strong>Email</strong> Us</h4>
-            </div>
-            <div class="col-sm-3 animation-fadeIn">
-                <a href="javascript:void(0)" class="circle themed-background">
-                    <i class="fa fa-comments"></i>
-                </a>
-                <h4><strong>Chat</strong> Live</h4>
-            </div>
-            <div class="col-sm-3 animation-fadeIn">
-                <a href="javascript:void(0)" class="circle themed-background">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <h4><strong>Tweet</strong> Us</h4>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END Support Links -->

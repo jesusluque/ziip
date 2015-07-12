@@ -1,0 +1,50 @@
+
+<section class="site-content site-section">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-vcenter">
+                <thead>
+                    <tr>
+                        <th>Accion</th>
+                        <th class="text-center">Contacto</th>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Mensaje anonimo</th>
+                        <th class="text-center">Mensaje personal</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                  {%for reciente in recientes %}
+                    <tr>
+                        <td style="width: 200px;">
+                            {{reciente.tipo}}
+                            <img src="" alt="" style="width: 180px;">
+
+                        </td>
+                        <td>
+
+                          {{reciente.reciente.contacto_nombre}} {{reciente.reciente.contacto_contacto}}
+                          {% ifequal reciente.tipo "3" %}
+                          <br>
+                          {{reciente.reciente.contacto2_nombre}} {{reciente.reciente.contacto2_contacto}}
+                          {% endifequal %}
+                        </td>
+                        <td>
+                          {{reciente.fecha}}
+                        </td>
+                        <td>
+                          {{reciente.mensaje_anonimo}}
+                        </td>
+                        <td>
+                          {{reciente.mensaje}}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
