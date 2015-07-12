@@ -24,7 +24,10 @@ def loginRequired():
     return decorator
 
 def base(request,rendered,seccion_activa):
-    data={"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa]}
+    logado = False
+    if request.session.has_key("user_id"):
+        logado = True
+    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa]}
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
 
@@ -73,8 +76,10 @@ def registro(request):
     datos={}
     if request.session.has_key("errores_registro"):
         errores = request.session["errores_registro"]
+        del request.session["errores_registro"]
     if request.session.has_key("datos_registro"):
         datos = request.session["datos_registro"]
+        del request.session["datos_registro"]
     csrf_token_value = get_token(request)
     data={"csrf_token_value":csrf_token_value, "errores":errores, "datos":datos}
     rendered = render_to_string("registro.html",data)
@@ -121,6 +126,9 @@ def doAlta(request):
         datos["telefono"] = request.POST["telefono"]
         if not isTelefono(request.POST["telefono"]):
             errores.append("El numero de telefono no es correcto")
+
+    if not request.POST.has_key("condiciones") or request.POST["condiciones"]!="1":
+        errores.append("Debe aceptar las condiciones de uso")
 
     if len(errores)==0:
         usuario = Usuarios()

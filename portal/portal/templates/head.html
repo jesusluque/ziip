@@ -49,12 +49,35 @@
 
                     </li>
                     -->
+                    {%if logado%}
+                    <li>
+                        <a href="ziip">Ziip</a>
+                    </li>
+                    <li>
+                        <a href="contactos">Contactos</a>
+                    </li>
+                    <li>
+                        <a href="recientes">Recientes</a>
+                    </li>
+                    <li>
+                        <a href="chat">Chat</a>
+                    </li>
+                    <li>
+                        <a href="ajustes">Ajustes</a>
+                    </li>
+
+
+
+
+                    {%else %}
+
                     <li>
                         <a href="login" class="btn btn-primary">Login</a>
                     </li>
                     <li>
                         <a href="registro" class="btn btn-success">Registro</a>
                     </li>
+                    {%endif%}
                 </ul>
 
                 <!-- END Main Menu -->
