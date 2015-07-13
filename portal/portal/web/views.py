@@ -260,7 +260,7 @@ def contactos(request):
 
 @loginRequired()
 def recientes(request):
-    recientes = Recientes.objects.filter(usuario_id=request.session["user_id"])
+    recientes = Peticiones.objects.filter(usuario_id=request.session["user_id"]).order_by("-id")
     data = {"recientes":recientes}
     rendered = render_to_string("recientes.html",data)
     return base(request,rendered,"recientes")
