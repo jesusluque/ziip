@@ -265,8 +265,37 @@ def recientes(request):
     rendered = render_to_string("recientes.html",data)
     return base(request,rendered,"recientes")
 
+@loginRequired()
+def ziip(request):
+    data = {}
+    rendered = render_to_string("ziip.html",data)
+    return base(request,rendered,"ziip")
+
+@loginRequired()
+def ajustes(request):
+    usuario = Usuarios.objects.get(pk=request.session["user_id"])
+    data = {"usuario":usuario}
+    rendered = render_to_string("ajustes.html",data)
+    return base(request,rendered,"ajustes")
 
 
+@loginRequired()
+def anonimo(request):
+    data = {"tipo":TIPO_PETICION_ANONIMO}
+    rendered = render_to_string("nuevaPeticion.html",data)
+    return base(request,rendered,"anonimo")
+
+@loginRequired()
+def conecta(request):
+    data = {"tipo":TIPO_PETICION_CONECTA}
+    rendered = render_to_string("nuevaPeticion.html",data)
+    return base(request,rendered,"conecta")
+
+@loginRequired()
+def celestino(request):
+    data = {"tipo":TIPO_PETICION_CELESTINO}
+    rendered = render_to_string("nuevaPeticion.html",data)
+    return base(request,rendered,"celestino")
 
 def legal(request):
     texto = Textos.objects.get()
