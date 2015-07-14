@@ -278,6 +278,35 @@ def ajustes(request):
     rendered = render_to_string("ajustes.html",data)
     return base(request,rendered,"ajustes")
 
+@loginRequired()
+def saveAjustes(request):
+    usuario = Usuarios.objects.get(pk=request.session["user_id"])
+
+    #primero la imagen
+    """
+    fichero=request.FILES['fichero']
+    listado = fichero.name.split(".")
+    extension = listado[len(listado)-1]
+    timestamp = str(int(time.time()))
+    tmp = "upload/tmp/"+timestamp+"."+extension
+    f = open(settings.PROJECT_ROOT+tmp,'w')
+    f.write(fichero.read())
+    f.close()
+    """
+
+
+    telefono = False
+    if request.POST.has_key("telefono"):
+        if isTelefono(request.POST["telefono"]):
+            usuario.num_telefono = limpiaTelefono(request.POST["telefono"])
+            enviaSmsCodigo(request.POST["telefono"],usuario.codigo)
+            telefono = True
+
+    usuario.save()
+    if telefono:
+        return HttpResponseRedirect('/confirmaMovil')
+    else:
+        return HttpResponseRedirect('/ajustes')
 
 @loginRequired()
 def anonimo(request):
@@ -296,6 +325,12 @@ def celestino(request):
     data = {"tipo":TIPO_PETICION_CELESTINO}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"celestino")
+
+@loginRequired()
+def logout(request):
+    if request.session.has_key("user_id"):
+        request.session.pop("user_id")
+    return HttpResponseRedirect('/')
 
 def legal(request):
     texto = Textos.objects.get()

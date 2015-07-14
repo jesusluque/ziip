@@ -15,11 +15,12 @@ urlpatterns = patterns('',
     url(r'^recientes$', 'portal.web.views.recientes'),
     url(r'^ziip$', 'portal.web.views.ziip'),
     url(r'^ajustes$', 'portal.web.views.ajustes'),
+    url(r'^saveAjustes$', 'portal.web.views.saveAjustes'),
     url(r'^conecta$', 'portal.web.views.conecta'),
     url(r'^anonimo$', 'portal.web.views.anonimo'),
     url(r'^celestino$', 'portal.web.views.celestino'),
 
-
+    url(r'^logout$', 'portal.web.views.logout'),
     url(r'^legal$', 'portal.web.views.legal'),
     url(r'^privacidad$', 'portal.web.views.privacidad'),
 
