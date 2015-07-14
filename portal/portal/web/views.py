@@ -273,8 +273,10 @@ def ziip(request):
 
 @loginRequired()
 def ajustes(request):
+    csrf_token_value = get_token(request)
     usuario = Usuarios.objects.get(pk=request.session["user_id"])
-    data = {"usuario":usuario}
+
+    data = {"csrf_token_value":csrf_token_value,"usuario":usuario}
     rendered = render_to_string("ajustes.html",data)
     return base(request,rendered,"ajustes")
 
@@ -283,16 +285,16 @@ def saveAjustes(request):
     usuario = Usuarios.objects.get(pk=request.session["user_id"])
 
     #primero la imagen
-    """
-    fichero=request.FILES['fichero']
-    listado = fichero.name.split(".")
-    extension = listado[len(listado)-1]
-    timestamp = str(int(time.time()))
-    tmp = "upload/tmp/"+timestamp+"."+extension
-    f = open(settings.PROJECT_ROOT+tmp,'w')
-    f.write(fichero.read())
-    f.close()
-    """
+    if request.FILES.has_key("imagen"):
+
+        fichero=request.FILES['imagen']
+        listado = fichero.name.split(".")
+        extension = listado[len(listado)-1]
+        timestamp = str(int(time.time()))
+        tmp = "uploads/"+timestamp+"."+extension
+        f = open(settings.PROJECT_ROOT+tmp,'w')
+        f.write(fichero.read())
+        f.close()
 
 
     telefono = False

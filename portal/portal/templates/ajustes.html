@@ -19,7 +19,7 @@
                 <!-- Sign Up Form -->
                 <form action="saveAjustes" method="post" id="form-sign-up" class="form-horizontal" enctype="multipart/form-data">
                     <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
-                    {%if not usuario.telefono %}
+                    {%if not usuario.num_telefono %}
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="input-group">
@@ -32,7 +32,7 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 {%if usuario.imagen %}
-                                <img src="{{usuario.imagen.url}}">
+                                <img src="{{usuario.imagen}}">
                                 {% endif %}
                                 <input type="file" id="imagen" name="imagen" class="form-control input-lg">
                             </div>
@@ -46,7 +46,7 @@
 
                         </div>
                         <div class="col-xs-6 text-right">
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Guradar</button>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Guardar</button>
                         </div>
                     </div>
                 </form>
