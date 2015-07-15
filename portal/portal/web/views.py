@@ -312,19 +312,22 @@ def saveAjustes(request):
 
 @loginRequired()
 def anonimo(request):
-    data = {"tipo":TIPO_PETICION_ANONIMO}
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_ANONIMO}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"anonimo")
 
 @loginRequired()
 def conecta(request):
-    data = {"tipo":TIPO_PETICION_CONECTA}
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CONECTA}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"conecta")
 
 @loginRequired()
 def celestino(request):
-    data = {"tipo":TIPO_PETICION_CELESTINO}
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CELESTINO}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"celestino")
 
