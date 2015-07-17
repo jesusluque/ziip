@@ -292,7 +292,7 @@ def saveAjustes(request):
         extension = listado[len(listado)-1]
         timestamp = str(int(time.time()))
         tmp = "uploads/"+timestamp+"."+extension
-        f = open(settings.PROJECT_ROOT+tmp,'w')
+        f = open(settings.BASE_DIR+"/portal/"+tmp,'w')
         f.write(fichero.read())
         f.close()
 
