@@ -312,21 +312,83 @@ def saveAjustes(request):
 
 @loginRequired()
 def anonimo(request):
-    data = {"tipo":TIPO_PETICION_ANONIMO}
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_ANONIMO}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"anonimo")
 
 @loginRequired()
 def conecta(request):
-    data = {"tipo":TIPO_PETICION_CONECTA}
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CONECTA}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"conecta")
 
 @loginRequired()
 def celestino(request):
-    data = {"tipo":TIPO_PETICION_CELESTINO}
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CELESTINO}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"celestino")
+
+@loginRequired()
+def sendAccion(request):
+
+    status = "ok"
+    mensaje = ""
+    motivo_error = ""
+    usuario = Usuarios.objects.get(pk=request.session["user_id"])
+    peticion = Peticiones()
+    peticion.usuario_id = usuario.pk
+    peticion.tipo =  request.POST["tipo_peticion"]
+    peticion.estado = ESTADO_PETICION_SOLICITADO
+    if request.POST["tipo_peticion"]==TIPO_PETICION_CONECTA:
+        peticion.contacto_nombre = request.POST["nombre"]
+        if request.POST["telefono"]=="":
+            contacto = request.POST["email"]
+        else:
+            contacto = request.POST["telefono"]
+        peticion.contacto_contacto = contacto
+
+    if request.POST["tipo_peticion"]==TIPO_PETICION_ANONIMO:
+        peticion.contacto_nombre = request.POST["nombre"]
+        if request.POST["telefono"]=="":
+            contacto = request.POST["email"]
+        else:
+            contacto = request.POST["telefono"]
+        peticion.contacto_contacto = contacto
+        peticion.mensaje = request.POST["mensaje"]
+        peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+
+    if request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
+        peticion.contacto_nombre = request.POST["nombre"]
+        if request.POST["telefono"]=="":
+            contacto = request.POST["email"]
+        else:
+            contacto = request.POST["telefono"]
+        peticion.contacto_contacto = contacto
+        peticion.contacto2_nombre = request.POST["nombre2"]
+        if request.POST["telefono2"]=="":
+            contacto2 = request.POST["email2"]
+        else:
+            contacto2 = request.POST["telefono2"]
+        peticion.contacto2_contacto = contacto2
+        peticion.mensaje = request.POST["mensaje"]
+        peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+
+    if status=="ok":
+        peticion.save()
+        enviaPeticion(peticion)
+        #Mostramos resultado
+        return HttpResponseRedirect('/')
+    else:
+        #Redirigimos y mostramos los errores
+        return HttpResponseRedirect('/')
+
+
+
+
+
 
 @loginRequired()
 def logout(request):
