@@ -1,4 +1,4 @@
-
+{% load imagenTipo %}
 <section class="site-content site-section">
     <div class="container">
         <div class="table-responsive">
@@ -17,8 +17,8 @@
                   {%for reciente in recientes %}
                     <tr>
                         <td>
-                            {{reciente.tipo}}
-                            <img src="" alt="" style="width: 180px;">
+                            {{reciente.tipo|imagenTipo|safe}}
+
 
                         </td>
                         <td>
@@ -30,7 +30,7 @@
                           {% endifequal %}
                         </td>
                         <td>
-                          {{reciente.fecha}}
+                          {{reciente.fecha|date:"h:i d-m-Y"}}
                         </td>
                         <td>
                           {{reciente.mensaje_anonimo}}

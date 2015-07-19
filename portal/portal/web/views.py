@@ -50,7 +50,7 @@ def doLogin(request):
         #Se debe comentar esta linea
         md5_pass = request.POST["password"]
         print request.POST
-        lista_usuarios = Usuarios.objects.filter(usuario=request.POST["email"],password=request.POST["password"])
+        lista_usuarios = Usuarios.objects.filter(usuario=request.POST["usuario"],password=request.POST["password"])
     else:
         lista_usuarios=[]
     if len(lista_usuarios)>0:
@@ -197,7 +197,7 @@ def doConfirmaMovil(request):
     return base(request,rendered,"confirmacionMovil")
 
 def peticion(request, codigo):
-    lista_peticiones = Peticiones.objects.filter(codigo=token)
+    lista_peticiones = Peticiones.objects.filter(codigo=codigo)
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         data={"peticion":peticion}
@@ -260,7 +260,7 @@ def contactos(request):
 
 @loginRequired()
 def recientes(request):
-    recientes = Peticiones.objects.filter(usuario_id=request.session["user_id"]).order_by("-id")
+    recientes = Peticiones.objects.filter(usuario_id=request.session["user_id"]).order_by("-id")[:10]
     data = {"recientes":recientes}
     rendered = render_to_string("recientes.html",data)
     return base(request,rendered,"recientes")
@@ -312,82 +312,163 @@ def saveAjustes(request):
 
 @loginRequired()
 def anonimo(request):
+    errores={}
+    datos={}
+    if request.session.has_key("errores_peticion"):
+        errores=request.session["errores_peticion"]
+        datos=request.session["datos_peticion"]
+        request.session.pop("errores_peticion")
+        request.session.pop("datos_peticion")
+    else:
+        datos["mensaje_anonimo"]="0"
+
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_ANONIMO}
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_ANONIMO,"datos":datos,"errores":errores}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"anonimo")
 
 @loginRequired()
 def conecta(request):
+    errores={}
+    datos={}
+    if request.session.has_key("errores_peticion"):
+        errores=request.session["errores_peticion"]
+        datos=request.session["datos_peticion"]
+        request.session.pop("errores_peticion")
+        request.session.pop("datos_peticion")
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CONECTA}
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CONECTA,"datos":datos,"errores":errores}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"conecta")
 
 @loginRequired()
 def celestino(request):
+    errores={}
+    datos={}
+    if request.session.has_key("errores_peticion"):
+        errores=request.session["errores_peticion"]
+        datos=request.session["datos_peticion"]
+        request.session.pop("errores_peticion")
+        request.session.pop("datos_peticion")
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CELESTINO}
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CELESTINO,"datos":datos,"errores":errores}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"celestino")
 
 @loginRequired()
-def sendAccion(request):
+def sendPeticion(request):
 
-    status = "ok"
-    mensaje = ""
-    motivo_error = ""
+    errores = []
+    datos={}
     usuario = Usuarios.objects.get(pk=request.session["user_id"])
     peticion = Peticiones()
     peticion.usuario_id = usuario.pk
     peticion.tipo =  request.POST["tipo_peticion"]
-    peticion.estado = ESTADO_PETICION_SOLICITADO
-    if request.POST["tipo_peticion"]==TIPO_PETICION_CONECTA:
-        peticion.contacto_nombre = request.POST["nombre"]
-        if request.POST["telefono"]=="":
-            contacto = request.POST["email"]
-        else:
-            contacto = request.POST["telefono"]
-        peticion.contacto_contacto = contacto
+    datos["tipo"]=request.POST["tipo_peticion"]
 
-    if request.POST["tipo_peticion"]==TIPO_PETICION_ANONIMO:
-        peticion.contacto_nombre = request.POST["nombre"]
-        if request.POST["telefono"]=="":
+    peticion.estado = ESTADO_PETICION_SOLICITADO
+    contacto=""
+    if request.POST["telefono"]=="":
+        try:
+            validate_email(request.POST["email"])
             contacto = request.POST["email"]
-        else:
+        except ValidationError as e:
+            errores.append("El email es incorrecto")
+    else:
+        if isTelefono(request.POST["telefono"]):
             contacto = request.POST["telefono"]
-        peticion.contacto_contacto = contacto
+        else:
+            errores.append("El telefono no es valido")
+
+    peticion.contacto_contacto = contacto
+    peticion.contacto_nombre = request.POST["nombre"]
+
+    datos["telefono"]=request.POST["telefono"]
+    datos["email"]=request.POST["email"]
+    datos["nombre"]=request.POST["nombre"]
+
+
+
+    if request.POST["tipo_peticion"]!=TIPO_PETICION_CONECTA:
+
+        datos["mensaje"]=request.POST["mensaje"]
+        datos["mensaje_anonimo"]=request.POST["mensaje_anonimo"]
+
         peticion.mensaje = request.POST["mensaje"]
-        peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
+        mensajes={}
+        if request.POST["tipo_peticion"]==TIPO_PETICION_ANONIMO:
+            mensajes["1"]="Te conozco desde hace tiempo y quiero conocerte mejor."
+            mensajes["2"]="Nos conocemos desde hace poco, pero no puedo olvidarte."
+            mensajes["3"]="Trabajamos juntos, tenemos muchas cosas en común, charlemos."
+            mensajes["4"]="Nuestras miradas se han encontrado, nuestras palabras también podrían."
+            mensajes["5"]="Estudiamos juntos, y desde que te vi no te olvido."
+        elif request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
+            mensajes["1"]="Trabajo con vosotros y creo que deberíais conoceros mejor."
+            mensajes["2"]="Os he visto muchas veces, se que haceis buena pareja."
+            mensajes["3"]="Nos conocemos los tres y creo que os gustáis."
+            mensajes["4"]="Os he visto a ambos en clase, creo que hacéis buena pareja."
+        peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
 
     if request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
-        peticion.contacto_nombre = request.POST["nombre"]
-        if request.POST["telefono"]=="":
-            contacto = request.POST["email"]
-        else:
-            contacto = request.POST["telefono"]
-        peticion.contacto_contacto = contacto
-        peticion.contacto2_nombre = request.POST["nombre2"]
-        if request.POST["telefono2"]=="":
-            contacto2 = request.POST["email2"]
-        else:
-            contacto2 = request.POST["telefono2"]
-        peticion.contacto2_contacto = contacto2
-        peticion.mensaje = request.POST["mensaje"]
-        peticion.mensaje_anonimo = request.POST["mensaje_anonimo"]
 
-    if status=="ok":
+        peticion.contacto2_nombre = request.POST["nombre2"]
+        contacto2=""
+        if request.POST["telefono2"]=="":
+            try:
+                validate_email(request.POST["email2"])
+                contacto2 = request.POST["email2"]
+            except ValidationError as e:
+                errores.append("El email del segundo contacto es incorrecto")
+        else:
+            if isTelefono(request.POST["telefono2"]):
+                contacto2 = request.POST["telefono2"]
+            else:
+                errores.append("El telefono del segundo contacto no es valido")
+        peticion.contacto2_contacto = contacto2
+
+        datos["telefono2"]=request.POST["telefono2"]
+        datos["email2"]=request.POST["email2"]
+        datos["nombre2"]=request.POST["nombre2"]
+
+
+    if len(errores)==0:
+
         peticion.save()
         enviaPeticion(peticion)
         #Mostramos resultado
-        return HttpResponseRedirect('/')
+        request.session["peticionEnviada"]=peticion.pk
+        return HttpResponseRedirect('/peticionEnviada')
     else:
+
         #Redirigimos y mostramos los errores
-        return HttpResponseRedirect('/')
+        paginas={}
+        paginas["1"]="/anonimo"
+        paginas["2"]="/conecta"
+        paginas["3"]="/celestino"
+        request.session["errores_peticion"] = errores
+        request.session["datos_peticion"] = datos
+
+        return HttpResponseRedirect(paginas[request.POST["tipo_peticion"]])
+
+@loginRequired()
+def peticionEnviada(request):
+    peticion=Peticiones.objects.get(pk=request.session["peticionEnviada"])
+    data = {"peticion":peticion}
+    paginas={}
+    paginas["1"]="/anonimo"
+    paginas["2"]="/conecta"
+    paginas["3"]="/celestino"
+
+    rendered = render_to_string("peticionEnviada.html",data)
+    return base(request,rendered,paginas[peticion.tipo])
 
 
+@loginRequired()
+def chat(request):
 
-
+    data = {}
+    rendered = render_to_string("chat.html",data)
+    return base(request,rendered,"chat")
 
 
 @loginRequired()

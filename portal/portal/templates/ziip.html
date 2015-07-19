@@ -1,4 +1,4 @@
-
+{% load imagenTipo %}
 <section class="site-content site-section">
     <div class="container">
         <div class="table-responsive">
@@ -9,7 +9,7 @@
                     <tr>
                         <td style="width: 200px;">
 
-                            <a href="/anonimo"><img src="imagenes/anonimo.png" alt="" style="width: 180px;"></a>
+                            <a href="/anonimo">{{"1"|imagenTipo|safe}}</a>
                         </td>
                         <td>
                           <a href="/anonimo">Mensaje Anonimo</a>
@@ -19,7 +19,7 @@
 
                     <tr>
                         <td style="width: 200px;">
-                            <a href="/conecta"><img src="imagenes/conecta.png" alt="" style="width: 180px;"></a>
+                            <a href="/conecta">{{"2"|imagenTipo|safe}}</a>
                         </td>
                         <td>
                           <a href="/conecta">Conecta</a>
@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td style="width: 200px;">
-                            <a href="/celestino"><img src="imagenes/celestino.png" alt="" style="width: 180px;"></a>
+                            <a href="/celestino">{{"3"|imagenTipo|safe}}</a>
                         </td>
                         <td>
                           <a href="/celestino">Celestino</a>

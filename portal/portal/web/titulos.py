@@ -16,7 +16,7 @@ titulos["ajustes"] = "ajustes"
 titulos["anonimo"] = "anonimo"
 titulos["conecta"] = "conecta"
 titulos["celestino"] = "celestino"
-
+titulos["chat"] = "Chat"
 
 
 subtitulos = {}
@@ -35,3 +35,4 @@ subtitulos["ajustes"] = "subtitulo ajustes"
 subtitulos["anonimo"] = "subtitulo anonimo"
 subtitulos["conecta"] = "subtitulo conecta"
 subtitulos["celestino"] = "subtitulo celestino"
+subtitulos["chat"] = "Subtitulo Chat"

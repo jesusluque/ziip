@@ -50,7 +50,7 @@ TEMPLATE_DIRS = (
     '/var/www/sitios/ziip/portal/portal/templates',
     '/Users/manuthema/git/ziip/portal/portal/templates',
     '/Users/manuthema/personal/ziip/portal/portal/templates',
-    
+
 )
 
 
@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portal.core',
+    'portal.web',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -140,6 +141,3 @@ LOGGING = {
         },
     }
 }
-
-
-
