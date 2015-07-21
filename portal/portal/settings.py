@@ -27,7 +27,7 @@ EMAIL_HOST_PASSWORD="b20contacto"
 EMAIL_USE_TLS=True
 
 QUEUE_DEFAULT = "celery"
-
+CELERY_SEND_TASK_ERROR_EMAILS = True
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -49,6 +49,8 @@ TEMPLATE_DIRS = (
     '/Users/marodriguez/git/ziip/portal/portal/templates',
     '/var/www/sitios/ziip/portal/portal/templates',
     '/Users/manuthema/git/ziip/portal/portal/templates',
+    '/Users/manuthema/personal/ziip/portal/portal/templates',
+
 )
 
 
@@ -63,13 +65,14 @@ DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ["ziip.marodriguez.com","api.ziip.es"]
+ALLOWED_HOSTS = ["test.ziip.es","ziip.es","www.ziip.es","ziip.marodriguez.com","api.ziip.es"]
 
 
 
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portal.core',
+    'portal.web',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -137,6 +141,3 @@ LOGGING = {
         },
     }
 }
-
-
-

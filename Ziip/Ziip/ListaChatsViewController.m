@@ -567,7 +567,6 @@
 
 - (void)newMsg:(NSDictionary *)datos {
     
-    NSLog(@"newMSg: %@",datos);
     self.lastMessageId = [NSNumber numberWithFloat:([self.lastMessageId intValue] + 1)];
     ChatMessage *message = (ChatMessage *)[NSEntityDescription insertNewObjectForEntityForName:@"ChatMessage" inManagedObjectContext:self.managedObjectContext];
     
@@ -819,7 +818,7 @@
 
 -(void) suena {
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"sonido" ofType:@"mp3"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"sonido2" ofType:@"mp3"];
     NSURL *pathUrl = [NSURL fileURLWithPath:path];
     SystemSoundID audioEffect;
     AudioServicesCreateSystemSoundID((__bridge  CFURLRef) pathUrl,&audioEffect);
