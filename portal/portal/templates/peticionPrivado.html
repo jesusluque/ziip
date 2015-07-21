@@ -12,7 +12,10 @@
               <!--<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i> Ver menaje privado</button>-->
 
               {%if logado %}
-              <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a>
+              <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
+              <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
+              <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
+
               {% else %}
               <br>
               Para aceptar al usuario como contacto debe estar logueado.<br>
