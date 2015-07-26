@@ -188,7 +188,7 @@ mensaje.bloqueado=0
 mensaje.enviado=None
 mensaje.leido=None
 mensaje.save()
-"""
+
 
 usuario=Usuarios()
 
@@ -196,7 +196,7 @@ usuario.usuario="apple"
 usuario.password="ulises"
 usuario.imagen = ""
 usuario.save()
-
+"""
 
 
 
@@ -205,11 +205,11 @@ usuario.save()
 
 contacto = Contactos()
 contacto.usuario_id =9
-contacto.usuario2_id = 24
+contacto.usuario2_id = 30
 contacto.save()
 
 
 contacto = Contactos()
-contacto.usuario_id =24
+contacto.usuario_id =30
 contacto.usuario2_id = 9
 contacto.save()

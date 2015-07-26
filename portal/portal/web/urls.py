@@ -22,12 +22,17 @@ urlpatterns = patterns('',
     url(r'^sendPeticion$', 'portal.web.views.sendPeticion'),
     url(r'^peticionEnviada$', 'portal.web.views.peticionEnviada'),
     url(r'^chat$', 'portal.web.views.chat'),
+    url(r'^contacto$', 'portal.web.views.contacto'),
+    url(r'^sendContacto$', 'portal.web.views.sendContacto'),
+    url(r'^rechazarContactoPeticion$', 'portal.web.views.rechazarContactoPeticion'),
+    url(r'^rechazarZiipPeticion$', 'portal.web.views.rechazarZiipPeticion'),
+    url(r'^rechazoEnviado$', 'portal.web.views.rechazoEnviado'),
+    url(r'^aceptarRechazo$', 'portal.web.views.aceptarRechazo'),
+    url(r'^rechazoAceptado$', 'portal.web.views.rechazoAceptado'),
+
 
     url(r'^logout$', 'portal.web.views.logout'),
     url(r'^legal$', 'portal.web.views.legal'),
     url(r'^privacidad$', 'portal.web.views.privacidad'),
-
-
     url(r'^(?P<codigo>\w{9})$', 'portal.web.views.peticion'),
-
 )
