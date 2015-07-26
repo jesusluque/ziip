@@ -200,21 +200,30 @@ def sendMensajeAnonimo(request):
             peticion.tipo = TIPO_PETICION_ANONIMO
             peticion.contacto_nombre = request.POST["nombre1"]
 
+            contacto = ""
             if request.POST["telefono"]=="":
-                contacto = request.POST["email"]
+                try:
+                    validate_email(request.POST["email"])
+                    contacto = request.POST["email"]
+                except ValidationError as e:
+                    status = "ko"
+                    mensaje = "El email es invalido"
             else:
-                contacto = request.POST["telefono"]
+                if isTelefono(request.POST["telefono"]):
+                    contacto = request.POST["telefono"]
+                else:
+                    status = "ko"
+                    mensaje = "El telefono no es valido"
+
             peticion.contacto_contacto = contacto
             
             peticion.mensaje = request.POST["mensaje"].encode('utf-8')
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
             peticion.estado = ESTADO_PETICION_SOLICITADO
-            peticion.save()
 
-            enviaPeticion(peticion)
-
-
-
+            if status == "ok":
+                peticion.save()
+                enviaPeticion(peticion)
         else:
             status = "ko"
             mensaje = "no hay usuario"
@@ -241,17 +250,28 @@ def sendConecta(request):
             peticion.tipo = TIPO_PETICION_CONECTA
             peticion.contacto_nombre = request.POST["nombre1"]
 
+            contacto = ""
             if request.POST["telefono"]=="":
-                contacto = request.POST["email"]
+                try:
+                    validate_email(request.POST["email"])
+                    contacto = request.POST["email"]
+                except ValidationError as e:
+                    status = "ko"
+                    mensaje = "El email es invalido"
             else:
-                contacto = request.POST["telefono"]
+                if isTelefono(request.POST["telefono"]):
+                    contacto = request.POST["telefono"]
+                else:
+                    status = "ko"
+                    mensaje = "El telefono no es valido"
             peticion.contacto_contacto = contacto
 
 
             peticion.estado = ESTADO_PETICION_SOLICITADO
-            peticion.save()
 
-            enviaPeticion(peticion)
+            if status == "ok":
+                peticion.save()
+                enviaPeticion(peticion)
 
         else:
             status = "ko"
@@ -287,24 +307,46 @@ def sendCelestino(request):
 
             peticion.contacto_nombre = request.POST["nombre1"]
 
+            contacto = ""
             if request.POST["telefono1"]=="":
-                contacto = request.POST["email1"]
+                try:
+                    validate_email(request.POST["email1"])
+                    contacto = request.POST["email1"]
+                except ValidationError as e:
+                    status = "ko"
+                    mensaje = "El email es invalido"
             else:
-                contacto = request.POST["telefono1"]
+                if isTelefono(request.POST["telefono1"]):
+                    contacto = request.POST["telefono1"]
+                else:
+                    status = "ko"
+                    mensaje = "El telefono no es valido"
+
+
             peticion.contacto_contacto = contacto
             peticion.contacto2_nombre = request.POST["nombre2"]
 
+            contacto2 = ""
             if request.POST["telefono2"]=="":
-                contacto2 = request.POST["email2"]
+                try:
+                    validate_email(request.POST["email2"])
+                    contacto2 = request.POST["email2"]
+                except ValidationError as e:
+                    status = "ko"
+                    mensaje = "El email es invalido"
             else:
-                contacto2 = request.POST["telefono2"]
+                if isTelefono(request.POST["telefono2"]):
+                    contacto2 = request.POST["telefono2"]
+                else:
+                    status = "ko"
+                    mensaje = "El telefono no es valido"
             peticion.contacto2_contacto = contacto2
             peticion.mensaje = request.POST["mensaje"].encode('utf-8')
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
             peticion.estado = ESTADO_PETICION_SOLICITADO
-            peticion.save()
-
-            enviaPeticion(peticion)
+            if status == "ok":
+                peticion.save()
+                enviaPeticion(peticion)
 
         else:
             status = "ko"

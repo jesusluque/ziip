@@ -199,6 +199,8 @@ def doConfirmaMovil(request):
 def peticion(request, codigo):
     lista_peticiones = Peticiones.objects.filter(codigo=codigo)
     if len(lista_peticiones)>0:
+        lista_peticiones = Peticiones.objects.filter(codigo2=codigo)
+    if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         data={"peticion":peticion}
         rendered = render_to_string("peticion.html",data)
@@ -209,6 +211,8 @@ def peticion(request, codigo):
 
 def peticionPrivado(request):
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         logado = False
@@ -228,19 +232,43 @@ def peticionPrivado(request):
 
 @loginRequired()
 def aceptarContactoPeticion(request):
+
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
+        usuario_logado=2
+    else:
+        usuario_logado=1
+
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
 
-        contacto = Contactos()
-        contacto.usuario_id = peticion.usuario_id
-        contacto.usuario2_id = request.session["user_id"]
-        contacto.save()
+        if peticion.tipo == TIPO_PETICION_CELESTINO:
+            if usuario_logado==1:
+                peticion.usuario1_id=request.session["user_id"]
+            else:
+                peticion.usuario2_id=request.session["user_id"]
+            peticion.save()
 
-        contacto = Contactos()
-        contacto.usuario_id = request.session["user_id"]
-        contacto.usuario2_id = peticion.usuario_id
-        contacto.save()
+            if peticion.usuario1!=None and peticion.usuario2!=None:
+                contacto = Contactos()
+                contacto.usuario_id = peticion.usuario1_id
+                contacto.usuario2_id = peticion.usuario2_id
+                contacto.save()
+                contacto = Contactos()
+                contacto.usuario_id = peticion.usuario2_id
+                contacto.usuario2_id = peticion.usuario1_id
+                contacto.save()
+        else:
+            contacto = Contactos()
+            contacto.usuario_id = peticion.usuario_id
+            contacto.usuario2_id = request.session["user_id"]
+            contacto.save()
+
+            contacto = Contactos()
+            contacto.usuario_id = request.session["user_id"]
+            contacto.usuario2_id = peticion.usuario_id
+            contacto.save()
 
         request.session["error_contactos"] = "Contacto aceptado"
         return HttpResponseRedirect('/contactos')
@@ -453,15 +481,85 @@ def sendPeticion(request):
 @loginRequired()
 def peticionEnviada(request):
     peticion=Peticiones.objects.get(pk=request.session["peticionEnviada"])
+    if len(lista_peticiones)>0:
+        lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticionEnviada"])
+
     data = {"peticion":peticion}
     paginas={}
-    paginas["1"]="/anonimo"
-    paginas["2"]="/conecta"
-    paginas["3"]="/celestino"
+    paginas["1"]="anonimo"
+    paginas["2"]="conecta"
+    paginas["3"]="celestino"
 
     rendered = render_to_string("peticionEnviada.html",data)
     return base(request,rendered,paginas[peticion.tipo])
 
+def rechazarContactoPeticion(request):
+    lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        peticion = lista_peticiones[0]
+        rechazo = Rechazos()
+        rechazo.contacto = peticion.contacto_contacto
+        rechazo.usuario = peticion.usuario
+        rechazo.general = False
+        rechazo.save()
+        enviaRechazo(rechazo)
+        request.session["rechazoEnviado"]=rechazo.pk
+        return HttpResponseRedirect('/rechazoEnviado')
+
+    else:
+        data = {}
+        rendered = render_to_string("peticionNoExiste.html",data)
+        return base(request,rendered,"peticion")
+
+def rechazarZiipPeticion(request):
+    lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
+    if len(lista_peticiones)>0:
+        peticion = lista_peticiones[0]
+        rechazo = Rechazos()
+        rechazo.contacto = peticion.contacto_contacto
+        rechazo.usuario = None
+        rechazo.general = True
+        rechazo.save()
+        enviaRechazo(rechazo)
+        request.session["rechazoEnviado"]=rechazo.pk
+        return HttpResponseRedirect('/rechazoEnviado')
+
+    else:
+        data = {}
+        rendered = render_to_string("peticionNoExiste.html",data)
+        return base(request,rendered,"rechazarPeticion")
+
+def rechazoEnviado(request):
+    mensajeRechazo=""
+    if request.session.has_key("mensajeRechazo"):
+        mensajeRechazo=request.session["mensajeRechazo"]
+
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"rechazoEnviado":request.session["rechazoEnviado"],"mensajeRechazo":mensajeRechazo}
+    rendered = render_to_string("rechazoEnviado.html",data)
+    return base(request,rendered,"rechazarPeticion")
+
+def aceptarRechazo(request):
+
+    rechazo = Rechazos.objects.get(codigo=request.POST["rechazoEnviado"])
+    if rechazo.codigo == request.POST["codigo"]:
+        rechazo.confirmado=True
+        rechazo.save()
+        return HttpResponseRedirect('/rechazoAceptado')
+    else:
+        request.session["mensajeRechazo"]="El codigo de rechazo es incorrecto"
+        return HttpResponseRedirect('/rechazoEnviado')
+
+def rechazoAceptado(request):
+
+    csrf_token_value = get_token(request)
+    data = {}
+    rendered = render_to_string("rechazoAceptado.html",data)
+    return base(request,rendered,"rechazarPeticion")
 
 @loginRequired()
 def chat(request):
@@ -470,12 +568,34 @@ def chat(request):
     rendered = render_to_string("chat.html",data)
     return base(request,rendered,"chat")
 
-
 @loginRequired()
 def logout(request):
     if request.session.has_key("user_id"):
         request.session.pop("user_id")
     return HttpResponseRedirect('/')
+
+def contacto(request):
+    mensaje=""
+    if request.session.has_key("mensaje_contacto"):
+        mensaje=request.session["mensaje_contacto"]
+        request.session.pop("mensaje_contacto")
+    csrf_token_value = get_token(request)
+    data = {"csrf_token_value":csrf_token_value,"mensaje":mensaje}
+    rendered = render_to_string("contacto.html",data)
+    return base(request,rendered,"contacto")
+
+def sendContacto(request):
+
+    rendered="Mensaje denvaido desde ziip<br>"
+    rendered="Asunto:"+request.POST["asunto"]+"<br>"
+    rendered="Email:"+request.POST["email"]+"<br>"
+    rendered="Texto:"+request.POST["texto"]+"<br>"
+
+    asunto="Contacto desde ziip"
+    enviaMail.apply_async(args=[settings.MAIL_TO,asunto,rendered], queue=QUEUE_DEFAULT)
+
+    request.session["mensaje_contacto"]="Menaje enviado correctamente"
+    return HttpResponseRedirect('/contacto')
 
 def legal(request):
     texto = Textos.objects.get()
