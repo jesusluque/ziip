@@ -457,8 +457,6 @@ def sendPeticion(request):
         datos["telefono2"]=request.POST["telefono2"]
         datos["email2"]=request.POST["email2"]
         datos["nombre2"]=request.POST["nombre2"]
-
-
     if len(errores)==0:
 
         peticion.save()
@@ -481,9 +479,6 @@ def sendPeticion(request):
 @loginRequired()
 def peticionEnviada(request):
     peticion=Peticiones.objects.get(pk=request.session["peticionEnviada"])
-    if len(lista_peticiones)>0:
-        lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticionEnviada"])
-
     data = {"peticion":peticion}
     paginas={}
     paginas["1"]="anonimo"
