@@ -37,13 +37,15 @@
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
         <link rel="stylesheet" href="css/themes.css">
+
         <!-- END Stylesheets -->
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- Modernizr (browser feature detection library) & Respond.js (enables responsive CSS code on browsers that don't support it, eg IE8) -->
         <script src="js/vendor/modernizr-respond.min.js"></script>
     </head>
     <body>
-        
+
 {% include "head.html" %}
 {{content|safe}}
 {% include "footer.html" %}

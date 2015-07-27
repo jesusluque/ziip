@@ -1,0 +1,12 @@
+
+a,
+a:hover,
+a:focus,
+.text-primary,
+.text-primary:hover {
+    color: #ffffff;
+}
+
+a.acciones {
+color: #000000;    
+}

@@ -78,7 +78,7 @@ def enviaPeticion(peticion):
             enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
 
         else:
-            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
+            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo, "username":peticion.usuario.usuario}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
             enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
@@ -92,7 +92,7 @@ def enviaPeticion(peticion):
             envio.save()
             enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
         else:
-            data = {}
+            data = { "username":peticion.usuario.usuario}
             rendered = render_to_string("mails/conecta.html", data)
             asunto = "Invitación a ziip.es "
             enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
@@ -106,7 +106,7 @@ def enviaPeticion(peticion):
             envio.save()
             enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
         else:
-            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo}
+            data = {"codigo_peticion":peticion.codigo,"mensaje_anonimo":peticion.mensaje_anonimo, "username":peticion.usuario.usuario}
             rendered = render_to_string("mails/peticion.html", data)
             asunto = "Tienes un mensaje de alguien a quien conoces. (ziip.es)"
             enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
