@@ -38,7 +38,7 @@ class Usuarios(models.Model):
 
 class Tokens(models.Model):
     usuario = models.ForeignKey(Usuarios)
-    token = models.EmailField(max_length=250)
+    token = models.CharField(max_length=250)
     tipo_dispositivo = models.CharField(max_length=2, choices = valores["tipos_dispositivos"].items(),default=TIPO_DISPOSITIVO_IOS)
 
 class ChatMensajes(models.Model):
