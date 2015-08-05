@@ -1,0 +1,45 @@
+
+a,
+a:hover,
+a:focus,
+.text-primary,
+.text-primary:hover {
+    color: #ffffff;
+}
+
+a.acciones {
+color: #8251A1;
+}
+.widget {
+    background-color: #000000;
+}
+
+.site-content {
+    background-color: #F2EDF9;
+}
+
+.footer-heading {
+    color: #F2EDF9;
+}
+
+.site-nav a {
+color: #F2EDF9;
+}
+
+h1 {
+color: #F2EDF9;
+}
+
+
+.btn-primary {
+    background-color: #8251A1;
+
+}
+
+
+.switch input:checked + span {
+    background-color: #8251A1;
+}
+.switch-primary span {
+    border-color: #8251A1;
+}

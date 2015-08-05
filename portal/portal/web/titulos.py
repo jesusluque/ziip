@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 titulos = {}
 titulos["legal"] = "Aviso Legal"
@@ -17,22 +17,25 @@ titulos["anonimo"] = "anonimo"
 titulos["conecta"] = "conecta"
 titulos["celestino"] = "celestino"
 titulos["chat"] = "Chat"
+titulos["contacto"] = "Contacto"
 
 
 subtitulos = {}
-subtitulos["legal"] = "subtitulo legal"
-subtitulos["privacidad"] = "subtitulo privacidad"
-subtitulos["login"] = "subtitulo login"
-subtitulos["index"] = "subtitulo Index"
+
+subtitulos["legal"] = ""
+subtitulos["privacidad"]= ""
+subtitulos["login"] = "Ziip.es la primera plataforma de contactos completamente anónima"
+subtitulos["index"] = "Ziip.es la primera plataforma de contactos completamente anónima"
 subtitulos["registro"] = "Subtitulo de registro en Ziip"
-subtitulos["home"] = "Subtitulo Home"
-subtitulos["confirmacionMovil"] = "subtitulo confirmacion Movil"
-subtitulos["peticion"] = "subtitulo Peticion"
-subtitulos["contactos"] = "subtitulo Contactos"
-subtitulos["recientes"] = "subtitulo Recientes"
-subtitulos["ziip"] = "subtitulo Ziip"
-subtitulos["ajustes"] = "subtitulo ajustes"
-subtitulos["anonimo"] = "subtitulo anonimo"
-subtitulos["conecta"] = "subtitulo conecta"
-subtitulos["celestino"] = "subtitulo celestino"
-subtitulos["chat"] = "Subtitulo Chat"
+subtitulos["home"] = "Ziip.es la primera plataforma de contactos completamente anónima"
+subtitulos["confirmacionMovil"] = "Intro"
+subtitulos["peticion"] = "Detalle de contacto."
+subtitulos["contactos"] = "Tus amigos"
+subtitulos["recientes"] = "Contactos recientes"
+subtitulos["ziip"] = "Ziip.es la primera plataforma de contactos completamente anónima"
+subtitulos["ajustes"] = ""
+subtitulos["anonimo"] = "Envía mensajes anónimos."
+subtitulos["conecta"] = "Invita a usar ziip.es de forma anónima."
+subtitulos["celestino"] = "Contacta con dos personas que deben de conocerse"
+subtitulos["chat"] = ""
+subtitulos["contacto"] = "Estamos a tu disposición para cualquier duda"

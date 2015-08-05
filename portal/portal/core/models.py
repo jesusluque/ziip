@@ -35,7 +35,6 @@ class Usuarios(models.Model):
     imagen = models.CharField(max_length=250)
     sexo = models.CharField(max_length=2, choices = valores["sexo"].items(),default=SEXO_HOMBRE)
 
-
 class Tokens(models.Model):
     usuario = models.ForeignKey(Usuarios)
     token = models.CharField(max_length=250)
@@ -56,7 +55,6 @@ class ChatBloqueos(models.Model):
     usuario = models.IntegerField()
     bloqueado = models.IntegerField()
 
-
 class Peticiones(models.Model):
     usuario = models.ForeignKey(Usuarios)
     tipo = models.CharField(max_length=2, choices = valores["tipos_peticion"].items(),default=TIPO_PETICION_CONECTA)
@@ -69,14 +67,14 @@ class Peticiones(models.Model):
     estado = models.CharField(max_length=2, choices = valores["estados_peticion"].items(),default=ESTADO_PETICION_SOLICITADO)
     fecha = models.DateTimeField(default=datetime.now)
     codigo = models.CharField(max_length=250, default=generaCodigo)
-
-
+    codigo2 = models.CharField(max_length=250, default=generaCodigo)
+    usuario1 = models.ForeignKey(Usuarios, related_name = "peticiones_usuario1", null=True)
+    usuario2 = models.ForeignKey(Usuarios, related_name = "peticiones_usuario2", null=True)
 
 class Contactos(models.Model):
     usuario = models.ForeignKey(Usuarios, related_name = "contactos_usuario")
     usuario2 = models.ForeignKey(Usuarios, related_name = "contactos_usuario2")
     fecha = models.DateTimeField(default=datetime.now)
-
 
 class EnviosSMS(models.Model):
     telefono = models.CharField(max_length=255)
@@ -88,9 +86,6 @@ class EnviosSMS(models.Model):
     fallido = models.BooleanField(default=False)
     motivo_error = models.TextField()
 
-
-
-
 class Textos(models.Model):
     aviso_legal = models.TextField()
     privacidad = models.TextField()
@@ -101,6 +96,14 @@ class Textos(models.Model):
 
     def __unicode__(self):
         return "Textos"
+
+class Rechazos(models.Model):
+    contacto = models.CharField(max_length=255)
+    usuario = models.ForeignKey(Usuarios, null=True)
+    general = models.BooleanField(default=False)
+    codigo = models.CharField(max_length=250, default=generaCodigo)
+    confirmado = models.BooleanField(default=False)
+
 
 
 """"
