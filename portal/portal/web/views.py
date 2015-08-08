@@ -198,7 +198,7 @@ def doConfirmaMovil(request):
 
 def peticion(request, codigo):
     lista_peticiones = Peticiones.objects.filter(codigo=codigo)
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=codigo)
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
@@ -211,7 +211,7 @@ def peticion(request, codigo):
 
 def peticionPrivado(request):
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
@@ -234,7 +234,7 @@ def peticionPrivado(request):
 def aceptarContactoPeticion(request):
 
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
         usuario_logado=2
     else:
