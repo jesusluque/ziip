@@ -110,7 +110,7 @@
 
 - (void) montaCabecera {
     
-    /*
+    
     NSString *reqSysVer = @"7.0";
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     bool is_ios7;
@@ -159,7 +159,7 @@
     [vista addSubview:nombre];
 
     [self.navigationItem setTitleView:vista];
-    */
+    
 }
 
 - (void) aPerfil {
