@@ -25,9 +25,12 @@ def loginRequired():
 
 def base(request,rendered,seccion_activa):
     logado = False
+    usuario=None
     if request.session.has_key("user_id"):
         logado = True
-    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa]}
+        usuario = Usuarios.objects.get(pk=request.session["user_id"])
+
+    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa],"usuario":usuario}
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
 
@@ -294,6 +297,13 @@ def recientes(request):
     return base(request,rendered,"recientes")
 
 @loginRequired()
+def reciente(request):
+    reciente = Peticiones.objects.get(usuario_id=request.session["user_id"], pk=request.GET["peticion_id"])
+    data = {"reciente":reciente}
+    rendered = render_to_string("reciente.html",data)
+    return base(request,rendered,"recientes")
+
+@loginRequired()
 def ziip(request):
     data = {}
     rendered = render_to_string("ziip.html",data)
@@ -418,9 +428,11 @@ def sendPeticion(request):
 
 
     if request.POST["tipo_peticion"]!=TIPO_PETICION_CONECTA:
-
         datos["mensaje"]=request.POST["mensaje"]
-        datos["mensaje_anonimo"]=request.POST["mensaje_anonimo"]
+        if request.POST.has_key("mensaje_anonimo"):
+            datos["mensaje_anonimo"] = request.POST["mensaje_anonimo"]
+        else:
+            errores.append("Debe seleccionar un mensaje")
 
         peticion.mensaje = request.POST["mensaje"]
         mensajes={}
@@ -435,7 +447,8 @@ def sendPeticion(request):
             mensajes["2"]="Os he visto muchas veces, se que haceis buena pareja."
             mensajes["3"]="Nos conocemos los tres y creo que os gustáis."
             mensajes["4"]="Os he visto a ambos en clase, creo que hacéis buena pareja."
-        peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
+        if request.POST.has_key("mensaje_anonimo"):
+            peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
 
     if request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
 
@@ -478,6 +491,7 @@ def sendPeticion(request):
 
 @loginRequired()
 def peticionEnviada(request):
+    request.session["peticionEnviada"]=1
     peticion=Peticiones.objects.get(pk=request.session["peticionEnviada"])
     data = {"peticion":peticion}
     paginas={}
@@ -594,12 +608,12 @@ def sendContacto(request):
 
 def legal(request):
     texto = Textos.objects.get()
-    data={"texto":texto.aviso_legal}
+    data={"texto":texto.aviso_legal,"titulo":"Asivo legal"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"legal")
 
 def privacidad(request):
     texto = Textos.objects.get()
-    data={"texto":texto.privacidad}
+    data={"texto":texto.privacidad,"titulo":"Politica de privacidad"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"privacidad")

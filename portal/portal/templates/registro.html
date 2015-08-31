@@ -1,95 +1,96 @@
+{%if errores %}
+<div class="row">
+    <div class="col-sm-12 col-lg-12 site-block">
+        <div class="alert alert-warning">
+            Se han encontrado los siguientes errores:
+            {%for error in errores %}
+                <br/>{{error}}
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{%endif%}
 
-<!-- Sign Up -->
-<section class="site-content site-section">
-    <div class="container">
-        {%if errores %}
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-                <div class="alert alert-warning">
-                    Se han encontrado los siguientes errores:
-                    {%for error in errores %}
-                        <br/>{{error}}
-                    {%endfor%}
+<div class="login-title text-center">
+    <h1><i class="gi gi-flash"></i> <strong>Ziip</strong><br><small> <strong>Registro</strong></small></h1>
+</div>
+<!-- END Login Title -->
+
+<!-- Login Block -->
+<div class="block push-bit">
+
+    <!-- Login Form -->
+    <form action="doAlta" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
+
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                    <input type="text" id="email" name="username" class="form-control input-lg" placeholder="Username" value="{{datos.username}}">
                 </div>
             </div>
         </div>
-        {%endif%}
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-                <!-- Sign Up Form -->
-                <form action="doAlta" method="post" id="form-sign-up" class="form-horizontal">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
-
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-user"></i></span>
-                                <input type="text" id="email" name="username" class="form-control input-lg" placeholder="Username" value="{{datos.username}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
-                                <input type="email" id="email" name="email" class="form-control input-lg" placeholder="Email"  value="{{datos.email}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                                <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                                <input type="password" id="password2" name="password2" class="form-control input-lg" placeholder="Verifica Password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                                <input type="text" id="telefono" name="telefono" class="form-control input-lg" placeholder="Telefono Movil"  value="{{datos.telefono}}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <label>Sexo: </label>
-                                <label class="radio-inline" for="checkout-payment-paypal">
-                                    <input type="radio" id="sexo" name="sexo" value="1" {%ifequal datos.sexo "1" %}cheked {% endifequal %} >Hombre
-                                </label>
-                                <label class="radio-inline" for="sexo">
-                                    <input type="radio" id="sexo" name="sexo" value="2" {%ifequal datos.sexo "2" %}cheked {% endifequal %}> Mujer
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group form-actions">
-                        <div class="col-xs-6">
-                            <label class="switch switch-primary" data-toggle="tooltip" title="Acepto los terminos">
-                                <input type="checkbox" id="register-terms" name="condiciones" value="1"><span></span>
-                            </label>
-                            <a href="#modal-terms" data-toggle="modal" class="register-terms"><small>Ver terminos</small></a>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Aceptar</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- END Sign Up Form -->
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                    <input type="email" id="email" name="email" class="form-control input-lg" placeholder="Email"  value="{{datos.email}}">
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- END Sign Up -->
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                    <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                    <input type="password" id="password2" name="password2" class="form-control input-lg" placeholder="Verifica Password">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                    <input type="text" id="telefono" name="telefono" class="form-control input-lg" placeholder="Telefono Movil"  value="{{datos.telefono}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <label>Sexo: </label>
+                    <label class="radio-inline" for="checkout-payment-paypal">
+                        <input type="radio" id="sexo" name="sexo" value="1" {%ifequal datos.sexo "1" %}cheked {% endifequal %} >Hombre
+                    </label>
+                    <label class="radio-inline" for="sexo">
+                        <input type="radio" id="sexo" name="sexo" value="2" {%ifequal datos.sexo "2" %}cheked {% endifequal %}> Mujer
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-xs-6">
+                <label class="switch switch-primary" data-toggle="tooltip" title="Acepto los terminos">
+                    <input type="checkbox" id="register-terms" name="condiciones" value="1"><span></span>
+                </label>
+                <a href="/legal" data-toggle="modal" class="register-terms" target="_blank"><small>Ver terminos</small></a>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login</button>
+            </div>
+        </div>
+
+    </form>
+    <!-- END Login Form -->
+
+</div>
+<!-- END Login Block -->

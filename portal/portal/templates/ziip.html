@@ -1,49 +1,85 @@
+
 {% load imagenTipo %}
-<section class="site-content site-section">
-    <div class="container">
+<div class="login-title text-center ">
+<img src="/img/icon57.png">
+        <h1> <strong>Ziip</strong><br><small> <strong>Enviar Mensaje</strong></small></h1>
+
+</div>
+<!-- END Login Title -->
+
+<!-- Login Block -->
+<div class="block push-bit">
+
+    <!-- Login Form -->
+    <form action="doLogin" method="post" id="form-login" class="form-horizontal  form-control-borderless">
 
 
-
-
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-vcenter">
-
-                <tbody>
-
-                    <tr>
-                        <td style="width: 200px;">
-
-                            <a href="/anonimo" >{{"1"|imagenTipo|safe}}</a>
-                        </td>
-                        <td>
-                         <h2> <strong><a href="/anonimo" class="acciones">Mensaje Anonimo</a></strong></h2>
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td style="width: 200px;">
-                            <a href="/conecta">{{"2"|imagenTipo|safe}}</a>
-                        </td>
-                        <td>
-                           <h2> <strong><a href="/conecta" class="acciones">Conecta</a></strong></h2>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td style="width: 200px;">
-                            <a href="/celestino">{{"3"|imagenTipo|safe}}</a>
-                        </td>
-                        <td>
-                          <h2> <strong> <a href="/celestino" class="acciones">Celestino</a></strong></h2>
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-            </table>
+        <div class="form-group accion">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><a href="/anonimo" >{{"1"|imagenTipo|safe}}</a></span>
+                    <a href="/anonimo">Mensaje Anonimo</a>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+        <div class="form-group accion">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <a href="/conecta" >{{"2"|imagenTipo|safe}}</a></span>
+                    <a href="/conecta"> Conecta</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group accion">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><a href="/celestina" >{{"3"|imagenTipo|safe}}</a></span>
+
+                    <a href="/celestino"> Celestina</a>
+                </div>
+            </div>
+        </div>
+
+
+<!--
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                    <input type="text"  name="usuario" class="form-control input-lg" placeholder="Usuario">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                    <input type="password" id="login-password" name="password" class="form-control input-lg" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-xs-4">
+                <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                    <input type="checkbox" id="login-remember-me" name="recordar" checked>
+                    <span></span>
+                </label>
+            </div>
+            <div class="col-xs-8 text-right">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 text-center">
+                <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
+                <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>
+            </div>
+        </div>
+    -->
+    </form>
+    <!-- END Login Form -->
+
+</div>
+<!-- END Login Block -->

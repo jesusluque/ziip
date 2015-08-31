@@ -1,61 +1,59 @@
+{%if error_login %}
+<div class="row">
+    <div class="col-sm-12 col-lg-12 site-block">
+        <div class="alert alert-warning">
+            Usuario o password invalido.
+        </div>
+    </div>
+</div>
+{%endif%}
 
-<!-- Log In -->
-<section class="site-content site-section">
-    <div class="container">
-      {%if error_login %}
-      <div class="row">
-          <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-              <div class="alert alert-warning">
-                  Usuario o password invalido.
-              </div>
-          </div>
-      </div>
-      {%endif%}
+<div class="login-title text-center">
+    <h1><i class="gi gi-flash"></i> <strong>Ziip</strong><br><small> <strong>Login</strong></small></h1>
+</div>
+<!-- END Login Title -->
 
+<!-- Login Block -->
+<div class="block push-bit">
 
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-                <!-- Log In Form -->
-                <form action="doLogin" method="post" id="form-log-in" class="form-horizontal">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
-                                <input type="text"  name="usuario" class="form-control input-lg" placeholder="Usuario">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                                <input type="password" id="login-password" name="password" class="form-control input-lg" placeholder="Password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group form-actions">
-                        <div class="col-xs-6">
-                            <label class="switch switch-primary">
-                                <input type="checkbox" id="login-remember-me" name="recordar" checked><span></span>
-                            </label>
-                            <small>Recordar</small>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i> Login</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                    </div>
-                </form>
-                <div class="text-center">
-                    <a href="javascript:void(0)"><small>Recuperar contraseña</small></a>
+    <!-- Login Form -->
+    <form action="doLogin" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                    <input type="text"  name="usuario" class="form-control input-lg" placeholder="Usuario">
                 </div>
-                <!-- END Log In Form -->
             </div>
         </div>
-        <hr>
-    </div>
-</section>
-<!-- END Log In -->
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                    <input type="password" id="login-password" name="password" class="form-control input-lg" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-xs-4">
+                <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                    <input type="checkbox" id="login-remember-me" name="recordar" checked>
+                    <span></span>
+                </label>
+            </div>
+            <div class="col-xs-8 text-right">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 text-center">
+                <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
+                <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>
+            </div>
+        </div>
+    </form>
+    <!-- END Login Form -->
+
+</div>
+<!-- END Login Block -->

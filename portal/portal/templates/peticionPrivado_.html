@@ -1,0 +1,29 @@
+
+
+<section class="site-content site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
+              {{peticion.mensaje_anonimo}}
+              <br><br>
+              {{peticion.mensaje}}
+
+
+              <!--<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i> Ver menaje privado</button>-->
+
+              {%if logado %}
+              <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
+              <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
+              <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
+
+              {% else %}
+              <br>
+              Para aceptar al usuario como contacto debe estar logueado.<br>
+              <a href="login" class="btn btn-sm btn-primary"></i> Login</a>
+              {% endif %}
+
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>
