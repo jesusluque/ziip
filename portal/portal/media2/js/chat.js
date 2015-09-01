@@ -26,30 +26,34 @@ function loginChat(user, password) {
 			var login = {
 				user : user,
 				pass : password,
+			 	//chatToken: password,
 				device: 'browser'
 			};
 			console.log(' > login:');
 			console.log(login);
 			socket.emit('login', login);
 		});
-        //REVISADO HASTA AQUI!!!
+
 		// Login
 		socket.on('login', function(data) {
 			console.log(' < login:');
 			console.log(data);
 			if (data.status == 'ok') {
                 ID = data.userId;
+				//comentado por manu
 				//changeChatStatus('Connected');
-				getNewMessages();
+
+				//comentado por manu
+				//getNewMessages();
 				initChat(socket, ID, image);
 			} else {
 				//comentado por manu
                 //changeChatStatus('Disconnected');
 			}
 		});
-        //TRABAJANDO HASTA AQUI!!!
 
 
+        //REVISADO HASTA AQUI!!!
 
 		// Nuevo mensaje
 		socket.on('newMsg', function(data) {
@@ -111,6 +115,9 @@ function logoutChat(){
 	socket = undefined;
 }
 
+
+/*
+Comentado por manu
 function getNewMessages() {
 	$.ajax({
 		url : 'ajax.php',
@@ -124,6 +131,7 @@ function getNewMessages() {
 		}
 	});
 }
+*/
 
 function setNewMessages() {
 	if (iframeCW != null && iframeCW.setNewMessages != null) {
@@ -174,12 +182,13 @@ function titleAlert() {
 function titleStop() {
 	$.titleAlert.stop();
 }
-
+/*
+Comentado por manu
 function initChat(socket, id, image) {
 	if (iframeCW != null && iframeCW.initChat != null) {
 		iframeCW.initChat(socket, id, image);
 	}
-}
+}*/
 
 function onNewMsg(data) {
 	if (iframeCW != null && iframeCW.onNewMsg != null) {
@@ -208,4 +217,43 @@ window.onbeforeunload = function() {
 	if (typeof socket != 'undefined') {
 		socket.disconnect();
 	}
+};
+
+//Toda esta parte la traigo de chat abroad.js
+
+
+function initChat(socket, id, image) {
+
+	SOCKET = socket;
+	ID = id;
+	IMG = image;
+
+	// Reseteamos en nNews global
+	if (parent.resetNewMessages != null) {
+		parent.resetNewMessages();
+	}
+
+	$.ajax({
+		url : 'ajax.php',
+		dataType : 'json',
+		data : {
+			action : 'getChatUsers'
+		},
+		success : function(data) {
+			console.log(data);
+			$.map(data.users, function(user) {
+				if (user.id > 0 && user.id != ID) {
+					user.noreadeds = new Array();
+					users[user.id] = user;
+					addRoomTab(user);
+					addRoom(user);
+					addOldMessages(user.id);
+				}
+			});
+			if (data.users.length == 0) {
+				$('#chat-add').tooltip('open');
+			}
+		}
+	});
+
 };

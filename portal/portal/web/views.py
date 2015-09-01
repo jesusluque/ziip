@@ -29,6 +29,8 @@ def base(request,rendered,seccion_activa):
     if request.session.has_key("user_id"):
         logado = True
         usuario = Usuarios.objects.get(pk=request.session["user_id"])
+        usuario.chatToken=generaTokenSolicitud()
+        usuario.save()
 
     data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa],"usuario":usuario}
     rendered = render_to_string("base.html",data)
