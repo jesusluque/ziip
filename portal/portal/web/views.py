@@ -14,14 +14,7 @@ from portal.core.models import *
 from portal.web.titulos import *
 from portal.core.utils import *
 
-def loginRequired():
-    def decorator(a_view):
-        def _wrapped_view(request, *args, **kwargs):
-            if request.session.has_key("user_id"):
-                return a_view(request, *args, **kwargs)
-            return HttpResponseRedirect('/login')
-        return _wrapped_view
-    return decorator
+
 
 def base(request,rendered,seccion_activa):
     logado = False

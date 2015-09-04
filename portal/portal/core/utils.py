@@ -8,6 +8,15 @@ NUM_CARACTERES_TOKEN = 20
 CARACTERES_CODIGO = '1234567890'
 NUM_CARACTERES_CODIGO = 6
 
+def loginRequired():
+    def decorator(a_view):
+        def _wrapped_view(request, *args, **kwargs):
+            if request.session.has_key("user_id"):
+                return a_view(request, *args, **kwargs)
+            return HttpResponseRedirect('/login')
+        return _wrapped_view
+    return decorator
+    
 def generaTokenSolicitud():
     token = ''
     i=0

@@ -1,6 +1,12 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
+
+    url(r'^chat/getChatUsers$', 'portal.web.chat.getChatUsers'),
+
+    
+
+
     url(r'^$', 'portal.web.views.index'),
     url(r'^login$', 'portal.web.views.login'),
     url(r'^doLogin$', 'portal.web.views.doLogin'),

@@ -4,6 +4,9 @@
 var socket;
 var nNews = 0;
 var ID = 0;
+var users = new Array();
+var templates = {};
+var autoId = 1;
 
 /*
 var chatSound = new buzz.sound("sounds/buip", {
@@ -45,7 +48,8 @@ function loginChat(user, password) {
 
 				//comentado por manu
 				//getNewMessages();
-				initChat(socket, ID, image);
+				imagen="";
+				initChat(socket, ID,imagen);
 			} else {
 				//comentado por manu
                 //changeChatStatus('Disconnected');
@@ -228,16 +232,20 @@ function initChat(socket, id, image) {
 	ID = id;
 	IMG = image;
 
+
+	/*
+	Comentario manu
 	// Reseteamos en nNews global
+
 	if (parent.resetNewMessages != null) {
 		parent.resetNewMessages();
 	}
+	*/
 
 	$.ajax({
-		url : 'ajax.php',
+		url : 'chat/getChatUsers',
 		dataType : 'json',
 		data : {
-			action : 'getChatUsers'
 		},
 		success : function(data) {
 			console.log(data);
@@ -245,8 +253,9 @@ function initChat(socket, id, image) {
 				if (user.id > 0 && user.id != ID) {
 					user.noreadeds = new Array();
 					users[user.id] = user;
+					users[user.id].mensajes = [];
 					addRoomTab(user);
-					addRoom(user);
+					//addRoom(user);
 					addOldMessages(user.id);
 				}
 			});
@@ -256,4 +265,221 @@ function initChat(socket, id, image) {
 		}
 	});
 
+};
+
+
+
+function addRoomTab(user) {
+
+	var $roomTabs = $('#lista_usuarios');
+
+	getTemplate('js/templates/room_tab.handlebars', function(template) {
+		$roomTabs.append(template({
+			'user' : user
+		}));
+
+		$('.chats-frame').jScrollPane();
+	});
+
+	// Scroll down tabs list
+	$roomTabs.parent().animate({
+		scrollTop : $roomTabs.height()
+	});
+
+};
+
+
+/*
+// Añadir una sala para el usuario
+function addRoom(user, activate) {
+	getTemplate('js/templates/room.handlebars', function(template) {
+		$('#rooms').append(template({
+			user : user
+		}));
+		if (activate) {
+			activateTab(user.id);
+		}
+	});
+};
+*/
+
+
+// Obtener y generar una plantilla
+function getTemplate(path, callback) {
+	var source;
+	var template;
+	// Check first if we've the template cached
+	if (_.has(templates, path)) {
+		if (callback)
+			callback(templates[path]);
+		// If not we get and compile it
+	} else {
+		$.ajax({
+			url : path,
+			cache : false,
+			success : function(data) {
+				source = data;
+				template = Handlebars.compile(source);
+				// Store compiled template in cache
+				templates[path] = template;
+				if (callback)
+					callback(template);
+			}
+		});
+	}
+}
+
+
+/*
+function addOldMessages(userId) {
+
+	$.ajax({
+		url : 'ajax.php',
+		dataType : 'json',
+		data : {
+			action : 'getOldMessages',
+			user : userId
+		},
+		success : function(data) {
+
+			var messages = data.messages;
+			var nNews = 0;
+
+			getTemplate('chat/js/templates/message.handlebars', function(
+					template) {
+
+				var room_messages = $('#rooms .chat-room[data-id="' + userId
+						+ '"] .messages-list');
+
+				$.map(messages, function(m) {
+
+					var roomId;
+					var remit;
+					var image;
+					if (m.user == ID) {
+						roomId = m.destination;
+						remit = 'me';
+						image = IMG;
+					} else {
+						roomId = m.user;
+						remit = 'him';
+						image = users[roomId].image;
+					}
+
+					var date = moment(m.received);
+
+					var message = {
+						id : autoId++,
+						serverId : m.id,
+						text : m.name,
+						from : m.user,
+						type : m.type,
+						date : m.received
+					};
+
+					switch (parseInt(message.type)) {
+					case 1:
+						message.typeText = true;
+						break;
+					case 2:
+						message.typeImg = true;
+						break;
+					case 3:
+						message.typeLoc = true;
+						break;
+					}
+
+					var tempVars = template({
+						message : message,
+						image : image,
+						date : date.calendar(),
+						remit : remit
+					});
+
+					$(room_messages).prepend(tempVars);
+
+					// Trackin del mensaje
+
+					// Si yo soy el remitente
+					if (m.user == ID) {
+
+						// Un aspa para todos puesto que estan en la
+						// base de datos
+						var $message = $('#message-' + message.id);
+						$message.addClass('message-sent');
+
+						// Dos aspas para los que estén como
+						// recibidos
+						if (m.tracking == 2) {
+							$message.addClass('message-received');
+						}
+					} else {
+						// Si el tracking es uno lo guardamos en no readeds e
+						// incrementamos el badge
+						if (m.tracking == 1) {
+							nNews++;
+							user = users[userId];
+							user.noreadeds.push(m.id);
+						}
+					}
+
+				});
+
+				if (nNews > 0) {
+					increaseBadge(userId, nNews);
+					// Incrementamos el badge principal pero no alertamos
+					if (parent.increaseNewMessages != null) {
+						parent.increaseNewMessages(nNews, false);
+					}
+				}
+
+				room_messages.parent().children('.messages-loading').hide();
+
+			});
+
+		}
+	});
+
+};
+
+*/
+
+
+function addOldMessages(userId) {
+
+	$.ajax({
+		url : 'chat/getOldMessages',
+		dataType : 'json',
+		data : {},
+		success : function(data) {
+			var messages = data.messages;
+			$.map(messages, function(m) {
+				var roomId;
+				var remit;
+				var image;
+				if (m.user == ID) {
+					roomId = m.destination;
+					remit = 'me';
+					image = IMG;
+				} else {
+					roomId = m.user;
+					remit = 'him';
+					image = users[roomId].imagen;
+				}
+
+				var date = moment(m.received);
+
+				var message = {
+					id : autoId++,
+					serverId : m.id,
+					text : m.texto,
+					from : m.user,
+					date : m.received
+				};
+				users[userId].mensajes.append(message)
+			});
+
+		}
+
+	});
 };
