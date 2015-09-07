@@ -3,8 +3,11 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
 
     url(r'^chat/getChatUsers$', 'portal.web.chat.getChatUsers'),
+    url(r'^chat/getOldMessages$', 'portal.web.chat.getOldMessages'),
 
-    
+
+
+
 
 
     url(r'^$', 'portal.web.views.index'),

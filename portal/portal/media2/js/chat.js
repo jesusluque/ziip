@@ -7,6 +7,8 @@ var ID = 0;
 var users = new Array();
 var templates = {};
 var autoId = 1;
+var IMG=""
+var USUARIO_SELECCIONADO=0
 
 /*
 var chatSound = new buzz.sound("sounds/buip", {
@@ -14,9 +16,9 @@ var chatSound = new buzz.sound("sounds/buip", {
 });
 */
 
-function loginChat(user, password) {
+function loginChat(user, password, imagen) {
 
-
+	IMG = imagen;
 	if (typeof socket == 'undefined') {
 
         //comentado por manu
@@ -49,7 +51,7 @@ function loginChat(user, password) {
 				//comentado por manu
 				//getNewMessages();
 				imagen="";
-				initChat(socket, ID,imagen);
+				initChat(socket, ID);
 			} else {
 				//comentado por manu
                 //changeChatStatus('Disconnected');
@@ -106,7 +108,7 @@ function loginChat(user, password) {
 		if (socket.socket.connected) {
 			changeChatStatus('Connected');
 			setNewMessages();
-			initChat(socket, ID, image);
+			initChat(socket, ID);
 		}
 	}
 }
@@ -195,26 +197,81 @@ function initChat(socket, id, image) {
 }*/
 
 function onNewMsg(data) {
-	if (iframeCW != null && iframeCW.onNewMsg != null) {
-		iframeCW.onNewMsg(data);
+
+	var from = data.from;
+	var destination = data.destination;
+	var roomId = 0;
+	var remit = '';
+	var image = '';
+
+	if (from == ID) {
+		roomId = destination;
+		remit = 'me';
 	} else {
-		// Incrementar el nNews
-		if (data.from != ID) {
-			increaseNewMessages(1, true);
+		roomId = from;
+		remit = 'him';
+	}
+
+	// Si ya tenemos el usuario
+	if (typeof users[roomId] != 'undefined') {
+
+		// Cargar la imagen
+		if (remit == 'me') {
+			image = IMG;
+		} else {
+			image = users[roomId].image;
+		}
+
+		var date = moment(data.date);
+
+		// Mostramos el mensaje
+		data.id = autoId++;
+		addMessage(roomId, data, image, date.calendar(), remit);
+
+		// Si no es propio
+		if (roomId == from) {
+			// Si es de la sala abierta, notificamos la recepción
+			if (data.from == getActiveRoomId()) {
+				var sId = {
+					serverId : data.serverId
+				};
+				console.log(' > recMsg:');
+				console.log(sId);
+				SOCKET.emit('recMsg', sId);
+			}
+			// Si no, lo guardamos en no leidos e incrementamos el badge
+			else {
+				user = users[data.from];
+				user.noreadeds.push(data.serverId);
+				increaseBadge(data.from, 1);
+
+				// Incrementamos el badge principal y alertamos
+				if (parent.increaseNewMessages != null) {
+					parent.increaseNewMessages(1, true);
+				}
+			}
+		}
+		// Si es propio lo ponemos como enviado
+		else {
+			setSendedMessage(data.id, data.serverId);
 		}
 	}
+	// Si no lo tenemos lo añadimos a la lista
+	else {
+		addUser(roomId, false);
+	}
+
 }
 
+
+
 function onRecMsg(data) {
-	if (iframeCW != null && iframeCW.onRecMsg != null) {
-		iframeCW.onRecMsg(data);
-	}
+	setSendedMessage(data.id, data.serverId);
 }
 
 function onReadMsg(data) {
-	if (iframeCW != null && iframeCW.onReadMsg != null) {
-		iframeCW.onReadMsg(data);
-	}
+	$('.messages-list li[data-serverId="' + data.serverId + '"]').addClass(
+			'message-received');
 }
 
 window.onbeforeunload = function() {
@@ -226,12 +283,10 @@ window.onbeforeunload = function() {
 //Toda esta parte la traigo de chat abroad.js
 
 
-function initChat(socket, id, image) {
+function initChat(socket, id) {
 
 	SOCKET = socket;
 	ID = id;
-	IMG = image;
-
 
 	/*
 	Comentario manu
@@ -254,6 +309,7 @@ function initChat(socket, id, image) {
 					user.noreadeds = new Array();
 					users[user.id] = user;
 					users[user.id].mensajes = [];
+					users[user.id].noreadeds= [];
 					addRoomTab(user);
 					//addRoom(user);
 					addOldMessages(user.id);
@@ -261,13 +317,25 @@ function initChat(socket, id, image) {
 			});
 			if (data.users.length == 0) {
 				$('#chat-add').tooltip('open');
-			}
+			} /*else {
+				console.log(users);
+				var first_user = getFirstKey(users);
+
+				console.log(first_user);
+				activateTab(first_user.id)
+			}*/
 		}
 	});
 
+
+
+
 };
 
-
+function getFirstKey( data ) {
+        for (elem in data )
+            return elem;
+ }
 
 function addRoomTab(user) {
 
@@ -278,7 +346,9 @@ function addRoomTab(user) {
 			'user' : user
 		}));
 
-		$('.chats-frame').jScrollPane();
+		//comentado por manu
+		//$('.chats-frame').jScrollPane();
+		//$('#lista_usuarios').jScrollPane();
 	});
 
 	// Scroll down tabs list
@@ -461,14 +531,16 @@ function addOldMessages(userId) {
 					roomId = m.destination;
 					remit = 'me';
 					image = IMG;
+
+
 				} else {
 					roomId = m.user;
 					remit = 'him';
 					image = users[roomId].imagen;
+					if (m.readed=="None") {
+						users[userId].noreadeds.push(m.id)
+					}
 				}
-
-				var date = moment(m.received);
-
 				var message = {
 					id : autoId++,
 					serverId : m.id,
@@ -476,10 +548,200 @@ function addOldMessages(userId) {
 					from : m.user,
 					date : m.received
 				};
-				users[userId].mensajes.append(message)
-			});
 
+				users[userId].mensajes.push(message)
+			});
+			var $badge = $('.chat-room[data-id="' + userId+ '"] .badge');
+			var no_leidos = users[userId].noreadeds
+
+			$badge.text( no_leidos.length);
 		}
 
 	});
 };
+
+
+
+
+function activateTab(id) {
+
+	console.log("activando tab");
+	/* comentado manu
+	$('#panel-search').hide();
+	$('#panel-rooms').show();
+
+	$('#rooms_tabs li').removeClass('active');
+	$('#rooms_tabs li[data-id="' + id + '"]').addClass('active');
+	*/
+	user = users[id];
+	if (USUARIO_SELECCIONADO!=id) {
+		USUARIO_SELECCIONADO = id;
+
+		// Decrementar el main badge
+		/*
+		if (window != window.top) {
+			if (parent.decreaseNewMessages != null) {
+				parent.decreaseNewMessages(user.noreadeds.length);
+			}
+		}
+		*/
+		// Confirmar que hemos recibido los mensajes
+		$.map(user.noreadeds, function(messageId) {
+			var sId = {
+				serverId : messageId
+			};
+			console.log(' > recMsg');
+			console.log(sId);
+			SOCKET.emit('recMsg', sId);
+		})
+
+		// Reiniciar los mensajes no leidos
+		user.noreadeds.splice(0, user.noreadeds.length);
+
+		//Limpiar el badge propio
+		var $badge = $('.chat-room[data-id="' + id + '"] .badge');
+		$badge.text(0);
+		//$badge.css('visibility', 'hidden');
+		// Poner como activo sólo ese chat
+		$('a.chat-room.active ').removeClass('active');
+		$('a.chat-room[data-id="' + id + '"]').addClass('active');
+
+		//Ponemos el nombre de usuario en la cabecera
+		var $usuario_seleccionado = $('#usuario_seleccionado');
+		$usuario_seleccionado.text(user.username);
+
+		//Generamos los mensajes y los ponemos en el div
+		generarMensajes(id);
+
+		// Mostrar el último mensaje
+		var room_messages = $('#lista-mensajes');
+		room_messages.parent().animate({
+			scrollTop : room_messages.height()
+		});
+
+		// Focus input
+		$('#message-text').focus();
+
+	}
+};
+
+function generarMensajes(id) {
+
+	var messages = users[id].mensajes;
+
+	getTemplate('js/templates/message.handlebars', function(
+			template) {
+
+		var room_messages = $('#lista-mensajes');
+		$(room_messages).html("");
+		$.map(messages, function(m) {
+
+			var roomId;
+			var clase;
+			var image;
+			if (m.from == ID) {
+				roomId = m.destination;
+				clase = '';
+				image = IMG;
+			} else {
+				roomId = m.user;
+				clase = 'chatui-talk-msg-highlight themed-border';
+				image = users[id].imagen;
+			}
+			var date = m.received;
+			var tempVars = template({
+				id:m.id,
+				message : m.text,
+				image : image,
+				//date : date.calendar(),
+				date:m.received,
+				clase : clase
+			});
+
+			$(room_messages).append(tempVars);
+
+		});
+		room_messages.parent().animate({
+			scrollTop : room_messages.height()
+		});
+		//$('.chatui-talk-scroll').jScrollPane();
+	});
+}
+
+
+
+$(document).ready(function() {
+
+	// Scroll a la izquierda jScrollPane
+	//$('.slimScrollDiv').jScrollPane();
+
+	// Enviar nuevo mensaje
+	$('#message-form').submit(
+		function(eventObject) {
+			eventObject.preventDefault();
+
+			if ($('#message-text').val() != "") {
+
+				var userId = getActiveRoomId();
+				if (userId != 0) {
+					var date = moment();
+					var json = {
+						to : userId,
+						date : date
+								.format('YYYY-MM-DD HH:mm:ss')
+								+ ' GMT'
+								+ date.format('Z'),
+								text : $('#message-text')
+								.val(),
+						type : 1,
+						id : autoId++
+					};
+					console.log(' > newMsg');
+					console.log(json);
+					SOCKET.emit('newMsg', json);
+					addMessage(userId, json, IMG, date.calendar(), '');
+					users[userId].mensajes.push(json);
+					$('#message-text').val('');
+				}
+			}
+	});
+});
+
+
+function getActiveRoomId() {
+
+	return USUARIO_SELECCIONADO;
+};
+
+
+
+// Añadir mensaje a una sala
+function addMessage(roomId, message, image, date, clase) {
+	console.log(message);
+	getTemplate('js/templates/message.handlebars', function(template) {
+
+		var room_messages = $('#lista-mensajes');
+
+		var tempVars = template({
+			id:message.id,
+			message : message.text,
+			image : image,
+			date: date,
+			clase : clase
+		});
+
+		$(room_messages).append(tempVars);
+		room_messages.parent().animate({
+			scrollTop : room_messages.height()
+		});
+
+	});
+};
+
+
+function setSendedMessage(id, sId) {
+
+	$message = $('#message-' + id);
+	$message.addClass('message-sent');
+	$message.attr('data-serverId', sId);
+}

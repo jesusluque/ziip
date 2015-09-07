@@ -28,10 +28,29 @@ def getChatUsers (request):
     json_usuarios=[]
 
     for user in usuarios:
+
         usuario={"id":user.id,
             "username":user.usuario,
             "imagen":user.imagen
             }
         json_usuarios.append(usuario)
     response = json.dumps({"users":json_usuarios})
+    return HttpResponse(response)
+
+@loginRequired()
+def getOldMessages (request):
+    mensajes_list = ChatMensajes.objects.filter(Q(usuario=request.session["user_id"])|Q(destinatario=request.session["user_id"]))
+    mensajes=[]
+
+    for msg in mensajes_list:
+        mensaje={
+            "id":msg.id,
+            "user":msg.usuario,
+            "destination":msg.destinatario,
+            "received":str(msg.recibido),
+            "readed":str(msg.leido),
+            "texto":msg.texto,
+        }
+        mensajes.append(mensaje)
+    response = json.dumps({"messages":mensajes})
     return HttpResponse(response)
