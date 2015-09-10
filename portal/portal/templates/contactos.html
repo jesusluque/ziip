@@ -12,13 +12,13 @@
 <div class="block push-bit">
     <form action="" method="post" id="form-login" class="form-horizontal  form-control-borderless">
         {%for contacto in contactos %}
-        <div class="form-group ">
+        <div class="form-group accion">
             <div class="col-xs-12">
                 <div class="input-group">
                     {%if contacto.usuario2.imagen %}
                         <span class="input-group-addon"><img src="{{contacto.usuario2.imagen.url}}" alt="" ></span>
                     {% endif %}
-                    {{contacto.usuario2.usuario}}
+                    <a href="#">{{contacto.usuario2.usuario}}</a>
                 </div>
             </div>
         </div>

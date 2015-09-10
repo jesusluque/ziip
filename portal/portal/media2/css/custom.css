@@ -35,14 +35,14 @@
 }
 .accion {
         background-color: #FFFFFF;
-        margin-left: 50px !important;
-        margin-right: 50px !important;
-        height: 60px;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        height: 80px;
 }
 
 .accion  img {
-height: 30px;
-width:30px !important;
+height: 50px;
+width:50px !important;
 }
 .accion{
     text-align: right;
@@ -92,6 +92,12 @@ width:30px !important;
 #login-container .login-title h1 small {
     color:#8251A1;
 }
+
+
+.input-group-addon, .input-group-btn {
+    vertical-align: inherit;
+}
+
 
 @media screen and (min-width: 768px) {
     #login-container {

@@ -29,6 +29,12 @@ def base(request,rendered,seccion_activa):
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
 
+def prueba(request):
+    data={}
+    rendered = render_to_string("contactos_javi.html",data)
+    return HttpResponse(rendered)
+
+
 def index(request):
     data={}
     rendered = render_to_string("index.html",data)
