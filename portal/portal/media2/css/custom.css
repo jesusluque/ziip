@@ -1,3 +1,7 @@
+h1 {
+    margin-top: 15px
+}
+
 .navbar.navbar-default {
     background-color: #583867;
     border-bottom: 1px solid #dedede;
@@ -75,7 +79,7 @@ width:50px !important;
 #login-container .login-title .logo-tittle{
     /*border: 1px solid red;*/
     float: left;
-    padding: 20px 20px 20px 10px;
+    padding: 0px 10px 0px 10px;
 }
 
 #login-container .login-title .txt-tittle{
@@ -117,7 +121,7 @@ width:50px !important;
     }
 
     #login-container .login-title .txt-tittle{
-    width: 65%;
+    width: 60%;
     }
 
 
