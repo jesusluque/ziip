@@ -25,6 +25,7 @@ def generaCodigo():
 
 class Usuarios(models.Model):
     token = models.CharField(max_length=250) #token para acceder en cada peticion
+    chatToken = models.CharField(max_length=250)# token para acceso del chat web, se genera uno cada vez que se accede al chat
     num_telefono = models.CharField(max_length=250)
     fecha_registro = models.DateField(blank=True, null=True, default=datetime.now)
     usuario = models.CharField(max_length=250)

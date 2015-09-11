@@ -1,19 +1,49 @@
+<div class="login-title">
+   <div class="logo-tittle">
+       <img src="/img/icon57.png">
+   </div>
+   <div class="txt-tittle">
+       <h1> <strong>Ziip</strong><br><small> <strong>Mensaje</strong></small></h1>
+   </div>
+</div>
+<!-- END Login Title -->
+<div class="clearfix"></div>
+<!-- Login Block -->
+<div class="block push-bit">
 
+    <!-- Login Form -->
+    <form action="" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
 
-<section class="site-content site-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-              {{peticion.mensaje_anonimo}}
-              <br><br>
+                     {{peticion.mensaje_anonimo}}
 
-              <!--<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i> Ver menaje privado</button>-->
-              <a href="peticionPrivado?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Ver menaje privado</a><br>
-              <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
-              <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
-
+                </div>
             </div>
         </div>
-        <hr>
-    </div>
-</section>
+        <div class="form-group">
+            <div class="col-xs-4">
+                <div class="input-group">
+                    <a href="peticionPrivado?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Ver menaje privado</a><br>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="input-group">
+                    <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="input-group">
+                    <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
+                </div>
+            </div>
+
+
+        </div>
+
+    </form>
+    <!-- END Login Form -->
+
+</div>
+<!-- END Login Block -->

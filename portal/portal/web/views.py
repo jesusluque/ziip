@@ -14,22 +14,26 @@ from portal.core.models import *
 from portal.web.titulos import *
 from portal.core.utils import *
 
-def loginRequired():
-    def decorator(a_view):
-        def _wrapped_view(request, *args, **kwargs):
-            if request.session.has_key("user_id"):
-                return a_view(request, *args, **kwargs)
-            return HttpResponseRedirect('/login')
-        return _wrapped_view
-    return decorator
+
 
 def base(request,rendered,seccion_activa):
     logado = False
+    usuario=None
     if request.session.has_key("user_id"):
         logado = True
-    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa]}
+        usuario = Usuarios.objects.get(pk=request.session["user_id"])
+        usuario.chatToken=generaTokenSolicitud()
+        usuario.save()
+
+    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa],"usuario":usuario}
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
+
+def prueba(request):
+    data={}
+    rendered = render_to_string("contactos_javi.html",data)
+    return HttpResponse(rendered)
+
 
 def index(request):
     data={}
@@ -198,7 +202,7 @@ def doConfirmaMovil(request):
 
 def peticion(request, codigo):
     lista_peticiones = Peticiones.objects.filter(codigo=codigo)
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=codigo)
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
@@ -211,7 +215,7 @@ def peticion(request, codigo):
 
 def peticionPrivado(request):
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
@@ -234,7 +238,7 @@ def peticionPrivado(request):
 def aceptarContactoPeticion(request):
 
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
         usuario_logado=2
     else:
@@ -291,6 +295,13 @@ def recientes(request):
     recientes = Peticiones.objects.filter(usuario_id=request.session["user_id"]).order_by("-id")[:10]
     data = {"recientes":recientes}
     rendered = render_to_string("recientes.html",data)
+    return base(request,rendered,"recientes")
+
+@loginRequired()
+def reciente(request):
+    reciente = Peticiones.objects.get(usuario_id=request.session["user_id"], pk=request.GET["peticion_id"])
+    data = {"reciente":reciente}
+    rendered = render_to_string("reciente.html",data)
     return base(request,rendered,"recientes")
 
 @loginRequired()
@@ -418,9 +429,11 @@ def sendPeticion(request):
 
 
     if request.POST["tipo_peticion"]!=TIPO_PETICION_CONECTA:
-
         datos["mensaje"]=request.POST["mensaje"]
-        datos["mensaje_anonimo"]=request.POST["mensaje_anonimo"]
+        if request.POST.has_key("mensaje_anonimo"):
+            datos["mensaje_anonimo"] = request.POST["mensaje_anonimo"]
+        else:
+            errores.append("Debe seleccionar un mensaje")
 
         peticion.mensaje = request.POST["mensaje"]
         mensajes={}
@@ -435,7 +448,8 @@ def sendPeticion(request):
             mensajes["2"]="Os he visto muchas veces, se que haceis buena pareja."
             mensajes["3"]="Nos conocemos los tres y creo que os gustáis."
             mensajes["4"]="Os he visto a ambos en clase, creo que hacéis buena pareja."
-        peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
+        if request.POST.has_key("mensaje_anonimo"):
+            peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
 
     if request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
 
@@ -478,6 +492,7 @@ def sendPeticion(request):
 
 @loginRequired()
 def peticionEnviada(request):
+    request.session["peticionEnviada"]=1
     peticion=Peticiones.objects.get(pk=request.session["peticionEnviada"])
     data = {"peticion":peticion}
     paginas={}
@@ -594,12 +609,12 @@ def sendContacto(request):
 
 def legal(request):
     texto = Textos.objects.get()
-    data={"texto":texto.aviso_legal}
+    data={"texto":texto.aviso_legal,"titulo":"Asivo legal"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"legal")
 
 def privacidad(request):
     texto = Textos.objects.get()
-    data={"texto":texto.privacidad}
+    data={"texto":texto.privacidad,"titulo":"Politica de privacidad"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"privacidad")

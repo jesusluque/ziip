@@ -1,32 +1,27 @@
 
-<section class="site-content site-section">
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table table-bordered table-vcenter">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th class="text-center">Contacto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {%for contacto in contactos %}
-                    <tr>
-                        <td style="width: 200px;">
-                          {%if contacto.usuario2.imagen %}
-                            <img src="{{contacto.usuario2.imagen.url}}" alt="" style="width: 180px;">
-                            {% endif %}
-                        </td>
-                        <td>
-                          {{contacto.usuario2.usuario}}
-                        </td>
-
-                    </tr>
-                    {% endfor %}
-
-                </tbody>
-            </table>
+<div class="login-title">
+   <div class="logo-tittle">
+       <img src="/img/icon57.png">
+   </div>
+   <div class="txt-tittle">
+       <h1> <strong>Ziip</strong><br><small> <strong>Mis contactos</strong></small></h1>
+   </div>
+</div>
+<!-- END Login Title -->
+<div class="clearfix"></div>
+<div class="block push-bit">
+    <form action="" method="post" id="form-login" class="form-horizontal  form-control-borderless">
+        {%for contacto in contactos %}
+        <div class="form-group accion">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    {%if contacto.usuario2.imagen %}
+                        <span class="input-group-addon"><img src="{{contacto.usuario2.imagen.url}}" alt="" ></span>
+                    {% endif %}
+                    <a href="#">{{contacto.usuario2.usuario}}</a>
+                </div>
+            </div>
         </div>
-
-    </div>
-</section>
+        {% endfor %}
+    </form>
+</div>

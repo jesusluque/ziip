@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
 
         <title>Ziip</title>
 
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <meta name="robots" content="">
+        <meta name="description" content="Ziip">
+        <meta name="author" content="manuthema.rodriguez@gmail.com">
+        <meta name="robots" content="noindex, nofollow">
 
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
 
@@ -35,20 +36,49 @@
         <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
         <link rel="stylesheet" href="css/main.css">
 
+        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
         <link rel="stylesheet" href="css/themes.css">
-
         <!-- END Stylesheets -->
         <link rel="stylesheet" href="css/custom.css">
-
         <!-- Modernizr (browser feature detection library) & Respond.js (enables responsive CSS code on browsers that don't support it, eg IE8) -->
         <script src="js/vendor/modernizr-respond.min.js"></script>
     </head>
     <body>
-
 {% include "head.html" %}
 {{content|safe}}
 {% include "footer.html" %}
+
+{% if seccion_activa == "chat" %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="js/socket.io.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/handlebars-1.0.rc.1.js"></script>
+<script src="js/moment.js"></script>
+<!--
+<script src="js/scrollPane.js"></script>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/app.js"></script>
+
+<script src="js/pages/readyChat.js"></script>
+-->
+
+<script src="js/chat.js"></script>
+<script>
+        $(document).ready(function() {
+            //ReadyChat.init();
+            //loginChat('{{usuario.usuario}}', '{{usuario.chatToken}}', '{{usuario.imagen}}');
+            loginChat('{{usuario.usuario}}', '1234', '{{usuario.imagen}}');
+        });
+
+
+</script>
+    <!--<script>$(function(){ ReadyChat.init(); });</script>-->
+
+{%endif%}
 
     </body>
 </html>

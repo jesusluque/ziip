@@ -1,16 +1,74 @@
+<div class="block">
+    <!-- Title -->
+    <div class="block-title">
 
-<!-- Log In -->
-<section class="site-content site-section">
-    <div class="container">
-
-      <div class="row">
-          <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-              <div class="alert alert-warning">
-                  Chat en desarrollo
-              </div>
-          </div>
-      </div>
-
+        <h2 id="usuario_seleccionado">Selecciona usuario</h2>
     </div>
-</section>
-<!-- END Log In -->
+    <!-- END Title -->
+
+    <!-- Content -->
+    <div class="chatui-container block-content-full" style="height: 350px;">
+        <!-- People -->
+        <div class="chatui-people themed-background-dark" style="height: 350px;">
+            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 350px;"><div class="chatui-people-scroll" style="height: 600px; overflow: hidden; width: auto;">
+                <div class="list-group" id="lista_usuarios" style=" overflow: scroll;">
+
+                </div>
+                <!-- END Online -->
+            </div><div class="slimScrollBar" style="width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 513.552068473609px; background: rgb(255, 255, 255);"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+        </div>
+        <!-- END People -->
+
+        <!-- Talk -->
+        <div class="chatui-talk" style="height: 300px;">
+            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;">
+                <div class="chatui-talk-scroll" style="height: 300px; overflow: scroll; width: auto;">
+                <ul id="lista-mensajes">
+                    <li class="text-center"><small>yesterday, 23:10</small></li>
+                    <li class="chatui-talk-msg">
+                        <img src="img/placeholders/avatars/avatar6.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar"> Buenas
+                    </li>
+                    <li class="chatui-talk-msg">
+                        <img src="img/placeholders/avatars/avatar6.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar"> Que tal?
+                    </li>
+                    <li class="text-center"><small>just now</small></li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                    <li class="chatui-talk-msg chatui-talk-msg-highlight themed-border">
+                        <img src="img/placeholders/avatars/avatar2.jpg" alt="Avatar" class="img-circle chatui-talk-msg-avatar">Aqui andamos
+                    </li>
+                </ul>
+            </div>
+            <div class="slimScrollBar" style="width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 550px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+        </div>
+        <!-- END Talk -->
+
+        <!-- Input -->
+        <div class="chatui-input">
+            <form id="message-form" action="page_ready_chat.html" method="post" class="form-horizontal form-control-borderless remove-margin">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-angle-right"></i></span>
+                    <input type="text" id="message-text" name="chatui-message" class="form-control input-lg" placeholder="Escribe un mensaje y pulsa enter..">
+                </div>
+            </form>
+        </div>
+        <!-- END Input -->
+    </div>
+    <!-- END Content -->
+</div>

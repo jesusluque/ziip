@@ -25,7 +25,7 @@
     
     NSString *mensaje;
     if ([self.accion isEqualToString:@"anonimo"]){
-        mensaje = @"Selecciona a la persona para enviarle un mensaje anonimo";
+        mensaje = @"Selecciona a la persona para enviarle un mensaje";
     } else if ([self.accion isEqualToString:@"conecta"]){
         mensaje = @"Selecciona a la persona para enviarle una invitación";
         

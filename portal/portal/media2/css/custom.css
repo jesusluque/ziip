@@ -1,0 +1,124 @@
+.navbar.navbar-default {
+    background-color: #583867;
+    border-bottom: 1px solid #dedede;
+}
+
+#page-content + footer {
+    background-color: #583867;
+    border-top: 1px solid #dedede;
+}
+
+
+.nav.navbar-nav-custom>li>a {
+    min-width: 50px;
+    padding: 5px 7px;
+    line-height: 40px;
+    text-align: center;
+    color: #dedede;
+    position: relative;
+}
+
+.nav.navbar-nav-custom > li.open > a, .nav.navbar-nav-custom > li > a:hover, .nav.navbar-nav-custom > li > a:focus {
+    background-color: #6d4580;
+}
+
+.text-primary, .text-primary:hover, a, a:hover, a:focus, a.text-primary, a.text-primary:hover, a.text-primary:focus {
+    color: #dedede;
+}
+
+#year-copy {
+    color: #dedede;
+}
+
+.block {
+    background-color: #F2EDF9;
+}
+.accion {
+        background-color: #FFFFFF;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        height: 80px;
+}
+
+.accion  img {
+height: 50px;
+width:50px !important;
+}
+.accion{
+    text-align: right;
+    vertical-align: middle;
+}
+.accion .input-group{
+    padding-top: 15px;
+}
+
+.accion .input-group-addon{
+    padding-top: 0px;
+    margin-top: -20px;
+}
+.accion a{
+    margin-top: 5px;
+    color:#8251A1;
+}
+
+.input-group {
+    background-color: #FFFFFF;
+}
+
+#login-container .login-title {
+    background-color: #FFFFFF;
+    position: relative;
+    float: left;
+    width: 540px;
+}
+
+#login-container .login-title .logo-tittle{
+    /*border: 1px solid red;*/
+    float: left;
+    padding: 20px 20px 20px 10px;
+}
+
+#login-container .login-title .txt-tittle{
+    /*border: 1px solid cyan;*/
+    float: left;
+    text-align: right;
+    width: 80%;
+}
+
+#login-container .login-title h1 {
+    color:#8251A1;
+}
+
+#login-container .login-title h1 small {
+    color:#8251A1;
+}
+
+
+.input-group-addon, .input-group-btn {
+    vertical-align: inherit;
+}
+
+
+@media screen and (min-width: 768px) {
+    #login-container {
+        width: 540px !important;
+        top: 156px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #login-container {
+        width: 300px !important;
+        top: 80px !important;
+    }
+
+    #login-container .login-title {
+    width: 300px !important;
+    }
+
+    #login-container .login-title .txt-tittle{
+    width: 65%;
+    }
+
+
+}

@@ -1,58 +1,60 @@
+{%if errores %}
+<div class="row">
+    <div class="col-sm-12 col-lg-12 site-block">
+        <div class="alert alert-warning">
+            Se han encontrado los siguientes errores:
+            {%for error in errores %}
+                <br/>{{error}}
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{%endif%}
 
-<!-- Sign Up -->
-<section class="site-content site-section">
-    <div class="container">
-        {%if errores %}
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-                <div class="alert alert-warning">
-                    Se han encontrado los siguientes errores:
-                    {%for error in errores %}
-                        <br/>{{error}}
-                    {%endfor%}
+<div class="login-title">
+   <div class="logo-tittle">
+       <img src="/img/icon57.png">
+   </div>
+   <div class="txt-tittle">
+       <h1> <strong>Ziip</strong><br><small> <strong>Ajustes</strong></small></h1>
+   </div>
+</div>
+<!-- END Login Title -->
+<div class="clearfix"></div>
+
+<!-- Login Block -->
+<div class="block push-bit">
+
+    <!-- Login Form -->
+    <form action="saveAjustes" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless"  enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
+        {%if not usuario.num_telefono %}
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input type="text" id="telefono" name="telefono" class="form-control input-lg" placeholder="Telefono Movil"  value="{{datos.telefono}}">
                 </div>
             </div>
         </div>
-        {%endif%}
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4 site-block">
-                <!-- Sign Up Form -->
-                <form action="saveAjustes" method="post" id="form-sign-up" class="form-horizontal" enctype="multipart/form-data">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
-                    {%if not usuario.num_telefono %}
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <input type="text" id="telefono" name="telefono" class="form-control input-lg" placeholder="Telefono Movil"  value="{{datos.telefono}}">
-                            </div>
-                        </div>
-                    </div>
+        {% endif %}
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    {%if usuario.imagen %}
+                    <img src="{{usuario.imagen}}" width="100px" height="100px">
                     {% endif %}
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                {%if usuario.imagen %}
-                                <img src="{{usuario.imagen}}" width="100px" height="100px">
-                                {% endif %}
-                                <input type="file" id="imagen" name="imagen" class="form-control input-lg">
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-group form-actions">
-                        <div class="col-xs-6">
-
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Guardar</button>
-                        </div>
-                    </div>
-                </form>
-                <!-- END Sign Up Form -->
+                    <input type="file" id="imagen" name="imagen" class="form-control input-lg">
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- END Sign Up -->
+        <div class="form-group">
+            <div class="col-xs-12 text-right">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Guardar</button>
+            </div>
+        </div>
+
+    </form>
+    <!-- END Login Form -->
+
+</div>
+<!-- END Login Block -->

@@ -10,6 +10,8 @@ from django.template.loader import render_to_string
 from portal.core.models import *
 from portal.core.celery_tasks import *
 from portal.core.utils import *
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 
 @csrf_exempt
