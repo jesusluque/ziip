@@ -99,8 +99,10 @@ width:50px !important;
 
 
 .input-group-addon, .input-group-btn {
-    vertical-align: inherit;
+    vertical-align: middle;
 }
+
+
 
 
 @media screen and (min-width: 768px) {
@@ -123,6 +125,3 @@ width:50px !important;
     #login-container .login-title .txt-tittle{
     width: 60%;
     }
-
-
-}

@@ -18,28 +18,25 @@
     <!-- Login Form -->
     <form action="" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
         {%for reciente in recientes %}
-        <div class="form-group">
-            <div class="col-xs-4">
+        <div class="form-group accion">
+            <div class="col-xs-12">
                 <div class="input-group">
-                     {{reciente.tipo|imagenTipo|safe}}
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="input-group">
-                    {{reciente.contacto_nombre}} {{reciente.contacto_contacto}}
-                    {% ifequal reciente.tipo "3" %}
+                    <span class="input-group-addon recientes"><a href="#">{{reciente.tipo|imagenTipo|safe}}></a></span>
+                   <a href="#">{{reciente.contacto_nombre}}</a>
+                   <br>
+                   <a href="#">{{reciente.contacto_contacto}}</a>
+                   <br>
+                   {% ifequal reciente.tipo "3" %}
+                    <a href="#">{{reciente.contacto2_nombre}} </a>
                     <br>
-                    {{reciente.contacto2_nombre}} {{reciente.contacto2_contacto}}
-                    {% endifequal %}
+                    <a href="#">{{reciente.contacto2_contacto}}</a>
+                    <br>
+                   {% endifequal %}
+
+                   <a href="#">{{reciente.fecha|date:"h:i d-m-Y"}}</a>
+     
                 </div>
             </div>
-
-            <div class="col-xs-4">
-                <div class="input-group">
-                     {{reciente.fecha|date:"h:i d-m-Y"}}
-                </div>
-            </div>
-
         </div>
         {% endfor %}
 
