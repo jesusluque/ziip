@@ -50,18 +50,23 @@
 {{content|safe}}
 {% include "footer.html" %}
 
-{% if seccion_activa == "chat" %}
+
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="js/vendor/modernizr-respond.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/app.js"></script>
+
+{% if seccion_activa == "chat" %}
 <script src="js/socket.io.js"></script>
 <script src="js/underscore-min.js"></script>
 <script src="js/handlebars-1.0.rc.1.js"></script>
 <script src="js/moment.js"></script>
+
 <!--
 <script src="js/scrollPane.js"></script>
 
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/app.js"></script>
 
 <script src="js/pages/readyChat.js"></script>
 -->
@@ -71,7 +76,8 @@
         $(document).ready(function() {
             //ReadyChat.init();
             //loginChat('{{usuario.usuario}}', '{{usuario.chatToken}}', '{{usuario.imagen}}');
-            loginChat('{{usuario.usuario}}', '1234', '{{usuario.imagen}}');
+
+            loginChat('{{usuario.usuario}}', '{{usuario.password}}', '{{usuario.imagen}}');
         });
 
 

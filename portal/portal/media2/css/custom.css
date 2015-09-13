@@ -125,3 +125,22 @@ width:50px !important;
     #login-container .login-title .txt-tittle{
     width: 60%;
     }
+}
+
+.btn-primary {
+    background-color: #583867;
+    border-color:#583867;
+}
+
+.btn-primary:hover {
+    background-color: #583867;
+    border-color:#583867;
+}
+
+.switch-primary input:checked + span {
+    background-color: #583867;
+}
+
+.switch-primary span {
+    border-color: #583867;
+}

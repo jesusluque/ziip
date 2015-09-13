@@ -200,32 +200,70 @@ function onNewMsg(data) {
 
 	var from = data.from;
 	var destination = data.destination;
-	var roomId = 0;
 	var remit = '';
 	var image = '';
-
+	var userId=0;
+	var clase="";
 	if (from == ID) {
-		roomId = destination;
 		remit = 'me';
+		userId=data.destination;
 	} else {
 		roomId = from;
 		remit = 'him';
+		userId=from;
+		clase="chatui-talk-msg-highlight themed-border";
+
 	}
 
 	// Si ya tenemos el usuario
-	if (typeof users[roomId] != 'undefined') {
+	if (typeof users[userId] == 'undefined') {
+		users[userId] = {};
+		users[userId].mensajes = [];
+		users[userId].noreadeds= [];
+		addUser(userId);
+	}
 
-		// Cargar la imagen
-		if (remit == 'me') {
-			image = IMG;
-		} else {
-			image = users[roomId].image;
-		}
+	var message = {
+		id : autoId++,
+		serverId : data.id,
+		text : data.text,
+		from : data.from,
+		date : data.received
+	};
 
-		var date = moment(data.date);
+	users[userId].mensajes.push(message)
+
+
+	if (userId == USUARIO_SELECCIONADO) {
+		//si estamos en el tab seleccionado, pintamos el mensaje
+		var date=moment();
+
+
+		addMessage(userId, message, image, date.calendar(), clase);
+
+
+	} else {
+		//si no estamos en el tab seleccionado, incrementamos el tab
+		//y lo agregamos a los mensajes no leidos
+		users[userId].noreadeds.push(data.id)
+		var $badge = $('.chat-room[data-id="' + userId+ '"] .badge');
+        var no_leidos = users[userId].noreadeds
+        $badge.text( no_leidos.length);
+	}
+	//hacemos el recMsg
+	//En la version de carlos, solo lo hacia si el tab estaba activo
+	var sId = {
+		serverId : data.serverId
+	};
+
+	SOCKET.emit('recMsg', sId);
+
+
+	/*
+	var date = moment(data.date);
 
 		// Mostramos el mensaje
-		data.id = autoId++;
+
 		addMessage(roomId, data, image, date.calendar(), remit);
 
 		// Si no es propio
@@ -255,12 +293,7 @@ function onNewMsg(data) {
 		else {
 			setSendedMessage(data.id, data.serverId);
 		}
-	}
-	// Si no lo tenemos lo añadimos a la lista
-	else {
-		addUser(roomId, false);
-	}
-
+		*/
 }
 
 
@@ -303,10 +336,9 @@ function initChat(socket, id) {
 		data : {
 		},
 		success : function(data) {
-			console.log(data);
 			$.map(data.users, function(user) {
 				if (user.id > 0 && user.id != ID) {
-					user.noreadeds = new Array();
+
 					users[user.id] = user;
 					users[user.id].mensajes = [];
 					users[user.id].noreadeds= [];
@@ -520,7 +552,9 @@ function addOldMessages(userId) {
 	$.ajax({
 		url : 'chat/getOldMessages',
 		dataType : 'json',
-		data : {},
+		data : {
+			user_id:userId,
+		},
 		success : function(data) {
 			var messages = data.messages;
 			$.map(messages, function(m) {
@@ -531,8 +565,6 @@ function addOldMessages(userId) {
 					roomId = m.destination;
 					remit = 'me';
 					image = IMG;
-
-
 				} else {
 					roomId = m.user;
 					remit = 'him';
@@ -550,6 +582,7 @@ function addOldMessages(userId) {
 				};
 
 				users[userId].mensajes.push(message)
+
 			});
 			var $badge = $('.chat-room[data-id="' + userId+ '"] .badge');
 			var no_leidos = users[userId].noreadeds
@@ -565,7 +598,6 @@ function addOldMessages(userId) {
 
 function activateTab(id) {
 
-	console.log("activando tab");
 	/* comentado manu
 	$('#panel-search').hide();
 	$('#panel-rooms').show();
@@ -686,13 +718,13 @@ $(document).ready(function() {
 				if (userId != 0) {
 					var date = moment();
 					var json = {
+						from: ID,
 						to : userId,
 						date : date
 								.format('YYYY-MM-DD HH:mm:ss')
 								+ ' GMT'
 								+ date.format('Z'),
-								text : $('#message-text')
-								.val(),
+						text : $('#message-text').val(),
 						type : 1,
 						id : autoId++
 					};
@@ -717,7 +749,6 @@ function getActiveRoomId() {
 
 // Añadir mensaje a una sala
 function addMessage(roomId, message, image, date, clase) {
-	console.log(message);
 	getTemplate('js/templates/message.handlebars', function(template) {
 
 		var room_messages = $('#lista-mensajes');
@@ -745,3 +776,22 @@ function setSendedMessage(id, sId) {
 	$message.addClass('message-sent');
 	$message.attr('data-serverId', sId);
 }
+
+
+function addUser(id) {
+
+	$.ajax({
+			url : '/chat/getUser',
+			dataType : 'json',
+			data : {
+				id : id
+			},
+			success : function(data) {
+				var user = data.user;
+				users[id].username = user.username;
+				users[id].imagen = user.imagen;
+				addRoomTab(users[id]);
+			}
+	});
+
+};
