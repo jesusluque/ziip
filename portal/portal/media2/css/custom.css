@@ -27,9 +27,16 @@ h1 {
 }
 
 .text-primary, .text-primary:hover, a, a:hover, a:focus, a.text-primary, a.text-primary:hover, a.text-primary:focus {
-    color: #dedede;
+    color: #583867;
 }
 
+
+ footer a,footer a:hover,footer a:focus,footer a.text-primary,footer a.text-primary:hover,footer a.text-primary:focus {
+    color: #FFFFFF;
+}
+.pull-left {
+    color: #FFFFFF;
+}
 #year-copy {
     color: #dedede;
 }
@@ -143,4 +150,43 @@ width:50px !important;
 
 .switch-primary span {
     border-color: #583867;
+}
+
+
+
+a.barriformat1{
+        padding:3px;
+        background:#583867;
+        color:#fff;
+}
+a.barriformat1:hover{
+  background:#fff;
+  color:#583867;
+  text-decoration: none;
+}
+a.barriformat2{
+        padding-left:5px;
+        color:#b3b3b3;
+}
+
+#barritacookie{
+        display:none;
+        position:fixed;
+        left:0px;
+        right:0px;
+        bottom:0px;
+        width:100%;
+        min-height:55px;
+        background: #333333;
+        color:#dddddd;
+        z-index: 99999;
+}
+
+#barritaloca2{
+        width: 100%;
+        position:absolute;
+        padding-left: 5px;
+        font-size: 1.3rem;
+        top: 20%;
+        text-align:center;
 }

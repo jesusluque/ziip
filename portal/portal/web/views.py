@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import redirect
 import time
+from datetime import timedelta
 
 from portal.settings import *
 from portal.core.models import *
@@ -19,14 +20,18 @@ from portal.core.utils import *
 
 def base(request,rendered,seccion_activa):
     logado = False
-    usuario=None
+    usuario = None
+    open_chat = 0
     if request.session.has_key("user_id"):
         logado = True
+    if seccion_activa == "chat":
         usuario = Usuarios.objects.get(pk=request.session["user_id"])
         usuario.chatToken=generaTokenSolicitud()
         usuario.save()
+        if request.GET.has_key("open_chat"):
+            open_chat = request.GET["open_chat"]
 
-    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa],"usuario":usuario}
+    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa],"usuario":usuario,"open_chat":open_chat}
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
 
@@ -401,6 +406,18 @@ def sendPeticion(request):
     errores = []
     datos={}
     usuario = Usuarios.objects.get(pk=request.session["user_id"])
+
+    #Primero realizamos las comprobaciones de limites.
+    #   - Maximo mensajes por mismo usuario (celestina y anonimo) 5, diarios. Sumando ambos.
+    #   - Persona contactada, se bloquea durante 2 semanas, a la espera de respuesta.
+
+    num_peticiones = Peticiones.objects.filter(fecha__starwidth=datetime.date())
+
+    if len(num_peticiones>4):
+        errores.append("Solo puedes relizar cinco envios diarios")
+
+
+
     peticion = Peticiones()
     peticion.usuario_id = usuario.pk
     peticion.tipo =  request.POST["tipo_peticion"]
@@ -419,6 +436,12 @@ def sendPeticion(request):
             contacto = request.POST["telefono"]
         else:
             errores.append("El telefono no es valido")
+
+
+    #Comprobamos los envios a contactos,hay que dejar 14 dias
+    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__starwidth=datetime.date()-timedelta(days=14))
+    if len(num_peticiones>0):
+        errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
 
     peticion.contacto_contacto = contacto
     peticion.contacto_nombre = request.POST["nombre"]
@@ -619,3 +642,22 @@ def privacidad(request):
     data={"texto":texto.privacidad,"titulo":"Politica de privacidad"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"privacidad")
+
+
+def recordarPassword(request):
+    csrf_token_value = get_token(request)
+    data={"csrf_token_value":csrf_token_value}
+    rendered = render_to_string("recordarPassword.html",data)
+    return base(request,rendered,"login")
+
+@loginRequired()
+def doRecordarPassword(request):
+    usuario = Usuarios.objects.filter(pk=request.session["user_id"])
+    usuario.password = generaPassword()
+    usuario.save()
+
+    data = { "usuario":usuario}
+    rendered = render_to_string("mails/recordar.html", data)
+    asunto = "Recuperar password ziip"
+    enviaMail.apply_async(args=[usuario.email,asunto,rendered], queue=QUEUE_DEFAULT)
+    return redirect('/login')

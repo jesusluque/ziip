@@ -18,7 +18,7 @@
                     {%if contacto.usuario2.imagen %}
                         <span class="input-group-addon"><img src="{{contacto.usuario2.imagen.url}}" alt="" ></span>
                     {% endif %}
-                    <a href="#">{{contacto.usuario2.usuario}}</a>
+                    <a href="/chat?open_chat={{contacto.usuario2.pk}}">{{contacto.usuario2.usuario}}</a>
                 </div>
             </div>
         </div>

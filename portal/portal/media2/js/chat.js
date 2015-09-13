@@ -10,14 +10,16 @@ var autoId = 1;
 var IMG=""
 var USUARIO_SELECCIONADO=0
 
+var TAB_INICIAL=0
+
 /*
 var chatSound = new buzz.sound("sounds/buip", {
 	formats: ["ogg", "mp3", "acc"]
 });
 */
 
-function loginChat(user, password, imagen) {
-
+function loginChat(user, password, imagen,abrir_chat) {
+	TAB_INICIAL=abrir_chat;
 	IMG = imagen;
 	if (typeof socket == 'undefined') {
 
@@ -220,7 +222,7 @@ function onNewMsg(data) {
 		users[userId] = {};
 		users[userId].mensajes = [];
 		users[userId].noreadeds= [];
-		addUser(userId);
+		addUser(userId,false);
 	}
 
 	var message = {
@@ -336,7 +338,11 @@ function initChat(socket, id) {
 		data : {
 		},
 		success : function(data) {
+			var existe=false;
 			$.map(data.users, function(user) {
+				if (user.id ==TAB_INICIAL ) {
+					existe = true;
+				}
 				if (user.id > 0 && user.id != ID) {
 
 					users[user.id] = user;
@@ -347,17 +353,16 @@ function initChat(socket, id) {
 					addOldMessages(user.id);
 				}
 			});
-			if (data.users.length == 0) {
-				$('#chat-add').tooltip('open');
-			} /*else {
-				console.log(users);
-				var first_user = getFirstKey(users);
 
-				console.log(first_user);
-				activateTab(first_user.id)
-			}*/
+			if (!existe) {
+				addUser(TAB_INICIAL, true);
+			}
+
+
 		}
 	});
+
+
 
 
 
@@ -588,6 +593,10 @@ function addOldMessages(userId) {
 			var no_leidos = users[userId].noreadeds
 
 			$badge.text( no_leidos.length);
+
+			if (TAB_INICIAL==userId){
+				activateTab(TAB_INICIAL);
+			}
 		}
 
 	});
@@ -778,7 +787,7 @@ function setSendedMessage(id, sId) {
 }
 
 
-function addUser(id) {
+function addUser(id, activar) {
 
 	$.ajax({
 			url : '/chat/getUser',
@@ -788,10 +797,24 @@ function addUser(id) {
 			},
 			success : function(data) {
 				var user = data.user;
-				users[id].username = user.username;
-				users[id].imagen = user.imagen;
-				addRoomTab(users[id]);
+				console.log(user);
+				users[user.id]={};
+				users[user.id].id = user.id;
+				users[user.id].username = user.username;
+				users[user.id].imagen = user.imagen;
+				users[user.id].noreadeds = [];
+				users[user.id].mensajes = [];
+
+
+
+				addRoomTab(users[user.id]);
+				if (activar){
+					console.log("activar");
+
+					activateTab(user.id);
+				}
 			}
+
 	});
 
 };
