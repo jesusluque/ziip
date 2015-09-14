@@ -8,6 +8,7 @@ from django.template.defaultfilters import register
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import redirect
+import time
 
 from portal.settings import *
 from portal.core.models import *
@@ -430,7 +431,7 @@ def sendPeticion(request):
 
     if request.POST["tipo_peticion"]!=TIPO_PETICION_CONECTA:
         datos["mensaje"]=request.POST["mensaje"]
-        if request.POST.has_key("mensaje_anonimo"):
+        if request.POST.has_key("mensaje_anonimo") and request.POST["mensaje_anonimo"]!="" :
             datos["mensaje_anonimo"] = request.POST["mensaje_anonimo"]
         else:
             errores.append("Debe seleccionar un mensaje")
@@ -609,7 +610,7 @@ def sendContacto(request):
 
 def legal(request):
     texto = Textos.objects.get()
-    data={"texto":texto.aviso_legal,"titulo":"Asivo legal"}
+    data={"texto":texto.aviso_legal,"titulo":"Aviso Legal"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"legal")
 

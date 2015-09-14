@@ -42,95 +42,36 @@
         <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
 
         {% ifequal tipo "1" %}
+
         <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon">Selecciona Mensaje</span>
-                </div>
+            <div class="col-xl-12">
+
+                    <select id="example-select2" name="mensaje_anonimo" class="select-select2 form-control input-lg" style="width: 100%;" data-placeholder="Elige mensaje anonimo">
+                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        <option value="1">Te conozco desde hace tiempo y quiero conocerte mejor.</option>
+                        <option value="2">Nos conocemos desde hace poco, pero no puedo olvidarte.</option>
+                        <option value="3">Trabajamos juntos, tenemos muchas cosas en común, charlemos.</option>
+                        <option value="4">Nuestras miradas se han encontrado, nuestras palabras también podrían.</option>
+                        <option value="5">Estudiamos juntos, y desde que te vi no te olvido.</option>
+                    </select>
+
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-xs"  value="1" {% ifequal datos.mensaje_anonimo "1"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Te conozco desde hace tiempo y quiero conocerte mejor.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-xs"  value="2" {% ifequal datos.mensaje_anonimo "2"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Nos conocemos desde hace poco, pero no puedo olvidarte.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-xs"  value="3" {% ifequal datos.mensaje_anonimo "3"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Trabajamos juntos, tenemos muchas cosas en común, charlemos.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-xs"  value="4" {% ifequal datos.mensaje_anonimo "4"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Nuestras miradas se han encontrado, nuestras palabras también podrían.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-xs"  value="5" {% ifequal datos.mensaje_anonimo "5"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Estudiamos juntos, y desde que te vi no te olvido.</span>
-                </div>
-            </div>
-        </div>
 
         {% endifequal %}
         {% ifequal tipo "3" %}
         <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon">Selecciona Mensaje</span>
-                </div>
-            </div>
-        </div>
+            <div class="col-xl-12">
 
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-lg"  value="1" {% ifequal datos.mensaje_anonimo "1"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Trabajo con vosotros y creo que deberíais conoceros mejor.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-lg"  value="2" {% ifequal datos.mensaje_anonimo "2"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Os he visto muchas veces, se que haceis buena pareja.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-lg"  value="3" {% ifequal datos.mensaje_anonimo "3"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Nos conocemos los tres y creo que os gustáis.</span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="radio"  name="mensaje_anonimo" class="form-control input-lg"  value="4" {% ifequal datos.mensaje_anonimo "4"%} checked {%endifequal%}>
-                    <span class="input-group-addon">Os he visto a ambos en clase, creo que hacéis buena pareja.</span>
-                </div>
+                    <select id="example-select2" name="mensaje_anonimo" class="select-select2 form-control input-lg" style="width: 100%;" data-placeholder="Elige mensaje anonimo">
+                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        <option value="1">Trabajo con vosotros y creo que deberíais conoceros mejor.</option>
+                        <option value="2">Os he visto muchas veces, se que haceis buena pareja.</option>
+                        <option value="3">Nos conocemos los tres y creo que os gustáis.</option>
+                        <option value="4">Os he visto a ambos en clase, creo que hacéis buena pareja.</option>
+                    </select>
+
             </div>
         </div>
 

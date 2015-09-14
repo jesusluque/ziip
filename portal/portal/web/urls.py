@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
 
     url(r'^chat/getChatUsers$', 'portal.web.chat.getChatUsers'),
+    url(r'^chat/getUser$', 'portal.web.chat.getUser'),
     url(r'^chat/getOldMessages$', 'portal.web.chat.getOldMessages'),
 
 
@@ -13,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^$', 'portal.web.views.index'),
     url(r'^login$', 'portal.web.views.login'),
     url(r'^doLogin$', 'portal.web.views.doLogin'),
-    url(r'^home$', 'portal.web.views.home'),
+    url(r'^home$', 'portal.web.views.ziip'),
     url(r'^registro$', 'portal.web.views.registro'),
     url(r'^doAlta$', 'portal.web.views.doAlta'),
     url(r'^confirmaMovil$', 'portal.web.views.confirmaMovil'),
