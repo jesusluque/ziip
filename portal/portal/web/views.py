@@ -529,7 +529,7 @@ def peticionEnviada(request):
 
 def rechazarContactoPeticion(request):
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
@@ -549,7 +549,7 @@ def rechazarContactoPeticion(request):
 
 def rechazarZiipPeticion(request):
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
