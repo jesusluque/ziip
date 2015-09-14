@@ -31,7 +31,7 @@ def base(request,rendered,seccion_activa):
         if request.GET.has_key("open_chat"):
             open_chat = request.GET["open_chat"]
 
-    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa],"usuario":usuario,"open_chat":open_chat}
+    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa,"usuario":usuario,"open_chat":open_chat}
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
 
@@ -575,7 +575,7 @@ def rechazoEnviado(request):
     csrf_token_value = get_token(request)
     data = {"csrf_token_value":csrf_token_value,"rechazoEnviado":request.session["rechazoEnviado"],"mensajeRechazo":mensajeRechazo}
     rendered = render_to_string("rechazoEnviado.html",data)
-    return base(request,rendered,"rechazarPeticion")
+    return base(request,rendered,"peticion")
 
 def aceptarRechazo(request):
 
