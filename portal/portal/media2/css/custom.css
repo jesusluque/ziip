@@ -190,3 +190,15 @@ a.barriformat2{
         top: 20%;
         text-align:center;
 }
+
+
+textarea.input-lg, select[multiple].input-lg {
+    height: auto;
+    padding-top: 16px;
+    line-height: 10px;
+}
+
+.select2-container-active .select2-choice, .select2-container-active .select2-choices {
+    border: 1px solid #583867;
+    outline: none;
+}
