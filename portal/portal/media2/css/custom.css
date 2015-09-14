@@ -241,3 +241,17 @@ textarea.input-lg, select[multiple].input-lg {
 .botones-mensaje .col-xs-12 {
     margin-bottom: 10px !important;
 }
+
+y pega esto al final del todo
+.ajustes .col-xs-12 {
+   width: 100%;
+   text-align: center;
+}
+
+.ajustes .col-xs-12 .input-group {
+   width: 100%;
+}
+
+.ajustes .col-xs-12 .input-group img{
+   margin: 20px 0;
+}
