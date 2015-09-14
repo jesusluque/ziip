@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import redirect
 import time
-from datetime import timedelta
+from datetime import timedelta, date
 
 from portal.settings import *
 from portal.core.models import *
@@ -411,7 +411,7 @@ def sendPeticion(request):
     #   - Maximo mensajes por mismo usuario (celestina y anonimo) 5, diarios. Sumando ambos.
     #   - Persona contactada, se bloquea durante 2 semanas, a la espera de respuesta.
 
-    num_peticiones = Peticiones.objects.filter(fecha__starwidth=datetime.date())
+    num_peticiones = Peticiones.objects.filter(fecha__starwidth=str(date.today()))
 
     if len(num_peticiones>4):
         errores.append("Solo puedes relizar cinco envios diarios")
@@ -439,7 +439,7 @@ def sendPeticion(request):
 
 
     #Comprobamos los envios a contactos,hay que dejar 14 dias
-    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__starwidth=datetime.date()-timedelta(days=14))
+    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__starwidth=str(date.today()-timedelta(days=14)))
     if len(num_peticiones>0):
         errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
 

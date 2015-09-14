@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
-from datetime import timedelta
+from datetime import timedelta, date
 from portal.core.models import *
 from portal.core.celery_tasks import *
 
