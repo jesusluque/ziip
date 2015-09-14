@@ -411,10 +411,10 @@ def sendPeticion(request):
     #   - Maximo mensajes por mismo usuario (celestina y anonimo) 5, diarios. Sumando ambos.
     #   - Persona contactada, se bloquea durante 2 semanas, a la espera de respuesta.
 
-    num_peticiones = Peticiones.objects.filter(fecha__starwidth=str(date.today()))
+    #num_peticiones = Peticiones.objects.filter(fecha__starwidth=str(date.today()))
 
-    if len(num_peticiones>4):
-        errores.append("Solo puedes relizar cinco envios diarios")
+    #if len(num_peticiones>4):
+    #   errores.append("Solo puedes relizar cinco envios diarios")
 
 
 
@@ -439,9 +439,9 @@ def sendPeticion(request):
 
 
     #Comprobamos los envios a contactos,hay que dejar 14 dias
-    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__starwidth=str(date.today()-timedelta(days=14)))
-    if len(num_peticiones>0):
-        errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
+    #num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__starwidth=str(date.today()-timedelta(days=14)))
+    #if len(num_peticiones>0):
+    #    errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
 
     peticion.contacto_contacto = contacto
     peticion.contacto_nombre = request.POST["nombre"]
