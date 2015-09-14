@@ -33,8 +33,8 @@
         <div class="form-group">
             <div class="col-xs-12">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
-                    <input type="text" id="email" name="username" class="form-control input-lg" placeholder="Username" value="{{datos.username}}">
+                    <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                    <input type="text" id="email" name="username" class="form-control input-lg" placeholder="Usuario" value="{{datos.username}}">
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                    <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password">
+                    <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Contaseña">
                 </div>
             </div>
         </div>
@@ -58,32 +58,32 @@
             <div class="col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                    <input type="password" id="password2" name="password2" class="form-control input-lg" placeholder="Verifica Password">
+                    <input type="password" id="password2" name="password2" class="form-control input-lg" placeholder="Verifica Contraseña">
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-xs-12">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                    <input type="text" id="telefono" name="telefono" class="form-control input-lg" placeholder="Telefono Movil"  value="{{datos.telefono}}">
+                    <span class="input-group-addon"><i class="gi gi-earphone"></i></span>
+                    <input type="text" id="telefono" name="telefono" class="form-control input-lg" placeholder="Teléfono Movil"  value="{{datos.telefono}}">
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-xs-12">
-                <div class="input-group">
+                <div class="input-group sexo-css">
                     <label>Sexo: </label>
                     <label class="radio-inline" for="checkout-payment-paypal">
                         <input type="radio" id="sexo" name="sexo" value="1" {%ifequal datos.sexo "1" %}cheked {% endifequal %} >Hombre
                     </label>
                     <label class="radio-inline" for="sexo">
-                        <input type="radio" id="sexo" name="sexo" value="2" {%ifequal datos.sexo "2" %}cheked {% endifequal %}> Mujer
+                        <input type="radio" id="sexo" name="sexo" value="2" {%ifequal datos.sexo "2" %}cheked {% endifequal %} > Mujer
                     </label>
                 </div>
             </div>
         </div>
+
         <div class="form-group form-actions">
             <div class="col-xs-6">
                 <label class="switch switch-primary" data-toggle="tooltip" title="Acepto los terminos">

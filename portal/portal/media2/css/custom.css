@@ -199,6 +199,24 @@ textarea.input-lg, select[multiple].input-lg {
 }
 
 .select2-container-active .select2-choice, .select2-container-active .select2-choices {
-    border: 1px solid #583867;
+    border: none;
     outline: none;
+}
+
+.sexo-css {
+    width: 100%;
+    padding-left: 15px;
+    line-height: 3;
+    color: #555;
+    font-size: 13px;
+}
+
+.sexo-css .radio-inline {
+    line-height: 1.6;
+    margin-top: -8px;
+}
+
+.sexo-css label {
+    font-weight: normal;
+    padding-right: 10px;
 }
