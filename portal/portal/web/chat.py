@@ -39,7 +39,7 @@ def getChatUsers (request):
 
 @loginRequired()
 def getUser (request):
-    user = Usuarios.objects.get(pk__in=request.GET["id"])
+    user = Usuarios.objects.get(pk=request.GET["id"])
     usuario={
         "id":user.id,
         "username":user.usuario,

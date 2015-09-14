@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
 
     url(r'^$', 'portal.web.views.index'),
+
     url(r'^login$', 'portal.web.views.login'),
     url(r'^doLogin$', 'portal.web.views.doLogin'),
     url(r'^home$', 'portal.web.views.ziip'),
@@ -40,6 +41,10 @@ urlpatterns = patterns('',
     url(r'^rechazoEnviado$', 'portal.web.views.rechazoEnviado'),
     url(r'^aceptarRechazo$', 'portal.web.views.aceptarRechazo'),
     url(r'^rechazoAceptado$', 'portal.web.views.rechazoAceptado'),
+
+
+    url(r'^recordarPassword$', 'portal.web.views.recordarPassword'),
+    url(r'^doRecordarPassword$', 'portal.web.views.doRecordarPassword'),
 
 
     url(r'^logout$', 'portal.web.views.logout'),

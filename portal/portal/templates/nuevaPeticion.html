@@ -48,11 +48,11 @@
 
                     <select id="example-select2" name="mensaje_anonimo" class="select-select2 form-control input-lg" style="width: 100%;" data-placeholder="Elige mensaje anonimo">
                         <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                        <option value="1">Te conozco desde hace tiempo y quiero conocerte mejor.</option>
-                        <option value="2">Nos conocemos desde hace poco, pero no puedo olvidarte.</option>
-                        <option value="3">Trabajamos juntos, tenemos muchas cosas en común, charlemos.</option>
-                        <option value="4">Nuestras miradas se han encontrado, nuestras palabras también podrían.</option>
-                        <option value="5">Estudiamos juntos, y desde que te vi no te olvido.</option>
+                        <option value="1" {% ifequal datos.mensaje_anonimo "1" %} selected {%endifequal%}>Te conozco desde hace tiempo y quiero conocerte mejor.</option>
+                        <option value="2" {% ifequal datos.mensaje_anonimo "2" %} selected {%endifequal%}>Nos conocemos desde hace poco, pero no puedo olvidarte.</option>
+                        <option value="3" {% ifequal datos.mensaje_anonimo "3" %} selected {%endifequal%}>Trabajamos juntos, tenemos muchas cosas en común, charlemos.</option>
+                        <option value="4" {% ifequal datos.mensaje_anonimo "4" %} selected {%endifequal%}>Nuestras miradas se han encontrado, nuestras palabras también podrían.</option>
+                        <option value="5" {% ifequal datos.mensaje_anonimo "5" %} selected {%endifequal%}>Estudiamos juntos, y desde que te vi no te olvido.</option>
                     </select>
 
             </div>
@@ -66,10 +66,10 @@
 
                     <select id="example-select2" name="mensaje_anonimo" class="select-select2 form-control input-lg" style="width: 100%;" data-placeholder="Elige mensaje anonimo">
                         <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                        <option value="1">Trabajo con vosotros y creo que deberíais conoceros mejor.</option>
-                        <option value="2">Os he visto muchas veces, se que haceis buena pareja.</option>
-                        <option value="3">Nos conocemos los tres y creo que os gustáis.</option>
-                        <option value="4">Os he visto a ambos en clase, creo que hacéis buena pareja.</option>
+                        <option value="1" {% ifequal datos.mensaje_anonimo "1" %} selected {%endifequal%}>Trabajo con vosotros y creo que deberíais conoceros mejor.</option>
+                        <option value="2" {% ifequal datos.mensaje_anonimo "2" %} selected {%endifequal%}>Os he visto muchas veces, se que haceis buena pareja.</option>
+                        <option value="3" {% ifequal datos.mensaje_anonimo "3" %} selected {%endifequal%}>Nos conocemos los tres y creo que os gustáis.</option>
+                        <option value="4" {% ifequal datos.mensaje_anonimo "4" %} selected {%endifequal%}>Os he visto a ambos en clase, creo que hacéis buena pareja.</option>
                     </select>
 
             </div>
