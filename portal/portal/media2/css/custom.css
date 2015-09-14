@@ -233,3 +233,12 @@ textarea.input-lg, select[multiple].input-lg {
     font-size: 18px;
     font-weight: normal;
 }
+
+.botones-mensaje {
+    border: 1px solid red;
+    text-align: center;
+}
+
+.botones-mensaje .col-xs-12 {
+    margin-bottom: 10px !important;
+}
