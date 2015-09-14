@@ -220,3 +220,16 @@ textarea.input-lg, select[multiple].input-lg {
     font-weight: normal;
     padding-right: 10px;
 }
+
+.enviado {
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+    padding: 6px;
+    margin-bottom: 20px;
+}
+
+.enviado h1 {
+    font-size: 18px;
+    font-weight: normal;
+}
