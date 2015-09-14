@@ -25,17 +25,23 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    {%if logado %}
-                    <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
-                    <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
-                    <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
 
+
+                    {%if logado %}
+                    <div class="col-xs-12">
+                    <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
+                </div>
+                <div class="col-xs-12">
+                    <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
+                </div>
+                <div class="col-xs-12">
+                    <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
+                </div>
                     {% else %}
-                    <br>
+                    <div class="col-xs-12">
                     Para aceptar al usuario como contacto debe estar logueado.<br>
                     <a href="login" class="btn btn-sm btn-primary"></i> Login</a>
+                    </div>
                     {% endif %}
 
 
