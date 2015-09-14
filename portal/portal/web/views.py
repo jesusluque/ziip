@@ -128,7 +128,7 @@ def doAlta(request):
         errores.append("El email es obligatorio")
 
     if request.POST.has_key("password") and request.POST["password"]!="":
-        if request.POST.has_key("password2") and request.POST("password") == request.POST["password2"]:
+        if request.POST.has_key("password2") and request.POST["password"] == request.POST["password2"]:
             datos["password"] = request.POST["password"]
         else:
             errores.append("Los passwords no coinciden")
