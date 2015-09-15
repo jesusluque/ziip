@@ -345,6 +345,7 @@ def saveAjustes(request):
         f = open(settings.BASE_DIR+"/portal/"+tmp,'w')
         f.write(fichero.read())
         f.close()
+        usuario.imagen=tmp
 
 
     telefono = False
