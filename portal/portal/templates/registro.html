@@ -34,7 +34,7 @@
             <div class="col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="gi gi-user"></i></span>
-                    <input type="text" id="email" name="username" class="form-control input-lg" placeholder="Usuario" value="{{datos.username}}">
+                    <input type="text" id="email" name="username" class="form-control input-lg" placeholder="Nick" value="{{datos.username}}">
                 </div>
             </div>
         </div>
@@ -80,6 +80,9 @@
                     <label class="radio-inline" for="sexo">
                         <input type="radio" id="sexo" name="sexo" value="2" {%ifequal datos.sexo "2" %}cheked {% endifequal %} > Mujer
                     </label>
+                    <label class="radio-inline" for="sexo">
+                        <input type="radio" id="sexo" name="sexo" value="3" {%ifequal datos.sexo "3" %}cheked {% endifequal %} > Indefinido
+                    </label>
                 </div>
             </div>
         </div>
@@ -92,7 +95,7 @@
                 <a href="/legal" data-toggle="modal" class="register-terms" target="_blank"><small>Ver terminos</small></a>
             </div>
             <div class="col-xs-6 text-right">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login</button>
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Enviar</button>
             </div>
         </div>
 

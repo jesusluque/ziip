@@ -36,6 +36,11 @@ def base(request,rendered,seccion_activa):
     return HttpResponse(rendered)
 
 def prueba(request):
+
+
+    num_peticiones = Peticiones.objects.filter(fecha__startswith=str(date.today()))
+    print len(num_peticiones)
+
     data={}
     rendered = render_to_string("contactos_javi.html",data)
     return HttpResponse(rendered)
@@ -148,7 +153,7 @@ def doAlta(request):
 
     if len(errores)==0:
         usuario = Usuarios()
-        usuario.usuario = atos["username"]
+        usuario.usuario = datos["username"]
         usuario.email = datos["email"]
         usuario.password = datos["password"]
         usuario.sexo = request.POST["sexo"]
@@ -410,11 +415,12 @@ def sendPeticion(request):
     #Primero realizamos las comprobaciones de limites.
     #   - Maximo mensajes por mismo usuario (celestina y anonimo) 5, diarios. Sumando ambos.
     #   - Persona contactada, se bloquea durante 2 semanas, a la espera de respuesta.
+    #Tb tiene que ser el usaurio logado
 
-    #num_peticiones = Peticiones.objects.filter(fecha__starwidth=str(date.today()))
+    num_peticiones = Peticiones.objects.filter(usuario__pk = usuario.pk,fecha__startswith=str(date.today()))
 
-    #if len(num_peticiones>4):
-    #   errores.append("Solo puedes relizar cinco envios diarios")
+    if len(num_peticiones>4):
+       errores.append("Solo puedes relizar cinco envios diarios")
 
 
 
@@ -439,9 +445,10 @@ def sendPeticion(request):
 
 
     #Comprobamos los envios a contactos,hay que dejar 14 dias
-    #num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__starwidth=str(date.today()-timedelta(days=14)))
-    #if len(num_peticiones>0):
-    #    errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
+
+    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__startswith=str(date.today()-timedelta(days=14)))
+    if len(num_peticiones>0):
+        errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
 
     peticion.contacto_contacto = contacto
     peticion.contacto_nombre = request.POST["nombre"]
@@ -661,3 +668,9 @@ def doRecordarPassword(request):
     asunto = "Recuperar password ziip"
     enviaMail.apply_async(args=[usuario.email,asunto,rendered], queue=QUEUE_DEFAULT)
     return redirect('/login')
+
+
+def blog(request):
+    data={}
+    rendered = render_to_string("blog.html",data)
+    return base(request,rendered,"blog")
