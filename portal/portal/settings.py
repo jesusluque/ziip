@@ -30,7 +30,7 @@ QUEUE_DEFAULT = "celery"
 CELERY_SEND_TASK_ERROR_EMAILS = True
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -40,6 +40,21 @@ DATABASES = {
         'HOST': '213.251.185.53',
     }
 }
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "ziip",
+        'USER': "ziip",
+        'PASSWORD': 'lkwh46w8u3f',
+        'HOST': '54.155.58.232',
+    }
+}
+
+
+
+
 
 
 TEMPLATE_DIRS = (

@@ -25,7 +25,7 @@ function loginChat(user, password, imagen,abrir_chat) {
 
         //comentado por manu
 		//changeChatStatus('Connecting...');
-		socket = io.connect('http://213.251.185.53:8888');
+		socket = io.connect('http://54.78.230.211:8888');
 
 		// Connection established
 		socket.on('connect', function(data) {
