@@ -447,7 +447,7 @@ def sendPeticion(request):
 
     #Comprobamos los envios a contactos,hay que dejar 14 dias
 
-    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__startswith=str(date.today()-timedelta(days=14)))
+    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto_contacto=contacto , fecha__startswith=str(date.today()-timedelta(days=14)))
     if len(num_peticiones)>0:
         errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
 
