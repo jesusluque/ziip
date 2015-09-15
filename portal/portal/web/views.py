@@ -420,7 +420,7 @@ def sendPeticion(request):
 
     num_peticiones = Peticiones.objects.filter(usuario__pk = usuario.pk,fecha__startswith=str(date.today()))
 
-    if len(num_peticiones>4):
+    if len(num_peticiones)>4:
        errores.append("Solo puedes relizar cinco envios diarios")
 
 
@@ -448,7 +448,7 @@ def sendPeticion(request):
     #Comprobamos los envios a contactos,hay que dejar 14 dias
 
     num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto=contacto , fecha__startswith=str(date.today()-timedelta(days=14)))
-    if len(num_peticiones>0):
+    if len(num_peticiones)>0:
         errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
 
     peticion.contacto_contacto = contacto
