@@ -587,7 +587,7 @@ def rechazoEnviado(request):
 
 def aceptarRechazo(request):
 
-    rechazo = Rechazos.objects.get(codigo=request.POST["rechazoEnviado"])
+    rechazo = Rechazos.objects.get(pk=request.POST["rechazoEnviado"])
     if rechazo.codigo == request.POST["codigo"]:
         rechazo.confirmado=True
         rechazo.save()
