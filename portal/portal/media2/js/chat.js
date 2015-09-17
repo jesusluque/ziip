@@ -32,8 +32,8 @@ function loginChat(user, password, imagen,abrir_chat) {
 			// Hacer login
 			var login = {
 				user : user,
-				pass : password,
-			 	//chatToken: password,
+				//pass : password,
+			 	chatToken: password,
 				device: 'browser'
 			};
 			console.log(' > login:');
