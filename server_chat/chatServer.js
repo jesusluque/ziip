@@ -198,9 +198,9 @@ io.sockets.on('connection', function(socket) {
         checkConnection();
 
         logger.emit('newEvent', 'Recibimos una peticion de login2', data);
-        if (data.user !=""  &&(data.pass !="" ||data.chatToken!="" ){
+        if (data.user !=""  &&(data.pass !="" ||data.chatToken!="" )){
             var sql;
-            if data.pass !="") {
+            if (data.pass !=null) {
                 sql = 'SELECT * from core_usuarios where usuario="'+data.user+'" and password="'+data.pass+'"';
 
             } else {

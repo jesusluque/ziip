@@ -43,6 +43,11 @@ def login(request):
                 token.usuario_id = usuario.pk
                 token.token = request.POST["pushToken"]
                 token.device = request.POST["device"]
+                produccion = True
+                if request.POST.has_key("env"):
+                    if request.POST["env"]=="dev";
+                        produccion = False
+                token.produccion = produccion
                 token.save()
 
     else:
