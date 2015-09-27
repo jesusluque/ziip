@@ -105,6 +105,7 @@ class Rechazos(models.Model):
     general = models.BooleanField(default=False)
     codigo = models.CharField(max_length=250, default=generaCodigo)
     confirmado = models.BooleanField(default=False)
+    fecha = models.DateTimeField(default=datetime.now)
 
 
 
