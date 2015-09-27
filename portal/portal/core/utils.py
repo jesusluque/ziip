@@ -89,27 +89,22 @@ def enviaPeticion(peticion):
     enviamos1=True
     enviamos2=True
 
-    rechazos1 = Rechazos.objects.filter(contacto=peticion.contacto_contacto,general=True,confirmado=True)
+    rechazos1 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto_contacto),general=True,confirmado=True)
     if len(rechazos1)>0:
         enviamos1=False
     else:
-        rechazos1 = Rechazos.objects.filter(contacto=peticion.contacto_contacto,general=False,usuario_id=peticion.usuario_id,confirmado=True)
+        rechazos1 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto_contacto),general=False,usuario_id=peticion.usuario_id,confirmado=True)
         if len(rechazos1)>0:
             enviamos1=False
 
     if peticion.tipo == TIPO_PETICION_CELESTINO:
-        rechazos2 = Rechazos.objects.filter(contacto=peticion.contacto2_contacto,general=True,confirmado=True)
+        rechazos2 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto2_contacto),general=True,confirmado=True)
         if len(rechazos2)>0:
             enviamos2=False
         else:
-            rechazos2 = Rechazos.objects.filter(contacto=peticion.contacto2_contacto,general=False,usuario_id=peticion.usuario_id,confirmado=True)
+            rechazos2 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto2_contacto),general=False,usuario_id=peticion.usuario_id,confirmado=True)
             if len(rechazos2)>0:
                 enviamos2=False
-
-
-
-
-
 
     if peticion.tipo == TIPO_PETICION_ANONIMO:
         if enviamos1:

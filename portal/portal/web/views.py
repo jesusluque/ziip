@@ -536,13 +536,18 @@ def peticionEnviada(request):
     return base(request,rendered,paginas[peticion.tipo])
 
 def rechazarContactoPeticion(request):
+    usuario2=False
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
     if len(lista_peticiones)==0:
+        usuario2=True
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         rechazo = Rechazos()
-        rechazo.contacto = peticion.contacto_contacto
+        if usuario2:
+            rechazo.contacto = limpiaTelefono(peticion.contacto2_contacto)
+        else:
+            rechazo.contacto = limpiaTelefono(peticion.contacto_contacto)
         rechazo.usuario = peticion.usuario
         rechazo.general = False
         rechazo.save()
@@ -556,13 +561,18 @@ def rechazarContactoPeticion(request):
         return base(request,rendered,"peticion")
 
 def rechazarZiipPeticion(request):
+    usuario2=False
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
     if len(lista_peticiones)==0:
+        usuario2=True
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         rechazo = Rechazos()
-        rechazo.contacto = peticion.contacto_contacto
+        if usuario2:
+            rechazo.contacto = limpiaTelefono(peticion.contacto2_contacto)
+        else:
+            rechazo.contacto = limpiaTelefono(peticion.contacto_contacto)
         rechazo.usuario = None
         rechazo.general = True
         rechazo.save()
