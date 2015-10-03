@@ -222,6 +222,11 @@ def sendMensajeAnonimo(request):
                     status = "ko"
                     mensaje = "El telefono no es valido"
 
+            limites=comprueba_limites(usuario,contacto)
+            if len(limites)>0:
+                status="ko"
+                mensaje=limites[0]
+
             peticion.contacto_contacto = contacto
             peticion.mensaje = request.POST["mensaje"].encode('utf-8')
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
@@ -272,6 +277,10 @@ def sendConecta(request):
                     mensaje = "El telefono no es valido"
             peticion.contacto_contacto = contacto
 
+            limites=comprueba_limites(usuario,contacto)
+            if len(limites)>0:
+                status="ko"
+                mensaje=limites[0]
 
             peticion.estado = ESTADO_PETICION_SOLICITADO
 
@@ -347,6 +356,13 @@ def sendCelestino(request):
                     status = "ko"
                     mensaje = "El telefono no es valido"
             peticion.contacto2_contacto = contacto2
+
+            limites=comprueba_limites(usuario,contacto)
+            limites=limites+comprueba_limites(usuario,contacto2)
+
+            if len(limites)>0:
+                status="ko"
+                mensaje=limites[0]
 
             peticion.mensaje = request.POST["mensaje"].encode('utf-8')
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
