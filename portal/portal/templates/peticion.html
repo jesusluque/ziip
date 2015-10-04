@@ -17,25 +17,32 @@
             <div class="col-xs-12">
                 <div class="enviado">
 <h1>
-    {% if peticion.tipo==2 %}
+    {% ifequal peticion.tipo 2 %}
         El usuario {{peticion.usuario.username}} te ha invitado a conectar.
     {%else%}
         {{peticion.mensaje_anonimo}}
-    {% endif %}
+    {% endifequal %}
 </h1>
                 </div>
             </div>
         </div>
         <div class="form-group botones-mensaje">
+            {% ifequal peticion.tipo 2 %}
+            <div class="col-xs-12">
+            <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
+            </div>
+            {%else%}
             <div class="col-xs-12">
                     <a href="peticionPrivado?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Ver mensaje privado</a><br>
             </div>
+            {% endifequal %}
             <div class="col-xs-12">
                     <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
             </div>
             <div class="col-xs-12">
                     <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
             </div>
+
 
         </div>
 
