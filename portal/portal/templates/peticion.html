@@ -17,8 +17,8 @@
             <div class="col-xs-12">
                 <div class="enviado">
 <h1>
-    {% ifequal peticion.tipo 2 %}
-        El usuario {{peticion.usuario.username}} te ha invitado a conectar.
+    {% ifequal peticion.tipo "2" %}
+        El usuario {{peticion.usuario.usuario}} te ha invitado a conectar.
     {%else%}
         {{peticion.mensaje_anonimo}}
     {% endifequal %}
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="form-group botones-mensaje">
-            {% ifequal peticion.tipo 2 %}
+            {% ifequal peticion.tipo "2" %}
             <div class="col-xs-12">
             <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
             </div>
