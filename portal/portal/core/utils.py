@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 from datetime import timedelta, date
+
 from portal.core.models import *
 from portal.core.celery_tasks import *
 
@@ -89,35 +90,28 @@ def enviaPeticion(peticion):
     enviamos1=True
     enviamos2=True
 
-    rechazos1 = Rechazos.objects.filter(contacto=peticion.contacto_contacto,general=True,confirmado=True)
+    rechazos1 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto_contacto),general=True,confirmado=True)
     if len(rechazos1)>0:
         enviamos1=False
     else:
-        rechazos1 = Rechazos.objects.filter(contacto=peticion.contacto_contacto,general=False,usuario_id=peticion.usuario_id,confirmado=True)
+        rechazos1 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto_contacto),general=False,usuario_id=peticion.usuario_id,confirmado=True)
         if len(rechazos1)>0:
             enviamos1=False
 
     if peticion.tipo == TIPO_PETICION_CELESTINO:
-        rechazos2 = Rechazos.objects.filter(contacto=peticion.contacto2_contacto,general=True,confirmado=True)
+        rechazos2 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto2_contacto),general=True,confirmado=True)
         if len(rechazos2)>0:
             enviamos2=False
         else:
-            rechazos2 = Rechazos.objects.filter(contacto=peticion.contacto2_contacto,general=False,usuario_id=peticion.usuario_id,confirmado=True)
+            rechazos2 = Rechazos.objects.filter(contacto=limpiaTelefono(peticion.contacto2_contacto),general=False,usuario_id=peticion.usuario_id,confirmado=True)
             if len(rechazos2)>0:
                 enviamos2=False
-
-
-
-
-
 
     if peticion.tipo == TIPO_PETICION_ANONIMO:
         if enviamos1:
 
             if isTelefono(peticion.contacto_contacto):
                 mensaje = "Te han enviado: "+peticion.mensaje_anonimo+". ziip.es contacto anonimo y seguro. Mas info http://ziip.es/"+str(peticion.codigo)
-
-
 
                 envio = EnviosSMS()
                 envio.telefono = limpiaTelefono(peticion.contacto_contacto)
@@ -134,17 +128,18 @@ def enviaPeticion(peticion):
     elif peticion.tipo == TIPO_PETICION_CONECTA:
         if enviamos1:
             if isTelefono(peticion.contacto_contacto):
-                mensaje = "Te ha invitado a usar nuestra aplicación. Primera plataforma de contacto anónima. http://ziip.es"
+                mensaje = "Te ha invitado a usar ziip. Primera plataforma de contacto anónima. http://ziip.es"+str(peticion.codigo)
                 envio = EnviosSMS()
                 envio.telefono = limpiaTelefono(peticion.contacto_contacto)
                 envio.texto = mensaje
                 envio.save()
                 enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
             else:
-                data = { "username":peticion.usuario.usuario}
+                data = { "username":peticion.usuario.usuario,"codigo_peticion":peticion.codigo}
                 rendered = render_to_string("mails/conecta.html", data)
                 asunto = "Invitación a ziip.es "
                 enviaMail.apply_async(args=[peticion.contacto_contacto,asunto,rendered], queue=QUEUE_DEFAULT)
+
 
     elif peticion.tipo == TIPO_PETICION_CELESTINO:
         if enviamos1:
@@ -190,3 +185,18 @@ def enviaRechazo(rechazo):
         rendered = render_to_string("mails/rechazoPeticion.html", data)
         asunto = "Codigo para rechazo de peticiones ziip"
         enviaMail.apply_async(args=[rechazo.contacto,asunto,rendered], queue=QUEUE_DEFAULT)
+
+def comprueba_limites(usuario,contacto):
+    #Primero realizamos las comprobaciones de limites.
+    #   - Maximo mensajes por mismo usuario (celestina y anonimo) 5, diarios. Sumando ambos.
+    #   - Persona contactada, se bloquea durante 2 semanas, a la espera de respuesta.
+    # Tb tiene que ser el usaurio logado
+    errores=[]
+    num_peticiones = Peticiones.objects.filter(usuario__pk = usuario.pk,fecha__startswith=str(date.today()))
+    if len(num_peticiones)>4:
+        errores.append("Solo puedes relizar cinco envios diarios")
+
+    num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto_contacto=contacto , fecha__gte=date.today()-timedelta(days=14))
+    if len(num_peticiones)>0:
+        errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
+    return errores

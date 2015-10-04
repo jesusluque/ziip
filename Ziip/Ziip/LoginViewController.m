@@ -179,11 +179,24 @@
         NSMutableArray *valores = [[NSMutableArray alloc] initWithObjects:self.txtUsuario.text,self.txtPassword.text, nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
+        NSString *env=@"prod";
+        #ifdef DEBUG
+        NSLog(@"Debug");
+            env=@"dev";
+        #else
+        NSLog(@"No Debug");
+        
+        #endif
+        
         if ([defaults objectForKey:@"pushToken"]) {
             [parametros addObject:@"pushToken"];
             [valores addObject:[defaults objectForKey:@"pushToken"]];
             [parametros addObject:@"device"];
             [valores addObject:@"ios"];
+            [parametros addObject:@"env"];
+            [valores addObject:env];
+            
+            
         }
         [self.r send:@"login" tipo_peticion:@"POST" withParams:parametros andValues:valores enviarToken:NO];
     }

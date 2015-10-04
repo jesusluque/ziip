@@ -40,6 +40,7 @@ class Tokens(models.Model):
     usuario = models.ForeignKey(Usuarios)
     token = models.CharField(max_length=250)
     tipo_dispositivo = models.CharField(max_length=2, choices = valores["tipos_dispositivos"].items(),default=TIPO_DISPOSITIVO_IOS)
+    produccion = models.BooleanField(default=True)
 
 class ChatMensajes(models.Model):
     texto = models.TextField()
@@ -104,6 +105,7 @@ class Rechazos(models.Model):
     general = models.BooleanField(default=False)
     codigo = models.CharField(max_length=250, default=generaCodigo)
     confirmado = models.BooleanField(default=False)
+    fecha = models.DateTimeField(default=datetime.now)
 
 
 

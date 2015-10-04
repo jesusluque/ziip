@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
 
     url(r'^$', 'portal.web.views.index'),
+    url(r'^blog$', 'portal.web.views.blog'),
 
     url(r'^login$', 'portal.web.views.login'),
     url(r'^doLogin$', 'portal.web.views.doLogin'),

@@ -17,7 +17,11 @@
             <div class="col-xs-12">
                 <div class="enviado">
 <h1>
-                     {{peticion.mensaje_anonimo}}
+    {% if peticion.tipo==2 %}
+        El usuario {{peticion.usuario.username}} te ha invitado a conectar.
+    {%else%}
+        {{peticion.mensaje_anonimo}}
+    {% endif %}
 </h1>
                 </div>
             </div>
