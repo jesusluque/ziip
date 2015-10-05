@@ -286,6 +286,10 @@ def aceptarContactoPeticion(request):
                 contacto.save()
                 peticionAceptada.apply_async(args=[peticion], queue=QUEUE_DEFAULT)
         else:
+            if usuario_logado==1:
+                peticion.usuario1_id=request.session["user_id"]
+
+            peticion.save()
             contacto = Contactos()
             contacto.usuario_id = peticion.usuario_id
             contacto.usuario2_id = request.session["user_id"]
