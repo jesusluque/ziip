@@ -218,6 +218,7 @@ def peticion(request, codigo):
         lista_peticiones = Peticiones.objects.filter(codigo2=codigo)
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
+        logado = False
         if request.session.has_key("user_id"):
             logado = True
         else:
@@ -227,7 +228,7 @@ def peticion(request, codigo):
     else:
         data={}
         rendered = render_to_string("peticionNoExiste.html",data)
-    logado = False
+
 
 
     return base(request,rendered,"peticion")
