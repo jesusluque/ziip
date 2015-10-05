@@ -28,9 +28,17 @@
         </div>
         <div class="form-group botones-mensaje">
             {% ifequal peticion.tipo "2" %}
+            {%if logado %}
             <div class="col-xs-12">
             <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
             </div>
+            {%else%}
+            <div class="col-xs-12">
+            Para aceptar al usuario como contacto debe estar logueado.<br>
+            <a href="login" class="btn btn-sm btn-primary"></i> Login</a></br>
+            <a href="registro" class="btn btn-sm btn-primary"></i> Registro</a>
+            </div>
+            {% endif %}
             {%else%}
             <div class="col-xs-12">
                     <a href="peticionPrivado?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Ver mensaje privado</a><br>
