@@ -72,12 +72,12 @@ def peticionAceptada(peticion):
 def enviaPeticionAceptada(usuario1,usuario2):
 
 
-    data = {"usuario":usuario1.username}
+    data = {"usuario":usuario1.usuario}
     rendered = render_to_string("mails/nuevoContacto.html", data)
     asunto = "Tienes un nuevo contacto (ziip.es)"
     enviaMail.apply_async(args=[usuario2.email,asunto,rendered], queue=QUEUE_DEFAULT)
 
-    data = {"usuario":usuario2.username}
+    data = {"usuario":usuario2.usuario}
     rendered = render_to_string("mails/nuevoContacto.html", data)
     asunto = "Tienes un nuevo contacto (ziip.es)"
     enviaMail.apply_async(args=[usuario1.email,asunto,rendered], queue=QUEUE_DEFAULT)
