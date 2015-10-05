@@ -212,16 +212,25 @@ def doConfirmaMovil(request):
     return base(request,rendered,"confirmacionMovil")
 
 def peticion(request, codigo):
+    data={}
     lista_peticiones = Peticiones.objects.filter(codigo=codigo)
     if len(lista_peticiones)==0:
         lista_peticiones = Peticiones.objects.filter(codigo2=codigo)
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
-        data={"peticion":peticion}
+        logado = False
+        if request.session.has_key("user_id"):
+            logado = True
+        else:
+            request.session["codigo_peticion"]=peticion.codigo
+        data={"peticion":peticion,"logado":logado}
         rendered = render_to_string("peticion.html",data)
     else:
         data={}
         rendered = render_to_string("peticionNoExiste.html",data)
+
+
+
     return base(request,rendered,"peticion")
 
 def peticionPrivado(request):
@@ -266,6 +275,7 @@ def aceptarContactoPeticion(request):
             peticion.save()
 
             if peticion.usuario1!=None and peticion.usuario2!=None:
+                peticionAceptada
                 contacto = Contactos()
                 contacto.usuario_id = peticion.usuario1_id
                 contacto.usuario2_id = peticion.usuario2_id
@@ -274,6 +284,7 @@ def aceptarContactoPeticion(request):
                 contacto.usuario_id = peticion.usuario2_id
                 contacto.usuario2_id = peticion.usuario1_id
                 contacto.save()
+                peticionAceptada.apply_async(args=[peticion], queue=QUEUE_DEFAULT)
         else:
             contacto = Contactos()
             contacto.usuario_id = peticion.usuario_id
@@ -284,6 +295,7 @@ def aceptarContactoPeticion(request):
             contacto.usuario_id = request.session["user_id"]
             contacto.usuario2_id = peticion.usuario_id
             contacto.save()
+            peticionAceptada.apply_async(args=[peticion], queue=QUEUE_DEFAULT)
 
         request.session["error_contactos"] = "Contacto aceptado"
         return HttpResponseRedirect('/contactos')
