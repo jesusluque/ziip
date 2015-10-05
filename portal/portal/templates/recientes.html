@@ -1,50 +1,47 @@
 {% load imagenTipo %}
-<section class="site-content site-section">
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table table-bordered table-vcenter">
-                <thead>
-                    <tr>
-                        <th>Accion</th>
-                        <th class="text-center">Contacto</th>
-                        <th class="text-center">Fecha</th>
-                        <th class="text-center">Mensaje anonimo</th>
-                        <th class="text-center">Mensaje personal</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                  {%for reciente in recientes %}
-                    <tr>
-                        <td>
-                            {{reciente.tipo|imagenTipo|safe}}
 
 
-                        </td>
-                        <td>
+<div class="login-title">
+   <div class="logo-tittle">
+       <img src="/img/logo.png">
+   </div>
+   <div class="txt-tittle">
+       <h1> <strong>Ziip</strong><br><small> <strong>Recientes</strong></small></h1>
+   </div>
+</div>
+<!-- END Login Title -->
+<div class="clearfix"></div>
 
-                          {{reciente.contacto_nombre}} {{reciente.contacto_contacto}}
-                          {% ifequal reciente.tipo "3" %}
-                          <br>
-                          {{reciente.contacto2_nombre}} {{reciente.contacto2_contacto}}
-                          {% endifequal %}
-                        </td>
-                        <td>
-                          {{reciente.fecha|date:"h:i d-m-Y"}}
-                        </td>
-                        <td>
-                          {{reciente.mensaje_anonimo}}
-                        </td>
-                        <td>
-                          {{reciente.mensaje}}
-                        </td>
+<!-- Login Block -->
+<div class="block push-bit">
 
-                    </tr>
-                    {% endfor %}
+    <!-- Login Form -->
+    <form action="" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
+        {%for reciente in recientes %}
+        <div class="form-group accion">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon recientes"><a href="#">{{reciente.tipo|imagenTipo|safe}}</a></span>
+                   <a href="#">{{reciente.contacto_nombre}}</a>
+                   <br>
+                   <a href="#">{{reciente.contacto_contacto}}</a>
+                   <br>
+                   {% ifequal reciente.tipo "3" %}
+                    <a href="#">{{reciente.contacto2_nombre}} </a>
+                    <br>
+                    <a href="#">{{reciente.contacto2_contacto}}</a>
+                    <br>
+                   {% endifequal %}
 
-                </tbody>
-            </table>
+                   <a href="#">{{reciente.fecha|date:"h:i d-m-Y"}}</a>
+
+                </div>
+            </div>
         </div>
+        {% endfor %}
 
-    </div>
-</section>
+    </form>
+    <!-- END Login Form -->
+
+</div>
+<!-- END Login Block -->

@@ -8,28 +8,43 @@ from django.template.defaultfilters import register
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import redirect
+import time
+from datetime import timedelta, date
 
 from portal.settings import *
 from portal.core.models import *
 from portal.web.titulos import *
 from portal.core.utils import *
 
-def loginRequired():
-    def decorator(a_view):
-        def _wrapped_view(request, *args, **kwargs):
-            if request.session.has_key("user_id"):
-                return a_view(request, *args, **kwargs)
-            return HttpResponseRedirect('/login')
-        return _wrapped_view
-    return decorator
+
 
 def base(request,rendered,seccion_activa):
     logado = False
+    usuario = None
+    open_chat = 0
     if request.session.has_key("user_id"):
         logado = True
-    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa, "titulo":titulos[seccion_activa],"subtitulo":subtitulos[seccion_activa]}
+    if seccion_activa == "chat":
+        usuario = Usuarios.objects.get(pk=request.session["user_id"])
+        usuario.chatToken=generaTokenSolicitud()
+        usuario.save()
+        if request.GET.has_key("open_chat"):
+            open_chat = request.GET["open_chat"]
+
+    data={"logado":logado,"content":rendered,"seccion_activa":seccion_activa,"usuario":usuario,"open_chat":open_chat}
     rendered = render_to_string("base.html",data)
     return HttpResponse(rendered)
+
+def prueba(request):
+
+
+    num_peticiones = Peticiones.objects.filter(fecha__startswith=str(date.today()))
+    print len(num_peticiones)
+
+    data={}
+    rendered = render_to_string("contactos_javi.html",data)
+    return HttpResponse(rendered)
+
 
 def index(request):
     data={}
@@ -118,7 +133,7 @@ def doAlta(request):
         errores.append("El email es obligatorio")
 
     if request.POST.has_key("password") and request.POST["password"]!="":
-        if request.POST.has_key("password2") and request.POST("password") == request.POST["password2"]:
+        if request.POST.has_key("password2") and request.POST["password"] == request.POST["password2"]:
             datos["password"] = request.POST["password"]
         else:
             errores.append("Los passwords no coinciden")
@@ -138,7 +153,7 @@ def doAlta(request):
 
     if len(errores)==0:
         usuario = Usuarios()
-        usuario.usuario = atos["username"]
+        usuario.usuario = datos["username"]
         usuario.email = datos["email"]
         usuario.password = datos["password"]
         usuario.sexo = request.POST["sexo"]
@@ -294,6 +309,13 @@ def recientes(request):
     return base(request,rendered,"recientes")
 
 @loginRequired()
+def reciente(request):
+    reciente = Peticiones.objects.get(usuario_id=request.session["user_id"], pk=request.GET["peticion_id"])
+    data = {"reciente":reciente}
+    rendered = render_to_string("reciente.html",data)
+    return base(request,rendered,"recientes")
+
+@loginRequired()
 def ziip(request):
     data = {}
     rendered = render_to_string("ziip.html",data)
@@ -323,6 +345,7 @@ def saveAjustes(request):
         f = open(settings.BASE_DIR+"/portal/"+tmp,'w')
         f.write(fichero.read())
         f.close()
+        usuario.imagen=tmp
 
 
     telefono = False
@@ -389,6 +412,7 @@ def sendPeticion(request):
     errores = []
     datos={}
     usuario = Usuarios.objects.get(pk=request.session["user_id"])
+
     peticion = Peticiones()
     peticion.usuario_id = usuario.pk
     peticion.tipo =  request.POST["tipo_peticion"]
@@ -408,6 +432,10 @@ def sendPeticion(request):
         else:
             errores.append("El telefono no es valido")
 
+
+    #Comprobamos los envios a contactos,hay que dejar 14 dias
+    errores = errores + comprueba_limites(usuario,contacto)
+
     peticion.contacto_contacto = contacto
     peticion.contacto_nombre = request.POST["nombre"]
 
@@ -418,9 +446,11 @@ def sendPeticion(request):
 
 
     if request.POST["tipo_peticion"]!=TIPO_PETICION_CONECTA:
-
         datos["mensaje"]=request.POST["mensaje"]
-        datos["mensaje_anonimo"]=request.POST["mensaje_anonimo"]
+        if request.POST.has_key("mensaje_anonimo") and request.POST["mensaje_anonimo"]!="" :
+            datos["mensaje_anonimo"] = request.POST["mensaje_anonimo"]
+        else:
+            errores.append("Debe seleccionar un mensaje")
 
         peticion.mensaje = request.POST["mensaje"]
         mensajes={}
@@ -435,7 +465,8 @@ def sendPeticion(request):
             mensajes["2"]="Os he visto muchas veces, se que haceis buena pareja."
             mensajes["3"]="Nos conocemos los tres y creo que os gustáis."
             mensajes["4"]="Os he visto a ambos en clase, creo que hacéis buena pareja."
-        peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
+        if request.POST.has_key("mensaje_anonimo"):
+            peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
 
     if request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
 
@@ -478,6 +509,7 @@ def sendPeticion(request):
 
 @loginRequired()
 def peticionEnviada(request):
+    request.session["peticionEnviada"]=1
     peticion=Peticiones.objects.get(pk=request.session["peticionEnviada"])
     data = {"peticion":peticion}
     paginas={}
@@ -489,13 +521,18 @@ def peticionEnviada(request):
     return base(request,rendered,paginas[peticion.tipo])
 
 def rechazarContactoPeticion(request):
+    usuario2=False
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
+        usuario2=True
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         rechazo = Rechazos()
-        rechazo.contacto = peticion.contacto_contacto
+        if usuario2:
+            rechazo.contacto = limpiaTelefono(peticion.contacto2_contacto)
+        else:
+            rechazo.contacto = limpiaTelefono(peticion.contacto_contacto)
         rechazo.usuario = peticion.usuario
         rechazo.general = False
         rechazo.save()
@@ -509,13 +546,18 @@ def rechazarContactoPeticion(request):
         return base(request,rendered,"peticion")
 
 def rechazarZiipPeticion(request):
+    usuario2=False
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
-    if len(lista_peticiones)>0:
+    if len(lista_peticiones)==0:
+        usuario2=True
         lista_peticiones = Peticiones.objects.filter(codigo2=request.GET["peticion"])
     if len(lista_peticiones)>0:
         peticion = lista_peticiones[0]
         rechazo = Rechazos()
-        rechazo.contacto = peticion.contacto_contacto
+        if usuario2:
+            rechazo.contacto = limpiaTelefono(peticion.contacto2_contacto)
+        else:
+            rechazo.contacto = limpiaTelefono(peticion.contacto_contacto)
         rechazo.usuario = None
         rechazo.general = True
         rechazo.save()
@@ -536,11 +578,11 @@ def rechazoEnviado(request):
     csrf_token_value = get_token(request)
     data = {"csrf_token_value":csrf_token_value,"rechazoEnviado":request.session["rechazoEnviado"],"mensajeRechazo":mensajeRechazo}
     rendered = render_to_string("rechazoEnviado.html",data)
-    return base(request,rendered,"rechazarPeticion")
+    return base(request,rendered,"peticion")
 
 def aceptarRechazo(request):
 
-    rechazo = Rechazos.objects.get(codigo=request.POST["rechazoEnviado"])
+    rechazo = Rechazos.objects.get(pk=request.POST["rechazoEnviado"])
     if rechazo.codigo == request.POST["codigo"]:
         rechazo.confirmado=True
         rechazo.save()
@@ -594,12 +636,37 @@ def sendContacto(request):
 
 def legal(request):
     texto = Textos.objects.get()
-    data={"texto":texto.aviso_legal}
+    data={"texto":texto.aviso_legal,"titulo":"Aviso Legal"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"legal")
 
 def privacidad(request):
     texto = Textos.objects.get()
-    data={"texto":texto.privacidad}
+    data={"texto":texto.privacidad,"titulo":"Politica de privacidad"}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"privacidad")
+
+
+def recordarPassword(request):
+    csrf_token_value = get_token(request)
+    data={"csrf_token_value":csrf_token_value}
+    rendered = render_to_string("recordarPassword.html",data)
+    return base(request,rendered,"login")
+
+@loginRequired()
+def doRecordarPassword(request):
+    usuario = Usuarios.objects.filter(pk=request.session["user_id"])
+    usuario.password = generaPassword()
+    usuario.save()
+
+    data = { "usuario":usuario}
+    rendered = render_to_string("mails/recordar.html", data)
+    asunto = "Recuperar password ziip"
+    enviaMail.apply_async(args=[usuario.email,asunto,rendered], queue=QUEUE_DEFAULT)
+    return redirect('/login')
+
+
+def blog(request):
+    data={}
+    rendered = render_to_string("blog.html",data)
+    return base(request,rendered,"blog")

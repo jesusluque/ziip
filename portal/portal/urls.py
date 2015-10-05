@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
 )+ (
         static('uploads', document_root=BASE_DIR+"/portal/uploads", show_indexes=True)+
-        static('css', document_root=BASE_DIR+"/portal/media/css", show_indexes=True)+
-        static('js', document_root=BASE_DIR+"/portal/media/js", show_indexes=True)+
-        static('img', document_root=BASE_DIR+"/portal/media/img", show_indexes=True)
+        static('css', document_root=BASE_DIR+"/portal/media2/css", show_indexes=True)+
+        static('js', document_root=BASE_DIR+"/portal/media2/js", show_indexes=True)+
+        static('img', document_root=BASE_DIR+"/portal/media2/img", show_indexes=True)
     )

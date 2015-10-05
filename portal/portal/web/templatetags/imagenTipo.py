@@ -7,7 +7,7 @@ register = template.Library()
 @stringfilter
 def imagenTipo(value):
     imagenes={}
-    imagenes["1"]="jicanonimoA.png"
-    imagenes["2"]="jicconectaA.png"
-    imagenes["3"]="jiccelestinaA.png"
-    return "<img src='/img/"+imagenes[value]+"'  style='width: 100px;'>"
+    imagenes["1"]="anonimo.png"
+    imagenes["2"]="conecta.png"
+    imagenes["3"]="celestina.png"
+    return "<img src='/img/"+imagenes[value]+"'>"

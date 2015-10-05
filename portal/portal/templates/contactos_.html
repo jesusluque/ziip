@@ -1,0 +1,32 @@
+
+<section class="site-content site-section">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-vcenter">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-center">Contacto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {%for contacto in contactos %}
+                    <tr>
+                        <td style="width: 200px;">
+                          {%if contacto.usuario2.imagen %}
+                            <img src="{{contacto.usuario2.imagen.url}}" alt="" style="width: 180px;">
+                            {% endif %}
+                        </td>
+                        <td>
+                          {{contacto.usuario2.usuario}}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>

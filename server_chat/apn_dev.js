@@ -1,21 +1,13 @@
 
-var join = require('path').join
-  //, pfx = join(__dirname, 'cert/push_notification.p12');
-  , pfx = join(__dirname, 'cert/apn_developer_identity2.p12');
+var join = require('path').join;
+var pfx = join(__dirname, 'Certificados2.p12');
+var apnagent_dev = require('apnagent')
 
-/*!
- * Create a new gateway agent
- */
-
-var apnagent = require('apnagent')
-  , agent_dev = module.exports = new apnagent.Agent();
-
-/*!
- * Configure agent
- */
+var agent_dev = module.exports = new apnagent_dev.Agent();
 
 agent_dev
   .set('pfx file', pfx)
+  .set('debug','on')
   .enable('sandbox');
 
 /*!
@@ -57,7 +49,7 @@ console.log("Error en el agent");
  */
 
 agent_dev.connect(function (err) {
-console.log("Conectando el agente");
+console.log("Conectando el agente de desarrollo");
   // gracefully handle auth problems
   if (err && err.name === 'GatewayAuthorizationError') {
     console.log('Authentication Error: %s', err.message);

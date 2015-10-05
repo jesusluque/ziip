@@ -2,7 +2,7 @@
 // Email: marodriguez@marodriguez.com
 
 //Basado en el proyecto:
-// Url GitHub:https://github.com/tegioz/chat 
+// Url GitHub:https://github.com/tegioz/chat
 // Author: Sergio Castaño Arteaga
 // Email: sergio.castano.arteaga@gmail.com
 
@@ -32,7 +32,7 @@ var notify = require('./notify');
 
 function handleDisconnect(connection) {
   connection.on('error', function(err) {
-      
+
     logger.emit('newEvent', 'Error de conexion mysql', err);
     if (!err.fatal) {
       return;
@@ -115,8 +115,8 @@ connection.query('SELECT * from core_chatbloqueos ', function(err, rows) {
 //Funcion para parsear la fecha
 var time = require('time');
 var formatDate = function(fecha) {
-    
-    
+
+
     console.log("la fecha que formateamos es"+fecha)
     var mes=fecha.getMonth()+1;
     var dia=fecha.getDate();
@@ -127,7 +127,7 @@ var formatDate = function(fecha) {
         dia="0"+dia;
     }
     return fecha.getFullYear()+"-"+mes+"-"+dia+" "+fecha.toLocaleTimeString();
-    
+
 };
 var formatFechaBBDD = function (fecha) {
     //2013-06-19T14:56:50.000Z
@@ -162,7 +162,7 @@ var RedisStore = require('socket.io/lib/stores/redis'),
     pub = redis.createClient(conf.dbPort, conf.dbHost, conf.dbOptions),
     sub = redis.createClient(conf.dbPort, conf.dbHost, conf.dbOptions),
     db = redis.createClient(conf.dbPort, conf.dbHost, conf.dbOptions);
-    
+
 io.set('store', new RedisStore({
     redisPub: pub,
     redisSub: sub,
@@ -186,7 +186,7 @@ io.sockets.on('connection', function(socket) {
     // Welcome message on connection
     var address = socket.handshake.address;
     console.log("usuario conectado:"+address.address);
-    
+
     // Store user data in db
     db.hset([socket.id, 'connectionDate', new Date()], redis.print);
     db.hset([socket.id, 'socketID', socket.id], redis.print);
@@ -196,10 +196,19 @@ io.sockets.on('connection', function(socket) {
     socket.on('login', function(data) {
         logger.emit('newEvent', 'El estado de la conexion es ', connection.state);
         checkConnection();
-        
+
         logger.emit('newEvent', 'Recibimos una peticion de login2', data);
-        if (data.pass !="" && data.user !="" ){
-            var sql = 'SELECT * from core_usuarios where usuario="'+data.user+'" and password="'+data.pass+'"';
+        if (data.user !=""  &&(data.pass !="" ||data.chatToken!="" )){
+            var sql;
+            if (data.pass !=null) {
+                sql = 'SELECT * from core_usuarios where usuario="'+data.user+'" and password="'+data.pass+'"';
+
+            } else {
+                sql = 'SELECT * from core_usuarios where usuario="'+data.user+'" and chatToken="'+data.chatToken+'"';
+
+            }
+
+
             logger.emit('newEvent', sql,{});
             connection.query(sql, function(err, rows) {
                 if (err) return logger.emit('newEvent', 'error1', err);
@@ -209,9 +218,9 @@ io.sockets.on('connection', function(socket) {
                     db.hset([socket.id, 'userName', rows[0].name+" "+rows[0].last_name], redis.print);
                     if (data.device) {
                          device="browser";
-                    } else { 
+                    } else {
                         device="movil";
-                    }    
+                    }
                     db.hset([socket.id, 'device', device], redis.print);
                     //db.hset([rows[0].id, 'socketId', socket.id], redis.print);
                     socket.join(rows[0].id);
@@ -224,15 +233,15 @@ io.sockets.on('connection', function(socket) {
                         "status":"error"
                     };*/
                     socket.disconnect();
-                }    
+                }
                 socket.emit('login', message);
-                
+
             });
         } else {
             socket.disconnect();
         }
     });
-    
+
     socket.on('newMsg', function(data) {
 
         logger.emit('newEvent', 'Recibimos new Msg',data);
@@ -242,7 +251,7 @@ io.sockets.on('connection', function(socket) {
                 var userId=objOrigen.userId;
                 if (userId) {
                     //Esta logado, guardamos el mensaje en la bbdd
-                    var fecha=new time.Date();    
+                    var fecha=new time.Date();
                     fecha.setTimezone('Europe/Madrid');
                     console.log("pedimos format1 date1 de fecha "+fecha)
                     var str_fecha=formatDate(fecha);
@@ -253,12 +262,12 @@ io.sockets.on('connection', function(socket) {
                         connection.query('update chat_config set sequence='+this_img, function(err, result) {
                             if (err) return logger.emit('newEvent', 'error al actualizar secuencia de img', err);
                         });
-                        var imgData=new Buffer(data.text, 'base64'); 
+                        var imgData=new Buffer(data.text, 'base64');
                         fs.writeFile(conf.imgFullPath+'image_'+this_img+'.png', imgData, function (err) {
                             if (err) throw err;
                                             console.log('It\'s saved!');
                         });
-                        data.text=conf.imgPublicPath+'image_'+this_img+'.png';    
+                        data.text=conf.imgPublicPath+'image_'+this_img+'.png';
                     }
                     */
                     console.log( data.type );
@@ -283,16 +292,16 @@ io.sockets.on('connection', function(socket) {
                                 bloq_user.splice(bloq_user.indexOf(data.to),1);
                             }
                             sql='delete from core_chatbloqueos where usuario="'+userId+'" and bloqueado="'+data.to+'" ';
-                    
+
                         }
                         bloqueos[userId]= bloq_user;
-                              
+
                         logger.emit('newEvent', 'bloqueos:', bloqueos);
                         connection.query(sql, function(err, result) {
                             if (err) return logger.emit('newEvent', 'error en bloquear usuario', {'sql':sql, 'error':err});
                         });
                     }
-                    
+
                     //comprobamos si esta bloqueado
                     var blocked = "0";
                     if (bloqueos[data.to]) {
@@ -304,7 +313,7 @@ io.sockets.on('connection', function(socket) {
                         }
                     }
                                         console.log("blocked es:",blocked);
-                    
+
                     connection.query('insert into core_chatmensajes (texto,fecha,recibido,usuario,destinatario,tipo, bloqueado) values ("'+data.text+'","'+data.date+'","'+str_fecha+'","'+userId+'","'+data.to+'","'+data.type+'","'+blocked+'")', function(err, result) {
                         //Le indicamos que lo hemos recibido
                         if (err) return logger.emit('newEvent', 'error3', err);
@@ -317,29 +326,29 @@ io.sockets.on('connection', function(socket) {
                         socket.emit('recMsg',message);
                         if (blocked=="0") {
                             //y se lo enviamos al otro usuario
-                        
-                            
+
+
                             var message = {
                                 "serverId":result.insertId,
                                 "text":data.text,
                                 "from":userId+"",
                                 "destination":data.to+"",
                                 "type":data.type+"",
-                                "date":str_fecha, 
+                                "date":str_fecha,
                                 "readed":0,
                             }
                             //Enviamos anuestro otro dispositivo
-                            
+
                             var socketsInRoom = io.sockets.clients(userId);
                             if (socketsInRoom.length != 0) {
                                 for (sock in socketsInRoom) {
                                     var other_socket = socketsInRoom[sock]
-                                    if (other_socket.id != socket.id){ 
+                                    if (other_socket.id != socket.id){
                                         console.log("Enviamos al socket:"+other_socket.id);
                                         other_socket.emit('newMsg',message);
                                     }
                                 }
-                            } 
+                            }
                             //Enviamos al amigo
                             var socketsInRoom = io.sockets.clients(data.to);
                             console.log("Cantidad de sockets:"+socketsInRoom.lenght)
@@ -352,7 +361,7 @@ io.sockets.on('connection', function(socket) {
                             } else {
                                 var roomsDone=0;
                                 for (sock in socketsInRoom) {
-                                    db.hget(socketsInRoom[sock].id, "device", function(err, value) { 
+                                    db.hget(socketsInRoom[sock].id, "device", function(err, value) {
                                         roomsDone++;
 
                                         console.log("En el hget");
@@ -375,7 +384,7 @@ io.sockets.on('connection', function(socket) {
                                     console.log("Le enviamos el mensaje al socket:"+socketsInRoom[sock].id)
                                     socketsInRoom[sock].emit('newMsg',message);
                                 }
-                            } 
+                            }
                         }
                     });
                 } else {
@@ -383,14 +392,14 @@ io.sockets.on('connection', function(socket) {
                 }
         });
     });
-    
-    
+
+
     socket.on('recMsg', function(data) {
         db.hgetall(socket.id, function(err, objOrigen) {
             if (err) return logger.emit('newEvent', 'error4', err);
                 var userId = objOrigen.userId;
                 if (userId) {
-                    var fecha=new time.Date();    
+                    var fecha=new time.Date();
                     fecha.setTimezone('Europe/Amsterdam');
                     console.log("pedimos format date2 de fecha "+fecha)
                     var str_fecha=formatDate(fecha);
@@ -401,7 +410,7 @@ io.sockets.on('connection', function(socket) {
                         connection.query(sql, function(err, rows) {
                             if (err) return logger.emit('newEvent', 'error6', {'sql':sql, 'error':err});
                             if (rows.length>0){
-                                
+
                                 var socketsInRoom = io.sockets.clients(rows[0].user);
                                 if (socketsInRoom.length>0){
                                     var message = {
@@ -417,10 +426,10 @@ io.sockets.on('connection', function(socket) {
                             }
                         });
                     });
-                    
+
                 }
             });
-    
+
     });
     socket.on('readMsg', function(data) {
         console.log("recibo read msg con mensaje"+data.serverId );
@@ -428,7 +437,7 @@ io.sockets.on('connection', function(socket) {
             if (err) return logger.emit('newEvent', 'error11', err);
                 var userId=objOrigen.userId;
                 if (userId) {
-                    var fecha=new time.Date();    
+                    var fecha=new time.Date();
                     fecha.setTimezone('Europe/Amsterdam');
                     console.log("pedimos format date3 de fecha "+fecha)
                     var str_fecha=formatDate(fecha);
@@ -439,7 +448,7 @@ io.sockets.on('connection', function(socket) {
                 }
             });
     });
-    
+
     socket.on('getUserInfo', function(data) {
         console.log("getUserInfo"+data.id );
         db.hgetall(socket.id, function(err, objOrigen) {
@@ -464,16 +473,16 @@ io.sockets.on('connection', function(socket) {
                             "usuario":row.usuario,
                             "imagen":imagen
                         }
-                        socket.emit('getUserInfo',datos)        
+                        socket.emit('getUserInfo',datos)
                     });
-                    
-                    
+
+
                 }
             });
     });
-    
-    
-    
+
+
+
     /*
     socket.on('getOldMsg', function(data) {
         //Obtenemos los mensajes antiguos de un usuario, dado un id.
@@ -482,7 +491,7 @@ io.sockets.on('connection', function(socket) {
             var userId=objOrigen.userId;
             // Todo desde el ultimo mensaje
             //var sql="select * from app_messenger where (user='"+userId+"' or destination='"+userId+"') and id>'"+data.lastMsg+"'";
-            
+
             //solo se envian los no leidos con destino al usuario conectado.
             var sql="select * from core_chat_mensajes where  destinatario='"+userId+"' and enviado is null and block='0'";
             logger.emit('newEvent', "getOldMsg query", sql);
@@ -492,7 +501,7 @@ io.sockets.on('connection', function(socket) {
                 for (i in result) {
                     var row=result[i];
                     console.log("pedimos format1 date4 de fecha "+row.date)
-                    
+
                     var message = {
                         "serverId":row.id,
                         "text":row.name,
@@ -502,10 +511,10 @@ io.sockets.on('connection', function(socket) {
                         "date":formatDate(row.date)+" GMT+02:00",
                     }
                     logger.emit('newEvent', 'el message que hacemos push es:', message);
-                    newMsgs.push(message);    
+                    newMsgs.push(message);
                 }
                 //Ya tenemos los mensajes que no hemos enviado.
-                
+
                 var sql="select * from app_messenger where  user='"+userId+"' and readed is null and block='0' and sended is not null";
                 logger.emit('newEvent', "getOldMsg, readMsg query", sql);
                 connection.query(sql, function(err, result) {
@@ -514,21 +523,21 @@ io.sockets.on('connection', function(socket) {
                     for (i in result) {
                         var row=result[i];
                         var message = {
-                            "serverId":row.id,    
+                            "serverId":row.id,
                         }
-                        readMsgs.push(message);    
+                        readMsgs.push(message);
                     }
-                    
+
                     var datos = {
                         "readMsg":readMsgs,
                         "newMsg":newMsgs,
                     }
-            
+
                     socket.emit('getOldMsg',datos)
-        
+
                 });
-            });    
-        });    
+            });
+        });
     });
     */
     socket.on('getOldMsg2', function(data) {
@@ -548,7 +557,7 @@ io.sockets.on('connection', function(socket) {
                     var readed=1;
                     if (row.readed==null) {
                         readed=0;
-                    } 
+                    }
                     var message = {
                         "serverId":row.id,
                         "text":row.texto,
@@ -558,10 +567,10 @@ io.sockets.on('connection', function(socket) {
                         "date":formatDate(row.fecha)+" GMT+02:00",
                         "readed":readed,
                     }
-                    newMsgs.push(message);    
+                    newMsgs.push(message);
                 }
                 //Ya tenemos los mensajes que no hemos enviado.
-                
+
                 var sql="select * from core_chatmensajes where  usuario='"+userId+"' and leido is null and bloqueado='0' and enviado is not null";
                 connection.query(sql, function(err, result) {
                     if (err) return logger.emit('newEvent', 'error10:'+sql, err);
@@ -569,24 +578,24 @@ io.sockets.on('connection', function(socket) {
                     for (i in result) {
                         var row=result[i];
                         var message = {
-                            "serverId":row.id,    
+                            "serverId":row.id,
                         }
-                        readMsgs.push(message);    
+                        readMsgs.push(message);
                     }
-                    
+
                     var datos = {
                         "readMsg":readMsgs,
                         "newMsg":newMsgs,
                     }
-            
+
                     socket.emit('getOldMsg',datos)
-        
+
                 });
-            });    
-        });    
+            });
+        });
     });
-    
-    
+
+
   /*
      socket.on('blockFriend', function(data) {
 
@@ -606,32 +615,32 @@ io.sockets.on('connection', function(socket) {
                     console.log("bloqueamos");
                     bloq_user.push(data.bloqueado_id);
                     sql='insert core_bloqueoschat (usuario,bloqueado) values ("'+userId+'","'+data.bloqueado_id+'")';
-                    
+
                 } else {
                      console.log("desbloqueamos");
                     if (bloq_user.indexOf(data.destination)>=0) {
                         bloq_user.splice(bloq_user.indexOf(data.to),1);
                     }
                     sql='delete * from core_bloqueoschat where usuario="'+userId+'"';
-                    
+
                 }
                 bloqueos[userId]= bloq_user;
                 connection.query(sql, function(err, result) {
                     if (err) return logger.emit('newEvent', 'error en bloquear usuario', {'sql':sql, 'error':err});
                 });
-                
-                    
+
+
             }
         });
-    });      
-    
-    */  
+    });
+
+    */
      // Clean up on disconnect
     socket.on('disconnect', function() {
-    
+
         // Get current rooms of user
         var rooms = _.clone(io.sockets.manager.roomClients[socket.id]);
-        
+
         // Get user info from db
         db.hgetall(socket.id, function(err, obj) {
             if (err) return logger.emit('newEvent', 'error7', err);
@@ -651,4 +660,3 @@ process.on('uncaughtException', function (err) {
         logStream.write("\nError: "+err.message);
         logStream.write(err.stack);
 });
-

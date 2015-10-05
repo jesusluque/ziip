@@ -32,7 +32,7 @@ def enviaSMS(envio):
     str_from="Ziip-es"
     url="api.smsarena.es"
     params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':envio.telefono,'text':envio.texto,"id":envio.pk})
-    
+
     h1 = httplib.HTTPSConnection(url)
     h1.request("GET", "/http/sms.php?"+params)
     r1 = h1.getresponse()
@@ -61,3 +61,25 @@ def enviaMail(email,asunto,texto):
     msg.send()
     
         
+
+@task
+def peticionAceptada(peticion):
+
+    if peticion.tipo == TIPO_PETICION_CELESTINO:
+        enviaPeticionAceptada.apply_async(args=[peticion.usuario1,peticion.usuario2], queue=QUEUE_DEFAULT)
+    else:
+        enviaPeticionAceptada.apply_async(args=[peticion.usuario1,peticion.usuario], queue=QUEUE_DEFAULT)
+
+@task
+def enviaPeticionAceptada(usuario1,usuario2):
+
+
+    data = {"usuario":usuario1.username}
+    rendered = render_to_string("mails/nuevoContacto.html", data)
+    asunto = "Tienes un nuevo contacto (ziip.es)"
+    enviaMail.apply_async(args=[usuario2.email,asunto,rendered], queue=QUEUE_DEFAULT)
+
+    data = {"usuario":usuario2.username}
+    rendered = render_to_string("mails/nuevoContacto.html", data)
+    asunto = "Tienes un nuevo contacto (ziip.es)"
+    enviaMail.apply_async(args=[usuario1.email,asunto,rendered], queue=QUEUE_DEFAULT)

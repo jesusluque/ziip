@@ -25,6 +25,7 @@ def generaCodigo():
 
 class Usuarios(models.Model):
     token = models.CharField(max_length=250) #token para acceder en cada peticion
+    chatToken = models.CharField(max_length=250)# token para acceso del chat web, se genera uno cada vez que se accede al chat
     num_telefono = models.CharField(max_length=250)
     fecha_registro = models.DateField(blank=True, null=True, default=datetime.now)
     usuario = models.CharField(max_length=250)
@@ -37,8 +38,9 @@ class Usuarios(models.Model):
 
 class Tokens(models.Model):
     usuario = models.ForeignKey(Usuarios)
-    token = models.EmailField(max_length=250)
+    token = models.CharField(max_length=250)
     tipo_dispositivo = models.CharField(max_length=2, choices = valores["tipos_dispositivos"].items(),default=TIPO_DISPOSITIVO_IOS)
+    produccion = models.BooleanField(default=True)
 
 class ChatMensajes(models.Model):
     texto = models.TextField()
@@ -103,6 +105,7 @@ class Rechazos(models.Model):
     general = models.BooleanField(default=False)
     codigo = models.CharField(max_length=250, default=generaCodigo)
     confirmado = models.BooleanField(default=False)
+    fecha = models.DateTimeField(default=datetime.now)
 
 
 

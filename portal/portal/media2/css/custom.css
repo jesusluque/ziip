@@ -1,0 +1,255 @@
+h1 {
+    margin-top: 15px
+}
+
+.navbar.navbar-default {
+    background-color: #583867;
+    border-bottom: 1px solid #dedede;
+}
+
+#page-content + footer {
+    background-color: #583867;
+    border-top: 1px solid #dedede;
+}
+
+
+.nav.navbar-nav-custom>li>a {
+    min-width: 50px;
+    padding: 5px 7px;
+    line-height: 40px;
+    text-align: center;
+    color: #dedede;
+    position: relative;
+}
+
+.nav.navbar-nav-custom > li.open > a, .nav.navbar-nav-custom > li > a:hover, .nav.navbar-nav-custom > li > a:focus {
+    background-color: #6d4580;
+}
+
+.text-primary, .text-primary:hover, a, a:hover, a:focus, a.text-primary, a.text-primary:hover, a.text-primary:focus {
+    color: #583867;
+}
+
+
+ footer a,footer a:hover,footer a:focus,footer a.text-primary,footer a.text-primary:hover,footer a.text-primary:focus {
+    color: #FFFFFF;
+}
+.pull-left {
+    color: #FFFFFF;
+}
+#year-copy {
+    color: #dedede;
+}
+
+.block {
+    background-color: #F2EDF9;
+}
+.accion {
+        background-color: #FFFFFF;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        height: 80px;
+}
+
+.accion  img {
+height: 50px;
+width:50px !important;
+}
+.accion{
+    text-align: right;
+    vertical-align: middle;
+}
+.accion .input-group{
+    padding-top: 15px;
+}
+
+.accion .input-group-addon{
+    padding-top: 0px;
+    margin-top: -20px;
+}
+.accion a{
+    margin-top: 5px;
+    color:#8251A1;
+}
+
+.input-group {
+    background-color: #FFFFFF;
+}
+
+#login-container .login-title {
+    background-color: #FFFFFF;
+    position: relative;
+    float: left;
+    width: 540px;
+}
+
+#login-container .login-title .logo-tittle{
+    /*border: 1px solid red;*/
+    float: left;
+    padding: 0px 10px 0px 10px;
+}
+
+#login-container .login-title .txt-tittle{
+    /*border: 1px solid cyan;*/
+    float: left;
+    text-align: right;
+    width: 80%;
+}
+
+#login-container .login-title h1 {
+    color:#8251A1;
+}
+
+#login-container .login-title h1 small {
+    color:#8251A1;
+}
+
+
+.input-group-addon, .input-group-btn {
+    vertical-align: middle;
+}
+
+
+
+
+@media screen and (min-width: 768px) {
+    #login-container {
+        width: 540px !important;
+        top: 156px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #login-container {
+        width: 300px !important;
+        top: 80px !important;
+    }
+
+    #login-container .login-title {
+    width: 300px !important;
+    }
+
+    #login-container .login-title .txt-tittle{
+    width: 60%;
+    }
+}
+
+.btn-primary {
+    background-color: #583867;
+    border-color:#583867;
+}
+
+.btn-primary:hover {
+    background-color: #583867;
+    border-color:#583867;
+}
+
+.switch-primary input:checked + span {
+    background-color: #583867;
+}
+
+.switch-primary span {
+    border-color: #583867;
+}
+
+
+
+a.barriformat1{
+        padding:3px;
+        background:#583867;
+        color:#fff;
+}
+a.barriformat1:hover{
+  background:#fff;
+  color:#583867;
+  text-decoration: none;
+}
+a.barriformat2{
+        padding-left:5px;
+        color:#b3b3b3;
+}
+
+#barritacookie{
+        display:none;
+        position:fixed;
+        left:0px;
+        right:0px;
+        bottom:0px;
+        width:100%;
+        min-height:55px;
+        background: #333333;
+        color:#dddddd;
+        z-index: 99999;
+}
+
+#barritaloca2{
+        width: 100%;
+        position:absolute;
+        padding-left: 5px;
+        font-size: 1.3rem;
+        top: 20%;
+        text-align:center;
+}
+
+
+textarea.input-lg, select[multiple].input-lg {
+    height: auto;
+    padding-top: 16px;
+    line-height: 10px;
+}
+
+.select2-container-active .select2-choice, .select2-container-active .select2-choices {
+    border: none;
+    outline: none;
+}
+
+.sexo-css {
+    width: 100%;
+    padding-left: 15px;
+    line-height: 3;
+    color: #555;
+    font-size: 13px;
+}
+
+.sexo-css .radio-inline {
+    line-height: 1.6;
+    margin-top: -8px;
+}
+
+.sexo-css label {
+    font-weight: normal;
+    padding-right: 10px;
+}
+
+.enviado {
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+    padding: 6px;
+    margin-bottom: 20px;
+}
+
+.enviado h1 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.botones-mensaje {
+    text-align: center;
+}
+
+.botones-mensaje .col-xs-12 {
+    margin-bottom: 10px !important;
+}
+
+.ajustes .col-xs-12 {
+   text-align: center;
+}
+
+.ajustes .col-xs-12 .input-group {
+   width: 100%;
+}
+
+.ajustes .col-xs-12 .input-group img{
+   margin: 20px 0;
+}

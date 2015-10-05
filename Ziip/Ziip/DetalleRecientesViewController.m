@@ -25,7 +25,7 @@
     
     NSString *imagenTipo = @"";
     if ([[self.reciente objectForKey:@"tipo" ] isEqualToString:@"1"]) {
-        self.tipoAccion.text = @"Anonimo";
+        self.tipoAccion.text = @"Mensaje";
         imagenTipo=@"jicanonimoA.png";
         
     } else if ([[self.reciente objectForKey:@"tipo" ] isEqualToString:@"2"]) {

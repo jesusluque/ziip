@@ -10,7 +10,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'portal.settings'
 
 from portal.api.views import *
 
-
+"""
 texto= u"mensaje con acentos áéíóú"
 
 envio = EnviosSMS()
@@ -33,3 +33,26 @@ params = urllib.urlencode({'auth_key': auth_key, 'from': str_from, 'to':envio.te
 #enviaSMS.apply_async(args=[envio], queue=QUEUE_DEFAULT)
 
 #enviaMail("manuthema.rodriguez@gmail.com","Asunto","email de prueba")
+"""
+
+errores=[]
+usuario_id=154
+usuario = Usuarios.objects.get(pk=usuario_id)
+
+contacto="660133987"
+num_peticiones = Peticiones.objects.filter(usuario__pk = usuario.pk,fecha__startswith=str(date.today()-timedelta(days=2)))
+print num_peticiones
+if len(num_peticiones)>4:
+   errores.append("Solo puedes relizar cinco envios diarios")
+
+num_peticiones = Peticiones.objects.filter(usuario_id=usuario.pk,contacto_contacto=contacto , fecha__gte=date.today()-timedelta(days=14))
+if len(num_peticiones)>0:
+    errores.append("No puedes enviar mas de una peticion al mismo usuario en 2 semanas")
+
+
+print errores
+
+
+rechazos1 = Rechazos.objects.filter(contacto=contacto,general=True,confirmado=True)
+
+print rechazos1

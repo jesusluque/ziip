@@ -1,0 +1,50 @@
+{% load imagenTipo %}
+<section class="site-content site-section">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-vcenter">
+                <thead>
+                    <tr>
+                        <th>Accion</th>
+                        <th class="text-center">Contacto</th>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Mensaje anonimo</th>
+                        <th class="text-center">Mensaje personal</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                  {%for reciente in recientes %}
+                    <tr>
+                        <td>
+                            {{reciente.tipo|imagenTipo|safe}}
+
+
+                        </td>
+                        <td>
+
+                          {{reciente.contacto_nombre}} {{reciente.contacto_contacto}}
+                          {% ifequal reciente.tipo "3" %}
+                          <br>
+                          {{reciente.contacto2_nombre}} {{reciente.contacto2_contacto}}
+                          {% endifequal %}
+                        </td>
+                        <td>
+                          {{reciente.fecha|date:"h:i d-m-Y"}}
+                        </td>
+                        <td>
+                         <a href="reciente?peticion_id={{reciente.pk}}" {{reciente.mensaje_anonimo}}
+                        </td>
+                        <td>
+                          {{reciente.mensaje}}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>

@@ -1,50 +1,15 @@
 
-join = require('path').join;
-fs = require('fs')
+var join = require('path').join;
+var pfx = join(__dirname, 'CertificadosPushZiip.p12');
+var apnagent = require('apnagent');
 
-
-pfx = join(__dirname, 'Certificados2.p12');
-//pfx = join(__dirname, 'CertificadosUltimo.p12');
-  //, pfx = join(__dirname, 'cert/apn_developer_identity2.p12');
-
-//pfx = join(__dirname, 'cert.pem');
-
-
-//cert = join(__dirname, 'certificado.cer');
-//key = join(__dirname, 'clave_privada.cer');
-
-
-
-//cert = fs.readFileSync(join(__dirname, 'certificado.cer'));
-//key = fs.readFileSync(join(__dirname, 'clave_privada.cer'));
-
-
-/*!
- * Create a new gateway agent
- */
-
-apnagent = require('apnagent')
-agent = module.exports = new apnagent.Agent();
-
-/*!
- * Configure agent
- */
-//auth=
-//    key, key
-//    cert, cert
+var agent = module.exports = new apnagent.Agent();
 
 agent
     .set('pfx file', pfx)
-    //.set(auth)
-    .set('debug','on')
-    .enable('sandbox');
+    .set('debug',true)
+    .enable('production');
 
-    
-    //.set('cert',cert)
-    //.set('key',key)
-    
-    
-    //agent.set('passphrase', '1234');
 
 /*!
  * Error Mitigation
@@ -80,6 +45,16 @@ console.log("Error en el agent");
   }
 });
 
+
+agent.on('message', function (err, msg) {
+
+console.log("mensaje");
+
+console.log(err);
+console.log(msg);
+
+
+})
 /*!
  * Make the connection
  */
@@ -88,11 +63,11 @@ agent.connect(function (err) {
 console.log("Conectando el agente");
   // gracefully handle auth problems
   if (err && err.name === 'GatewayAuthorizationError') {
-      
+
     console.log('Authentication Error: %s', err.message);
     console.log("bla");
     console.log(err.code)
-    
+
     process.exit(1);
   }
   if (err){

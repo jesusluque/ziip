@@ -1,6 +1,9 @@
 
 var conf      = require('./config');
 
+
+process.env.DEBUG = '-pong:*,ping:*';
+
 //Conectamos al mysql
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -14,7 +17,7 @@ var notify = require('./notify');
 
 connection.connect();
 
-user_id="9" //user id  
+user_id="2" //user id
 text="Hola Jesus, te llega la notif push??"
 message={
     "serverId": "data.serverId",
@@ -28,6 +31,4 @@ message={
 
 setTimeout(function() {
   sendNotification(connection,user_id,text,message);
-}, 5000);
-
-
+}, 1000);
