@@ -195,7 +195,6 @@ a.barriformat2{
 textarea.input-lg, select[multiple].input-lg {
     height: auto;
     padding-top: 16px;
-    line-height: 10px;
 }
 
 .select2-container-active .select2-choice, .select2-container-active .select2-choices {
