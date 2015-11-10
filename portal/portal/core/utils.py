@@ -128,7 +128,7 @@ def enviaPeticion(peticion):
     elif peticion.tipo == TIPO_PETICION_CONECTA:
         if enviamos1:
             if isTelefono(peticion.contacto_contacto):
-                mensaje = "Te ha invitado a usar ziip. Primera plataforma de contacto anónima. http://ziip.es"+str(peticion.codigo)
+                mensaje = "Te ha invitado a usar ziip. Primera plataforma de contacto anónima. http://ziip.es/"+str(peticion.codigo)
                 envio = EnviosSMS()
                 envio.telefono = limpiaTelefono(peticion.contacto_contacto)
                 envio.texto = mensaje
