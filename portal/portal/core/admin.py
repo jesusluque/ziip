@@ -15,7 +15,8 @@ class TextosAdmin(TinyAdmin):
         return False
 #PAra que no se pueda borrar un tipo de datos
     def get_actions(self,request):
-       return []    
-       
-       
+       return []
+
+
 admin.site.register(Textos, TextosAdmin)
+admin.site.register(Paises)

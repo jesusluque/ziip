@@ -1,10 +1,11 @@
+{% load i18n %}
 <!-- Login Full Background -->
 <!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
 
 <div id="barritacookie" style="display: block;">
 <div id="barritaloca2">
 
-    Este sitio utiliza cookies. Si sigues navegando entendemos que estás de acuerdo.
+    {% trans 'Este sitio utiliza cookies. Si sigues navegando entendemos que estás de acuerdo.'%}'
  <a class="barriformat1" href="javascript:void(0);" onclick="PonerCookie();"><b>OK</b></a>
 </div>
 </div>
@@ -30,31 +31,31 @@
         <!-- Alternative Sidebar Toggle Button -->
         {%if logado%}
         <li>
-            <a href="ziip">Mensajes</a>
+            <a href="ziip">{% trans 'Mensajes'%}</a>
         </li>
         <li>
-            <a href="contactos">Contactos</a>
+            <a href="contactos">{% trans 'Contactos'%}</a>
         </li>
         <li>
-            <a href="recientes">Recientes</a>
+            <a href="recientes">{% trans 'Recientes'%}</a>
         </li>
         <li>
-            <a href="chat">Chat</a>
+            <a href="chat">{% trans 'Chat'%}</a>
         </li>
         <li>
-            <a href="ajustes">Ajustes</a>
+            <a href="ajustes">{% trans 'Ajustes'%}</a>
         </li>
         <li>
-            <a href="logout">Logout</a>
+            <a href="logout">{% trans 'Logout'%}</a>
         </li>
 
         {%else %}
 
         <li>
-            <a href="login">Login</a>
+            <a href="login">{% trans 'Login'%}</a>
         </li>
         <li>
-            <a href="registro">Registro</a>
+            <a href="registro">{% trans 'Registro'%}</a>
         </li>
         {%endif%}
 

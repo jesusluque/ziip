@@ -10,6 +10,7 @@ from django.core.validators import validate_email
 from django.shortcuts import redirect
 import time
 from datetime import timedelta, date
+from django.utils.translation import ugettext as _
 
 from portal.settings import *
 from portal.core.models import *
@@ -37,20 +38,19 @@ def base(request,rendered,seccion_activa):
 
 def prueba(request):
 
-
     num_peticiones = Peticiones.objects.filter(fecha__startswith=str(date.today()))
     print len(num_peticiones)
-
     data={}
     rendered = render_to_string("contactos_javi.html",data)
     return HttpResponse(rendered)
 
-
+@idioma()
 def index(request):
     data={}
     rendered = render_to_string("index.html",data)
     return base(request,rendered,"index")
 
+@idioma()
 def login(request):
     csrf_token_value = get_token(request)
     data={"csrf_token_value":csrf_token_value}
@@ -64,14 +64,17 @@ def doLogin(request):
         md5_pass = m.hexdigest()
         #Se debe comentar esta linea
         md5_pass = request.POST["password"]
-        print request.POST
         lista_usuarios = Usuarios.objects.filter(usuario=request.POST["usuario"],password=request.POST["password"])
     else:
         lista_usuarios=[]
     if len(lista_usuarios)>0:
-        print "usuario ok"
         usuario = lista_usuarios[0]
+
+        if  request.session.has_key("lang"):
+            usuario.lang = request.session["lang"]
+
         request.session['user_id'] = usuario.id
+        request.session["pais_id"] = usuario.pais_id
         #TODO el recordar, probar
         if request.POST.has_key("recordar"):
             print request.POST["recordar"]
@@ -89,6 +92,7 @@ def doLogin(request):
         rendered = render_to_string("login.html",data)
         return base(request,rendered,"login")
 
+@idioma()
 def registro(request):
     errores=[]
     datos={}
@@ -99,15 +103,19 @@ def registro(request):
         datos = request.session["datos_registro"]
         request.session.pop("datos_registro")
     csrf_token_value = get_token(request)
-    data={"csrf_token_value":csrf_token_value, "errores":errores, "datos":datos}
+    paises = Paises.objects.all()
+    data={"csrf_token_value":csrf_token_value, "errores":errores, "datos":datos, "paises":paises}
     rendered = render_to_string("registro.html",data)
     return base(request,rendered,"registro")
 
+"""
+@idioma()
 @loginRequired()
 def home(request):
     data={}
     rendered = render_to_string("home.html",data)
     return base(request,rendered,"home")
+"""
 
 def doAlta(request):
     errores=[]
@@ -116,46 +124,56 @@ def doAlta(request):
         datos["username"] = request.POST["username"]
         lista_usuarios = Usuarios.objects.filter(usuario=datos["username"])
         if len(lista_usuarios)>0:
-            errores.append("El username ya existe")
+            errores.append(_("El username ya existe"))
     else:
-        errores.append("El username es obligatorio")
+        errores.append(_("El username es obligatorio"))
     if request.POST.has_key("email") and request.POST["email"]!="":
         datos["email"] = request.POST["email"]
         try:
             validate_email(request.POST["email"])
         except ValidationError as e:
-            errores.append("El email es incorrecto")
+            errores.append(_("El email es incorrecto"))
         else:
             lista_usuarios = Usuarios.objects.filter(email=datos["email"])
             if len(lista_usuarios)>0:
-                errores.append("El email ya esta en uso")
+                errores.append(_("El email ya esta en uso"))
     else:
-        errores.append("El email es obligatorio")
+        errores.append(_("El email es obligatorio"))
 
     if request.POST.has_key("password") and request.POST["password"]!="":
         if request.POST.has_key("password2") and request.POST["password"] == request.POST["password2"]:
             datos["password"] = request.POST["password"]
         else:
-            errores.append("Los passwords no coinciden")
+            errores.append(_("Los passwords no coinciden"))
     else:
-        errores.append("El password es obligatorio")
+        errores.append(_("El password es obligatorio"))
 
     if request.POST.has_key("telefono") and request.POST["telefono"]!="":
         datos["telefono"] = request.POST["telefono"]
         if not isTelefono(request.POST["telefono"]):
-            errores.append("El numero de telefono no es correcto")
+            errores.append(_("El numero de telefono no es correcto"))
 
     if request.POST.has_key("sexo") and request.POST["sexo"]!="":
         datos["sexo"] = request.POST["sexo"]
 
+    if request.POST.has_key("pais_id") and request.POST["pais_id"]!="":
+        datos["pais_id"] = int(request.POST["pais_id"])
+    else:
+        errores.append(_("El pais es obligatorio"))
+
+
     if not request.POST.has_key("condiciones") or request.POST["condiciones"]!="1":
-        errores.append("Debe aceptar las condiciones de uso")
+        errores.append(_("Debe aceptar las condiciones de uso"))
 
     if len(errores)==0:
         usuario = Usuarios()
+        if request.session.has_key("lang"):
+            usuario.lang = request.session["lang"]
+
         usuario.usuario = datos["username"]
         usuario.email = datos["email"]
         usuario.password = datos["password"]
+        usuario.pais_id = datos["pais_id"]
         usuario.sexo = request.POST["sexo"]
         if datos.has_key("telefono"):
             usuario.num_telefono = limpiaTelefono(datos["telefono"])
@@ -180,6 +198,7 @@ def doAlta(request):
         return HttpResponseRedirect('/registro')
 
 
+@idioma()
 @loginRequired()
 def confirmaMovil(request):
     csrf_token_value = get_token(request)
@@ -193,6 +212,7 @@ def confirmaMovil(request):
     rendered = render_to_string("confirmacionMovil.html",data)
     return base(request,rendered,"confirmacionMovil")
 
+@idioma()
 @loginRequired()
 def doConfirmaMovil(request):
     confirmado = False
@@ -211,6 +231,7 @@ def doConfirmaMovil(request):
     rendered = render_to_string("respuestaConfirmacionMovil.html",data)
     return base(request,rendered,"confirmacionMovil")
 
+@idioma()
 def peticion(request, codigo):
     data={}
     lista_peticiones = Peticiones.objects.filter(codigo=codigo)
@@ -228,11 +249,9 @@ def peticion(request, codigo):
     else:
         data={}
         rendered = render_to_string("peticionNoExiste.html",data)
-
-
-
     return base(request,rendered,"peticion")
 
+@idioma()
 def peticionPrivado(request):
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
     if len(lista_peticiones)==0:
@@ -245,8 +264,6 @@ def peticionPrivado(request):
         else:
             request.session["codigo_peticion"]=peticion.codigo
         data={"peticion":peticion,"logado":logado}
-
-
         rendered = render_to_string("peticionPrivado.html",data)
     else:
         data={}
@@ -254,6 +271,7 @@ def peticionPrivado(request):
     return base(request,rendered,"peticion")
 
 
+@idioma()
 @loginRequired()
 def aceptarContactoPeticion(request):
 
@@ -301,7 +319,7 @@ def aceptarContactoPeticion(request):
             contacto.save()
             peticionAceptada.apply_async(args=[peticion], queue=QUEUE_DEFAULT)
 
-        request.session["error_contactos"] = "Contacto aceptado"
+        request.session["error_contactos"] = _("Contacto aceptado")
         return HttpResponseRedirect('/contactos')
 
     else:
@@ -309,6 +327,7 @@ def aceptarContactoPeticion(request):
         rendered = render_to_string("peticionNoExiste.html",data)
         return base(request,rendered,"peticion")
 
+@idioma()
 @loginRequired()
 def contactos(request):
     contactos= Contactos.objects.filter(usuario_id=request.session["user_id"])
@@ -317,6 +336,7 @@ def contactos(request):
     return base(request,rendered,"contactos")
 
 
+@idioma()
 @loginRequired()
 def recientes(request):
     recientes = Peticiones.objects.filter(usuario_id=request.session["user_id"]).order_by("-id")[:10]
@@ -324,6 +344,7 @@ def recientes(request):
     rendered = render_to_string("recientes.html",data)
     return base(request,rendered,"recientes")
 
+@idioma()
 @loginRequired()
 def reciente(request):
     reciente = Peticiones.objects.get(usuario_id=request.session["user_id"], pk=request.GET["peticion_id"])
@@ -331,12 +352,14 @@ def reciente(request):
     rendered = render_to_string("reciente.html",data)
     return base(request,rendered,"recientes")
 
+@idioma()
 @loginRequired()
 def ziip(request):
     data = {}
     rendered = render_to_string("ziip.html",data)
     return base(request,rendered,"ziip")
 
+@idioma()
 @loginRequired()
 def ajustes(request):
     csrf_token_value = get_token(request)
@@ -377,10 +400,12 @@ def saveAjustes(request):
     else:
         return HttpResponseRedirect('/ajustes')
 
+@idioma()
 @loginRequired()
 def anonimo(request):
     errores={}
     datos={}
+    datos["pais_id"]=request.session["pais_id"]
     if request.session.has_key("errores_peticion"):
         errores=request.session["errores_peticion"]
         datos=request.session["datos_peticion"]
@@ -389,39 +414,48 @@ def anonimo(request):
     else:
         datos["mensaje_anonimo"]="0"
 
+    paises = Paises.objects.all()
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_ANONIMO,"datos":datos,"errores":errores}
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_ANONIMO,"datos":datos,"errores":errores, "paises":paises}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"anonimo")
 
+@idioma()
 @loginRequired()
 def conecta(request):
     errores={}
     datos={}
+    datos["pais_id"]=request.session["pais_id"]
     if request.session.has_key("errores_peticion"):
         errores=request.session["errores_peticion"]
         datos=request.session["datos_peticion"]
         request.session.pop("errores_peticion")
         request.session.pop("datos_peticion")
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CONECTA,"datos":datos,"errores":errores}
+    paises = Paises.objects.all()
+
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CONECTA,"datos":datos,"errores":errores, "paises":paises}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"conecta")
 
+@idioma()
 @loginRequired()
 def celestino(request):
     errores={}
     datos={}
+    datos["pais_id"]=request.session["pais_id"]
     if request.session.has_key("errores_peticion"):
         errores=request.session["errores_peticion"]
         datos=request.session["datos_peticion"]
         request.session.pop("errores_peticion")
         request.session.pop("datos_peticion")
     csrf_token_value = get_token(request)
-    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CELESTINO,"datos":datos,"errores":errores}
+    paises = Paises.objects.all()
+    data = {"csrf_token_value":csrf_token_value,"tipo":TIPO_PETICION_CELESTINO,"datos":datos,"errores":errores, "paises":paises}
     rendered = render_to_string("nuevaPeticion.html",data)
     return base(request,rendered,"celestino")
 
+@idioma()
 @loginRequired()
 def sendPeticion(request):
 
@@ -441,25 +475,30 @@ def sendPeticion(request):
             validate_email(request.POST["email"])
             contacto = request.POST["email"]
         except ValidationError as e:
-            errores.append("El email es incorrecto")
+            errores.append(_("El email es incorrecto"))
     else:
         if isTelefono(request.POST["telefono"]):
             contacto = request.POST["telefono"]
         else:
-            errores.append("El telefono no es valido")
+            errores.append(_("El telefono no es valido"))
 
+    if request.POST["pais_id"]=="":
+        datos["pais_id"] = session["pais_id"]
+    else:
+        datos["pais_id"] = int(request.POST["pais_id"])
 
     #Comprobamos los envios a contactos,hay que dejar 14 dias
     errores = errores + comprueba_limites(usuario,contacto)
 
-    peticion.contacto_contacto = contacto
+    #peticion.contacto_contacto = contacto
+    pais = Paises.objects.get(id=datos["pais_id"])
+    peticion.contacto_contacto = pais.codigo_pais+contacto
+
     peticion.contacto_nombre = request.POST["nombre"]
 
     datos["telefono"]=request.POST["telefono"]
     datos["email"]=request.POST["email"]
     datos["nombre"]=request.POST["nombre"]
-
-
 
     if request.POST["tipo_peticion"]!=TIPO_PETICION_CONECTA:
         datos["mensaje"]=request.POST["mensaje"]
@@ -471,16 +510,16 @@ def sendPeticion(request):
         peticion.mensaje = request.POST["mensaje"]
         mensajes={}
         if request.POST["tipo_peticion"]==TIPO_PETICION_ANONIMO:
-            mensajes["1"]="Te conozco desde hace tiempo y quiero conocerte mejor."
-            mensajes["2"]="Nos conocemos desde hace poco, pero no puedo olvidarte."
-            mensajes["3"]="Trabajamos juntos, tenemos muchas cosas en común, charlemos."
-            mensajes["4"]="Nuestras miradas se han encontrado, nuestras palabras también podrían."
-            mensajes["5"]="Estudiamos juntos, y desde que te vi no te olvido."
+            mensajes["1"]=_("Te conozco desde hace tiempo y quiero conocerte mejor.")
+            mensajes["2"]=_("Nos conocemos desde hace poco, pero no puedo olvidarte.")
+            mensajes["3"]=_("Trabajamos juntos, tenemos muchas cosas en comun charlemos.")
+            mensajes["4"]=_("Nuestras miradas se han encontrado, nuestras palabras tambien podrian.")
+            mensajes["5"]=_("Estudiamos juntos, y desde que te vi no te olvido.")
         elif request.POST["tipo_peticion"]==TIPO_PETICION_CELESTINO:
-            mensajes["1"]="Trabajo con vosotros y creo que deberíais conoceros mejor."
-            mensajes["2"]="Os he visto muchas veces, se que haceis buena pareja."
-            mensajes["3"]="Nos conocemos los tres y creo que os gustáis."
-            mensajes["4"]="Os he visto a ambos en clase, creo que hacéis buena pareja."
+            mensajes["1"]=_("Trabajo con vosotros y creo que deberiais conoceros mejor.")
+            mensajes["2"]=_("Os he visto muchas veces, se que haceis buena pareja.")
+            mensajes["3"]=_("Nos conocemos los tres y creo que os gustais.")
+            mensajes["4"]=_("Os he visto a ambos en clase, creo que haceis buena pareja.")
         if request.POST.has_key("mensaje_anonimo"):
             peticion.mensaje_anonimo = mensajes[request.POST["mensaje_anonimo"]]
 
@@ -493,19 +532,27 @@ def sendPeticion(request):
                 validate_email(request.POST["email2"])
                 contacto2 = request.POST["email2"]
             except ValidationError as e:
-                errores.append("El email del segundo contacto es incorrecto")
+                errores.append(_("El email del segundo contacto es incorrecto"))
         else:
             if isTelefono(request.POST["telefono2"]):
                 contacto2 = request.POST["telefono2"]
             else:
-                errores.append("El telefono del segundo contacto no es valido")
-        peticion.contacto2_contacto = contacto2
+                errores.append(_("El telefono del segundo contacto no es valido"))
+        if request.POST["pais2_id"]=="":
+            datos["pais2_id"] = session["pais_id"]
+        else:
+            datos["pais2_id"] = int(request.POST["pais2_id"])
+
+        pais = Paises.objects.get(id=datos["pais2_id"])
+        peticion.contacto2_contacto = pais.codigo_pais+contacto2
+
 
         datos["telefono2"]=request.POST["telefono2"]
         datos["email2"]=request.POST["email2"]
         datos["nombre2"]=request.POST["nombre2"]
     if len(errores)==0:
-
+        pais = Paises.objects.get(id=datos["pais_id"])
+        peticion.telefono= peticion.telefono
         peticion.save()
         enviaPeticion(peticion)
         #Mostramos resultado
@@ -523,6 +570,7 @@ def sendPeticion(request):
 
         return HttpResponseRedirect(paginas[request.POST["tipo_peticion"]])
 
+@idioma()
 @loginRequired()
 def peticionEnviada(request):
     request.session["peticionEnviada"]=1
@@ -536,6 +584,7 @@ def peticionEnviada(request):
     rendered = render_to_string("peticionEnviada.html",data)
     return base(request,rendered,paginas[peticion.tipo])
 
+@idioma()
 def rechazarContactoPeticion(request):
     usuario2=False
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
@@ -561,6 +610,7 @@ def rechazarContactoPeticion(request):
         rendered = render_to_string("peticionNoExiste.html",data)
         return base(request,rendered,"peticion")
 
+@idioma()
 def rechazarZiipPeticion(request):
     usuario2=False
     lista_peticiones = Peticiones.objects.filter(codigo=request.GET["peticion"])
@@ -586,6 +636,7 @@ def rechazarZiipPeticion(request):
         rendered = render_to_string("peticionNoExiste.html",data)
         return base(request,rendered,"rechazarPeticion")
 
+@idioma()
 def rechazoEnviado(request):
     mensajeRechazo=""
     if request.session.has_key("mensajeRechazo"):
@@ -596,6 +647,7 @@ def rechazoEnviado(request):
     rendered = render_to_string("rechazoEnviado.html",data)
     return base(request,rendered,"peticion")
 
+@idioma()
 def aceptarRechazo(request):
 
     rechazo = Rechazos.objects.get(pk=request.POST["rechazoEnviado"])
@@ -604,9 +656,10 @@ def aceptarRechazo(request):
         rechazo.save()
         return HttpResponseRedirect('/rechazoAceptado')
     else:
-        request.session["mensajeRechazo"]="El codigo de rechazo es incorrecto"
+        request.session["mensajeRechazo"]=_("El codigo de rechazo es incorrecto")
         return HttpResponseRedirect('/rechazoEnviado')
 
+@idioma()
 def rechazoAceptado(request):
 
     csrf_token_value = get_token(request)
@@ -614,6 +667,7 @@ def rechazoAceptado(request):
     rendered = render_to_string("rechazoAceptado.html",data)
     return base(request,rendered,"rechazarPeticion")
 
+@idioma()
 @loginRequired()
 def chat(request):
 
@@ -627,6 +681,7 @@ def logout(request):
         request.session.pop("user_id")
     return HttpResponseRedirect('/')
 
+@idioma()
 def contacto(request):
     mensaje=""
     if request.session.has_key("mensaje_contacto"):
@@ -639,7 +694,7 @@ def contacto(request):
 
 def sendContacto(request):
 
-    rendered="Mensaje denvaido desde ziip<br>"
+    rendered="Mensaje enviado desde ziip<br>"
     rendered="Asunto:"+request.POST["asunto"]+"<br>"
     rendered="Email:"+request.POST["email"]+"<br>"
     rendered="Texto:"+request.POST["texto"]+"<br>"
@@ -647,22 +702,26 @@ def sendContacto(request):
     asunto="Contacto desde ziip"
     enviaMail.apply_async(args=[settings.MAIL_TO,asunto,rendered], queue=QUEUE_DEFAULT)
 
-    request.session["mensaje_contacto"]="Menaje enviado correctamente"
+    request.session["mensaje_contacto"]=_("Mensaje enviado correctamente")
     return HttpResponseRedirect('/contacto')
 
+@idioma()
 def legal(request):
     texto = Textos.objects.get()
-    data={"texto":texto.aviso_legal,"titulo":"Aviso Legal"}
+    data={"texto":texto.aviso_legal,"titulo":_("Aviso Legal")}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"legal")
 
+@idioma()
 def privacidad(request):
     texto = Textos.objects.get()
-    data={"texto":texto.privacidad,"titulo":"Politica de privacidad"}
+    data={"texto":texto.privacidad,"titulo":_("Politica de privacidad")}
     rendered = render_to_string("textos.html",data)
     return base(request,rendered,"privacidad")
 
 
+@idioma()
+@loginRequired()
 def recordarPassword(request):
     csrf_token_value = get_token(request)
     data={"csrf_token_value":csrf_token_value}
@@ -677,7 +736,7 @@ def doRecordarPassword(request):
 
     data = { "usuario":usuario}
     rendered = render_to_string("mails/recordar.html", data)
-    asunto = "Recuperar password ziip"
+    asunto = _("Recuperar password ziip")
     enviaMail.apply_async(args=[usuario.email,asunto,rendered], queue=QUEUE_DEFAULT)
     return redirect('/login')
 

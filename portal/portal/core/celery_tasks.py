@@ -8,6 +8,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 import httplib,urllib
+from django.utils.translation import ugettext as _
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
@@ -79,10 +80,10 @@ def enviaPeticionAceptada(usuario1,usuario2):
     print usuario1
     data = {"usuario":usuario1.usuario}
     rendered = render_to_string("mails/nuevoContacto.html", data)
-    asunto = "Tienes un nuevo contacto (ziip.es)"
+    asunto = _("Tienes un nuevo contacto (ziip.es)")
     enviaMail.apply_async(args=[usuario2.email,asunto,rendered], queue=QUEUE_DEFAULT)
 
     data = {"usuario":usuario2.usuario}
     rendered = render_to_string("mails/nuevoContacto.html", data)
-    asunto = "Tienes un nuevo contacto (ziip.es)"
+    asunto = _("Tienes un nuevo contacto (ziip.es)")
     enviaMail.apply_async(args=[usuario1.email,asunto,rendered], queue=QUEUE_DEFAULT)

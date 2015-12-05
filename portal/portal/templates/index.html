@@ -1,9 +1,10 @@
+{% load i18n %}
 <div class="block block-alt-noborder">
     <div class="row">
 
         <div class="col-md-12 col-lg-12 ">
             <!-- Intro Content -->
-            <h3 class="sub-header"><strong>ziip.es</strong> es la primera aplicación de contactos anónima y GRATUITA.</h3>
+            <h3 class="sub-header"><strong>ziip.es</strong> {% trans 'es la primera aplicación de contactos anónima y GRATUITA.'%}'</h3>
             <div id="faq1" class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -11,8 +12,7 @@
                     </div>
                     <div id="faq1_q1" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            <p>Ziip es una plataforma de comunicación, que permite a los usuarios contactar anónimamente por SMS (solo en España, actualmente) o email, manteniendo la privacidad.
-                                TOTALMENTE GRATUITA.</p>
+                            <p>{% trans 'Ziip es una plataforma de comunicación, que permite a los usuarios contactar anónimamente por SMS (solo en España, actualmente) o email, manteniendo la privacidad. TOTALMENTE GRATUITA.'%}</p>
                             </div>
                         </div>
                     </div>
@@ -22,9 +22,7 @@
                         </div>
                         <div id="faq1_q2" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <p>No existe una aplicación similar, “el primer paso” en el inicio de una relación es muy complicado, especialmente en entornos laborales o familiares.
-                                    Permitimos a los usuarios que se comuniquen sin comprometer su privacidad, sin el uso de Facebook o cualquier red social.
-                                    Ziip es una herramienta para el primer contacto, a partir de el envío de un SMS (solo en España, actualmente)  o email (gratuito) abrimos un chat para permitir la comunicación privada.
+                                <p>{% trans 'No existe una aplicación similar, “el primer paso” en el inicio de una relación es muy complicado, especialmente en entornos laborales o familiares. Permitimos a los usuarios que se comuniquen sin comprometer su privacidad, sin el uso de Facebook o cualquier red social. Ziip es una herramienta para el primer contacto, a partir de el envío de un SMS (solo en España, actualmente)  o email (gratuito) abrimos un chat para permitir la comunicación privada.'%}
                                 </p>
                             </div>
                         </div>
@@ -38,7 +36,7 @@
                         <div id="faq1_q3" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    Un usuario de la plataforma, introduce un contacto (email o número de móvil), selecciona un mensaje genérico y uno personal. El genérico se enviará por SMS (solo en España, actualmente) o email, junto con un link para ver el personal.
+                                    {% trans 'Un usuario de la plataforma, introduce un contacto (email o número de móvil), selecciona un mensaje genérico y uno personal. El genérico se enviará por SMS (solo en España, actualmente) o email, junto con un link para ver el personal.'%}
                                 </p>
                             </div>
                         </div>
@@ -47,24 +45,25 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q4">¿Que es celestina?</a></h4>
+                            <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q4">{% trans '¿Que es celestina?'%}</a></h4>
                         </div>
                         <div id="faq1_q4" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    Es habitual que entre dos compañeros de trabajo o de tu entorno social veas una atracción, Celestina es la herramienta para que tú de forma anónima los pongas en contacto.
+                                    {% trans 'Es habitual que entre dos compañeros de trabajo o de tu entorno social veas una atracción, Celestina es la herramienta para que tú de forma anónima los pongas en contacto.'%}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q5">¿Podría enviar muchos mensajes al mismo móvil o email?</a></h4>
+                            <h4 class="panel-title"><i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q5">{% trans '¿Podría enviar muchos mensajes al mismo móvil o email?'%}</a></h4>
                         </div>
                         <div id="faq1_q5" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    NO, nuestro objetivo ha sido prevenir cualquier tipo de acoso con las siguientes normas:
+                                    {% blocktrans %}
+                                     NO, nuestro objetivo ha sido prevenir cualquier tipo de acoso con las siguientes normas:
                                     <ul>
                                         <li>
                                             Cualquier número de móvil o email que no sea usuario de Ziip solo puede recibir un solo mensaje de un solo usuario. El usuario “receptor” tiene 4 opciones:
@@ -82,6 +81,7 @@
                                             No contestar, manteniendo este usuario en la lista de contactos no admitidos durante 15 días.
                                         </li>
                                     </ul>
+                                 {%    endblocktrans %}
                                 </p>
                             </div>
                         </div>

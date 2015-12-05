@@ -14,5 +14,3 @@ def imagenTipo(value):
 
 
     return "<img src='/img/"+imagenes[value]+"'  style='width: 20px;'>"
-
-print "En template tags"
