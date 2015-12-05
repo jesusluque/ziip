@@ -13,7 +13,7 @@
        <img src="/img/logo.png">
    </div>
    <div class="txt-tittle">
-       <h1> <strong>Ziip</strong><br><small> <strong>Contacto</strong></small></h1>
+       <h1> <strong>Ziip</strong><br><small> <strong>{% trans 'Contacto'%}</strong></small></h1>
    </div>
 </div>
 <!-- END Login Title -->
@@ -27,13 +27,13 @@
         <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token_value}}">
         <div class="form-group">
             <div class="col-xs-12">
-ziip.es tiene como objetivo contactar personas, nuestro esfuerzo es continuo para su buen uso.</br>
+{% trans 'ziip.es tiene como objetivo contactar personas, nuestro esfuerzo es continuo para su buen uso.</br>
 Si tienes cualquier duda o  problema. No dudes en enviarnos un mail a info@ziip.es o rellenar el siguiente formulario:
 </br>
-Para prensa puedes encontrar más información <a href="http://bit.ly/ziipPackPress"> aquí</a>.</br>
+Para prensa puedes encontrar más información'%} <a href="http://bit.ly/ziipPackPress"> {% trans 'aquí'%}'</a>.</br>
 
 
-ziip.es es un proyecto de beyondthebox.sl<br>
+ziip.es {% trans 'es un proyecto de'%} Missing Bite S.L.<br>
 <a href="http://facebook.com/www.ziip.es">Facebook</a><br>
 <a href="http://twitter.com/ziip_es">Twitter</a>
 
@@ -47,7 +47,7 @@ ziip.es es un proyecto de beyondthebox.sl<br>
             <div class="col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="email"  name="email" class="form-control input-lg" placeholder="Email">
+                    <input type="email"  name="email" class="form-control input-lg" placeholder="{% trans 'Email'%}">
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@ ziip.es es un proyecto de beyondthebox.sl<br>
             <div class="col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="text"  name="asunto" class="form-control input-lg" placeholder="Asunto">
+                    <input type="text"  name="asunto" class="form-control input-lg" placeholder="{% trans 'Asunto'%}">
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ ziip.es es un proyecto de beyondthebox.sl<br>
             <div class="col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <textarea name="texto" class="form-control input-lg" rows="4" placeholder="Comentario"></textarea>
+                    <textarea name="texto" class="form-control input-lg" rows="4" placeholder="{% trans 'Comentario'%}"></textarea>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@ ziip.es es un proyecto de beyondthebox.sl<br>
         <div class="form-group form-actions">
             <div class="col-xs-12">
 
-                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i> Enviar</button>
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i> {% trans 'Enviar'%}</button>
             </div>
         </div>
 

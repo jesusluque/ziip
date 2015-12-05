@@ -1,9 +1,10 @@
+{% load i18n %}
 <div class="login-title">
    <div class="logo-tittle">
        <img src="/img/logo.png">
    </div>
    <div class="txt-tittle">
-       <h1> <strong>Ziip</strong><br><small> <strong>Peticion</strong></small></h1>
+       <h1> <strong>Ziip</strong><br><small> <strong>{% trans 'Peticion'%}</strong></small></h1>
    </div>
 </div>
 <!-- END Login Title -->
@@ -29,19 +30,19 @@
 
                     {%if logado %}
                     <div class="col-xs-12">
-                    <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Aceptar Contacto</a><br>
+                    <a href="aceptarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> {% trans 'Aceptar Contacto'%}</a><br>
                 </div>
                 <div class="col-xs-12">
-                    <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar Contacto</a><br>
+                    <a href="rechazarContactoPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> {% trans 'Rechazar Contacto'%}</a><br>
                 </div>
                 <div class="col-xs-12">
-                    <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> Rechazar todos los mensajes de Ziip</a>
+                    <a href="rechazarZiipPeticion?peticion={{peticion.codigo}}" class="btn btn-sm btn-primary"></i> {% trans 'Rechazar todos los mensajes de Ziip'%}</a>
                 </div>
                     {% else %}
                     <div class="col-xs-12">
-                    Para aceptar al usuario como contacto debe estar logueado.<br>
-                    <a href="login" class="btn btn-sm btn-primary"></i> Login</a></br>
-                    <a href="registro" class="btn btn-sm btn-primary"></i> Registro</a>
+                    {% trans 'Para aceptar al usuario como contacto debe estar logueado.'%}<br>
+                    <a href="login" class="btn btn-sm btn-primary"></i> {% trans 'Login'%}</a></br>
+                    <a href="registro" class="btn btn-sm btn-primary"></i> {% trans 'Registro'%}</a>
                     </div>
                     {% endif %}
 

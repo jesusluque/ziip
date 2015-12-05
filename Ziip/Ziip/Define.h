@@ -16,6 +16,9 @@
 #define CONEXION_URL @"https://api.ziip.es/api/"
 //#define CONEXION_URL @"http://192.168.1.135:8000/api/"
 //#define CONEXION_URL @"http://127.0.0.1:8000/api/"
+//#define CONEXION_URL @"http://test2.ziip.es/api/"
+
+
 
 
 
@@ -27,7 +30,8 @@
 #define IMAGENES_PUBLI_URL @"http://publi.ziip.es/publicidad/"
 
 #define CHAT_URL @"chat.ziip.es"
-//#define CHAT_URL @"localhost"
+//#define CHAT_URL @"test.ziip.es"
+
 
 
 
