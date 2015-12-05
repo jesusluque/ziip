@@ -63,6 +63,9 @@ def enviaMail(email,asunto,texto):
 @task
 def peticionAceptada(peticion):
 
+    print peticion
+    print peticion.usuario
+    print peticion.usuario1
     if peticion.tipo == TIPO_PETICION_CELESTINO:
         enviaPeticionAceptada.apply_async(args=[peticion.usuario1,peticion.usuario2], queue=QUEUE_DEFAULT)
     else:
@@ -72,6 +75,8 @@ def peticionAceptada(peticion):
 def enviaPeticionAceptada(usuario1,usuario2):
 
 
+    print "En envia peticion aceptada"
+    print usuario1
     data = {"usuario":usuario1.usuario}
     rendered = render_to_string("mails/nuevoContacto.html", data)
     asunto = "Tienes un nuevo contacto (ziip.es)"
