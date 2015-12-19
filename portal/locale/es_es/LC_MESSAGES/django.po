@@ -217,7 +217,7 @@ msgstr ""
 #: portal/templates/head.html:58 portal/templates/peticion.html:40
 #: portal/templates/peticionPrivado.html:45 portal/templates/registro.html:21
 msgid "Registro"
-msgstr ""
+msgstr "Registro"
 
 #: portal/templates/index.html:7
 msgid "es la primera aplicación de contactos anónima y GRATUITA."

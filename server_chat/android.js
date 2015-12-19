@@ -1,25 +1,30 @@
 
 var GCM = require('./gcm');
- 
-var gcm = new GCM("AIzaSyCuGaCj0ZTWqgkBcSChqQ2AYcVEboaQWDQ"); // https://code.google.com/apis/console
- 
+
+var gcm = new GCM("AIzaSyCwgZeTLnOgx3IwHFfuRaLAuZsl-BnnGes");
+
 
 var msg = {
-  registration_ids: ["APA91bExX-rlqhOjK76N3SDAYWE3toGCwBywi2GP4WFWjW-8rR-4V_XIr-3yZWUTYF1sYW1yTotLwG5dVqS1FKMIKvWrI6VwIIDBZJiLQb2jdFkjqN6EXdA4CriCMoCrfhpsJusF5pOI"], // this is the device token (phone)
-  collapse_key: "newWallEntry", // http://developer.android.com/guide/google/gcm/gcm.html#send-msg
-  time_to_live: 180, // just 30 minutes
+  registration_ids: ["dUFKVW2q4xM:APA91bGLQiNfTEiYsA1sN3lnu6cR9C-1ytLSlqSwZ_7n1YlA_IpKZeZP9YGu5EmRDbQhs5A8c_zcAUt8V-Y4IlIFpJLyViJ0DNI3_lObhucv4krkeKbRgdhqBF1dqCdRSAhmoruIzTra"],
+  collapse_key: "newChat",
+  time_to_live: 180,
   data: {
-    message: "Hola Carlos!", 
-	action: "newWallEntry",
-	name :"Manu",
-	id: "123",
+      "readed":0,
+      "text":"test1",
+      "from":"272",
+      "serverId":582,
+      "date":"2015-11-24 19:08:14 GMT+02:00",
+      "type":"1",
+      "destination":"272"
   }
+
 };
- 
+
+
 
 
 // send the message and see what happened
 gcm.send(msg, function(err, response) {
- 
+
   console.log(response); // http://developer.android.com/guide/google/gcm/gcm.html#response
 });

@@ -32,7 +32,7 @@ class Paises(models.Model):
         ordering = ['-id']
 
     def __unicode__(self):
-        return "Paises"
+        return  self.pais
 
 class Usuarios(models.Model):
     token = models.CharField(max_length=250) #token para acceder en cada peticion

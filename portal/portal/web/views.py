@@ -37,11 +37,11 @@ def base(request,rendered,seccion_activa):
     return HttpResponse(rendered)
 
 def prueba(request):
+    rendered="fallo"
 
-    num_peticiones = Peticiones.objects.filter(fecha__startswith=str(date.today()))
-    print len(num_peticiones)
-    data={}
-    rendered = render_to_string("contactos_javi.html",data)
+    if request.GET.has_key("lang"):
+        translation.activate("en_en")
+        rendered = "idioma cambiado"
     return HttpResponse(rendered)
 
 @idioma()
