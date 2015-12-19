@@ -456,25 +456,15 @@ def getPaises(request):
     status = "ok"
     mensaje = ""
     lista_paises=[]
-    motivo_error = ""
-    if request.META.has_key("HTTP_X_AUTH_TOKEN"):
-        token = request.META["HTTP_X_AUTH_TOKEN"]
-        lista_usuarios = Usuarios.objects.filter(token=request.META["HTTP_X_AUTH_TOKEN"])
-        if len(lista_usuarios)>0:
-            paises = Paises.objects.all()
-            for pais in paises:
-                pais = {}
-                pais["id"]=pais.id
-                pais["pais"]=pais.pais
-                pais["codigo_pais"]=pais.codigo_pais
-                lista_paises.append(pais)
-        else:
-            status = "ko"
-            mensaje = _("no hay usuario")
-    else:
-        status = "ko"
-        mensaje = _("no hay token")
-    response = json.dumps({"resource":"getRecientes","status":status,"paises":lista_paises})
+
+    paises = Paises.objects.all()
+    for pais in paises:
+        d_pais = {}
+        d_pais["id"]=pais.id
+        d_pais["pais"]=pais.pais
+        d_pais["codigo_pais"]=pais.codigo_pais
+        lista_paises.append(d_pais)
+    response = json.dumps({"resource":"getPaises","status":status,"paises":lista_paises})
     return HttpResponse(response)
 
 

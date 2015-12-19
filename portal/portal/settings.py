@@ -133,7 +133,7 @@ STATIC_URL = '/static/'
 
 LOCALE_PATHS = (
     '/Users/manuthema/git/ziip/portal/locale',
-    '/var/www/sitios/ziip/portla/locale',
+    '/var/www/sitios/ziip/portal/locale',
 )
 
 LOGGING = {

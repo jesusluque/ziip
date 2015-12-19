@@ -356,7 +356,7 @@ io.sockets.on('connection', function(socket) {
                             if (socketsInRoom.length==0) {
                                  var userName = objOrigen.userName;
                                  var text = data.text;
-                                 sendNotification(connection,data.to,text,message);
+                                 sendNotification(connection,data.to,text,message,userName);
                                  //Tenemos desactivadas las notificaciones push
                             } else {
                                 var roomsDone=0;
@@ -377,7 +377,7 @@ io.sockets.on('connection', function(socket) {
                                                 logger.emit('newEvent', 'el destino no esta conectado, notificamos por PUSH',null);
                                                 var userName = objOrigen.userName;
                                                 var text = data.text;
-                                                sendNotification(connection,data.to,text,message);
+                                                sendNotification(connection,data.to,text,message, userName);
                                             }
                                         }
                                     });
