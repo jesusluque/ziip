@@ -131,7 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+LOCALE_PATHS = (
+    '/Users/manuthema/git/ziip/portal/locale',
+    '/var/www/sitios/ziip/portal/locale',
+)
 
 LOGGING = {
     'version': 1,

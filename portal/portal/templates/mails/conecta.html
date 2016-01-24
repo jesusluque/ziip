@@ -1,4 +1,5 @@
-El usuario {{username}} te ha invitado a usar nuestra aplicación.<br>
-Primera plataforma de contacto anónima.<br>
+{% load i18n %}
 
-Para obtener más información, haz click en este enlace http://ziip.es/{{codigo_peticion}}
+{% trans 'El usuario' %} {{username}} {% trans 'te ha invitado a usar nuestra aplicación.' %}<br>
+{% trans 'Primera plataforma de contacto anónima.' %}<br>
+{% trans 'Para obtener más información, haz click en este enlace' %} http://ziip.es/{{codigo_peticion}}

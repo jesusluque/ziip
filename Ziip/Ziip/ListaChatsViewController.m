@@ -441,6 +441,8 @@
         datos = [packet.args objectAtIndex:0];
         [self readMsg:datos];
     } else if ([packet.name isEqualToString:@"getOldMsg"]) {
+        NSLog(@"recibo getOldMSg");
+        NSLog(@"%@",packet.args);
         self.notifica = NO;
         [self getOldMsg:packet.args];
     }else if ([packet.name isEqualToString:@"getUserInfo"]) {
@@ -512,6 +514,8 @@
         NSArray *parametros = [[NSArray alloc] initWithObjects:@"lastMsg", nil];
         NSDictionary *datos = [[NSDictionary alloc] initWithObjects:valores forKeys:parametros];
         [self.miSocket sendEvent:@"getOldMsg2" withData:datos];
+        NSLog(@"envio getOldMsg2");
+        NSLog(@"%@",valores);
     } else {
         NSLog(@"Error al hacer login");
     }

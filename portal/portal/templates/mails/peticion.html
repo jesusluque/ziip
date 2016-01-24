@@ -1,8 +1,10 @@
-Ziip.es la primera plataforma de contactos completamente anónima<br><br>
+{% load i18n %}
+
+{% trans 'Ziip.es la primera plataforma de contactos completamente anónima'%}<br><br>
 
 
-El usuario {{username}} te ha enviado un mensaje:<br>
+{% trans 'El usuario'%} {{username}} {% trans 'te ha enviado un mensaje:'%}'<br>
 {{mensaje_anonimo}}
 
 <br><br>
-Para obtener más información personal, haz click en este enlace http://ziip.es/{{codigo_peticion}}
+{% trans 'Para obtener más información personal, haz click en este enlace'%} http://ziip.es/{{codigo_peticion}}

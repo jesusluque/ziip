@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -42,9 +43,9 @@
             </tr>
             <tr>
                 <td align="center" bgcolor="#ffffff" style="padding: 40px 20px 40px 20px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px; border-bottom: 1px solid #f6f6f6;">
-                    
+
                     {{content|safe}}
-                    
+
                 </td>
             </tr>
            <!--
@@ -62,9 +63,8 @@
                -->
             <tr>
                 <td align="center" bgcolor="#dddddd" style="padding: 15px 10px 15px 10px; color: #555555; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px;">
-                    <b>Ziip.es</b><br/> ziip.es es una marca registrada de beyondthebox s.l.<br>
-                    Travessera de Gracia 62 3-3 08006 Barcelona
-                    <!--985 Example St. &bull; Suite A1S2 &bull; San Francisco, CA 12458 USA-->
+                    <b>Ziip.es</b><br/> {% trans 'es una marca registrada de'%} Missing Bite s.l.<br>
+                    Escuelas Pias 132, 08017 Barcelona
                 </td>
             </tr>
             <tr>
@@ -79,10 +79,6 @@
                 </td>
             </tr>
         </table>
-        <!--[if (gte mso 9)|(IE)]>
-                </td>
-            </tr>
-        </table>
-        <![endif]-->
+        
     </body>
 </html>

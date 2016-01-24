@@ -23,6 +23,17 @@ def generaCodigo():
 
     return token
 
+class Paises(models.Model):
+    pais = models.CharField(max_length=250)
+    codigo_pais = models.CharField(max_length=250)
+    class Meta:
+        verbose_name="Pais"
+        verbose_name_plural = "Paises"
+        ordering = ['-id']
+
+    def __unicode__(self):
+        return  self.pais
+
 class Usuarios(models.Model):
     token = models.CharField(max_length=250) #token para acceder en cada peticion
     chatToken = models.CharField(max_length=250)# token para acceso del chat web, se genera uno cada vez que se accede al chat
@@ -35,6 +46,9 @@ class Usuarios(models.Model):
     confirmado = models.BooleanField(default=False)
     imagen = models.CharField(max_length=250)
     sexo = models.CharField(max_length=2, choices = valores["sexo"].items(),default=SEXO_HOMBRE)
+    lang = models.CharField(max_length=250,default="es")
+    pais = models.ForeignKey(Paises)
+
 
 class Tokens(models.Model):
     usuario = models.ForeignKey(Usuarios)

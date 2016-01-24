@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^sendMensajeAnonimo$', 'portal.api.views.sendMensajeAnonimo'),
     url(r'^sendConecta$', 'portal.api.views.sendConecta'),
     url(r'^sendCelestino$', 'portal.api.views.sendCelestino'),
+    url(r'^getPaises$', 'portal.api.views.getPaises'),
     url(r'^getContactos$', 'portal.api.views.getContactos'),
     url(r'^getRecientes$', 'portal.api.views.getRecientes'),
 

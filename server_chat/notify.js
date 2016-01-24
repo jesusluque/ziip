@@ -4,7 +4,7 @@ var GCM = require('./gcm');
 
 
 
-sendNotification = function(connection, userId, text, data) {
+sendNotification = function(connection, userId, text, data, contactName) {
     //Primero comprobamos si el usuario tiene activas las notificaciones
 
 
@@ -85,24 +85,27 @@ sendNotification = function(connection, userId, text, data) {
 
 
             } else {
-                /*
+
                     console.log("Es android");
 
                     var message = {
-                        "serverId": data.serverId,
-                        "text": data.text,
-                        "fromId": data.from,
-                        "type": data.type,
-                        "date": data.date,
-                        "readed": data.readed,
-                        "destination": data.destination,
-                        "action": "newMessage",
+                        "newMessage": {
+                            "serverId": data.serverId,
+                            "text": data.text,
+                            "from": data.from,
+                            "type": data.type,
+                            "date": data.date,
+                            "readed": data.readed,
+                            "destination": data.destination,
+
+                            "contactName":contactName,
+                        }
                     }
 
                     var msg = {
                         registration_ids: [row.gcmcode],
                         collapse_key: "newMessage",
-                        time_to_live: 0,
+                        time_to_live: 180,
                         data: message,
                     };
                     console.log("Enviamos android");

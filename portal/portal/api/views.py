@@ -7,12 +7,13 @@ import time
 from portal.settings import *
 import httplib,urllib
 from django.template.loader import render_to_string
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.utils.translation import ugettext as _
+
 from portal.core.models import *
 from portal.core.celery_tasks import *
 from portal.core.utils import *
-from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
-
 
 @csrf_exempt
 def login(request):
@@ -22,13 +23,15 @@ def login(request):
     if len(usuarios)>0:
         status = "ok"
         usuario = usuarios[0]
+        if request.POST.has_key("lang"):
+            usuario.lang = request.POST["lang"]
         usuario.token = generaTokenUsuario()
         usuario.save()
         user_token = usuario.token
         telefono=""
         if usuario.confirmado:
             telefono=usuario.num_telefono
-        dict_usuario = {"telefono":telefono or "","email":usuario.email or "","imagen":usuario.imagen or ""}
+        dict_usuario = {"telefono":telefono or "","email":usuario.email or "","imagen":usuario.imagen or "", "pais_id":usuario.pais_id or ""}
 
         mensaje = ""
         if request.POST.has_key("pushToken"):
@@ -53,7 +56,7 @@ def login(request):
     else:
         status = "ko"
         token = ""
-        mensaje = "Usuario o password invalido"
+        mensaje = _("Usuario o password invalido")
 
     response = json.dumps({"resource":"login","status":status, "token":user_token,"mensaje":mensaje, "usuario":dict_usuario})
     return HttpResponse(response)
@@ -66,10 +69,13 @@ def alta(request):
     token_usuario=""
     if len(lista_usuarios) == 0:
         usuario = Usuarios()
+        if request.POST.has_key("lang"):
+            usuario.lang = request.POST["lang"]
         usuario.usuario = request.POST["user"]
         usuario.password = request.POST["password"]
         usuario.email = request.POST["email"]
         usuario.sexo = request.POST["sexo"]
+        usuario.pais_id = request.POST["pais_id"]
 
         if request.POST["movil"] != "":
             usuario.num_telefono = request.POST["movil"]
@@ -96,7 +102,7 @@ def alta(request):
                 token.save()
     else:
         status = "ko"
-        mensaje = "El usuario ya existe"
+        mensaje = _("El usuario ya existe")
 
 
     response = json.dumps({"resource":"alta","status":status, "token":token_usuario,"mensaje":mensaje})
@@ -116,15 +122,15 @@ def confirmacionMovil(request):
                 usuario.save()
             else:
                 status = "ko"
-                mensaje ="El codigo de confirmacion no coincide"
+                mensaje = _("El codigo de confirmacion no coincide")
 
         else:
             status = "ko"
-            mensaje=" no hay usuario"
+            mensaje=_("no hay usuario")
 
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"confirmacionMovil","status":status,"mensaje":mensaje})
     return HttpResponse(response)
 
@@ -144,10 +150,10 @@ def editaMovil(request):
             enviaSmsCodigo(request.POST["movil"],usuario.codigo)
         else:
             status = "ko"
-            mensaje=" no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"editaMovil","status":status,"mensaje":mensaje})
     return HttpResponse(response)
 
@@ -177,10 +183,10 @@ def editaImagen(request):
 
         else:
             status = "ko"
-            mensaje = "no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"editaImagen","status":status,"mensaje":mensaje,"imagen":file_url})
     return HttpResponse(response)
 
@@ -214,13 +220,13 @@ def sendMensajeAnonimo(request):
                     contacto = request.POST["email"]
                 except ValidationError as e:
                     status = "ko"
-                    mensaje = "El email es invalido"
+                    mensaje = _("El email es invalido")
             else:
                 if isTelefono(request.POST["telefono"]):
                     contacto = request.POST["telefono"]
                 else:
                     status = "ko"
-                    mensaje = "El telefono no es valido"
+                    mensaje = _("El telefono no es valido")
 
             limites=comprueba_limites(usuario,contacto)
             if len(limites)>0:
@@ -238,10 +244,10 @@ def sendMensajeAnonimo(request):
                 enviaPeticion(peticion)
         else:
             status = "ko"
-            mensaje = "no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"sendMensajeAnonimo","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
     return HttpResponse(response)
 
@@ -269,13 +275,13 @@ def sendConecta(request):
                     contacto = request.POST["email"]
                 except ValidationError as e:
                     status = "ko"
-                    mensaje = "El email es invalido"
+                    mensaje = _("El email es invalido")
             else:
                 if isTelefono(request.POST["telefono"]):
                     contacto = request.POST["telefono"]
                 else:
                     status = "ko"
-                    mensaje = "El telefono no es valido"
+                    mensaje = _("El telefono no es valido")
             peticion.contacto_contacto = contacto
 
             limites=comprueba_limites(usuario,contacto)
@@ -291,10 +297,10 @@ def sendConecta(request):
 
         else:
             status = "ko"
-            mensaje = "no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"sendConecta","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
     return HttpResponse(response)
 
@@ -330,13 +336,13 @@ def sendCelestino(request):
                     contacto = request.POST["email1"]
                 except ValidationError as e:
                     status = "ko"
-                    mensaje = "El email es invalido"
+                    mensaje = _("El email es invalido")
             else:
                 if isTelefono(request.POST["telefono1"]):
                     contacto = request.POST["telefono1"]
                 else:
                     status = "ko"
-                    mensaje = "El telefono no es valido"
+                    mensaje = _("El telefono no es valido")
 
 
             peticion.contacto_contacto = contacto
@@ -349,13 +355,13 @@ def sendCelestino(request):
                     contacto2 = request.POST["email2"]
                 except ValidationError as e:
                     status = "ko"
-                    mensaje = "El email es invalido"
+                    mensaje = _("El email es invalido")
             else:
                 if isTelefono(request.POST["telefono2"]):
                     contacto2 = request.POST["telefono2"]
                 else:
                     status = "ko"
-                    mensaje = "El telefono no es valido"
+                    mensaje = _("El telefono no es valido")
             peticion.contacto2_contacto = contacto2
 
             limites=comprueba_limites(usuario,contacto)
@@ -374,10 +380,10 @@ def sendCelestino(request):
 
         else:
             status = "ko"
-            mensaje = "no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"sendCelestino","status":status,"mensaje":mensaje,"motivo_error":motivo_error})
     return HttpResponse(response)
 
@@ -403,10 +409,10 @@ def getContactos(request):
 
         else:
             status = "ko"
-            mensaje = "no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"getContactos","status":status,"mensaje":mensaje,"contactos":lista_contactos})
     return HttpResponse(response)
 
@@ -440,12 +446,29 @@ def getRecientes(request):
                 lista_recientes.append(con)
         else:
             status = "ko"
-            mensaje = "no hay usuario"
+            mensaje = _("no hay usuario")
     else:
         status = "ko"
-        mensaje = "no hay token"
+        mensaje = _("no hay token")
     response = json.dumps({"resource":"getRecientes","status":status,"recientes":lista_recientes})
     return HttpResponse(response)
+
+def getPaises(request):
+    status = "ok"
+    mensaje = ""
+    lista_paises=[]
+
+    paises = Paises.objects.all()
+    for pais in paises:
+        d_pais = {}
+        d_pais["id"]=pais.id
+        d_pais["pais"]=pais.pais
+        d_pais["codigo_pais"]=pais.codigo_pais
+        lista_paises.append(d_pais)
+    response = json.dumps({"resource":"getPaises","status":status,"paises":lista_paises})
+    return HttpResponse(response)
+
+
 
 
     """

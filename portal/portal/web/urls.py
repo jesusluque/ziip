@@ -6,11 +6,6 @@ urlpatterns = patterns('',
     url(r'^chat/getUser$', 'portal.web.chat.getUser'),
     url(r'^chat/getOldMessages$', 'portal.web.chat.getOldMessages'),
 
-
-
-
-
-
     url(r'^$', 'portal.web.views.index'),
     url(r'^blog$', 'portal.web.views.blog'),
 
