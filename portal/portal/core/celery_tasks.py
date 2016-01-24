@@ -60,6 +60,8 @@ def enviaMail(email,asunto,texto):
     msg = EmailMultiAlternatives(asunto, "", MAIL_FROM, [email])
     msg.attach_alternative(rendered, "text/html")
     msg.send()
+    
+        
 
 @task
 def peticionAceptada(peticion):

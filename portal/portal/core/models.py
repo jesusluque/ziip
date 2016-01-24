@@ -139,7 +139,4 @@ class SolicitudBang(models.Model):
     num_telefono = models.EmailField(max_length=250)
     fecha_solicitud = models.DateField(blank=True, null=True, default=datetime.now)
     estado = models.CharField(max_length=2, choices = valores["estado_solicitud_bang"].items(),default=SOLICITUD_BANG_PENDIENTE)
-
-
-
 """

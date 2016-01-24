@@ -207,7 +207,7 @@ def sendMensajeAnonimo(request):
             email = request.POST["email"]
             mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
             mensaje = request.POST["mensaje"].encode('utf-8')
-
+            
             peticion = Peticiones()
             peticion.usuario_id = usuario.pk
             peticion.tipo = TIPO_PETICION_ANONIMO
@@ -234,6 +234,7 @@ def sendMensajeAnonimo(request):
                 mensaje=limites[0]
 
             peticion.contacto_contacto = contacto
+            
             peticion.mensaje = request.POST["mensaje"].encode('utf-8')
             peticion.mensaje_anonimo = request.POST["mensaje_anonimo"].encode('utf-8')
             peticion.estado = ESTADO_PETICION_SOLICITADO
